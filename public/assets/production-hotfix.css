@@ -1,0 +1,57 @@
+/* TARGET production image hotfix — 2026-08-15
+   Removes dependency on corrupted local preview binaries and keeps the approved v7 layout intact.
+*/
+
+/* Clean Qatar hero across commercial pages */
+.visual-hero-home,
+.visual-hero-about,
+.visual-hero-qatar-market,
+.visual-hero-contact,
+.visual-hero-capabilities{
+  background-image:url('https://images.unsplash.com/photo-1685113872064-de4180a0ea93?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=82&w=2400')!important;
+  background-position:center 55%!important;
+}
+
+/* Food portfolio receives a food/Qatar-context visual instead of the damaged local asset */
+.visual-hero-food-portfolio{
+  background-image:url('https://images.pexels.com/photos/33564207/pexels-photo-33564207/free-photo-of-vibrant-market-stall-with-spices-in-doha.jpeg?auto=compress&dpr=1&h=900&w=1600')!important;
+  background-position:center 52%!important;
+}
+
+/* Home: keep text legible without hiding the photograph */
+.home-v7 .v7-hero::before{
+  background:linear-gradient(90deg,rgba(5,43,29,.88) 0%,rgba(5,43,29,.68) 34%,rgba(5,43,29,.22) 66%,rgba(5,43,29,.08) 100%)!important;
+}
+html[dir='rtl'] .home-v7 .v7-hero::before{
+  background:linear-gradient(90deg,rgba(5,43,29,.88) 0%,rgba(5,43,29,.66) 34%,rgba(5,43,29,.20) 66%,rgba(5,43,29,.06) 100%)!important;
+}
+
+/* Category edge photography: both sources are clean remote images. */
+.home-v7 .v7-category-art-left{
+  background-image:linear-gradient(90deg,rgba(255,253,249,0) 42%,#fffdf9 98%),url('https://images.pexels.com/photos/33564207/pexels-photo-33564207/free-photo-of-vibrant-market-stall-with-spices-in-doha.jpeg?auto=compress&dpr=1&h=750&w=1260')!important;
+  background-size:auto 100%,cover!important;
+  background-position:left center,left center!important;
+}
+.home-v7 .v7-category-art-right{
+  background-image:linear-gradient(270deg,rgba(255,253,249,0) 42%,#fffdf9 98%),url('https://images.unsplash.com/photo-1737999183056-20bf6b8952e6?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=76&w=1600')!important;
+  background-size:auto 100%,cover!important;
+  background-position:right center,right center!important;
+}
+
+/* Remove any damaged background reference from subtle page decoration. */
+.page-about main>.section:nth-of-type(3)::after,
+.page-qatar-market main>.section:nth-of-type(3)::after{
+  background-image:url('https://images.unsplash.com/photo-1685113872064-de4180a0ea93?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=72&w=1800')!important;
+}
+
+/* Footer: only forest logo exists in repo; render it as light on green instead of requesting a missing cream file. */
+.site-footer .footer-logo{
+  content:url('/assets/brand/target-logo-horizontal-forest.svg')!important;
+  filter:brightness(0) invert(1)!important;
+  opacity:.96!important;
+}
+
+@media (max-width:767.98px){
+  .visual-hero-home,.visual-hero-about,.visual-hero-qatar-market,.visual-hero-contact,.visual-hero-capabilities{background-position:58% center!important}
+  .home-v7 .v7-hero::before,html[dir='rtl'] .home-v7 .v7-hero::before{background:linear-gradient(180deg,rgba(5,43,29,.58),rgba(5,43,29,.82))!important}
+}
