@@ -1,6 +1,6 @@
 {
-  "name": "target-premium-v6-astro",
-  "version": "2.0.0",
+  "name": "target-premium-v8-astro",
+  "version": "3.0.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -9,6 +9,9 @@
     "preview": "astro preview"
   },
   "dependencies": {
-    "astro": "^5.13.2"
+    "astro": "^5.13.2",
+    "@astrojs/vue": "^5.1.4",
+    "vue": "^3.5.40",
+    "pinia": "^4.0.2"
   }
 }
