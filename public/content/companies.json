@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-08-14",
+  "governance": {
+    "sourceOfTruth": "TARGET Business Foundation in Notion",
+    "publicLabelAr": "شركات ومنتجات محل اهتمامنا",
+    "publicLabelEn": "Companies & Products in Focus",
+    "forbiddenRelationshipLabels": [
+      "Our Brands",
+      "Our Agencies",
+      "Brands We Represent",
+      "Exclusive Distributor"
+    ]
+  },
+  "companies": [
+    {
+      "id": "company-01",
+      "slug": "falcon",
+      "status": "active",
+      "nameAr": "فالكون",
+      "nameEn": "Falcon",
+      "countryAr": null,
+      "countryEn": null,
+      "categoryAr": "الشاي والمشروبات العشبية",
+      "categoryEn": "Tea & Herbal Infusions",
+      "productsAr": ["شاي", "ينسون", "كمومايل", "قرفة", "شاي أخضر", "نعناع", "تليا", "شاي أبيض", "زعتر", "كركديه"],
+      "productsEn": ["Tea", "Anise", "Chamomile", "Cinnamon", "Green Tea", "Mint", "Linden / Tilia", "White Tea", "Thyme", "Hibiscus"],
+      "logo": null,
+      "brochure": {
+        "enabled": false,
+        "path": "assets/companies/falcon/brochure.pdf",
+        "driveSourceFileId": "1JyQzHZE5tEr-sSpV_8MzprLXtNwG1DaQ",
+        "status": "placeholder"
+      }
+    },
+    {
+      "id": "company-02",
+      "slug": "al-nada",
+      "status": "active",
+      "nameAr": "الندى",
+      "nameEn": "Al Nada",
+      "countryAr": null,
+      "countryEn": null,
+      "categoryAr": "منتجات الألبان والأغذية المجمدة والمجهزة",
+      "categoryEn": "Dairy, Frozen & Prepared Foods",
+      "productsAr": ["جبنة رومي", "حمام", "كفتة", "محشي", "ممبار"],
+      "productsEn": ["Roumy Cheese", "Pigeon", "Kofta", "Mahshi / Stuffed Vegetables", "Mombar"],
+      "adjacentProducts": [
+        {
+          "nameAr": "فحم شيشة",
+          "nameEn": "Shisha Charcoal",
+          "publicFoodCategory": false,
+          "claimControl": "Activity / legal suitability must be confirmed before public trading claims."
+        }
+      ],
+      "logo": null,
+      "brochure": {
+        "enabled": false,
+        "path": "assets/companies/al-nada/brochure.pdf",
+        "driveSourceFileId": "1YOSbMvZRnZEbZ5bPZacWqZ2tVabixGzh",
+        "status": "placeholder"
+      }
+    },
+    {
+      "id": "company-03",
+      "slug": "al-dar",
+      "status": "active",
+      "nameAr": "الدار",
+      "nameEn": "Al Dar",
+      "countryAr": null,
+      "countryEn": null,
+      "categoryAr": "العسل والدبس والحلويات التقليدية",
+      "categoryEn": "Honey, Molasses & Traditional Sweets",
+      "productsAr": ["عسل نحل", "عسل أسود", "حلويات شامية"],
+      "productsEn": ["Bee Honey", "Sugarcane Molasses", "Levantine Sweets"],
+      "logo": null,
+      "brochure": {
+        "enabled": false,
+        "path": "assets/companies/al-dar/brochure.pdf",
+        "driveSourceFileId": "1--RrwB0rUFEkqmptxmi_WbQ18WSNis5o",
+        "status": "placeholder"
+      }
+    },
+    {
+      "id": "company-04",
+      "slug": "al-reem",
+      "status": "active",
+      "nameAr": "الريم",
+      "nameEn": "Al Reem",
+      "countryAr": null,
+      "countryEn": null,
+      "categoryAr": "العصائر والمشروبات التقليدية",
+      "categoryEn": "Juices & Traditional Beverages",
+      "productsAr": ["برتقال", "كركديه", "خروب", "تمر هندي", "جوافة", "مانجو", "رمان"],
+      "productsEn": ["Orange", "Hibiscus", "Carob", "Tamarind", "Guava", "Mango", "Pomegranate"],
+      "logo": null,
+      "brochure": {
+        "enabled": false,
+        "path": "assets/companies/al-reem/brochure.pdf",
+        "driveSourceFileId": "1-hofWlSOqO1gNYqlHw6RKXgmiMCs8-t2",
+        "status": "placeholder"
+      }
+    },
+    {
+      "id": "company-05",
+      "slug": "company-05",
+      "status": "pending",
+      "nameAr": null,
+      "nameEn": null
+    },
+    {
+      "id": "company-06",
+      "slug": "company-06",
+      "status": "pending",
+      "nameAr": null,
+      "nameEn": null
+    }
+  ]
+}
