@@ -1,0 +1,30 @@
+/* TARGET Premium v6 — Visual Enhancement Layer
+   Preserves the approved v6 layout, typography, logo, forms, legal pages and content hierarchy.
+   Adds image-led visual depth only.
+*/
+.visual-hero{background-color:var(--t-green);background-repeat:no-repeat;background-size:cover;background-position:center}
+.visual-hero::before{inset:0;width:auto;height:auto;border:0;border-radius:0;box-shadow:none;background:linear-gradient(90deg,rgba(8,58,39,.96) 0%,rgba(8,58,39,.86) 38%,rgba(8,58,39,.58) 65%,rgba(8,58,39,.36) 100%);z-index:-1}
+html[dir="rtl"] .visual-hero::before{background:linear-gradient(270deg,rgba(8,58,39,.96) 0%,rgba(8,58,39,.86) 38%,rgba(8,58,39,.58) 65%,rgba(8,58,39,.36) 100%)}
+.visual-hero-home,.visual-hero-about,.visual-hero-qatar-market,.visual-hero-contact{background-image:url('/images/hero-qatar-trade.webp')}
+.visual-hero-food-portfolio{background-image:url('/images/hero-food-portfolio-clean2.webp')}
+.visual-hero-capabilities{background-image:url('/images/hero-qatar-trade.webp')}
+.visual-hero-faq,.visual-hero-privacy,.visual-hero-terms{background-image:none}
+.visual-hero .container{position:relative;z-index:2}
+.visual-hero h1,.visual-hero p,.visual-hero .hero-kicker{filter:drop-shadow(0 2px 12px rgba(0,0,0,.14))}
+.visual-hero-home{background-position:center 48%}.visual-hero-food-portfolio{background-position:center 48%}.visual-hero-capabilities{background-position:center 52%}
+@media (min-width:992px){.visual-hero-home,.visual-hero-about,.visual-hero-qatar-market,.visual-hero-contact{background-position:left center}html[dir="ltr"] .visual-hero-home,html[dir="ltr"] .visual-hero-about,html[dir="ltr"] .visual-hero-qatar-market,html[dir="ltr"] .visual-hero-contact{background-position:right center}}
+.page-food-portfolio main > .section:nth-of-type(2) .p-card,.page-home main > .section:nth-of-type(5) .p-card{overflow:hidden;padding-top:calc(1.35rem + 118px);position:relative}
+.page-food-portfolio main > .section:nth-of-type(2) .p-card::before,.page-home main > .section:nth-of-type(5) .p-card::before{content:"";position:absolute;inset-inline:0;top:0;height:112px;background-size:500% 100%;background-position:center;border-bottom:1px solid var(--t-line);background-image:url('/images/category-sprite.webp')}
+.page-food-portfolio main > .section:nth-of-type(2) .row > div:nth-child(1) .p-card::before,.page-home main > .section:nth-of-type(5) .row > div:nth-child(1) .p-card::before{background-position:0 50%}
+.page-food-portfolio main > .section:nth-of-type(2) .row > div:nth-child(2) .p-card::before,.page-home main > .section:nth-of-type(5) .row > div:nth-child(2) .p-card::before{background-position:25% 50%}
+.page-food-portfolio main > .section:nth-of-type(2) .row > div:nth-child(3) .p-card::before,.page-home main > .section:nth-of-type(5) .row > div:nth-child(3) .p-card::before{background-position:50% 50%}
+.page-food-portfolio main > .section:nth-of-type(2) .row > div:nth-child(4) .p-card::before,.page-home main > .section:nth-of-type(5) .row > div:nth-child(4) .p-card::before{background-position:75% 50%}
+.page-food-portfolio main > .section:nth-of-type(2) .row > div:nth-child(5) .p-card::before,.page-home main > .section:nth-of-type(5) .row > div:nth-child(5) .p-card::before{background-position:100% 50%}
+.page-home main > .section:nth-of-type(3) .p-card,.page-capabilities main > .section:nth-of-type(2) .p-card{overflow:hidden;position:relative;padding-top:calc(1.35rem + 86px)}
+.page-home main > .section:nth-of-type(3) .p-card::before,.page-capabilities main > .section:nth-of-type(2) .p-card::before{content:"";position:absolute;top:0;inset-inline:0;height:82px;background:url('/images/hero-qatar-trade.webp') center/cover;border-bottom:1px solid var(--t-line);opacity:.92}
+.page-about main > .section:nth-of-type(3),.page-qatar-market main > .section:nth-of-type(3){position:relative;isolation:isolate}
+.page-about main > .section:nth-of-type(3)::after,.page-qatar-market main > .section:nth-of-type(3)::after{content:"";position:absolute;inset:0;z-index:-1;opacity:.055;background:url('/images/hero-qatar-trade.webp') center/cover no-repeat;filter:saturate(.75)}
+.page-contact .contact-form,.page-contact .contact-channel,.page-privacy .legal-card,.page-terms .legal-card{box-shadow:0 14px 34px rgba(12,73,49,.065)}
+.page-contact .visual-hero-contact::before{background:rgba(8,58,39,.82)}
+.page-privacy .page-hero,.page-terms .page-hero,.page-faq .page-hero{background-image:none}
+@media (max-width:767.98px){.visual-hero{background-position:center}.visual-hero::before,html[dir="rtl"] .visual-hero::before{background:rgba(8,58,39,.84)}.page-food-portfolio main > .section:nth-of-type(2) .p-card,.page-home main > .section:nth-of-type(5) .p-card{padding-top:calc(1.2rem + 96px)}.page-food-portfolio main > .section:nth-of-type(2) .p-card::before,.page-home main > .section:nth-of-type(5) .p-card::before{height:92px}}
