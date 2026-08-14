@@ -1,1 +1,16 @@
-# TARGET — Production Candidate\n\nArabic-first bilingual B2B website for TARGET Food Trading, built with Astro static output and a controlled Vue/Pinia portfolio experience.\n\n## Delivery\n- Production branch: `main`\n- Build: `npm run build`\n- Output: `dist`\n- Arabic UI: Tajawal\n- English UI: Manrope\n- Palette: Forest Green `#0C4931`, Cream `#F4EDE4`, Charcoal `#262626`, Warm Sand `#C09552`\n\n## Governance\nFalcon, Al Nada, Al Dar and Al Reem are approved Companies & Products in Focus. Public presentation must not imply agency, representation or exclusivity without explicit evidence.\n\n## Architecture\n- `src/legacy/*.html`: governed page baseline during progressive component migration\n- `src/pages/*.astro`: routes\n- `src/components/`: shared shell and interactive portfolio\n- `src/data/companies.ts`: governed portfolio source\n- `public/assets/`: brand and UI assets\n
+# TARGET — Premium v6 Astro Merge
+
+This repository preserves the approved TARGET Premium v6 website as the visual and functional baseline while using Astro as the static build layer for Cloudflare Pages.
+
+## Cloudflare Pages
+- Production branch: `main`
+- Build command: `npm run build`
+- Output directory: `dist`
+
+## Architecture
+- `src/legacy/*.html` — approved Premium v6 page documents (preserved baseline)
+- `src/pages/*.astro` — thin Astro build wrappers that emit the preserved documents
+- `public/assets/` — approved v6 CSS/JS, logo assets and company data
+- `public/images/` — visual enhancement assets used by the v6 design
+
+This is an intentional progressive-Astro migration: preserve the approved interface first, then componentize in controlled future iterations without visual regression.
