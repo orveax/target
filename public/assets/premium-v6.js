@@ -2,6 +2,13 @@
 (function(){
   'use strict';
   const root=document.documentElement;
+
+  /* Production visual hotfix is injected centrally so every preserved legacy page receives the same image correction without duplicating markup changes. */
+  const hotfix=document.createElement('link');
+  hotfix.rel='stylesheet';
+  hotfix.href='/assets/production-hotfix.css?v=20260815-01';
+  document.head.appendChild(hotfix);
+
   function isArabic(){return root.lang!=='en'}
   function applyLanguage(lang){
     const ar=lang!=='en';root.lang=ar?'ar':'en';root.dir=ar?'rtl':'ltr';
