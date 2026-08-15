@@ -115,7 +115,7 @@ jobs:
           grep -q 'visual-hard-audit-v1.css' dist/food-portfolio.html
           grep -q 'visual-hard-audit-v1.css' dist/suppliers.html
           grep -q 'visual-hard-audit-v1.css' dist/company-profile.html
-          grep -q 'data-lucide=\"candy\"' dist/assets/visual-hard-audit-v1.js
+          grep -q "setAttribute('data-lucide', 'candy')" dist/assets/visual-hard-audit-v1.js
           grep -q 'work-info-media' dist/assets/visual-hard-audit-v1.js
           grep -q 'company-logo-slot:not(:has(img))' dist/assets/visual-hard-audit-v1.css
           grep -q 'cp-next-panel' dist/assets/visual-hard-audit-v1.css
