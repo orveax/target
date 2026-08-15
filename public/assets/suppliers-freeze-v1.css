@@ -1,0 +1,35 @@
+/* TARGET — For Suppliers Final Visual Freeze */
+.page-suppliers .fs-final-panel{
+  background:var(--target-charcoal,#262626)!important;
+  color:var(--target-cream,#F4EDE4)!important;
+}
+.page-suppliers .fs-final-panel h2{
+  color:#fff!important;
+}
+.page-suppliers .fs-final-panel p{
+  color:rgba(244,237,228,.82)!important;
+}
+.page-suppliers .fs-final-panel .fs-kicker{
+  color:var(--target-sand,#C09552)!important;
+}
+.page-suppliers .fs-final-primary{
+  border-color:var(--target-sand,#C09552)!important;
+  background:var(--target-sand,#C09552)!important;
+  color:var(--target-charcoal,#262626)!important;
+}
+.page-suppliers .fs-final-primary:hover,
+.page-suppliers .fs-final-primary:focus-visible{
+  background:#d1ae73!important;
+  border-color:#d1ae73!important;
+  color:var(--target-charcoal,#262626)!important;
+}
+.page-suppliers .fs-final-secondary{
+  border-color:rgba(255,255,255,.82)!important;
+  background:#fff!important;
+  color:var(--target-charcoal,#262626)!important;
+}
+.page-suppliers .fs-final-secondary:hover,
+.page-suppliers .fs-final-secondary:focus-visible{
+  background:var(--target-cream,#F4EDE4)!important;
+  color:var(--target-charcoal,#262626)!important;
+}
