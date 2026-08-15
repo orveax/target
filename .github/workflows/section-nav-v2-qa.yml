@@ -1,0 +1,22 @@
+name: TARGET Section Navigation V2 QA
+on:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  section-nav-v2:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify under-header navigation runtime
+        run: |
+          test -f public/assets/target-section-nav-v2.js
+          node --check public/assets/target-section-nav-v2.js
+          grep -q 'target-section-nav-v2.js' public/assets/premium-v6.js
+          grep -q 'target-section-nav--under-header' public/assets/target-section-nav-v2.js
+          grep -q 'header.insertAdjacentElement' public/assets/target-section-nav-v2.js
+          grep -q 'target-section-nav-track' public/assets/target-section-nav-v2.js
+          grep -q 'aria-current' public/assets/target-section-nav-v2.js
