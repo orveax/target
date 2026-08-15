@@ -1,4 +1,4 @@
-name: TARGET Premium v6 Astro QA
+name: TARGET Canonical Website QA
 on:
   pull_request:
   push:
@@ -13,15 +13,24 @@ jobs:
           node-version: 22
       - run: npm install
       - run: npm run build
-      - name: Verify expected pages
+      - name: Verify canonical pages
         run: |
           test -f dist/index.html
           test -f dist/about.html
           test -f dist/capabilities.html
           test -f dist/food-portfolio.html
           test -f dist/qatar-market.html
+          test -f dist/suppliers.html
           test -f dist/contact.html
+          test -f dist/company-profile.html
           test -f dist/faq.html
           test -f dist/privacy.html
           test -f dist/terms.html
           test -f dist/404.html
+      - name: Verify locked implementation assets
+        run: |
+          test -f dist/assets/target-design-tokens-v1.css
+          test -f dist/assets/final-freeze-v1.css
+          test -f dist/assets/final-freeze-media-v1.css
+          test -f dist/assets/content-pages-final-v1.css
+          test -f dist/content/target-design-tokens-v1.json

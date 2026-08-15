@@ -1,16 +1,21 @@
-# TARGET — Premium v6 Astro Merge
+# TARGET Website
 
-This repository preserves the approved TARGET Premium v6 website as the visual and functional baseline while using Astro as the static build layer for Cloudflare Pages.
+Internal production baseline for **Target For Food Trading / تارقت لتجارة الأغذية**.
 
-## Cloudflare Pages
-- Production branch: `main`
-- Build command: `npm run build`
-- Output directory: `dist`
+## Status — 2026-08-15
 
-## Architecture
-- `src/legacy/*.html` — approved Premium v6 page documents (preserved baseline)
-- `src/pages/*.astro` — thin Astro build wrappers that emit the preserved documents
-- `public/assets/` — approved v6 CSS/JS, logo assets and company data
-- `public/images/` — visual enhancement assets used by the v6 design
+- 11 canonical routes aligned and build-tested.
+- Final visual system, design tokens, image/media rules and icon system implemented.
+- Controlled placeholder/editorial imagery is approved for the internal-production baseline until verified supplier/company assets replace it.
+- Company Profile uses a temporary internal cover and placeholder metadata until the final PDF is supplied.
+- Privacy Policy and Terms & Conditions are approved and locked.
+- Contact and Supplier forms are UI/validation ready. Backend delivery/integration is intentionally deferred and does not block this internal baseline.
 
-This is an intentional progressive-Astro migration: preserve the approved interface first, then componentize in controlled future iterations without visual regression.
+## Build
+
+```bash
+npm install
+npm run build
+```
+
+GitHub Actions validates all 11 canonical routes, the 404 page, and locked implementation assets.
