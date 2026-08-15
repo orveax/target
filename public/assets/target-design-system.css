@@ -80,3 +80,17 @@ p{font-size:var(--target-text-base);line-height:1.82}
 .site-footer h3{font-size:.98rem!important;font-weight:800!important}.site-footer p,.site-footer a,.footer-contact-item{font-size:.87rem!important;line-height:1.65!important}
 .form-label{font-size:.92rem!important;font-weight:800!important}.form-control,.form-select{font-family:inherit!important;font-size:1rem!important}
 @media(max-width:767px){body{font-size:1rem!important;line-height:1.76!important}h1{font-size:clamp(2.35rem,11vw,3.4rem)!important;line-height:1.08!important}h2{font-size:clamp(1.82rem,8.5vw,2.55rem)!important;line-height:1.18!important}h3{font-size:1.15rem!important}.section-head p{font-size:1rem!important}.site-header .nav-link{font-size:.96rem!important}}
+
+/* HF-04 Spatial system */
+:root{--target-container:1240px;--target-gutter:clamp(1rem,4vw,1.75rem);--target-section:clamp(4.5rem,8vw,8rem);--target-section-compact:clamp(3rem,5vw,5rem);--target-card-pad:clamp(1.1rem,2vw,1.55rem)}
+.container{max-width:var(--target-container)!important;padding-inline:var(--target-gutter)!important}
+.section{padding-block:var(--target-section)!important}.section-compact{padding-block:var(--target-section-compact)!important}
+.section-head{margin-bottom:clamp(1.5rem,3vw,2.6rem)!important}.section-head>*:last-child{margin-bottom:0!important}
+.p-card,.legal-card{padding:var(--target-card-pad)!important}.contact-card{padding:clamp(1rem,1.7vw,1.3rem)!important}
+.route-grid,.journey-grid,.legal-grid,.contact-layout{gap:clamp(1rem,2vw,1.5rem)!important}
+.hero-actions{gap:.75rem!important}.btn-premium{padding-inline:1.1rem!important}
+.site-header .navbar>.container{padding-inline:var(--target-gutter)!important}.site-footer{padding-block:clamp(3.5rem,6vw,5rem) 1.35rem!important}.footer-bottom{margin-top:clamp(2.25rem,4vw,3.5rem)!important}
+html[dir='rtl'] .section-head,html[dir='rtl'] .visual-hero .container,html[dir='rtl'] .premium-page-hero-content{text-align:right}
+html[dir='ltr'] .section-head,html[dir='ltr'] .visual-hero .container,html[dir='ltr'] .premium-page-hero-content{text-align:left}
+@media(max-width:991.98px){:root{--target-section:clamp(3.75rem,8vw,5.5rem)}.premium-footer-grid{gap:2rem!important}}
+@media(max-width:767px){:root{--target-gutter:1rem;--target-section:3.75rem;--target-section-compact:2.8rem}.container{padding-inline:var(--target-gutter)!important}.section{padding-block:var(--target-section)!important}.section-head{margin-bottom:1.55rem!important}.p-card,.legal-card{padding:1.15rem!important}.site-footer{padding-top:3.25rem!important}.footer-bottom{margin-top:2.25rem!important}.hero-actions{margin-top:1.4rem!important}}
