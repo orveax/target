@@ -1,0 +1,157 @@
+/* TARGET About — visual execution layer
+   Canonical copy and IA remain in AboutCanonical.astro. */
+
+.about-canonical .about-hero {
+  background: var(--ac-cream);
+  color: var(--ac-charcoal);
+  padding-block: clamp(3.5rem, 6vw, 5.25rem);
+}
+.about-canonical .about-hero::before {
+  inline-size: min(34vw, 28rem);
+  inset-inline-end: -8%;
+  inset-block-start: -45%;
+  border-color: rgba(12,73,49,.13);
+  box-shadow: 0 0 0 4rem rgba(12,73,49,.025), 0 0 0 8rem rgba(12,73,49,.018);
+}
+.about-canonical .about-hero__grid {
+  grid-template-columns: minmax(0, 1.22fr) minmax(23rem, .78fr);
+  gap: clamp(2rem, 6vw, 5.25rem);
+  align-items: center;
+}
+.about-canonical .about-eyebrow {
+  color: var(--ac-forest);
+  background: rgba(255,254,251,.72);
+  border-color: rgba(12,73,49,.16);
+}
+.about-canonical .about-hero h1 {
+  color: var(--ac-charcoal) !important;
+  max-width: 14ch;
+  text-shadow: none !important;
+}
+.about-canonical .about-hero p {
+  color: rgba(38,38,38,.72) !important;
+  text-shadow: none !important;
+}
+.about-canonical .about-hero .about-resource-link { color: var(--ac-forest); }
+.about-canonical .about-hero__cue {
+  position: relative;
+  isolation: isolate;
+  justify-self: stretch;
+  min-height: 22.5rem;
+  padding: 2rem;
+  overflow: hidden;
+  border: 0;
+  border-radius: 1.5rem;
+  background:
+    radial-gradient(circle at 75% 20%, rgba(244,237,228,.94) 0 3%, transparent 3.4%),
+    linear-gradient(135deg, #0c4931 0%, #155b42 56%, #87a999 100%);
+  box-shadow: 0 22px 42px rgba(7,53,35,.2);
+}
+.about-canonical .about-hero__cue::before,
+.about-canonical .about-hero__cue::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  border: 1px solid rgba(244,237,228,.4);
+  border-radius: 50%;
+}
+.about-canonical .about-hero__cue::before {
+  inline-size: 24rem;
+  block-size: 24rem;
+  inset: -6rem auto auto -9rem;
+  transform: rotate(-25deg);
+}
+.about-canonical .about-hero__cue::after {
+  inline-size: 18rem;
+  block-size: 18rem;
+  inset: auto -7rem -7rem auto;
+}
+.about-canonical .about-hero__cue svg {
+  width: 2.6rem;
+  height: 2.6rem;
+  margin-top: auto;
+  color: var(--ac-cream);
+}
+.about-canonical .about-hero__cue span {
+  color: var(--ac-sand);
+  font-family: Manrope, sans-serif;
+  font-size: .85rem;
+  letter-spacing: .16em;
+}
+.about-canonical .about-hero__cue b {
+  color: var(--ac-cream);
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+  letter-spacing: .055em;
+}
+.about-canonical .about-who { background: #fff; }
+.about-canonical .about-facts {
+  padding: .5rem;
+  border: 1px solid rgba(12,73,49,.12);
+  border-radius: 1.25rem;
+  background: rgba(244,237,228,.55);
+}
+.about-canonical .about-facts li {
+  min-height: 4.7rem;
+  border-color: transparent;
+  background: transparent;
+  border-radius: .9rem;
+}
+.about-canonical .about-facts li + li { border-top: 1px solid rgba(12,73,49,.1); }
+.about-canonical .about-values .about-value-card {
+  box-shadow: 0 14px 30px rgba(12,73,49,.055);
+  transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+.about-canonical .about-values .about-value-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(12,73,49,.28);
+  box-shadow: 0 20px 38px rgba(12,73,49,.11);
+}
+.about-canonical .about-role { background: #fff; }
+.about-canonical .about-flow-node {
+  min-height: 14.75rem;
+  box-shadow: 0 10px 24px rgba(12,73,49,.045);
+}
+.about-canonical .about-trust-card {
+  border-inline-start: 4px solid rgba(12,73,49,.86);
+  box-shadow: none;
+}
+.about-canonical .about-trust-card:nth-child(even) { border-inline-start-color: var(--ac-sand); }
+.about-canonical .about-profile-panel {
+  position: relative;
+  overflow: hidden;
+}
+.about-canonical .about-profile-panel::after {
+  content: "";
+  position: absolute;
+  inline-size: 10rem;
+  block-size: 10rem;
+  inset: auto -3rem -5rem auto;
+  border: 1px solid rgba(12,73,49,.14);
+  border-radius: 50%;
+}
+.about-canonical .about-final-cta { box-shadow: 0 22px 42px rgba(7,53,35,.18); }
+
+@media (max-width: 767.98px) {
+  .about-canonical .about-hero { padding-block: 3rem; }
+  .about-canonical .about-hero__grid { grid-template-columns: 1fr; gap: 1.5rem; }
+  .about-canonical .about-hero h1 { max-width: 13ch; font-size: clamp(2.15rem, 9.5vw, 2.8rem) !important; }
+  .about-canonical .about-hero p { font-size: 1rem; line-height: 1.8; }
+  .about-canonical .about-hero__cue {
+    display: grid;
+    min-height: 15.5rem;
+    padding: 1.35rem;
+    border-radius: 1.2rem;
+  }
+  .about-canonical .about-hero__cue svg { width: 2.2rem; height: 2.2rem; }
+  .about-canonical .about-facts { padding: .35rem; }
+  .about-canonical .about-facts li { min-height: 4.15rem; padding: .7rem; }
+  .about-canonical .about-icon { width: 2.8rem; height: 2.8rem; }
+  .about-canonical .about-icon--large { width: 3.5rem; height: 3.5rem; }
+  .about-canonical .about-values .about-value-card,
+  .about-canonical .about-trust-card { padding: 1.4rem; }
+  .about-canonical .about-flow-node { min-height: 0; }
+  .about-canonical .about-flow-link { color: var(--ac-sand); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .about-canonical .about-values .about-value-card { transition: none; }
+}
