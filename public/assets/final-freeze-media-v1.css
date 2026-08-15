@@ -1,0 +1,70 @@
+/* TARGET staged editorial media map — governed by Notion Production Image Asset Selection & Crop Board V1.
+   These are staging/context images only. Supplier/company product imagery must use verified originals before production. */
+
+/* Existing canonical components: replace decorative hero art with real editorial photography. */
+.hc-hero-media{
+  background-image:linear-gradient(180deg,rgba(12,73,49,.01),rgba(12,73,49,.10)),url('https://images.pexels.com/photos/11679687/pexels-photo-11679687.jpeg?auto=compress&cs=tinysrgb&w=1600')!important;
+  background-size:cover!important;background-position:center!important;
+}
+.hc-hero-media>*{display:none!important}
+.about-hero__cue{
+  background-image:linear-gradient(180deg,rgba(12,73,49,.01),rgba(12,73,49,.10)),url('https://images.pexels.com/photos/5953831/pexels-photo-5953831.jpeg?auto=compress&cs=tinysrgb&w=1600')!important;
+  background-size:cover!important;background-position:center!important;
+}
+.about-hero__cue>*{display:none!important}
+.work-hero__route{
+  background-image:linear-gradient(180deg,rgba(12,73,49,.01),rgba(12,73,49,.10)),url('https://images.pexels.com/photos/24394699/pexels-photo-24394699.jpeg?auto=compress&cs=tinysrgb&w=1600')!important;
+  background-size:cover!important;background-position:center!important;
+}
+.work-hero__route>*{display:none!important}
+
+/* Shared legacy/premium page hero conversion: 55/45 text/media without duplicating markup. */
+.page-food-portfolio .premium-page-hero,
+.page-suppliers .premium-page-hero,
+.page-contact .premium-page-hero{position:relative;min-height:590px;display:flex;align-items:center}
+.page-food-portfolio .premium-page-hero::after,
+.page-suppliers .premium-page-hero::after,
+.page-contact .premium-page-hero::after{content:"";position:absolute;inset-block:72px;inset-inline-end:max(24px,calc((100vw - 1200px)/2));width:min(42vw,520px);border-radius:24px;background-size:cover;background-position:center;border:1px solid var(--target-border-default);box-shadow:var(--target-shadow-resource)}
+.page-food-portfolio .premium-page-hero::after{background-image:linear-gradient(180deg,rgba(12,73,49,.02),rgba(12,73,49,.12)),url('https://images.pexels.com/photos/10907746/pexels-photo-10907746.jpeg?auto=compress&cs=tinysrgb&w=1600')}
+.page-suppliers .premium-page-hero::after{background-image:linear-gradient(180deg,rgba(12,73,49,.02),rgba(12,73,49,.12)),url('https://images.pexels.com/photos/11679687/pexels-photo-11679687.jpeg?auto=compress&cs=tinysrgb&w=1600')}
+.page-contact .premium-page-hero::after{background-image:linear-gradient(180deg,rgba(12,73,49,.02),rgba(12,73,49,.12)),url('https://images.pexels.com/photos/8069552/pexels-photo-8069552.jpeg?auto=compress&cs=tinysrgb&w=1600')}
+.page-food-portfolio .premium-page-hero-content,
+.page-suppliers .premium-page-hero-content,
+.page-contact .premium-page-hero-content{position:relative;z-index:1;padding-inline-end:48%;margin:0 auto}
+
+/* Qatar Market legacy hero receives a real packaged-food/channel context until the route is rebuilt. */
+.page-qatar-market .page-hero{position:relative;background:var(--target-cream)!important;color:var(--target-charcoal)!important;min-height:590px;display:flex;align-items:center;overflow:hidden}
+.page-qatar-market .page-hero::after{content:"";position:absolute;inset-block:72px;inset-inline-end:max(24px,calc((100vw - 1200px)/2));width:min(42vw,520px);border-radius:24px;background-image:linear-gradient(180deg,rgba(12,73,49,.02),rgba(12,73,49,.12)),url('https://images.unsplash.com/photo-1601599561213-832382fd07ba?auto=format&fit=crop&w=1600&q=80');background-size:cover;background-position:center;border:1px solid var(--target-border-default);box-shadow:var(--target-shadow-resource)}
+.page-qatar-market .page-hero>.container{position:relative;z-index:1;padding-inline-end:48%}
+.page-qatar-market .page-hero h1{color:var(--target-charcoal)!important;font-size:var(--target-h1-internal)!important;line-height:1.12!important}
+.page-qatar-market .page-hero p{color:var(--target-text-secondary)!important;font-size:var(--target-lead)!important}
+.page-qatar-market .page-hero .hero-kicker{color:var(--target-forest)!important}
+
+/* Category media: clear visual cues, still illustrative rather than supplier-owned. */
+.media-fmcg{background-image:url('https://images.pexels.com/photos/10907746/pexels-photo-10907746.jpeg?auto=compress&cs=tinysrgb&w=900')!important}
+.media-dairy{background-image:url('https://images.pexels.com/photos/5953831/pexels-photo-5953831.jpeg?auto=compress&cs=tinysrgb&w=900')!important}
+
+/* Supporting media cards: implemented via pseudo-panels where markup is legacy. */
+.page-suppliers .t5-route-card::before{content:"";display:block;aspect-ratio:16/10;border-radius:16px;margin-bottom:24px;background:url('https://images.pexels.com/photos/8069552/pexels-photo-8069552.jpeg?auto=compress&cs=tinysrgb&w=1000') center/cover;border:1px solid var(--target-border-default)}
+.page-contact .t5-contact-side::before{content:"";display:block;aspect-ratio:16/10;border-radius:16px;margin-bottom:24px;background:linear-gradient(135deg,rgba(12,73,49,.08),rgba(192,149,82,.10));border:1px solid var(--target-border-default)}
+
+@media (max-width:991.98px){
+  .page-food-portfolio .premium-page-hero,
+  .page-suppliers .premium-page-hero,
+  .page-contact .premium-page-hero,
+  .page-qatar-market .page-hero{display:block;min-height:auto;padding-bottom:40px!important}
+  .page-food-portfolio .premium-page-hero-content,
+  .page-suppliers .premium-page-hero-content,
+  .page-contact .premium-page-hero-content,
+  .page-qatar-market .page-hero>.container{padding-inline-end:24px!important}
+  .page-food-portfolio .premium-page-hero::after,
+  .page-suppliers .premium-page-hero::after,
+  .page-contact .premium-page-hero::after,
+  .page-qatar-market .page-hero::after{position:relative;display:block;inset:auto;width:auto;max-width:none;aspect-ratio:4/3;margin:0 24px 24px;border-radius:20px}
+}
+@media (max-width:575.98px){
+  .page-food-portfolio .premium-page-hero::after,
+  .page-suppliers .premium-page-hero::after,
+  .page-contact .premium-page-hero::after,
+  .page-qatar-market .page-hero::after{margin-inline:20px}
+}
