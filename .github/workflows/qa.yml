@@ -33,6 +33,7 @@ jobs:
           test -f dist/assets/final-freeze-v1.css
           test -f dist/assets/final-freeze-media-v1.css
           test -f dist/assets/content-pages-final-v1.css
+          test -f dist/assets/verified-contact-v1.css
           test -f dist/content/target-design-tokens-v1.json
           test -f dist/content/companies.json
       - name: Verify internal company brochure resources
@@ -41,3 +42,13 @@ jobs:
           test -f dist/assets/companies/al-nada/brochure.pdf
           test -f dist/assets/companies/al-dar/brochure.pdf
           test -f dist/assets/companies/al-reem/brochure.pdf
+      - name: Verify approved contact data
+        run: |
+          grep -q '97477910919' dist/assets/premium-v6.js
+          grep -q '97477910919' dist/assets/t5-conversion.js
+          grep -q '25.1753889,51.6052222' dist/assets/contact-refinement-v2.js
+          grep -q 'facebook.com/targetft' dist/contact.html
+          grep -q 'instagram.com/targetft' dist/contact.html
+          grep -q 'tiktok.com/@targetft' dist/contact.html
+          ! grep -R -q '97400000000' dist
+          ! grep -R -q '+974 XX' dist
