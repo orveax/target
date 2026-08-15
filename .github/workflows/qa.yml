@@ -35,6 +35,7 @@ jobs:
           test -f dist/assets/content-pages-final-v1.css
           test -f dist/assets/verified-contact-v1.css
           test -f dist/assets/company-profile-v1.css
+          test -f dist/assets/faq-v1.css
           test -f dist/content/target-design-tokens-v1.json
           test -f dist/content/companies.json
       - name: Verify internal company brochure resources
@@ -60,3 +61,12 @@ jobs:
           grep -q 'food-portfolio.html' dist/company-profile.html
           grep -q 'qatar-market.html' dist/company-profile.html
           ! grep -q 'href="#"' dist/company-profile.html
+      - name: Verify canonical FAQ
+        run: |
+          grep -q 'faq-q01' dist/faq.html
+          grep -q 'faq-q15' dist/faq.html
+          grep -q 'إجابات واضحة قبل أن تبدأ' dist/faq.html
+          grep -q 'لم تجد الإجابة التي تحتاجها' dist/faq.html
+          grep -q 'partners@targetft.com' dist/faq.html
+          ! grep -q 'Partnership Model' dist/faq.html
+          ! grep -q 'Discover → Evaluate → Partner' dist/faq.html
