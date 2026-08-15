@@ -50,6 +50,7 @@ const faqs = [
       </div>
       <div class="hc-hero-visual">
         <div class="hc-hero-media" aria-hidden="true">
+          <img class="hc-hero-photo" src="/images/home-food-trade-hero-v1.png" alt="" loading="eager" decoding="async" />
           <span class="hc-hero-orbit hc-hero-orbit--one"></span>
           <span class="hc-hero-orbit hc-hero-orbit--two"></span>
           <span class="hc-hero-gridline hc-hero-gridline--one"></span>
@@ -80,13 +81,14 @@ const faqs = [
 
   <section class="hc-section hc-categories"><div class="container">
     <header class="hc-heading"><span class="hc-kicker" data-ar="نطاق اهتمامنا" data-en="Our Focus">نطاق اهتمامنا</span><h2 data-ar="فئات ومنتجات نركز عليها" data-en="Products & Categories We Focus On">فئات ومنتجات نركز عليها</h2><p data-ar="نعمل ضمن فئات غذائية مختارة، مع مرونة لتقييم المنتجات التي تتناسب مع توجه تارقت وفرص السوق القطري." data-en="We focus on selected food categories while remaining open to evaluating products that fit TARGET's commercial direction and Qatar-market opportunities.">نعمل ضمن فئات غذائية مختارة، مع مرونة لتقييم المنتجات التي تتناسب مع توجه تارقت وفرص السوق القطري.</p></header>
+    <figure class="hc-category-editorial" aria-hidden="true"><img src="/images/home-food-trade-editorial-v1.png" alt="" loading="lazy" decoding="async" /></figure>
     <div class="hc-category-grid">{categories.map(([icon,ar,en]) => <a href="food-portfolio.html"><span class="hc-category-media"><span class="hc-icon-tile"><i data-lucide={icon}></i></span></span><strong data-ar={ar} data-en={en}>{ar}</strong><i class="hc-category-arrow" data-lucide="arrow-up-left"></i></a>)}</div>
     <a class="hc-explore-link" href="food-portfolio.html"><span data-ar="استعرض المنتجات والشركات" data-en="Explore Products & Companies">استعرض المنتجات والشركات</span><i data-lucide="arrow-up-left"></i></a>
   </div></section>
 
   <section class="hc-section hc-why"><div class="container"><div class="hc-why-layout">
     <header class="hc-heading"><span class="hc-kicker" data-ar="لماذا تارقت؟" data-en="Why TARGET?">لماذا تارقت؟</span><h2 data-ar="طريقة عمل واضحة حول المنتج والفرصة" data-en="A Clear Way to Discuss the Product and Opportunity">طريقة عمل واضحة حول المنتج والفرصة</h2><p data-ar="نفضّل أن يعرف المصنع أو المورد منذ البداية ما الذي نراجعه، وما الذي تعنيه المناقشة، ومتى يبدأ الالتزام التجاري." data-en="We want manufacturers and suppliers to understand from the start what is reviewed, what a discussion means, and when a commercial commitment begins.">نفضّل أن يعرف المصنع أو المورد منذ البداية ما الذي نراجعه، وما الذي تعنيه المناقشة، ومتى يبدأ الالتزام التجاري.</p></header>
-    <div class="hc-why-grid">{why.map(([icon,ar,arCopy,en,enCopy]) => <article><span class="hc-icon-tile"><i data-lucide={icon}></i></span><div><h3 data-ar={ar} data-en={en}>{ar}</h3><p data-ar={arCopy} data-en={enCopy}>{arCopy}</p></div></article>)}</div>
+    <div class="hc-why-content"><figure class="hc-why-editorial" aria-hidden="true"><img src="/images/home-food-trade-editorial-v1.png" alt="" loading="lazy" decoding="async" /></figure><div class="hc-why-grid">{why.map(([icon,ar,arCopy,en,enCopy]) => <article><span class="hc-icon-tile"><i data-lucide={icon}></i></span><div><h3 data-ar={ar} data-en={en}>{ar}</h3><p data-ar={arCopy} data-en={enCopy}>{arCopy}</p></div></article>)}</div></div>
   </div></div></section>
 
   <section class="hc-section hc-start"><div class="container"><header class="hc-heading"><span class="hc-kicker" data-ar="كيف نبدأ؟" data-en="How to Start">كيف نبدأ؟</span><h2 data-ar="أربع خطوات لبدء مناقشة المنتج" data-en="Four Steps to Start a Product Discussion">أربع خطوات لبدء مناقشة المنتج</h2><p data-ar="البداية لا تحتاج ملفًا معقدًا. نحتاج معلومات واضحة تساعدنا على فهم الشركة والمنتج والفرصة في قطر." data-en="The first step does not require a complicated submission. We need clear information that helps us understand the company, product and Qatar opportunity.">البداية لا تحتاج ملفًا معقدًا. نحتاج معلومات واضحة تساعدنا على فهم الشركة والمنتج والفرصة في قطر.</p></header>
