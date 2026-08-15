@@ -1,30 +1,149 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-const reviewInputs = [
-  ['building-2','الشركة أو المصنع','Company / Manufacturer'],
-  ['package','المنتج والفئة','Product / Category'],
-  ['map-pinned','الفرصة التي تريد مناقشتها في قطر','The Qatar Opportunity to Discuss'],
-  ['file-text','المعلومات التجارية المتاحة','Available Commercial Information'],
+
+const marketContext = [
+  ['package','المنتج والفئة','Product & Category','نبدأ بفهم المنتج والفئة وما الذي يقدمه المورد أو المصنع فعلًا.','We start by understanding the product, its category and what the supplier or manufacturer actually offers.'],
+  ['file-check-2','معلومات واضحة','Clear Product Information','كلما كانت معلومات المنتج والشركة والتعبئة والمواد المتاحة أوضح، كان النقاش التجاري أكثر دقة.','The clearer the product, company, packaging and available material information is, the more precise the commercial discussion becomes.'],
+  ['handshake','طريقة العمل','Commercial Arrangement','طريقة العمل لا تُفترض مسبقًا؛ تُناقش وتُحدد عندما تكون الفرصة مناسبة للطرفين.','The way of working is not assumed in advance; it is discussed and defined when the opportunity fits both sides.'],
+  ['route','قنوات الوصول','Sales & Distribution Channels','القناة المناسبة تعتمد على المنتج والفئة والفرصة، ولا نفترض تغطية موحدة لكل المنتجات.','The suitable channel depends on the product, category and opportunity; we do not assume one coverage model for every product.'],
 ];
+
+const reviewInputs = [
+  ['building-2','الشركة أو المصنع','Company / Manufacturer','من هي الجهة؟ وما المنتج أو العلامة التي تريد مناقشتها؟','Who is the manufacturer or supplier, and what product or brand is being discussed?'],
+  ['package','المنتج والفئة','Product / Category','ما نوع المنتج؟ وما الفئة التي ينتمي إليها؟ وما المعلومات المتاحة عنه؟','What is the product, category and available product information?'],
+  ['map-pinned','الفرصة المطلوبة في قطر','Qatar Opportunity','ما الذي تريد مناقشته تحديدًا: دخول المنتج، الاستيراد والتجارة، البيع والتوزيع، أو فرصة تجارية أخرى مرتبطة بالمنتج؟','What specifically do you want to discuss in Qatar: product entry, import and trading, sales and distribution, or another product-related commercial opportunity?'],
+  ['file-text','المعلومات التجارية المتاحة','Available Commercial Information','عندما تصل المناقشة لهذه المرحلة، تساعد معلومات العبوات والكميات المتاحة والأسعار والشروط التجارية على تحديد إمكانية الانتقال للخطوة التالية.','When the discussion reaches this stage, packaging, available quantities, pricing and commercial terms help determine whether the next step is practical.'],
+];
+
 const checkpoints = [
-  ['search-check','ملاءمة المنتج','Product Fit','نراجع المنتج والفئة في سياق الفرصة المطروحة.','We review the product and category in the context of the opportunity.'],
-  ['file-check-2','اتفاق واضح','Clear Agreement','أي التزام يبدأ بعد اتفاق واضح على طريقة العمل.','Commitment starts only after clear agreement on how to work.'],
-  ['ship','الاستيراد والتجارة','Import & Trading','تتحرك خطوات التجارة والاستيراد بحسب المنتج والاتفاق.','Trading and import steps move according to the product and agreement.'],
-  ['route','البيع والتوزيع','Sales & Distribution','قنوات البيع والتوزيع تُحدد بحسب المنتج والفرصة.','Sales and distribution channels are defined according to the product and opportunity.'],
+  ['search-check','ملاءمة المنتج','Product Fit','نراجع المنتج والفئة والفرصة المطروحة في قطر قبل أي التزام تجاري.','We review the product, category and opportunity in Qatar before any commercial commitment.'],
+  ['file-check-2','اتفاق واضح','Clear Agreement','إذا كانت الفرصة مناسبة، نحدد طريقة العمل والشروط الأساسية قبل التنفيذ.','If the opportunity is suitable, we define the way of working and key commercial terms before execution.'],
+  ['ship','الاستيراد والتجارة','Import & Trading','تبدأ أنشطة الاستيراد والتجارة فقط وفق الاتفاق وطبيعة المنتج والخطوات المطلوبة.','Import and trading activities begin only according to the agreement, product and required steps.'],
+  ['route','البيع والتوزيع','Sales & Distribution','يتم التعامل مع قنوات البيع والتوزيع بحسب المنتج والفئة والفرصة المتاحة داخل قطر.','Sales and distribution channels are addressed according to the product, category and opportunity in Qatar.'],
+];
+
+const channelPrinciples = [
+  ['package','المنتج يحدد طبيعة القناة','Product Shapes the Channel','نبدأ من طبيعة المنتج والفئة.','We start with the nature of the product and category.'],
+  ['route','الفرصة تُراجع عمليًا','Opportunity Is Reviewed Practically','لا نفترض أن كل قناة مناسبة لكل منتج.','We do not assume every channel fits every product.'],
+  ['move-up-right','التوسع يأتي بعد البداية','Expansion Comes After the Start','الاستمرار أو توسيع الوصول يُراجع بعد وجود أساس تجاري مناسب.','Continuation or wider reach is reviewed after a suitable commercial foundation exists.'],
 ];
 ---
 <BaseLayout active="market" bodyClass="page-qatar-market premium-v8-page" title="السوق القطري | TARGET" description="كيف تراجع تارقت فرصة المنتج في السوق القطري قبل التحرك التجاري.">
-  <section class="target-hero"><div class="container target-hero__grid"><div class="target-hero__copy"><span class="target-kicker"><i data-lucide="map-pinned"></i><span data-ar="السوق القطري" data-en="Qatar Market">السوق القطري</span></span><h1 data-ar="فرصة المنتج في قطر تبدأ بفهم السوق قبل التحرك." data-en="A product opportunity in Qatar starts with understanding the market before moving forward.">فرصة المنتج في قطر تبدأ بفهم السوق قبل التحرك.</h1><p data-ar="ننظر إلى المنتج في سياق فئته وفرصته وطريقة العمل المناسبة في قطر، ثم نحدد الخطوة التالية من خلال نقاش تجاري واضح حول الاستيراد والتجارة وقنوات البيع والتوزيع." data-en="We look at the product in the context of its category, opportunity and an appropriate way of working in Qatar, then define the next step through a clear commercial discussion around import, trading, sales and distribution channels.">ننظر إلى المنتج في سياق فئته وفرصته وطريقة العمل المناسبة في قطر، ثم نحدد الخطوة التالية من خلال نقاش تجاري واضح حول الاستيراد والتجارة وقنوات البيع والتوزيع.</p><div class="target-hero__actions"><a class="btn-premium btn-primary-premium" href="suppliers.html"><i data-lucide="send"></i><span data-ar="ناقش منتجك معنا" data-en="Discuss Your Product">ناقش منتجك معنا</span></a><a class="btn-premium btn-light-premium" href="capabilities.html"><i data-lucide="route"></i><span data-ar="تعرف على طريقة عملنا" data-en="See How We Work">تعرف على طريقة عملنا</span></a></div></div><div class="target-hero__media"><img src="https://images.pexels.com/photos/10907746/pexels-photo-10907746.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="منتجات غذائية معبأة على أرفف بيع" width="1600" height="1280"><span class="target-media-caption" data-ar="سياق بيع وتوزيع غذائي — صورة تحريرية توضيحية" data-en="Food retail and distribution context — editorial illustration">سياق بيع وتوزيع غذائي — صورة تحريرية توضيحية</span></div></div></section>
+  <section class="qm-hero">
+    <div class="container qm-hero-grid">
+      <div class="qm-hero-copy">
+        <span class="qm-eyebrow"><i data-lucide="map-pinned"></i><span data-ar="السوق القطري" data-en="Qatar Market">السوق القطري</span></span>
+        <h1 data-ar="فرصة المنتج في قطر تبدأ بفهم السوق قبل التحرك." data-en="A product opportunity in Qatar starts with understanding the market before moving forward.">فرصة المنتج في قطر تبدأ بفهم السوق قبل التحرك.</h1>
+        <p data-ar="ننظر إلى المنتج في سياق فئته وفرصته وطريقة العمل المناسبة في قطر، ثم نحدد الخطوة التالية من خلال نقاش تجاري واضح حول الاستيراد والتجارة وقنوات البيع والتوزيع." data-en="We look at the product in the context of its category, opportunity and suitable way of working in Qatar, then define the next step through a clear commercial discussion around import, trading and sales and distribution channels.">ننظر إلى المنتج في سياق فئته وفرصته وطريقة العمل المناسبة في قطر، ثم نحدد الخطوة التالية من خلال نقاش تجاري واضح حول الاستيراد والتجارة وقنوات البيع والتوزيع.</p>
+        <div class="qm-actions">
+          <a class="qm-primary" href="suppliers.html"><i data-lucide="send"></i><span data-ar="ناقش منتجك معنا" data-en="Discuss Your Product">ناقش منتجك معنا</span></a>
+          <a class="qm-secondary" href="capabilities.html"><span data-ar="تعرف على طريقة عملنا" data-en="See How We Work">تعرف على طريقة عملنا</span><i data-lucide="arrow-left"></i></a>
+        </div>
+      </div>
+      <figure class="qm-hero-media">
+        <img src="/images/home-food-trade-editorial-v1.png" alt="منتجات غذائية وتعبئة في سياق تجاري" data-ar-alt="منتجات غذائية وتعبئة في سياق تجاري" data-en-alt="Packaged food products in a commercial context" width="1400" height="1120" loading="eager" decoding="async" />
+        <figcaption>
+          <span><i data-lucide="package"></i><b data-ar="منتج وفئة" data-en="Product & Category">منتج وفئة</b></span>
+          <span><i data-lucide="store"></i><b data-ar="قنوات السوق" data-en="Market Channels">قنوات السوق</b></span>
+          <span><i data-lucide="file-check-2"></i><b data-ar="اتفاق واضح" data-en="Clear Agreement">اتفاق واضح</b></span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
 
-  <section class="target-section target-section--white"><div class="container target-media-split"><div><span class="target-kicker" data-ar="سياق السوق" data-en="Market Context">سياق السوق</span><h2 data-ar="ماذا يعني السوق القطري للمنتج؟" data-en="What does the Qatar market mean for a product?">ماذا يعني السوق القطري للمنتج؟</h2><p><strong data-ar="لا يوجد مسار واحد يناسب كل المنتجات." data-en="There is no single route that fits every product.">لا يوجد مسار واحد يناسب كل المنتجات.</strong></p><p data-ar="الفئة، طبيعة المنتج، المعلومات المتاحة وطريقة العمل المقترحة كلها تؤثر في الخطوة التالية. لذلك نبدأ بالمراجعة قبل افتراض قناة أو نموذج ثابت." data-en="The category, product characteristics, available information and proposed way of working all affect the next step. We therefore start with review rather than assuming a fixed channel or model.">الفئة، طبيعة المنتج، المعلومات المتاحة وطريقة العمل المقترحة كلها تؤثر في الخطوة التالية. لذلك نبدأ بالمراجعة قبل افتراض قناة أو نموذج ثابت.</p></div><div class="target-media-frame"><img src="https://images.pexels.com/photos/11835350/pexels-photo-11835350.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="صناديق كرتونية على أرفف تخزين" loading="lazy" width="1200" height="900"></div></div></section>
+  <section class="qm-section qm-context">
+    <div class="container qm-context-grid">
+      <div class="qm-context-copy">
+        <span class="qm-kicker" data-ar="ماذا يعني السوق القطري للمنتج؟" data-en="Qatar Market Context">ماذا يعني السوق القطري للمنتج؟</span>
+        <h2 data-ar="لا يوجد مسار واحد يناسب كل المنتجات." data-en="There is no single route that fits every product.">لا يوجد مسار واحد يناسب كل المنتجات.</h2>
+        <p data-ar="اختلاف الفئة والمنتج والمعلومات التجارية وطبيعة الفرصة يعني أن نقطة البداية وقنوات البيع والتوزيع وطريقة العمل قد تختلف من منتج إلى آخر." data-en="Differences in category, product, commercial information and the opportunity mean the starting point, sales and distribution channels, and way of working may vary from one product to another.">اختلاف الفئة والمنتج والمعلومات التجارية وطبيعة الفرصة يعني أن نقطة البداية وقنوات البيع والتوزيع وطريقة العمل قد تختلف من منتج إلى آخر.</p>
+        <div class="qm-context-points">
+          {marketContext.map(([icon,ar,en,arBody,enBody],index) => <article><span class="qm-point-index">0{index+1}</span><span class="qm-icon"><i data-lucide={icon}></i></span><div><h3 data-ar={ar} data-en={en}>{ar}</h3><p data-ar={arBody} data-en={enBody}>{arBody}</p></div></article>)}
+        </div>
+      </div>
+      <figure class="qm-context-media">
+        <img src="/images/home-food-trade-hero-v1.png" alt="تعبئة وتجهيز منتجات غذائية" data-ar-alt="تعبئة وتجهيز منتجات غذائية" data-en-alt="Food packaging and product preparation" width="1200" height="960" loading="lazy" decoding="async" />
+        <div class="qm-market-note"><i data-lucide="map-pinned"></i><span data-ar="السوق القطري هو سياق المراجعة — وليس وعدًا بقناة أو نتيجة ثابتة." data-en="Qatar is the market context for review — not a promise of a fixed channel or outcome.">السوق القطري هو سياق المراجعة — وليس وعدًا بقناة أو نتيجة ثابتة.</span></div>
+      </figure>
+    </div>
+  </section>
 
-  <section class="target-section target-section--subtle"><div class="container"><header class="target-section-head"><span class="target-kicker" data-ar="قبل التحرك" data-en="Before Moving Forward">قبل التحرك</span><h2 data-ar="ما الذي نراجعه أولًا؟" data-en="What do we review first?">ما الذي نراجعه أولًا؟</h2></header><div class="target-card-grid">{reviewInputs.map(([icon,ar,en]) => <article class="target-card"><span class="target-icon-tile"><i data-lucide={icon}></i></span><h3 data-ar={ar} data-en={en}>{ar}</h3></article>)}</div></div></section>
+  <section class="qm-section qm-review">
+    <div class="container qm-review-grid">
+      <header class="qm-section-head">
+        <span class="qm-kicker" data-ar="قبل الخطوة التالية" data-en="Before the Next Step">قبل الخطوة التالية</span>
+        <h2 data-ar="أربع معلومات تساعدنا على فهم الفرصة بشكل أفضل." data-en="Four areas help us understand the opportunity more clearly.">أربع معلومات تساعدنا على فهم الفرصة بشكل أفضل.</h2>
+        <p data-ar="هذه المعلومات تساعد في النقاش التجاري الأولي، وليست معايير قبول آلية أو درجات تقييم." data-en="These are discussion inputs for the initial commercial review, not automatic acceptance criteria or scoring rules.">هذه المعلومات تساعد في النقاش التجاري الأولي، وليست معايير قبول آلية أو درجات تقييم.</p>
+      </header>
+      <div class="qm-checklist">
+        {reviewInputs.map(([icon,ar,en,arBody,enBody],index) => <article><span class="qm-check-number">0{index+1}</span><span class="qm-icon"><i data-lucide={icon}></i></span><div><h3 data-ar={ar} data-en={en}>{ar}</h3><p data-ar={arBody} data-en={enBody}>{arBody}</p></div></article>)}
+      </div>
+    </div>
+  </section>
 
-  <section class="target-section target-section--white"><div class="container"><header class="target-section-head"><span class="target-kicker" data-ar="من المنتج إلى السوق" data-en="From Product to Market">من المنتج إلى السوق</span><h2 data-ar="أربع نقاط تجارية تحدد الخطوة التالية" data-en="Four commercial checkpoints define the next step">أربع نقاط تجارية تحدد الخطوة التالية</h2></header><div class="target-card-grid">{checkpoints.map(([icon,ar,en,arBody,enBody],index) => <article class="target-card"><small>0{index+1}</small><span class="target-icon-tile"><i data-lucide={icon}></i></span><h3 data-ar={ar} data-en={en}>{ar}</h3><p data-ar={arBody} data-en={enBody}>{arBody}</p></article>)}</div></div></section>
+  <section class="qm-section qm-checkpoints">
+    <div class="container">
+      <header class="qm-section-head qm-head-wide">
+        <span class="qm-kicker" data-ar="من المنتج إلى السوق" data-en="From Product to Market">من المنتج إلى السوق</span>
+        <h2 data-ar="أربع نقاط تجارية واضحة قبل أن يصبح المنتج جزءًا من فرصة فعلية." data-en="Four clear commercial checkpoints before a product becomes an active opportunity.">أربع نقاط تجارية واضحة قبل أن يصبح المنتج جزءًا من فرصة فعلية.</h2>
+      </header>
+      <div class="qm-checkpoint-track">
+        {checkpoints.map(([icon,ar,en,arBody,enBody],index) => <article class={index === 1 ? 'is-focus' : ''}><span class="qm-track-number">0{index+1}</span><span class="qm-icon"><i data-lucide={icon}></i></span><h3 data-ar={ar} data-en={en}>{ar}</h3><p data-ar={arBody} data-en={enBody}>{arBody}</p></article>)}
+      </div>
+    </div>
+  </section>
 
-  <section class="target-section target-section--subtle"><div class="container target-media-split"><div><span class="target-kicker" data-ar="قنوات البيع والتوزيع" data-en="Sales & Distribution Context">قنوات البيع والتوزيع</span><h2 data-ar="قنوات البيع والتوزيع تُحدد بحسب المنتج، لا بقالب ثابت." data-en="Sales and distribution channels are defined by the product, not by a fixed template.">قنوات البيع والتوزيع تُحدد بحسب المنتج، لا بقالب ثابت.</h2><p data-ar="المنتج هو الذي يحدد القناة المناسبة؛ نراجع الفرصة بشكل عملي، ثم يأتي توسيع الوصول بعد بداية لها أساس تجاري واضح." data-en="The product determines the suitable channel. We review the opportunity practically, and wider reach follows only after a commercially grounded start.">المنتج هو الذي يحدد القناة المناسبة؛ نراجع الفرصة بشكل عملي، ثم يأتي توسيع الوصول بعد بداية لها أساس تجاري واضح.</p></div><div class="target-card"><span class="target-icon-tile"><i data-lucide="store"></i></span><h3 data-ar="المنتج أولًا" data-en="Product First">المنتج أولًا</h3><p data-ar="لا نعد بقناة بيع أو تغطية أو حجم مبيعات قبل معرفة المنتج والاتفاق على طريقة العمل." data-en="We do not promise a sales channel, coverage or sales volume before understanding the product and agreeing how to work.">لا نعد بقناة بيع أو تغطية أو حجم مبيعات قبل معرفة المنتج والاتفاق على طريقة العمل.</p></div></div></section>
+  <section class="qm-section qm-channels">
+    <div class="container qm-channel-grid">
+      <div class="qm-channel-copy">
+        <span class="qm-kicker" data-ar="الوصول إلى السوق" data-en="Reaching the Market">الوصول إلى السوق</span>
+        <h2 data-ar="قنوات البيع والتوزيع تُحدد بحسب المنتج، لا بقالب ثابت." data-en="Sales and distribution channels are shaped by the product, not a fixed template.">قنوات البيع والتوزيع تُحدد بحسب المنتج، لا بقالب ثابت.</h2>
+        <p data-ar="بعض المنتجات تحتاج طريقة وصول مختلفة عن غيرها. لذلك نتعامل مع موضوع البيع والتوزيع كجزء من فرصة المنتج نفسها، وليس كوعْد بتغطية أو عدد منافذ محدد مسبقًا." data-en="Different products may require different routes to market. We therefore treat sales and distribution as part of the product opportunity itself, not as a promise of predefined coverage or outlet numbers.">بعض المنتجات تحتاج طريقة وصول مختلفة عن غيرها. لذلك نتعامل مع موضوع البيع والتوزيع كجزء من فرصة المنتج نفسها، وليس كوعْد بتغطية أو عدد منافذ محدد مسبقًا.</p>
+      </div>
+      <div class="qm-channel-network" aria-label="قنوات الوصول إلى السوق">
+        {channelPrinciples.map(([icon,ar,en,arBody,enBody],index) => <article class={index === 1 ? 'is-center' : ''}><span class="qm-icon"><i data-lucide={icon}></i></span><h3 data-ar={ar} data-en={en}>{ar}</h3><p data-ar={arBody} data-en={enBody}>{arBody}</p></article>)}
+      </div>
+    </div>
+  </section>
 
-  <section class="target-section target-section--white"><div class="container"><div class="target-card"><span class="target-icon-tile"><i data-lucide="shield-check"></i></span><h2 data-ar="وضوح تجاري قبل أي التزام" data-en="Commercial clarity before commitment">وضوح تجاري قبل أي التزام</h2><p data-ar="مناقشة المنتج لا تعني قبولًا تلقائيًا، ولا تضمن مبيعات أو إدراجًا أو تغطية أو حجمًا أو نموًا. كما لا تنشئ وكالة أو حصرية أو تمثيلًا رسميًا ما لم يتم توثيق ذلك في اتفاق واضح." data-en="A product discussion does not mean automatic acceptance and does not guarantee sales, listing, coverage, volume or growth. It also does not create agency, exclusivity or official representation unless documented in a clear agreement.">مناقشة المنتج لا تعني قبولًا تلقائيًا، ولا تضمن مبيعات أو إدراجًا أو تغطية أو حجمًا أو نموًا. كما لا تنشئ وكالة أو حصرية أو تمثيلًا رسميًا ما لم يتم توثيق ذلك في اتفاق واضح.</p></div></div></section>
+  <section class="qm-section qm-clarity">
+    <div class="container">
+      <div class="qm-clarity-panel">
+        <span class="qm-icon qm-icon-large"><i data-lucide="shield-check"></i></span>
+        <div>
+          <span class="qm-kicker" data-ar="توقعات واضحة" data-en="Clear Expectations">توقعات واضحة</span>
+          <h2 data-ar="نناقش الفرصة بوضوح — دون وعود غير موثقة." data-en="We discuss the opportunity clearly — without unsupported promises.">نناقش الفرصة بوضوح — دون وعود غير موثقة.</h2>
+          <p data-ar="مناقشة المنتج لا تعني قبولًا تلقائيًا، ولا تضمن مبيعات أو إدراجًا أو تغطية أو حجمًا أو نموًا. كما لا تنشئ وكالة أو حصرية أو تمثيلًا رسميًا ما لم يتم توثيق ذلك في اتفاق واضح." data-en="A product discussion does not mean automatic acceptance and does not guarantee sales, listing, coverage, volume or growth. It also does not create agency, exclusivity or official representation unless documented in a clear agreement.">مناقشة المنتج لا تعني قبولًا تلقائيًا، ولا تضمن مبيعات أو إدراجًا أو تغطية أو حجمًا أو نموًا. كما لا تنشئ وكالة أو حصرية أو تمثيلًا رسميًا ما لم يتم توثيق ذلك في اتفاق واضح.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <section class="target-section target-section--forest"><div class="container d-lg-flex align-items-center justify-content-between gap-4"><div class="target-section-head mb-0"><span class="target-kicker" data-ar="هل لديك منتج؟" data-en="Have a Product?">هل لديك منتج؟</span><h2 data-ar="لديك منتج غذائي تريد مناقشة فرصته في قطر؟" data-en="Have a food product you want to discuss for Qatar?">لديك منتج غذائي تريد مناقشة فرصته في قطر؟</h2></div><a class="btn-premium btn-light-premium" href="suppliers.html"><i data-lucide="send"></i><span data-ar="ناقش منتجك معنا" data-en="Discuss Your Product">ناقش منتجك معنا</span></a></div></section>
+  <section class="qm-final">
+    <div class="container">
+      <div class="qm-final-panel">
+        <div><span class="qm-kicker" data-ar="هل لديك منتج؟" data-en="Have a Product?">هل لديك منتج؟</span><h2 data-ar="لديك منتج غذائي تريد مناقشة فرصته في قطر؟" data-en="Have a food product you want to discuss for Qatar?">لديك منتج غذائي تريد مناقشة فرصته في قطر؟</h2><p data-ar="شاركنا معلومات واضحة عن المنتج والفرصة التي تريد مناقشتها، وسنبدأ بالمراجعة قبل أي التزام تجاري." data-en="Share clear information about the product and the opportunity you want to discuss, and we will begin with review before any commercial commitment.">شاركنا معلومات واضحة عن المنتج والفرصة التي تريد مناقشتها، وسنبدأ بالمراجعة قبل أي التزام تجاري.</p></div>
+        <a class="qm-final-button" href="suppliers.html"><i data-lucide="send"></i><span data-ar="ناقش منتجك معنا" data-en="Discuss Your Product">ناقش منتجك معنا</span></a>
+      </div>
+    </div>
+  </section>
 </BaseLayout>
+
+<style is:global>
+.page-qatar-market{background:var(--target-cream,#F4EDE4)}
+.qm-hero{position:relative;overflow:hidden;padding-block:88px 96px;background:radial-gradient(circle at 8% 20%,rgba(12,73,49,.055),transparent 24%),linear-gradient(135deg,rgba(192,149,82,.045) 25%,transparent 25%) 0 0/56px 56px,var(--target-cream)}
+.qm-hero-grid{display:grid;grid-template-columns:minmax(0,55fr) minmax(0,45fr);gap:50px;align-items:center}.qm-hero-copy{max-width:710px}.qm-eyebrow,.qm-kicker{display:inline-flex;align-items:center;gap:8px;color:var(--target-forest);font-size:.875rem;font-weight:700}.qm-eyebrow{padding:8px 12px;border:1px solid rgba(12,73,49,.12);border-radius:999px;background:rgba(255,255,255,.64)}.qm-eyebrow svg{width:18px;height:18px;color:var(--target-sand)}
+.qm-hero h1{max-width:13ch;margin:15px 0 20px;color:var(--target-charcoal)!important;font-size:var(--target-h1-internal);font-weight:700;line-height:1.1}.qm-hero-copy>p{max-width:680px;color:rgba(38,38,38,.74)!important;font-size:var(--target-lead);line-height:1.8}.qm-actions{display:flex;flex-wrap:wrap;align-items:center;gap:13px;margin-top:28px}.qm-primary,.qm-final-button{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding-inline:26px;border:1px solid var(--target-forest);border-radius:12px;background:var(--target-forest);color:var(--target-cream);font-weight:700;text-decoration:none;transition:.2s}.qm-primary:hover{background:#073b29;color:#fff;transform:translateY(-1px)}.qm-secondary{display:inline-flex;align-items:center;gap:8px;min-height:52px;padding-inline:8px;color:var(--target-forest);font-weight:700;text-decoration:none}.qm-secondary:hover{text-decoration:underline;text-underline-offset:4px;color:var(--target-forest)}
+.qm-hero-media{position:relative;margin:0;aspect-ratio:5/4}.qm-hero-media>img{display:block;width:100%;height:100%;object-fit:cover;border:1px solid rgba(12,73,49,.12);border-radius:24px;box-shadow:0 24px 56px rgba(38,38,38,.13);filter:saturate(.88) contrast(.99)}.qm-hero-media::after{content:"";position:absolute;inset:0;border-radius:24px;background:linear-gradient(180deg,transparent 62%,rgba(12,73,49,.22));pointer-events:none}.qm-hero-media figcaption{position:absolute;z-index:2;inset-inline:18px;inset-block-end:16px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:8px;border-radius:15px;background:rgba(255,254,251,.95);box-shadow:0 14px 32px rgba(38,38,38,.14)}.qm-hero-media figcaption span{display:flex;align-items:center;gap:7px;padding:9px 10px;border-radius:11px;background:rgba(244,237,228,.7);color:var(--target-charcoal)}.qm-hero-media figcaption svg{width:19px;height:19px;color:var(--target-forest)}.qm-hero-media figcaption b{font-size:.72rem;line-height:1.35}
+.qm-section{padding-block:96px}.qm-kicker::before{content:"";width:22px;height:2px;border-radius:999px;background:var(--target-sand)}.qm-section h2,.qm-final h2{margin:10px 0 16px;color:var(--target-charcoal);font-size:var(--target-h2);font-weight:700;line-height:1.2}.qm-section-head{max-width:650px}.qm-section-head>p,.qm-context-copy>p,.qm-channel-copy>p,.qm-clarity-panel p,.qm-final-panel p{color:rgba(38,38,38,.72);font-size:1.04rem;line-height:1.82}.qm-head-wide{max-width:820px;margin-bottom:42px}
+.qm-context{background:#fff}.qm-context-grid{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(340px,.88fr);gap:54px;align-items:center}.qm-context-copy>p{max-width:760px}.qm-context-points{display:grid;gap:10px;margin-top:28px}.qm-context-points article{display:grid;grid-template-columns:38px 52px 1fr;gap:13px;align-items:start;padding:15px 16px;border-bottom:1px solid rgba(12,73,49,.10)}.qm-context-points article:last-child{border-bottom:0}.qm-point-index,.qm-check-number,.qm-track-number{color:var(--target-sand);font:800 .72rem/1 Manrope,sans-serif;padding-top:8px}.qm-icon{display:grid;place-items:center;width:50px;height:50px;border:1px solid rgba(12,73,49,.12);border-radius:14px;background:var(--target-cream);color:var(--target-forest)}.qm-icon svg{width:27px;height:27px;stroke-width:1.8}.qm-context-points h3,.qm-checklist h3,.qm-checkpoint-track h3,.qm-channel-network h3{margin:2px 0 5px;color:var(--target-charcoal);font-size:1.08rem!important;font-weight:700}.qm-context-points p,.qm-checklist p,.qm-checkpoint-track p,.qm-channel-network p{margin:0;color:rgba(38,38,38,.68);font-size:.92rem;line-height:1.65}.qm-context-media{position:relative;margin:0;aspect-ratio:4/5}.qm-context-media img{display:block;width:100%;height:100%;object-fit:cover;border-radius:22px;box-shadow:0 18px 44px rgba(38,38,38,.09)}.qm-market-note{position:absolute;inset-inline:18px;inset-block-end:18px;display:flex;gap:10px;align-items:flex-start;padding:14px 15px;border-radius:14px;background:rgba(12,73,49,.94);color:var(--target-cream);font-size:.82rem;line-height:1.55}.qm-market-note svg{flex:0 0 auto;width:20px;height:20px;color:var(--target-sand)}
+.qm-review{background:var(--target-cream)}.qm-review-grid{display:grid;grid-template-columns:minmax(260px,.62fr) minmax(0,1.38fr);gap:50px;align-items:start}.qm-checklist{overflow:hidden;border:1px solid rgba(12,73,49,.12);border-radius:20px;background:#fff;box-shadow:0 10px 28px rgba(38,38,38,.045)}.qm-checklist article{display:grid;grid-template-columns:42px 52px 1fr;gap:14px;align-items:start;padding:20px 22px;border-bottom:1px solid rgba(12,73,49,.10)}.qm-checklist article:last-child{border-bottom:0}.qm-checklist .qm-icon{background:rgba(12,73,49,.045)}
+.qm-checkpoints{background:#fff}.qm-checkpoint-track{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.qm-checkpoint-track::before{content:"";position:absolute;inset-inline:8%;top:50px;height:1px;background:linear-gradient(90deg,rgba(12,73,49,.12),rgba(192,149,82,.45),rgba(12,73,49,.12))}.qm-checkpoint-track article{position:relative;z-index:1;min-height:270px;padding:24px 22px;border:1px solid rgba(12,73,49,.12);border-radius:18px;background:#fff}.qm-checkpoint-track article.is-focus{background:var(--target-forest);color:var(--target-cream);box-shadow:0 18px 38px rgba(12,73,49,.16)}.qm-checkpoint-track .qm-icon{margin:16px 0 22px;background:var(--target-cream)}.qm-checkpoint-track article.is-focus .qm-icon{background:rgba(244,237,228,.96)}.qm-checkpoint-track article.is-focus h3{color:#fff!important}.qm-checkpoint-track article.is-focus p{color:rgba(244,237,228,.78)}.qm-checkpoint-track article.is-focus .qm-track-number{color:var(--target-sand)}
+.qm-channels{background:var(--target-cream)}.qm-channel-grid{display:grid;grid-template-columns:minmax(280px,.72fr) minmax(0,1.28fr);gap:52px;align-items:center}.qm-channel-network{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.qm-channel-network::before{content:"";position:absolute;inset-inline:16%;top:46px;height:2px;background:linear-gradient(90deg,rgba(12,73,49,.12),var(--target-sand),rgba(12,73,49,.12))}.qm-channel-network article{position:relative;z-index:1;min-height:220px;padding:24px 20px;border:1px solid rgba(12,73,49,.12);border-radius:18px;background:#fff;text-align:center;box-shadow:0 8px 24px rgba(38,38,38,.04)}.qm-channel-network article.is-center{background:var(--target-forest);color:var(--target-cream);transform:translateY(-10px);box-shadow:0 18px 36px rgba(12,73,49,.14)}.qm-channel-network .qm-icon{margin:0 auto 18px}.qm-channel-network article.is-center h3{color:#fff!important}.qm-channel-network article.is-center p{color:rgba(244,237,228,.76)}
+.qm-clarity{background:#fff}.qm-clarity-panel{display:grid;grid-template-columns:72px 1fr;gap:24px;align-items:start;padding:36px;border:1px solid rgba(12,73,49,.12);border-radius:22px;background:var(--target-cream)}.qm-icon-large{width:64px;height:64px;border-radius:17px;background:#fff}.qm-icon-large svg{width:32px;height:32px}
+.qm-final{padding-block:72px;background:var(--target-cream)}.qm-final-panel{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:space-between;gap:36px;padding:40px 42px;border-radius:22px;background:var(--target-charcoal);color:var(--target-cream)}.qm-final-panel::before{content:"";position:absolute;inset:-115px auto auto -80px;width:230px;height:230px;border:1px solid rgba(192,149,82,.23);border-radius:50%}.qm-final-panel>*{position:relative;z-index:1}.qm-final-panel .qm-kicker{color:var(--target-sand)}.qm-final-panel h2{max-width:760px;color:#fff!important}.qm-final-panel p{max-width:760px;color:rgba(244,237,228,.78)!important;margin-bottom:0}.qm-final-button{flex:0 0 auto;border-color:var(--target-sand);background:var(--target-sand);color:var(--target-charcoal)}.qm-final-button:hover{background:#d1ae73;color:var(--target-charcoal);transform:translateY(-1px)}
+@media(max-width:1199.98px){.qm-section{padding-block:80px}.qm-checkpoint-track{grid-template-columns:repeat(2,1fr)}.qm-checkpoint-track::before{display:none}}
+@media(max-width:991.98px){.qm-hero{padding-block:70px 78px}.qm-hero-grid,.qm-context-grid,.qm-review-grid,.qm-channel-grid{grid-template-columns:1fr;gap:36px}.qm-hero-media{max-width:720px;width:100%;aspect-ratio:4/3}.qm-context-media{max-width:720px;width:100%;aspect-ratio:16/10}.qm-section{padding-block:68px}.qm-channel-network article.is-center{transform:none}.qm-final-panel{align-items:flex-start;flex-direction:column}.qm-final-button{width:100%}}
+@media(max-width:575.98px){.qm-hero{padding-block:56px 64px}.qm-hero h1{font-size:clamp(2.35rem,10vw,3.1rem)!important}.qm-hero-media figcaption{inset-inline:10px;grid-template-columns:1fr}.qm-section{padding-block:52px}.qm-context-points article{grid-template-columns:32px 48px 1fr;padding-inline:0}.qm-checklist article{grid-template-columns:34px 48px 1fr;padding:18px 16px}.qm-checkpoint-track{grid-template-columns:1fr}.qm-checkpoint-track article{min-height:auto}.qm-channel-network{grid-template-columns:1fr}.qm-channel-network::before{display:none}.qm-channel-network article{min-height:auto;text-align:start}.qm-channel-network .qm-icon{margin-inline:0}.qm-clarity-panel{grid-template-columns:1fr;padding:28px 24px}.qm-final{padding-block:52px}.qm-final-panel{padding:30px 24px}.qm-primary{width:100%}.qm-secondary{justify-content:center;width:100%}}
+@media(prefers-reduced-motion:reduce){.page-qatar-market *{transition-duration:.01ms!important;animation-duration:.01ms!important}}
+</style>
