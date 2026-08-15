@@ -9,7 +9,7 @@ Internal production baseline for **Target For Food Trading / تارقت لتجا
 - Controlled placeholder/editorial imagery is approved for the internal-production baseline until verified supplier/company assets replace it.
 - Company Profile uses a temporary internal cover/metadata preview until the final PDF is supplied.
 - Privacy Policy and Terms & Conditions are approved and locked.
-- Contact and Supplier forms are UI/validation ready; backend delivery/integration is intentionally deferred.
+- Contact and Supplier forms are UI/validation ready; backend delivery/integration is intentionally deferred and is not a blocker for the internal production baseline.
 
 ## Build
 
