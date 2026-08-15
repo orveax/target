@@ -1,47 +1,125 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
 const groups = [
   {
-    id:'about', titleAr:'عن تارقت والسوق القطري', titleEn:'About TARGET & Qatar', icon:'building-2',
+    id:'about', titleAr:'عن تارقت والسوق القطري', titleEn:'About TARGET & Qatar', icon:'building-2', surface:'is-white',
     items:[
-      ['ما هي تارقت؟','TARGET is a Qatar-based food trading and import company.','تارقت شركة تعمل من قطر في تجارة واستيراد الأغذية، وتركز على مناقشة المنتجات المناسبة مع المصنعين والعلامات والموردين وفرصها في السوق القطري.','TARGET is a Qatar-based food trading and import company focused on discussing suitable products with manufacturers, brands and suppliers and their opportunities in Qatar.'],
-      ['هل يتركز عمل تارقت على السوق القطري؟','Is TARGET focused on Qatar?','نعم. الموقع يشرح نشاط الشركة وفرص المنتجات في سياق السوق القطري. أي توسع أو سوق آخر لا يُفترض من محتوى الموقع ما لم يُذكر ويُعتمد صراحة.','Yes. The website explains the company and product opportunities in the context of Qatar. No other market scope should be assumed unless expressly stated and approved.'],
-      ['هل الموقع متجر إلكتروني؟','Is this an online store?','لا. الموقع منصة معلومات وتواصل تجاري B2B، وليس متجر تجزئة أو منصة شراء إلكتروني مباشر.','No. The website is a B2B information and commercial-contact platform, not a retail store or direct online purchasing platform.']
+      ['faq-q01','ما هي تارقت لتجارة الأغذية؟','What is Target For Food Trading?','تارقت شركة قطرية تعمل في تجارة واستيراد الأغذية. نتعامل مع المصنعين والعلامات والموردين لمناقشة المنتجات المناسبة للسوق القطري، ومراجعة ملاءمة المنتج قبل الانتقال إلى الخطوات التجارية التالية.','TARGET is a Qatar-based food trading and import company. We work with manufacturers, brands and suppliers to discuss products for the Qatar market and review product fit before moving to further commercial steps.'],
+      ['faq-q02','ما السوق الذي تركز عليه تارقت؟','Which market does TARGET focus on?','تركيزنا الحالي هو السوق القطري. وتختلف طريقة التعامل مع كل فرصة حسب المنتج والفئة والمعلومات التجارية المتاحة وقنوات البيع والتوزيع المناسبة.','Our current focus is the Qatar market. Each opportunity is considered according to the product, category, available commercial information and suitable sales and distribution channels.'],
+      ['faq-q03','هل موقع تارقت متجر إلكتروني؟','Is TARGET\'s website an online store?','لا. الموقع موجه للتعريف بالشركة والعلاقات التجارية B2B ومناقشة المنتجات والفرص، وليس للبيع المباشر للمستهلك أو عرض مخزون وأسعار مباشرة.','No. The website is for company information, B2B commercial relationships and product discussions; it is not a direct-to-consumer store or a live inventory and pricing platform.']
     ]
   },
   {
-    id:'products', titleAr:'المنتجات والموردون', titleEn:'Products & Suppliers', icon:'package',
+    id:'products', titleAr:'المنتجات والموردون', titleEn:'Products & Suppliers', icon:'package', surface:'is-soft',
     items:[
-      ['ما الفئات الغذائية التي تركز عليها تارقت؟','Which food categories does TARGET focus on?','تشمل الفئات الحالية الشاي والمشروبات العشبية، العصائر والمشروبات التقليدية، العسل والدبس والحلويات التقليدية، الألبان والمجمدات والأغذية المجهزة، والأغذية المعبأة ومنتجات FMCG المختارة.','Current categories include tea and herbal infusions, juices and traditional beverages, honey, molasses and traditional sweets, dairy, frozen and prepared foods, and selected packaged food FMCG.'],
-      ['هل يمكن إرسال منتج خارج الفئات الحالية؟','Can I submit a product outside the current categories?','يمكن إرسال منتج غذائي مناسب للمراجعة. الفئات الحالية توضح نطاق الاهتمام، لكنها ليست وعدًا بقبول كل منتج ولا قائمة مغلقة.','A relevant food product may be submitted for review. The current categories show areas of focus but are neither an acceptance promise nor a closed list.'],
-      ['من يمكنه تقديم منتج؟','Who can submit a product?','المصنعون الغذائيون، ملاك العلامات، الموردون والمصدرون، وفرق المبيعات أو التصدير الدولية التي لديها منتج وفرصة تريد مناقشتها في قطر.','Food manufacturers, brand owners, suppliers, exporters, and international sales or export teams with a product and Qatar opportunity to discuss.'],
-      ['ما البيانات المطلوبة لبدء المراجعة؟','What information is needed to start a review?','الاسم، الشركة أو العلامة، الدولة، البريد التجاري، المنتج أو الفئة، موضوع النقاش، وملخص واضح للمنتج والفرصة. الهاتف أو WhatsApp اختياري.','Name, company or brand, country, business email, product or category, discussion type, and a clear product and opportunity summary. Phone or WhatsApp is optional.'],
-      ['أين أقدم المنتج؟','Where do I submit a product?','استخدم صفحة للموردين ونموذج مراجعة المنتج المخصص. الاستفسارات العامة لها صفحة اتصال منفصلة.','Use the For Suppliers page and its dedicated product review form. General enquiries use the separate Contact page.']
+      ['faq-q04','ما الفئات الغذائية التي تركز عليها تارقت؟','Which food categories does TARGET focus on?','تشمل فئات التركيز الحالية الشاي والمشروبات العشبية، العصائر والمشروبات التقليدية، العسل والدبس والحلويات التقليدية، الألبان والمجمدات والأغذية المجهزة، والأغذية المعبأة ومنتجات FMCG الغذائية المختارة.','Current focus categories include tea and herbal infusions, juices and traditional beverages, honey, molasses and traditional sweets, dairy, frozen and prepared foods, and selected packaged food FMCG.'],
+      ['faq-q05','هل يمكن إرسال منتج خارج الفئات الحالية؟','Can I submit a product outside the current categories?','نعم، يمكن إرسال المنتج للمراجعة. الفئات المنشورة توضح نطاق التركيز الحالي، لكنها لا تعني أن كل منتج داخلها مقبول أو أن أي منتج خارجها مرفوض تلقائيًا.','Yes, a product can be submitted for review. The published categories show the current focus, but they do not mean every product within them is accepted or that every product outside them is automatically rejected.'],
+      ['faq-q06','من يمكنه إرسال منتج إلى تارقت؟','Who can submit a product to TARGET?','المصنعون، أصحاب العلامات الغذائية، الموردون، والمصدّرون أو فرق المبيعات الدولية الراغبة في مناقشة فرصة منتج داخل قطر.','Manufacturers, food brand owners, suppliers, exporters and international sales teams seeking to discuss a product opportunity in Qatar.'],
+      ['faq-q07','ما المعلومات المطلوبة لبدء مناقشة المنتج؟','What information is needed to start a product discussion?','نحتاج في البداية إلى معلومات واضحة عن الشركة أو العلامة، الدولة، المنتج أو الفئة، وما الذي تريد مناقشته في قطر، مع ملخص مناسب عن المنتج والفرصة.','We initially need clear information about the company or brand, country, product or category, what you want to discuss in Qatar, and a concise summary of the product and opportunity.'],
+      ['faq-q08','كيف أرسل بيانات المنتج؟','How do I submit product information?','استخدم صفحة للموردين / For Suppliers ونموذج مراجعة المنتج المخصص. الاستفسارات العامة أو المبيعات أو طلبات المستندات تستخدم صفحة الاتصال بنا / Contact Us.','Use the dedicated For Suppliers page and product review form. General enquiries, sales questions and document requests should use Contact Us.']
     ]
   },
   {
-    id:'clarity', titleAr:'وضوح التعامل التجاري', titleEn:'Commercial Clarity', icon:'shield-check',
+    id:'clarity', titleAr:'وضوح التعامل', titleEn:'Commercial Clarity', icon:'shield-check', surface:'is-white',
     items:[
-      ['هل تقديم المنتج يعني قبوله أو استيراده؟','Does product submission mean acceptance or import?','لا. تقديم المنتج يبدأ المراجعة فقط، ولا يعني قبولًا تلقائيًا أو التزامًا بالشراء أو الاستيراد أو التوزيع.','No. Submission starts a review only and does not mean automatic acceptance or a commitment to purchase, import or distribute.'],
-      ['هل التواصل أو عرض الشركة يعني وكالة أو حصرية؟','Does contact or company display mean agency or exclusivity?','لا. لا تنشأ وكالة أو حصرية أو تمثيل رسمي أو حقوق توزيع إلا إذا تم الاتفاق عليها وتوثيقها صراحة.','No. Agency, exclusivity, official representation or distribution rights exist only when expressly agreed and documented.'],
-      ['هل توجد ضمانات للمبيعات أو التوزيع أو التغطية؟','Are sales, distribution or coverage guaranteed?','لا. الموقع لا يقدم ضمانًا للمبيعات أو الإدراج أو حجم التوزيع أو التغطية أو النمو. أي خطوة تعتمد على المنتج والفرصة والاتفاق والواقع التجاري.','No. The website does not guarantee sales, listing, distribution volume, coverage or growth. Any step depends on the product, opportunity, agreement and commercial reality.'],
-      ['متى يبدأ الالتزام التجاري؟','When does commercial commitment begin?','يبدأ فقط بعد اتفاق واضح ومناسب بين الأطراف المخولة على طريقة العمل ونطاق الالتزامات والشروط ذات الصلة.','Only after the authorized parties reach a clear and appropriate agreement on how to work, the scope of commitments and relevant terms.']
+      ['faq-q09','هل إرسال المنتج يعني قبوله أو استيراده؟','Does submitting a product mean it is accepted or will be imported?','لا. إرسال المنتج أو بدء المناقشة لا يعني قبول المنتج أو الالتزام باستيراده أو شرائه أو توزيعه. أي خطوة لاحقة تعتمد على المراجعة والاتفاق المناسب.','No. Submitting a product or starting a discussion does not mean the product is accepted or that TARGET is committed to import, purchase or distribute it. Any next step depends on review and an appropriate agreement.'],
+      ['faq-q10','هل مناقشة المنتج تعني وكالة أو حصرية؟','Does a product discussion create agency or exclusivity?','لا. لا تنشأ وكالة أو حصرية أو تمثيل رسمي من مجرد إرسال المنتج أو مناقشته. أي حقوق أو التزامات من هذا النوع تحتاج إلى اتفاق صريح وموثق.','No. Submitting or discussing a product does not create agency, exclusivity or official representation. Any such rights or obligations require an explicit documented agreement.'],
+      ['faq-q11','هل تضمن تارقت المبيعات أو التوزيع في قطر؟','Does TARGET guarantee sales or distribution in Qatar?','لا. لا نعد بنتائج مبيعات أو أحجام أو تغطية أو إدراج في قنوات بيع بعينها. تختلف النتيجة حسب المنتج والفئة والاتفاق والظروف التجارية الفعلية.','No. TARGET does not promise sales results, volumes, coverage or listing in specific sales channels. Outcomes depend on the product, category, agreement and actual commercial conditions.'],
+      ['faq-q12','متى تبدأ الالتزامات التجارية؟','When do commercial commitments begin?','تبدأ الالتزامات فقط بعد اتفاق واضح على البنود المناسبة، مثل نطاق العمل والأسعار والكميات وأي حقوق أو مسؤوليات ذات صلة.','Commercial commitments begin only after clear agreement on the relevant terms, such as scope, pricing, quantities and any related rights or responsibilities.']
     ]
   },
   {
-    id:'contact', titleAr:'التواصل والموارد', titleEn:'Contact & Resources', icon:'mail',
+    id:'contact', titleAr:'التواصل والموارد', titleEn:'Contact & Resources', icon:'mail', surface:'is-soft',
     items:[
-      ['كيف أتواصل مع القسم المناسب؟','How do I contact the right channel?','الاستفسارات العامة عبر info@targetft.com، والمبيعات وطلبات الأسعار عبر sales@targetft.com، والمشتريات عبر procurement@targetft.com. المصنعون والموردون يستخدمون صفحة الموردين المخصصة.','General enquiries use info@targetft.com, sales and quote requests use sales@targetft.com, and procurement uses procurement@targetft.com. Manufacturers and suppliers use the dedicated supplier page.'],
-      ['أين أجد الملف التعريفي للشركة؟','Where can I find the Company Profile?','صفحة الملف التعريفي تعطي نظرة مختصرة وروابط إلى صفحات الشركة. يظهر تحميل PDF فقط بعد اعتماد النسخة النهائية ونشرها.','The Company Profile page provides a concise overview and links to company information. The PDF download appears only after the final version is approved and published.'],
-      ['أين أتعرف على طريقة العمل والمنتجات والسوق؟','Where can I learn about the process, products and market?','راجع صفحات كيف نعمل، المنتجات والشركات، والسوق القطري. كل صفحة لها دور مختلف حتى لا يتكرر نفس المحتوى.','See How We Work, Products & Companies, and Qatar Market. Each page has a distinct purpose so the same content is not repeated.']
+      ['faq-q13','كيف أتواصل مع القسم المناسب؟','How do I contact the right department?','للاستفسارات العامة استخدم info@targetft.com، وللمبيعات sales@targetft.com، وللمشتريات procurement@targetft.com، وللمصنعين والموردين partners@targetft.com. ويمكن استخدام صفحة الاتصال لاختيار نوع الاستفسار.','For general enquiries use info@targetft.com, for sales sales@targetft.com, for procurement procurement@targetft.com, and for manufacturers and suppliers partners@targetft.com. You can also use the Contact Us page to select the enquiry type.'],
+      ['faq-q14','أين يمكنني تنزيل الملف التعريفي؟','Where can I download the Company Profile?','من صفحة الملف التعريفي / Company Profile. يظهر رابط التحميل فقط عندما تكون النسخة المعتمدة والجاهزة للنشر متاحة.','From the Company Profile page. The download link is shown only when the approved production-ready version is available.'],
+      ['faq-q15','أين أجد معلومات أكثر عن طريقة العمل والمنتجات؟','Where can I learn more about how TARGET works and its products?','راجع صفحات كيف نعمل، المنتجات والشركات والسوق القطري. كل صفحة تشرح جانبًا مختلفًا بدون تكرار نفس المحتوى.','See How We Work, Products & Companies and Qatar Market. Each page explains a different part of the commercial journey without duplicating the same content.']
     ]
   }
 ];
 ---
-<BaseLayout active="faq" bodyClass="page-faq" title="الأسئلة الشائعة | TARGET" description="إجابات واضحة عن تارقت، المنتجات، الموردين، فرص السوق القطري والتواصل.">
-  <section class="target-hero"><div class="container target-hero__grid"><div class="target-hero__copy"><span class="target-kicker"><i data-lucide="circle-help"></i><span data-ar="الأسئلة الشائعة" data-en="FAQ">الأسئلة الشائعة</span></span><h1 data-ar="إجابات واضحة قبل أن تبدأ." data-en="Clear answers before you start.">إجابات واضحة قبل أن تبدأ.</h1><p data-ar="إجابات مختصرة عن تارقت، المنتجات والموردين، حدود الالتزام التجاري، وكيف تصل إلى المسار المناسب على الموقع." data-en="Concise answers about TARGET, products and suppliers, commercial boundaries, and how to reach the right route on the website.">إجابات مختصرة عن تارقت، المنتجات والموردين، حدود الالتزام التجاري، وكيف تصل إلى المسار المناسب على الموقع.</p><div class="target-hero__actions"><a class="btn-premium btn-primary-premium" href="suppliers.html"><i data-lucide="send"></i><span data-ar="ناقش منتجك معنا" data-en="Discuss Your Product">ناقش منتجك معنا</span></a><a class="btn-premium btn-light-premium" href="contact.html"><i data-lucide="mail"></i><span data-ar="الاتصال بنا" data-en="Contact Us">الاتصال بنا</span></a></div></div><div class="legal-hero-visual"><div class="legal-visual-stack"><span class="target-icon-tile"><i data-lucide="message-circle-question"></i></span><strong data-ar="وضوح · منتجات · سوق · تواصل" data-en="Clarity · Products · Market · Contact">وضوح · منتجات · سوق · تواصل</strong></div></div></div></section>
+<BaseLayout active="faq" bodyClass="page-faq premium-v8-page" title="الأسئلة الشائعة | TARGET For Food Trading" description="إجابات مختصرة حول تارقت، المنتجات التي نراجعها، السوق القطري، إرسال المنتجات، وحدود أي التزام تجاري.">
+  <section class="faq-hero">
+    <div class="container faq-hero-grid">
+      <div class="faq-hero-copy">
+        <span class="faq-eyebrow"><i data-lucide="circle-help"></i><span data-ar="الأسئلة الشائعة" data-en="Frequently Asked Questions">الأسئلة الشائعة</span></span>
+        <h1 data-ar="إجابات واضحة قبل أن تبدأ." data-en="Clear answers before you start.">إجابات واضحة قبل أن تبدأ.</h1>
+        <p data-ar="إجابات مختصرة حول تارقت، المنتجات التي نراجعها، السوق القطري، إرسال المنتجات، وحدود أي التزام تجاري." data-en="Concise answers about TARGET, the products we review, the Qatar market, product submissions and the limits of any commercial commitment.">إجابات مختصرة حول تارقت، المنتجات التي نراجعها، السوق القطري، إرسال المنتجات، وحدود أي التزام تجاري.</p>
+        <div class="faq-actions">
+          <a class="faq-btn faq-btn-primary" href="suppliers.html"><i data-lucide="send"></i><span data-ar="ناقش منتجك معنا" data-en="Discuss Your Product">ناقش منتجك معنا</span></a>
+          <a class="faq-btn faq-btn-secondary" href="contact.html"><i data-lucide="mail"></i><span data-ar="الاتصال بنا" data-en="Contact Us">الاتصال بنا</span></a>
+        </div>
+      </div>
+      <div class="faq-visual" aria-label="TARGET FAQ information composition">
+        <article class="faq-visual-card">
+          <span class="faq-visual-mark"><i data-lucide="message-circle-question"></i></span>
+          <strong data-ar="المعلومة الصحيحة، في المسار الصحيح." data-en="The right answer, on the right route.">المعلومة الصحيحة، في المسار الصحيح.</strong>
+          <p data-ar="أربع مجموعات تساعدك على الوصول سريعًا إلى إجابات تخص الشركة والمنتجات والتعامل التجاري والتواصل." data-en="Four topic groups help you quickly reach answers about the company, products, commercial clarity and contact routes.">أربع مجموعات تساعدك على الوصول سريعًا إلى إجابات تخص الشركة والمنتجات والتعامل التجاري والتواصل.</p>
+          <div class="faq-visual-cues">
+            <span><i data-lucide="building-2"></i><b data-ar="تارقت وقطر" data-en="TARGET & Qatar">تارقت وقطر</b></span>
+            <span><i data-lucide="package"></i><b data-ar="المنتجات" data-en="Products">المنتجات</b></span>
+            <span><i data-lucide="shield-check"></i><b data-ar="وضوح التعامل" data-en="Clarity">وضوح التعامل</b></span>
+            <span><i data-lucide="mail"></i><b data-ar="التواصل" data-en="Contact">التواصل</b></span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
 
-  <section class="target-section target-section--white"><div class="container faq-shell"><nav class="faq-topic-cues" aria-label="FAQ topics">{groups.map(g => <a href={`#${g.id}`}><i data-lucide={g.icon}></i><span data-ar={g.titleAr} data-en={g.titleEn}>{g.titleAr}</span></a>)}</nav>{groups.map(g => <section class="faq-group" id={g.id}><header class="faq-group-head"><span class="target-kicker"><i data-lucide={g.icon}></i><span data-ar={g.titleAr} data-en={g.titleEn}>{g.titleAr}</span></span><h2 data-ar={g.titleAr} data-en={g.titleEn}>{g.titleAr}</h2></header>{g.items.map(([arQ,enQ,arA,enA]) => <details class="faq-item"><summary><span data-ar={arQ} data-en={enQ}>{arQ}</span></summary><div class="faq-answer"><p data-ar={arA} data-en={enA}>{arA}</p></div></details>)}</section>)}</div></section>
+  <nav class="faq-topic-band" aria-label="FAQ topics">
+    <div class="container faq-topic-cues">
+      {groups.map((group) => (
+        <a href={`#${group.id}`}><i data-lucide={group.icon}></i><span data-ar={group.titleAr} data-en={group.titleEn}>{group.titleAr}</span></a>
+      ))}
+    </div>
+  </nav>
 
-  <section class="target-section target-section--forest"><div class="container d-lg-flex align-items-center justify-content-between gap-4"><div class="target-section-head mb-0"><span class="target-kicker" data-ar="ما زلت تحتاج مساعدة؟" data-en="Still Need Help?">ما زلت تحتاج مساعدة؟</span><h2 data-ar="اختر بين استفسار عام أو مناقشة منتج." data-en="Choose between a general enquiry and a product discussion.">اختر بين استفسار عام أو مناقشة منتج.</h2></div><div class="d-flex flex-wrap gap-2"><a class="btn-premium btn-light-premium" href="contact.html"><i data-lucide="mail"></i><span data-ar="الاتصال بنا" data-en="Contact Us">الاتصال بنا</span></a><a class="btn-premium btn-outline-light" href="suppliers.html"><i data-lucide="factory"></i><span data-ar="ناقش منتجك معنا" data-en="Discuss Your Product">ناقش منتجك معنا</span></a></div></div></section>
+  {groups.map((group) => (
+    <section class={`faq-group ${group.surface}`} id={group.id}>
+      <div class="container faq-group-inner">
+        <header class="faq-group-head">
+          <span class="faq-kicker"><i data-lucide={group.icon}></i><span data-ar={group.titleAr} data-en={group.titleEn}>{group.titleAr}</span></span>
+          <h2 data-ar={group.titleAr} data-en={group.titleEn}>{group.titleAr}</h2>
+        </header>
+        <div class="faq-list">
+          {group.items.map(([id,arQ,enQ,arA,enA]) => (
+            <details class="faq-item" id={id}>
+              <summary aria-controls={`${id}-answer`} aria-expanded="false">
+                <span data-ar={arQ} data-en={enQ}>{arQ}</span>
+                <span class="faq-chevron"><i data-lucide="chevron-down"></i></span>
+              </summary>
+              <div class="faq-answer" id={`${id}-answer`}>
+                <p data-ar={arA} data-en={enA}>{arA}</p>
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <section class="faq-support">
+    <div class="container faq-support-panel">
+      <div>
+        <span class="faq-kicker" data-ar="ما زلت تحتاج مساعدة؟" data-en="Still Need Help?">ما زلت تحتاج مساعدة؟</span>
+        <h2 data-ar="لم تجد الإجابة التي تحتاجها؟" data-en="Still need an answer?">لم تجد الإجابة التي تحتاجها؟</h2>
+        <p data-ar="للاستفسارات العامة تواصل معنا مباشرة. وإذا كان لديك منتج تريد مناقشة فرصته في قطر، استخدم صفحة الموردين." data-en="For general enquiries, contact us directly. If you have a product you want to discuss for Qatar, use the supplier page.">للاستفسارات العامة تواصل معنا مباشرة. وإذا كان لديك منتج تريد مناقشة فرصته في قطر، استخدم صفحة الموردين.</p>
+      </div>
+      <div class="faq-support-actions">
+        <a class="faq-btn faq-support-primary" href="contact.html"><i data-lucide="mail"></i><span data-ar="الاتصال بنا" data-en="Contact Us">الاتصال بنا</span></a>
+        <a class="faq-btn faq-support-secondary" href="suppliers.html"><i data-lucide="factory"></i><span data-ar="ناقش منتجك معنا" data-en="Discuss Your Product">ناقش منتجك معنا</span></a>
+      </div>
+    </div>
+  </section>
+
+  <script is:inline>
+    (()=>{
+      const items=[...document.querySelectorAll('.page-faq .faq-item')];
+      const sync=(item)=>{const summary=item.querySelector('summary');if(summary)summary.setAttribute('aria-expanded',item.open?'true':'false');};
+      items.forEach((item)=>{sync(item);item.addEventListener('toggle',()=>sync(item));});
+      const openHash=()=>{const id=location.hash.slice(1);if(!id)return;const target=document.getElementById(id);if(target?.matches('details.faq-item')){target.open=true;sync(target);requestAnimationFrame(()=>target.scrollIntoView({block:'start'}));}};
+      openHash();window.addEventListener('hashchange',openHash);
+    })();
+  </script>
 </BaseLayout>
