@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import html from '../legacy/about.html?raw';
-import { extractLegacyMain } from '../lib/legacy';
+import AboutCanonical from '../components/AboutCanonical.astro';
 ---
-<BaseLayout active="about" bodyClass="page-about" title="عن تارقت | TARGET"><Fragment set:html={extractLegacyMain(html)} /></BaseLayout>
+<BaseLayout active="about" bodyClass="page-about about-canonical-page" title="عن تارقت | TARGET" description="شركة تارقت القطرية لتجارة واستيراد الأغذية.">
+  <AboutCanonical />
+</BaseLayout>
