@@ -1,0 +1,6 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import html from '../legacy/contact.html?raw';
+import { extractLegacyMain } from '../lib/legacy';
+---
+<BaseLayout active="suppliers" bodyClass="page-suppliers" title="للموردين | TARGET"><Fragment set:html={extractLegacyMain(html)} /></BaseLayout>
