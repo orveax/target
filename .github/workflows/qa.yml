@@ -36,6 +36,7 @@ jobs:
           test -f dist/assets/verified-contact-v1.css
           test -f dist/assets/company-profile-v1.css
           test -f dist/assets/faq-v1.css
+          test -f dist/assets/privacy-v1.css
           test -f dist/content/target-design-tokens-v1.json
           test -f dist/content/companies.json
       - name: Verify internal company brochure resources
@@ -70,3 +71,17 @@ jobs:
           grep -q 'partners@targetft.com' dist/faq.html
           ! grep -q 'Partnership Model' dist/faq.html
           ! grep -q 'Discover → Evaluate → Partner' dist/faq.html
+      - name: Verify approved Privacy Policy
+        run: |
+          grep -q 'id="scope"' dist/privacy.html
+          grep -q 'id="collect"' dist/privacy.html
+          grep -q 'id="consent"' dist/privacy.html
+          grep -q 'id="sharing"' dist/privacy.html
+          grep -q 'id="rights"' dist/privacy.html
+          grep -q 'id="cookies"' dist/privacy.html
+          grep -q 'info@targetft.com' dist/privacy.html
+          grep -q 'سياسة الخصوصية' dist/privacy.html
+          grep -q 'ملفات الارتباط والتحليلات والتحديثات' dist/privacy.html
+          ! grep -q 'Legal Review Required' dist/privacy.html
+          ! grep -q 'Set at publication' dist/privacy.html
+          ! grep -q 'noindex,nofollow' dist/privacy.html
