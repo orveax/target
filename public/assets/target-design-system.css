@@ -359,3 +359,44 @@ p,.text-muted-premium{color:var(--target-text-secondary)!important}
 .card-route .journey-num{background:var(--target-color-primary)!important}
 .p-card:hover,.contact-card:hover,.legal-card:hover,.faq-item:hover,.company-tile:hover{border-color:var(--target-accent)!important}
 .cta-box{background:var(--target-bg-subtle)!important;border:1px solid var(--target-border-default)!important}
+
+
+/* T03.4 — Capability, journey and audience information architecture */
+.card-service{position:relative;display:flex!important;min-height:328px!important;padding:1.55rem!important;overflow:hidden!important}
+.card-service-number{position:absolute;inset-inline-start:1rem;inset-block-end:-1.05rem;z-index:0;font-family:var(--target-font-en);font-size:clamp(6.5rem,11vw,10rem);line-height:.8;font-weight:800;letter-spacing:-.09em;color:rgba(12,73,49,.055);pointer-events:none}
+.card-service--trade .card-service-number{color:rgba(244,237,228,.13)}
+.card-service-head{position:relative;z-index:1;display:flex;align-items:center;gap:14px;margin-bottom:1rem}
+.card-service-head .icon-tile{width:62px!important;height:62px!important;min-width:62px!important;margin:0!important;border-radius:18px!important}
+.card-service-head .icon-tile svg{width:29px!important;height:29px!important}
+.card-service-label{display:block;margin-bottom:.25rem;color:var(--target-sand-500);font-size:.75rem;font-weight:800;letter-spacing:.03em}
+.card-service h2{margin:0!important}
+.card-service p,.card-service .card-points{position:relative;z-index:1}
+.card-points{display:grid;gap:.42rem;margin:.5rem 0 0!important;padding:0!important;list-style:none!important}
+.card-points li{display:flex;align-items:center;gap:.5rem;color:var(--target-ink-800);font-size:.84rem;font-weight:800;line-height:1.45}
+.card-points li::before{content:'✓';display:grid;place-items:center;width:18px;height:18px;flex:0 0 18px;border-radius:50%;background:var(--target-cream-100);color:var(--target-forest-800);font-family:var(--target-font-en);font-size:.7rem}
+.card-service--trade .card-points li{color:rgba(255,255,255,.90)}
+.card-service--trade .card-points li::before{background:rgba(244,237,228,.16);color:var(--target-cream)}
+.journey-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:16px!important}
+.journey-step{position:relative;display:grid!important;grid-template-columns:46px minmax(0,1fr)!important;align-items:start!important;gap:13px!important;min-height:208px!important;padding:1.2rem!important}
+.journey-step .journey-num{width:42px!important;height:42px!important;margin:0!important;font-size:.8rem!important}
+.journey-copy header{display:flex;align-items:center;gap:10px;margin-bottom:.65rem}
+.journey-icon{display:grid;place-items:center;width:38px;height:38px;flex:0 0 38px;border-radius:12px;background:var(--target-cream-100);color:var(--target-forest-800)}
+.journey-icon svg{width:20px;height:20px}
+.journey-step h3{margin:0!important;font-size:1.16rem!important}
+.journey-step p{margin:0 0 .8rem!important;font-size:.9rem!important}
+.journey-point{display:block;color:var(--target-forest-800);font-size:.78rem}
+.journey-point::before{content:'•';color:var(--target-sand-400);padding-inline-end:.35rem}
+.card-audience{min-height:250px!important;justify-content:flex-start!important;padding:1.35rem!important}
+.card-audience header{display:flex;align-items:center;gap:12px;margin-bottom:1rem}
+.card-audience .icon-tile{width:54px!important;height:54px!important;min-width:54px!important;margin:0!important;border-radius:16px!important}
+.card-audience h3{font-size:1.12rem!important;line-height:1.35!important}
+.card-audience .card-points li{font-size:.82rem}
+.cta-box,.hp-final-box{background:var(--target-charcoal)!important;border-color:var(--target-charcoal)!important;box-shadow:0 20px 48px rgba(38,38,38,.18)!important}
+.cta-box h2,.cta-box p,.hp-final-box h2,.hp-final-box p,.hp-final-box small{color:#fff!important}
+.cta-box p,.hp-final-box p,.hp-final-box small{color:rgba(255,255,255,.74)!important}
+.cta-box .btn-primary-premium,.hp-final-box .hp-btn-light{background:var(--target-cream)!important;border-color:var(--target-cream)!important;color:var(--target-charcoal)!important}
+@media(max-width:767.98px){
+  .card-service{min-height:0!important;padding:1.35rem 1.25rem 1.5rem!important}.card-service-number{font-size:7.5rem;inset-inline-start:.85rem;inset-block-end:-.7rem}.card-service-head{gap:12px;margin-bottom:.85rem}.card-service-head .icon-tile{width:56px!important;height:56px!important;min-width:56px!important}.card-service-head .icon-tile svg{width:26px!important;height:26px!important}.card-service h2{font-size:1.28rem!important}.card-service p{font-size:.93rem!important}.card-points{gap:.4rem}.card-points li{font-size:.79rem}
+  .journey-grid{grid-template-columns:1fr!important;gap:12px!important}.journey-step{grid-template-columns:42px minmax(0,1fr)!important;min-height:0!important;padding:1.12rem!important}.journey-step .journey-num{width:38px!important;height:38px!important}.journey-icon{width:36px;height:36px;flex-basis:36px}.journey-step h3{font-size:1.1rem!important}.journey-step p{font-size:.86rem!important}
+  .card-audience{min-height:0!important;padding:1.15rem!important}.card-audience header{margin-bottom:.8rem}.card-audience .icon-tile{width:50px!important;height:50px!important;min-width:50px!important}.card-audience h3{font-size:1.05rem!important}
+}
