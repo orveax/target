@@ -1,11 +1,10 @@
-/* T5 — do not expose an unverified WhatsApp destination */
+/* TARGET — verified WhatsApp contact activation */
 document.addEventListener('DOMContentLoaded',()=>{
   const quick=document.querySelector('.quick-whatsapp');
   if(!quick)return;
-  quick.removeAttribute('target');
-  quick.removeAttribute('rel');
-  quick.setAttribute('href','#');
-  quick.setAttribute('aria-disabled','true');
-  quick.classList.add('is-pending');
-  quick.addEventListener('click',(event)=>event.preventDefault());
+  quick.setAttribute('href','https://wa.me/97477910919');
+  quick.setAttribute('target','_blank');
+  quick.setAttribute('rel','noopener noreferrer');
+  quick.removeAttribute('aria-disabled');
+  quick.classList.remove('is-pending');
 });
