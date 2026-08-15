@@ -1,4 +1,6 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
 import html from '../legacy/qatar-market.html?raw';
+import { extractLegacyMain } from '../lib/legacy';
 ---
-<Fragment set:html={html} />
+<BaseLayout active="market" bodyClass="page-qatar-market" title="الوصول إلى السوق القطري | TARGET"><Fragment set:html={extractLegacyMain(html)} /></BaseLayout>

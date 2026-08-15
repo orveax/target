@@ -1,4 +1,6 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
 import html from '../legacy/contact.html?raw';
+import { extractLegacyMain } from '../lib/legacy';
 ---
-<Fragment set:html={html} />
+<BaseLayout active="contact" bodyClass="page-contact" title="تواصل معنا | TARGET"><Fragment set:html={extractLegacyMain(html)} /></BaseLayout>

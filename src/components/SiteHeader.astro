@@ -3,10 +3,10 @@ const { active = '' } = Astro.props;
 const nav = [
   ['index.html','home','الرئيسية','Home'],
   ['about.html','about','عن تارقت','About'],
-  ['capabilities.html','capabilities','حلولنا التجارية','Capabilities'],
-  ['food-portfolio.html','portfolio','المنتجات والشركات','Food Portfolio'],
-  ['qatar-market.html','market','السوق القطري','Qatar Market'],
-  ['contact.html','contact','تواصل','Contact'],
+  ['capabilities.html','capabilities','مجالات عملنا','What We Do'],
+  ['food-portfolio.html','portfolio','المنتجات والفئات','Products & Categories'],
+  ['qatar-market.html','market','الوصول إلى السوق القطري','Qatar Market Access'],
+  ['contact.html','contact','تواصل معنا','Contact'],
 ];
 ---
 <header class="site-header premium-header">
@@ -16,7 +16,7 @@ const nav = [
       <div class="collapse navbar-collapse premium-desktop-nav"><ul class="navbar-nav mx-auto">{nav.map(([href,key,ar,en]) => (<li><a class:list={['nav-link', active===key && 'active']} href={href} data-ar={ar} data-en={en}>{ar}</a></li>))}</ul></div>
       <div class="nav-actions premium-nav-actions">
         <button class="lang-button" type="button" data-lang-toggle>EN</button>
-        <a class="btn-premium btn-primary-premium premium-header-cta" href="contact.html"><i data-lucide="send"></i><span data-ar="ناقش فرصة شراكة" data-en="Discuss a Partnership">ناقش فرصة شراكة</span></a>
+        <a class="btn-premium btn-primary-premium premium-header-cta" href="contact.html"><i data-lucide="send"></i><span data-ar="ناقش فرصة تجارية" data-en="Discuss an Opportunity">ناقش فرصة تجارية</span></a>
         <button class="icon-button d-xl-none premium-menu-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileNav" aria-controls="mobileNav" aria-label="Menu"><i data-lucide="menu"></i></button>
       </div>
     </div>
@@ -24,5 +24,5 @@ const nav = [
 </header>
 <div class="offcanvas offcanvas-start premium-mobile-nav" tabindex="-1" id="mobileNav" aria-labelledby="mobileNavLabel">
   <div class="offcanvas-header premium-mobile-head"><img class="mobile-brand-logo" src="/assets/brand/target-logo-horizontal-forest.svg" alt="TARGET"><button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button></div>
-  <div class="offcanvas-body"><nav class="premium-mobile-links">{nav.map(([href,key,ar,en]) => (<a class:list={['nav-link', active===key && 'active']} href={href}><span data-ar={ar} data-en={en}>{ar}</span><i data-lucide="arrow-up-left"></i></a>))}</nav><div class="premium-mobile-cta"><a class="btn-premium btn-primary-premium w-100" href="contact.html"><i data-lucide="send"></i><span data-ar="ناقش فرصة شراكة" data-en="Discuss a Partnership">ناقش فرصة شراكة</span></a></div></div>
+  <div class="offcanvas-body"><nav class="premium-mobile-links">{nav.map(([href,key,ar,en]) => (<a class:list={['nav-link', active===key && 'active']} href={href}><span data-ar={ar} data-en={en}>{ar}</span><i data-lucide="arrow-up-left"></i></a>))}</nav><div class="premium-mobile-cta"><a class="btn-premium btn-primary-premium w-100" href="contact.html"><i data-lucide="send"></i><span data-ar="ناقش فرصة تجارية" data-en="Discuss an Opportunity">ناقش فرصة تجارية</span></a></div></div>
 </div>

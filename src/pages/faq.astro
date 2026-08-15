@@ -1,4 +1,6 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
 import html from '../legacy/faq.html?raw';
+import { extractLegacyMain } from '../lib/legacy';
 ---
-<Fragment set:html={html} />
+<BaseLayout bodyClass="page-faq" title="الأسئلة الشائعة | TARGET"><Fragment set:html={extractLegacyMain(html)} /></BaseLayout>

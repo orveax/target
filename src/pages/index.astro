@@ -1,4 +1,6 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
 import html from '../legacy/index.html?raw';
+import { extractLegacyMain } from '../lib/legacy';
 ---
-<Fragment set:html={html} />
+<BaseLayout active="home" bodyClass="home-v7 page-home" title="تارقت لتجارة الأغذية | TARGET"><Fragment set:html={extractLegacyMain(html)} /></BaseLayout>
