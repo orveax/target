@@ -38,18 +38,30 @@ const nav = [
   </nav>
 </header>
 <div class="offcanvas offcanvas-start premium-mobile-nav" tabindex="-1" id="mobileNav" aria-labelledby="mobileNavLabel">
-  <div class="offcanvas-header premium-mobile-head"><img class="mobile-brand-logo" src="/assets/brand/target-logo-horizontal-forest.svg" alt="TARGET"><button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button></div>
+  <div class="offcanvas-header premium-mobile-head">
+    <div class="premium-mobile-brand">
+      <img class="mobile-brand-logo" src="/assets/brand/target-logo-horizontal-forest.svg" alt="TARGET">
+      <div><span class="premium-mobile-eyebrow" data-ar="التنقل" data-en="Navigation">التنقل</span><strong id="mobileNavLabel" data-ar="استكشف تارقت" data-en="Explore TARGET">استكشف تارقت</strong></div>
+    </div>
+    <button type="button" class="premium-mobile-close" data-bs-dismiss="offcanvas" aria-label="إغلاق القائمة" data-ar-aria="إغلاق القائمة" data-en-aria="Close menu"><i data-lucide="x"></i></button>
+  </div>
   <div class="offcanvas-body">
-    <nav class="premium-mobile-links">
-      <a class:list={['nav-link', active==='home' && 'active']} href="index.html"><span data-ar="الرئيسية" data-en="Home">الرئيسية</span><i data-lucide="arrow-up-left"></i></a>
-      <a class:list={['nav-link', active==='about' && 'active']} href="about.html"><span data-ar="عن تارقت" data-en="About">عن تارقت</span><i data-lucide="arrow-up-left"></i></a>
-      <a class:list={['nav-link', active==='capabilities' && 'active']} href="capabilities.html"><span data-ar="مجالات عملنا" data-en="What We Do">مجالات عملنا</span><i data-lucide="arrow-up-left"></i></a>
-      <a class:list={['nav-link', active==='portfolio' && 'active']} href="food-portfolio.html"><span data-ar="المنتجات والفئات" data-en="Products & Categories">المنتجات والفئات</span><i data-lucide="arrow-up-left"></i></a>
-      <a href="company-profile.html"><span data-ar="ملف الشركة" data-en="Company Profile">ملف الشركة</span><i data-lucide="arrow-up-left"></i></a>
-      <a href="product-profile.html"><span data-ar="ملف المنتجات" data-en="Product Profile">ملف المنتجات</span><i data-lucide="arrow-up-left"></i></a>
-      <a class:list={['nav-link', active==='market' && 'active']} href="qatar-market.html"><span data-ar="الوصول إلى السوق القطري" data-en="Qatar Market Access">الوصول إلى السوق القطري</span><i data-lucide="arrow-up-left"></i></a>
-      <a class:list={['nav-link', active==='contact' && 'active']} href="contact.html"><span data-ar="تواصل معنا" data-en="Contact">تواصل معنا</span><i data-lucide="arrow-up-left"></i></a>
+    <p class="premium-mobile-intro" data-ar="روابط واضحة للوصول السريع إلى ما تحتاجه." data-en="A clear route to the information you need.">روابط واضحة للوصول السريع إلى ما تحتاجه.</p>
+    <nav class="premium-mobile-links" aria-label="Mobile navigation">
+      <a class:list={['nav-link', active==='home' && 'active']} href="index.html"><span><i data-lucide="house"></i><b data-ar="الرئيسية" data-en="Home">الرئيسية</b></span><i data-lucide="arrow-up-left"></i></a>
+      <a class:list={['nav-link', active==='about' && 'active']} href="about.html"><span><i data-lucide="building-2"></i><b data-ar="عن تارقت" data-en="About Target">عن تارقت</b></span><i data-lucide="arrow-up-left"></i></a>
+      <a class:list={['nav-link', active==='capabilities' && 'active']} href="capabilities.html"><span><i data-lucide="handshake"></i><b data-ar="مجالات عملنا" data-en="What We Do">مجالات عملنا</b></span><i data-lucide="arrow-up-left"></i></a>
+      <a class:list={['nav-link', active==='portfolio' && 'active']} href="food-portfolio.html"><span><i data-lucide="package-open"></i><b data-ar="المنتجات والفئات" data-en="Products & Categories">المنتجات والفئات</b></span><i data-lucide="arrow-up-left"></i></a>
+      <a class:list={['nav-link', active==='market' && 'active']} href="qatar-market.html"><span><i data-lucide="map-pinned"></i><b data-ar="الوصول إلى السوق القطري" data-en="Qatar Market Access">الوصول إلى السوق القطري</b></span><i data-lucide="arrow-up-left"></i></a>
+      <a class:list={['nav-link', active==='contact' && 'active']} href="contact.html"><span><i data-lucide="messages-square"></i><b data-ar="تواصل معنا" data-en="Contact">تواصل معنا</b></span><i data-lucide="arrow-up-left"></i></a>
     </nav>
+    <div class="premium-mobile-secondary">
+      <span data-ar="ملفات ومعلومات" data-en="Profiles & information">ملفات ومعلومات</span>
+      <div>
+        <a href="company-profile.html" data-ar="ملف الشركة" data-en="Company Profile">ملف الشركة</a>
+        <a href="product-profile.html" data-ar="ملف المنتجات" data-en="Product Profile">ملف المنتجات</a>
+      </div>
+    </div>
     <div class="premium-mobile-cta"><a class="btn-premium btn-primary-premium w-100" href="contact.html"><i data-lucide="send"></i><span data-ar="ناقش فرصة تجارية" data-en="Discuss an Opportunity">ناقش فرصة تجارية</span></a></div>
   </div>
 </div>
