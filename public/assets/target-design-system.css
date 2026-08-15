@@ -211,3 +211,40 @@ html[dir='rtl'] .premium-mobile-nav .offcanvas-body{text-align:right}html[dir='l
 /* T02.2 — Ensure visible mobile brand and social hierarchy */
 .premium-mobile-head::before{display:none!important;content:none!important}.premium-mobile-brand{flex:1!important}.mobile-brand-logo{display:block!important;width:106px!important;max-width:106px!important;height:auto!important;max-height:46px!important;opacity:1!important;visibility:visible!important;object-fit:contain!important}.premium-mobile-brand>div{padding-inline-start:12px;border-inline-start:1px solid rgba(12,73,49,.14)}.premium-mobile-social{display:grid!important;gap:9px!important;margin-top:17px!important;padding-top:16px;border-top:1px solid rgba(12,73,49,.10)}.premium-mobile-social>span{color:var(--target-muted);font-size:.76rem;font-weight:800}.premium-mobile-social>div{display:flex;gap:9px}.premium-mobile-social a{width:40px!important;height:40px!important;border:1px solid rgba(12,73,49,.14)!important;border-radius:13px!important;background:#fff!important;color:var(--target-forest-800)!important;font-size:1rem!important;box-shadow:0 5px 12px rgba(12,73,49,.05)!important}.premium-mobile-social a:hover{background:var(--target-forest-800)!important;color:#fff!important;transform:translateY(-2px)}
 @media(max-width:575.98px){.mobile-brand-logo{width:92px!important;max-width:92px!important;max-height:42px!important}.premium-mobile-brand>div{padding-inline-start:9px}.premium-mobile-social a{width:38px!important;height:38px!important}}
+
+
+/* T03 — Shared cards, content rhythm and responsive structure */
+.p-card,.route-node,.journey-step,.contact-card,.premium-eval-cards article,.premium-category-grid article,.company-tile,.company-summary,.product-stage{border-radius:18px!important}
+.p-card,.route-node,.journey-step,.premium-eval-cards article{display:flex;flex-direction:column}.p-card>p:last-child,.route-node>p:last-child,.journey-step>p:last-child{margin-bottom:0}.p-card .icon-tile,.p-card .icon-tile-dark{flex:0 0 auto}.route-node,.journey-step{box-shadow:0 11px 30px rgba(12,73,49,.055)!important}.cta-box{border-radius:22px!important;background:linear-gradient(135deg,#f8f3eb,#eef5f0)!important}.cta-box .btn-premium{flex:0 0 auto}.contact-form{border-radius:20px!important}.contact-card{min-height:86px}.premium-eval-cards article{min-height:142px}
+@media(max-width:1199.98px){
+  .journey-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:14px!important}
+  .premium-evaluation-grid{gap:30px!important}
+  .premium-category-grid{gap:14px!important}
+}
+@media(max-width:767.98px){
+  .section-head{max-width:100%!important}
+  .section-head p{max-width:100%!important}
+  .p-card{padding:1.2rem!important}
+  .p-card .icon-tile,.p-card .icon-tile-dark{width:46px!important;height:46px!important;margin-bottom:.8rem!important}
+  .route-grid{gap:10px!important}
+  .route-node{display:grid!important;grid-template-columns:48px minmax(0,1fr)!important;column-gap:13px!important;align-items:start!important;min-height:0!important;padding:1.1rem!important;text-align:start!important}
+  .route-node .icon-tile,.route-node .icon-tile-dark{grid-row:span 2!important;width:48px!important;height:48px!important;margin:0!important}
+  .route-node h3{margin:.1rem 0 .35rem!important;font-size:1.05rem!important}
+  .route-node p{font-size:.89rem!important;line-height:1.65!important}
+  .route-arrow{height:22px!important}.route-arrow svg{width:21px!important;height:21px!important}
+  .journey-grid{grid-template-columns:1fr 1fr!important;gap:10px!important}
+  .journey-step{min-height:170px!important;padding:1.05rem!important}
+  .journey-step h3{font-size:1rem!important}.journey-step p{font-size:.84rem!important;line-height:1.62!important}
+  .journey-num{width:32px!important;height:32px!important;margin-bottom:.7rem!important}
+  .cta-box{padding:1.35rem!important;text-align:start!important}
+  .cta-box .btn-premium{width:100%!important;margin-top:1rem}
+  .contact-card{min-height:0!important;padding:1rem!important}
+  .premium-eval-cards{gap:10px!important}.premium-eval-cards article{min-height:0!important;padding:1rem!important}
+}
+@media(max-width:430px){
+  .journey-grid{grid-template-columns:1fr!important}
+  .journey-step{min-height:0!important}
+  .premium-category-grid article{min-height:auto!important}
+}
+html[dir='rtl'] .route-node,html[dir='rtl'] .journey-step,html[dir='rtl'] .cta-box{text-align:right}
+html[dir='ltr'] .route-node,html[dir='ltr'] .journey-step,html[dir='ltr'] .cta-box{text-align:left}
