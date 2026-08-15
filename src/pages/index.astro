@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import html from '../legacy/index.html?raw';
-import { extractLegacyMain } from '../lib/legacy';
+import HomePremium from '../components/HomePremium.astro';
 ---
-<BaseLayout active="home" bodyClass="home-v7 page-home" title="تارقت لتجارة الأغذية | TARGET"><Fragment set:html={extractLegacyMain(html)} /></BaseLayout>
+<BaseLayout active="home" bodyClass="home-v7 page-home" title="تارقت لتجارة الأغذية | TARGET">
+  <HomePremium />
+</BaseLayout>
