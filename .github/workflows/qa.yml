@@ -34,3 +34,10 @@ jobs:
           test -f dist/assets/final-freeze-media-v1.css
           test -f dist/assets/content-pages-final-v1.css
           test -f dist/content/target-design-tokens-v1.json
+          test -f dist/content/companies.json
+      - name: Verify internal company brochure resources
+        run: |
+          test -f dist/assets/companies/falcon/brochure.pdf
+          test -f dist/assets/companies/al-nada/brochure.pdf
+          test -f dist/assets/companies/al-dar/brochure.pdf
+          test -f dist/assets/companies/al-reem/brochure.pdf
