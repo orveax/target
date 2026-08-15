@@ -1,0 +1,4 @@
+/* Final TARGET website UI typography lock */
+:root{--target-font-ar:'Tajawal',Arial,sans-serif;--target-font-en:'Manrope',Arial,sans-serif}
+html[lang='ar'] body{font-family:var(--target-font-ar)!important;font-weight:500;line-height:1.78}
+html[lang='en'] body{font-family:var(--target-font-en)!important;font-weight:500;line-height:1.68}
