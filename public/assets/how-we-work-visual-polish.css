@@ -1,0 +1,146 @@
+/* TARGET How We Work — visual execution layer
+   Canonical copy and information architecture remain unchanged. */
+
+.work-canonical .work-hero {
+  background: var(--w-cream);
+  color: var(--w-charcoal);
+  padding-block: clamp(3.5rem, 6vw, 5.25rem);
+}
+.work-canonical .work-hero::before {
+  inset-inline-end: -9rem;
+  inset-block-start: -15rem;
+  border-color: rgba(12,73,49,.13);
+  box-shadow: 0 0 0 4rem rgba(12,73,49,.025);
+}
+.work-canonical .work-hero__grid {
+  grid-template-columns: minmax(0,1.2fr) minmax(21rem,.8fr);
+  gap: clamp(2rem,6vw,5rem);
+}
+.work-canonical .work-eyebrow {
+  color: var(--w-green);
+  border-color: rgba(12,73,49,.16);
+  background: rgba(255,254,251,.72);
+}
+.work-canonical .work-hero h1 {
+  color: var(--w-charcoal) !important;
+  max-width: 14ch;
+  text-shadow: none !important;
+}
+.work-canonical .work-hero p {
+  color: rgba(38,38,38,.72) !important;
+  text-shadow: none !important;
+}
+.work-canonical .work-hero .btn-light-premium {
+  color: var(--w-cream) !important;
+  background: var(--w-green) !important;
+  border-color: var(--w-green) !important;
+  box-shadow: 0 12px 24px rgba(12,73,49,.16);
+}
+.work-canonical .work-hero .work-quiet-link { color: var(--w-green); }
+.work-canonical .work-hero__route {
+  justify-self: stretch;
+  min-height: 22rem;
+  padding: 1.5rem;
+  border-radius: 1.5rem;
+  background:
+    radial-gradient(circle at 78% 20%, rgba(244,237,228,.95) 0 3%, transparent 3.4%),
+    linear-gradient(135deg,#0c4931 0%,#155b42 55%,#87a999 100%);
+  box-shadow: 0 22px 42px rgba(7,53,35,.2);
+  flex-direction: column;
+  justify-content: center;
+  gap: .65rem;
+  overflow: hidden;
+}
+.work-canonical .work-hero__route::before {
+  content: "PRODUCT · TARGET · QATAR";
+  color: rgba(244,237,228,.68);
+  font: 800 .65rem/1 Manrope,sans-serif;
+  letter-spacing: .14em;
+  margin-bottom: auto;
+}
+.work-canonical .work-hero__route > span,
+.work-canonical .work-hero__route strong {
+  width: min(100%,16rem);
+  height: 3.7rem;
+  border-radius: .9rem;
+}
+.work-canonical .work-hero__route > span { background: rgba(244,237,228,.1); }
+.work-canonical .work-hero__route strong {
+  background: var(--w-cream);
+  box-shadow: 0 10px 18px rgba(0,0,0,.12);
+}
+.work-canonical .work-hero__route > i {
+  transform: rotate(-90deg);
+  color: var(--w-sand);
+}
+html[dir='ltr'] .work-canonical .work-hero__route > i { transform: rotate(90deg); }
+
+.work-canonical .work-way {
+  border-inline-start: 4px solid var(--w-green);
+  box-shadow: 0 12px 28px rgba(12,73,49,.055);
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.work-canonical .work-way:nth-child(even) { border-inline-start-color: var(--w-sand); }
+.work-canonical .work-way:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 38px rgba(12,73,49,.12);
+}
+.work-canonical .work-way .work-icon { background: var(--w-cream); }
+.work-canonical .work-steps li {
+  border-radius: 1.1rem;
+  box-shadow: 0 8px 18px rgba(12,73,49,.035);
+}
+.work-canonical .work-steps li:nth-child(3n+2) {
+  border-color: rgba(192,149,82,.42);
+}
+.work-canonical .work-audiences article {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: .9rem;
+  align-content: start;
+  transition: background .2s ease, border-color .2s ease;
+}
+.work-canonical .work-audiences h3,
+.work-canonical .work-audiences p { grid-column: 2; }
+.work-canonical .work-audiences .work-icon { grid-row: 1 / span 2; }
+.work-canonical .work-audiences article:hover {
+  background: var(--w-cream);
+  border-color: rgba(12,73,49,.25);
+}
+.work-canonical .work-info-cues {
+  padding: .45rem;
+  border: 1px solid rgba(12,73,49,.12);
+  border-radius: 1.2rem;
+  background: rgba(255,254,251,.62);
+}
+.work-canonical .work-info-cues li {
+  border-color: transparent;
+  border-radius: .85rem;
+  background: transparent;
+}
+.work-canonical .work-info-cues li + li { border-top: 1px solid rgba(12,73,49,.1); }
+.work-canonical .work-clarity__panel { border-inline-start: 4px solid var(--w-sand); }
+.work-canonical .work-final { box-shadow: inset 0 1px rgba(244,237,228,.1); }
+
+@media (max-width: 767.98px) {
+  .work-canonical .work-hero { padding-block: 3rem; }
+  .work-canonical .work-hero__grid { grid-template-columns:1fr; gap:1.5rem; }
+  .work-canonical .work-hero h1 { font-size:clamp(2.15rem,9.5vw,2.8rem) !important; }
+  .work-canonical .work-hero p { font-size:1rem; line-height:1.8; }
+  .work-canonical .work-hero__route {
+    display:flex;
+    min-height:15rem;
+    padding:1.15rem;
+    align-items:stretch;
+  }
+  .work-canonical .work-hero__route > span,
+  .work-canonical .work-hero__route strong { width:100%; height:3rem; }
+  .work-canonical .work-way { padding:1.4rem; }
+  .work-canonical .work-way .work-icon { width:3.4rem; height:3.4rem; }
+  .work-canonical .work-audiences article { padding:1.15rem; }
+  .work-canonical .work-audiences h3 { margin:.35rem 0 .4rem; }
+  .work-canonical .work-audiences p { line-height:1.58; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .work-canonical .work-way,.work-canonical .work-audiences article { transition:none; }
+}
