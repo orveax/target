@@ -272,3 +272,77 @@
   .home-canonical .hc-hero-media::after { animation: none; }
   .home-canonical .hc-steps li { transition: none; }
 }
+
+/* Mobile QA hotfix — 2026-08-15 */
+.home-canonical .hc-hero h1,
+.home-canonical .hc-hero h1[data-ar],
+.home-canonical .hc-hero h1[data-en] {
+  color: var(--hc-charcoal) !important;
+  text-shadow: none !important;
+  opacity: 1 !important;
+}
+.home-canonical .hc-hero-copy > p,
+.home-canonical .hc-hero-copy > p[data-ar],
+.home-canonical .hc-hero-copy > p[data-en] {
+  color: rgba(38, 38, 38, .72) !important;
+  text-shadow: none !important;
+  opacity: 1 !important;
+}
+.home-canonical .hc-hero .hc-eyebrow {
+  color: var(--hc-forest) !important;
+  background: rgba(255,254,251,.82) !important;
+}
+.home-canonical .hc-hero .hc-button-secondary {
+  color: var(--hc-forest) !important;
+  border-color: var(--hc-forest) !important;
+}
+.home-canonical .hc-hero .hc-button-secondary i { color: currentColor !important; }
+
+html { scroll-padding-top: 6.75rem; }
+.home-canonical section { scroll-margin-top: 6.75rem; }
+
+@media (max-width: 575px) {
+  .home-canonical .hc-hero h1 {
+    font-size: clamp(2.08rem, 9.4vw, 2.7rem) !important;
+    line-height: 1.12 !important;
+    letter-spacing: -.035em !important;
+  }
+  .home-canonical .hc-hero-copy > p {
+    font-size: 1rem !important;
+    line-height: 1.8 !important;
+  }
+
+  .home-canonical .hc-category-grid > a {
+    grid-template-columns: 6.25rem minmax(0, 1fr) !important;
+    min-height: 6.55rem !important;
+  }
+  .home-canonical .hc-category-media {
+    min-height: 6.55rem !important;
+  }
+  .home-canonical .hc-category-media .hc-icon-tile {
+    width: 3rem !important;
+    height: 3rem !important;
+  }
+  .home-canonical .hc-category-grid > a strong {
+    padding-block: .85rem !important;
+    padding-inline-start: .8rem !important;
+    padding-inline-end: 2.55rem !important;
+    font-size: 1.06rem !important;
+    line-height: 1.38 !important;
+  }
+  .home-canonical .hc-category-arrow {
+    inset-block-start: 50% !important;
+    inset-block-end: auto !important;
+    transform: translateY(-50%) !important;
+  }
+
+  .site-quick-actions {
+    bottom: max(1rem, env(safe-area-inset-bottom)) !important;
+    inset-inline-end: .85rem !important;
+  }
+  .quick-whatsapp, .quick-top {
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px !important;
+  }
+}
