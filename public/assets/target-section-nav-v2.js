@@ -9,7 +9,6 @@
   window.__TARGET_SECTION_NAV_V2__ = true;
 
   const doc = document;
-  const root = doc.documentElement;
   const reducedMotion = () => window.matchMedia?.('(prefers-reduced-motion: reduce)').matches === true;
 
   function injectStyles() {
@@ -181,6 +180,62 @@
     track.scrollTo({ left: Math.max(0, left), behavior: reducedMotion() ? 'auto' : 'smooth' });
   }
 
+  function trackedEntries(track) {
+    const buttons = [...track.querySelectorAll('button')];
+    const sections = [...doc.querySelectorAll('main > section')].filter((section) => {
+      const heading = section.querySelector('h2,h1');
+      return heading && !section.matches(':first-child') && !/final|closing/i.test(section.className || '');
+    });
+    return buttons.map((button, index) => ({ button, section: sections[index] })).filter((entry) => entry.section);
+  }
+
+  function setActiveEntry(nav, entries, activeEntry) {
+    if (!activeEntry) return;
+    const current = entries.find(({ button }) => button.getAttribute('aria-current') === 'true');
+    if (current === activeEntry) return;
+    entries.forEach(({ button }) => button.setAttribute('aria-current', button === activeEntry.button ? 'true' : 'false'));
+    window.requestAnimationFrame(() => centerActiveButton(nav));
+  }
+
+  function updateScrollSpy(nav, header, entries) {
+    if (!entries.length) return;
+    const probeY = headerStickyOffset(header) + Math.ceil(nav.getBoundingClientRect().height) + 22;
+    let active = entries[0];
+
+    for (const entry of entries) {
+      const rect = entry.section.getBoundingClientRect();
+      if (rect.top <= probeY) active = entry;
+      else break;
+    }
+
+    const last = entries[entries.length - 1];
+    const nearPageEnd = window.innerHeight + window.scrollY >= doc.documentElement.scrollHeight - 8;
+    if (nearPageEnd) active = last;
+
+    setActiveEntry(nav, entries, active);
+  }
+
+  function installScrollSpy(nav, header, track) {
+    const entries = trackedEntries(track);
+    if (!entries.length) return;
+
+    let ticking = false;
+    const queueUpdate = () => {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(() => {
+        ticking = false;
+        updateScrollSpy(nav, header, entries);
+      });
+    };
+
+    window.addEventListener('scroll', queueUpdate, { passive: true });
+    window.addEventListener('resize', queueUpdate, { passive: true });
+    window.addEventListener('orientationchange', queueUpdate, { passive: true });
+    window.addEventListener('load', queueUpdate, { once: true });
+    queueUpdate();
+  }
+
   function upgrade(nav) {
     if (!nav || nav.dataset.sectionNavV2 === '1') return;
     nav.dataset.sectionNavV2 = '1';
@@ -200,13 +255,7 @@
     window.addEventListener('resize', syncOffset, { passive: true });
     window.addEventListener('orientationchange', syncOffset, { passive: true });
 
-    const activeObserver = new MutationObserver((mutations) => {
-      if (mutations.some((m) => m.type === 'attributes' && m.attributeName === 'aria-current')) {
-        window.requestAnimationFrame(() => centerActiveButton(nav));
-      }
-    });
-    track.querySelectorAll('button').forEach((button) => activeObserver.observe(button, { attributes: true, attributeFilter: ['aria-current'] }));
-
+    installScrollSpy(nav, header, track);
     window.requestAnimationFrame(() => centerActiveButton(nav));
   }
 
