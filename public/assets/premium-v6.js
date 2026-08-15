@@ -53,7 +53,6 @@
   function normalizeFooter(){
     document.querySelectorAll('.site-footer').forEach((footer)=>{
       footer.querySelectorAll('.footer-logo').forEach((logo)=>{logo.src='/assets/brand/target-logo-horizontal-cream.svg';});
-      footer.querySelectorAll('.footer-social,.footer-whatsapp,.footer-contact-item').forEach((node)=>node.remove());
       const bottom=footer.querySelector('.footer-bottom');
       if(bottom){bottom.innerHTML='<span>targetft.com</span><span data-ar="جميع الحقوق محفوظة © TARGET 2026 — RFX" data-en="TARGET 2026 © All rights reserved — RFX">جميع الحقوق محفوظة © TARGET 2026 — RFX</span>';}
     });
@@ -67,7 +66,7 @@
   }
   function initHeaderAndUtilities(){
     if(!document.querySelector('.site-quick-actions')){
-      document.body.insertAdjacentHTML('beforeend','<div class="site-quick-actions" aria-label="Quick actions"><button class="quick-top" type="button" aria-label="Go to top"><i class="bi bi-arrow-up"></i><span data-ar="أعلى" data-en="Top">أعلى</span></button></div>');
+      document.body.insertAdjacentHTML('beforeend','<div class="site-quick-actions" aria-label="Quick actions"><a class="quick-whatsapp" href="https://wa.me/97477910919" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp TARGET"><i class="bi bi-whatsapp"></i><span data-ar="واتساب" data-en="WhatsApp">واتساب</span></a><button class="quick-top" type="button" aria-label="Go to top"><i class="bi bi-arrow-up"></i><span data-ar="أعلى" data-en="Top">أعلى</span></button></div>');
       document.querySelector('.quick-top')?.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
     }
     document.querySelectorAll('[data-company-profile-download]').forEach((button)=>button.addEventListener('click',(event)=>{event.preventDefault();window.print();}));
