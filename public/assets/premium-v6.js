@@ -3,12 +3,6 @@
   'use strict';
   const root=document.documentElement;
 
-  /* Production visual hotfix is injected centrally so every preserved legacy page receives the same image correction without duplicating markup changes. */
-  const hotfix=document.createElement('link');
-  hotfix.rel='stylesheet';
-  hotfix.href='/assets/production-hotfix.css?v=20260815-01';
-  document.head.appendChild(hotfix);
-
   function isArabic(){return root.lang!=='en'}
   function applyLanguage(lang){
     const ar=lang!=='en';root.lang=ar?'ar':'en';root.dir=ar?'rtl':'ltr';
@@ -36,23 +30,17 @@
     });
   }
   function initMegaMenu(){
-    const target=[...document.querySelectorAll('.site-header .navbar-nav .nav-link')].find((link)=>/capabilities\.html$/.test(link.getAttribute('href')||''));
-    if(!target||target.closest('.mega-nav-item'))return;
-    const item=target.closest('li')||target.parentElement;
-    if(!item)return;
-    item.classList.add('mega-nav-item');
-    target.insertAdjacentHTML('afterend','<button class="mega-toggle" type="button" aria-expanded="false" aria-controls="target-mega-menu"><i data-lucide="chevron-down"></i><span class="visually-hidden">فتح قائمة الحلول</span></button><div class="target-mega-menu" id="target-mega-menu"><a href="capabilities.html"><i data-lucide="handshake"></i><span data-ar="حلولنا التجارية" data-en="Commercial Solutions">حلولنا التجارية</span><small data-ar="استيراد وتمثيل وشراكات" data-en="Import, representation & partnerships">استيراد وتمثيل وشراكات</small></a><a href="food-portfolio.html"><i data-lucide="package-open"></i><span data-ar="المنتجات والشركات" data-en="Products & Companies">المنتجات والشركات</span><small data-ar="فئات ومنتجات محل اهتمام" data-en="Categories and products in focus">فئات ومنتجات محل اهتمام</small></a><a href="company-profile.html"><i data-lucide="building-2"></i><span data-ar="ملف الشركة" data-en="Company Profile">ملف الشركة</span><small data-ar="نبذة وقدرات تارقت" data-en="Target overview and capabilities">نبذة وقدرات تارقت</small></a><a href="product-profile.html"><i data-lucide="book-open-check"></i><span data-ar="ملف المنتجات" data-en="Product Profile">ملف المنتجات</span><small data-ar="الفئات والمنتجات محل الاهتمام" data-en="Categories and products in focus">الفئات والمنتجات محل الاهتمام</small></a></div>');
-    const toggle=item.querySelector('.mega-toggle');
+    const item=document.querySelector('.site-header .mega-nav-item');
+    const toggle=item?.querySelector('.mega-toggle');
+    if(!item||!toggle)return;
     const close=()=>{item.classList.remove('is-mega-open');toggle.setAttribute('aria-expanded','false');};
-    toggle.addEventListener('click',()=>{const open=item.classList.toggle('is-mega-open');toggle.setAttribute('aria-expanded',String(open));});
+    toggle.addEventListener('click',(event)=>{event.preventDefault();const open=item.classList.toggle('is-mega-open');toggle.setAttribute('aria-expanded',String(open));});
     document.addEventListener('click',(event)=>{if(!item.contains(event.target))close();});
     document.addEventListener('keydown',(event)=>{if(event.key==='Escape')close();});
   }
   function initHeaderAndUtilities(){
-    document.querySelectorAll('.site-header .brand-logo,.mobile-brand-logo').forEach((logo)=>{logo.src='/assets/brand/target-logo-horizontal-cream.png';});
-    document.querySelectorAll('.site-header .btn-premium').forEach((cta)=>{const label=cta.querySelector('[data-ar][data-en]');if(label){label.dataset.ar='ناقش فرصة تجارية';label.dataset.en='Discuss a Commercial Opportunity';label.textContent=isArabic()?'ناقش فرصة تجارية':'Discuss a Commercial Opportunity';}});
     if(!document.querySelector('.site-quick-actions')){document.body.insertAdjacentHTML('beforeend','<div class="site-quick-actions" aria-label="Quick actions"><a class="quick-whatsapp" href="https://wa.me/97400000000" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i><span data-ar="واتساب" data-en="WhatsApp">واتساب</span></a><button class="quick-top" type="button" aria-label="Go to top"><i class="bi bi-arrow-up"></i><span data-ar="أعلى" data-en="Top">أعلى</span></button></div>');document.querySelector('.quick-top')?.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));}
     document.querySelectorAll('[data-company-profile-download]').forEach((button)=>button.addEventListener('click',(event)=>{event.preventDefault();window.print();}));
   }
-  document.addEventListener('DOMContentLoaded',()=>{normalizeFooter();initLanguage();initMegaMenu();initHeaderAndUtilities();initIcons();initForms();initDisabledSocial();setActiveNav();});
+  document.addEventListener('DOMContentLoaded',()=>{initLanguage();initMegaMenu();initHeaderAndUtilities();initIcons();initForms();initDisabledSocial();setActiveNav();});
 })();
