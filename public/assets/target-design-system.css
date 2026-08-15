@@ -414,3 +414,28 @@ main .section .row>[class*='col']>.p-card:not(.card-service):not(.card-audience)
 .card-interactive:hover :is(h2,h3,strong,p,small,i),.card-interactive.active :is(h2,h3,strong,p,small,i),.company-tile:hover :is(h2,h3,strong,p,small,i),.company-tile.active :is(h2,h3,strong,p,small,i),.premium-category-grid article:hover :is(h2,h3,strong,p,small,i),.hp-category-grid a:hover :is(h2,h3,strong,p,small,i){color:var(--target-text-inverse)!important}
 .card-interactive:hover .icon-tile,.card-interactive.active .icon-tile,.company-tile:hover .icon-tile,.company-tile.active .icon-tile,.premium-category-grid article:hover .icon-tile,.hp-category-grid a:hover>span{background:var(--target-cream)!important;color:var(--target-color-primary)!important;border-color:var(--target-cream)!important}
 @media(max-width:767.98px){main .section .row>[class*='col']>.p-card:not(.card-service):not(.card-audience){min-height:154px!important;padding:1.15rem!important}main .section .row>[class*='col']>.p-card:not(.card-service):not(.card-audience)::after{left:.75rem;bottom:-.45rem;font-size:5.2rem}.card-service-number{left:.85rem!important;bottom:-.55rem!important}}
+
+
+/* T01 Hotfix — dependable language toggle, direction parity and compact desktop header */
+.hp-hero .hp-copy h1{color:var(--target-text-inverse)!important}
+.hp-hero .hp-copy p{color:rgba(255,255,255,.84)!important}
+@media(min-width:1200px){
+  .site-header .navbar>.container{grid-template-columns:auto minmax(0,1fr) auto!important;column-gap:14px!important}
+  html[dir='ltr'] .site-header .navbar-brand{grid-column:1!important;justify-self:start!important}
+  html[dir='ltr'] .site-header .navbar-collapse{grid-column:2!important;min-width:0!important}
+  html[dir='ltr'] .site-header .nav-actions{grid-column:3!important;justify-self:end!important;position:relative;z-index:3}
+  html[dir='rtl'] .site-header .navbar-brand{grid-column:3!important;justify-self:end!important}
+  html[dir='rtl'] .site-header .navbar-collapse{grid-column:2!important;min-width:0!important}
+  html[dir='rtl'] .site-header .nav-actions{grid-column:1!important;justify-self:start!important;position:relative;z-index:3}
+  .site-header .navbar-nav{flex-wrap:nowrap!important;justify-content:center!important}
+  .site-header .nav-link{white-space:nowrap!important}
+  .site-header .lang-button{position:relative;z-index:4!important;flex:0 0 auto!important}
+}
+@media(min-width:1200px) and (max-width:1439.98px){
+  .site-header .brand-logo{width:148px!important}
+  .site-header .navbar-nav{gap:0!important}
+  .site-header .nav-link{padding-inline:.42rem!important;font-size:.78rem!important}
+  .site-header .mega-toggle{width:28px!important;min-width:28px!important}
+  .site-header .premium-header-cta{min-height:46px!important;padding-inline:.85rem!important;font-size:.78rem!important}
+  .site-header .nav-actions{gap:9px!important}
+}
