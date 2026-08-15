@@ -1,6 +1,6 @@
 (() => {
   const applyAuditFixes = () => {
-    // Home: replace unsupported legacy icon with the already proven category icon.
+    // Home: replace unsupported legacy icon before the shared Lucide hydration runs.
     document.querySelectorAll('[data-lucide="jar"]').forEach((node) => {
       node.setAttribute('data-lucide', 'candy');
     });
@@ -31,8 +31,6 @@
       const cues = infoLayout.querySelector('.work-info-cues');
       infoLayout.insertBefore(figure, cues || null);
     }
-
-    window.lucide?.createIcons?.();
   };
 
   if (document.readyState === 'loading') {
