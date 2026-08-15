@@ -64,7 +64,7 @@ html[dir='ltr'] .premium-page-hero-overlay{background:linear-gradient(90deg,rgba
 @media (max-width:767px){.visual-hero::before,.premium-page-hero-overlay{background:linear-gradient(180deg,rgba(6,45,32,.56),rgba(6,45,32,.91))!important}}
 
 /* HF-03 Typography system */
-:root{--target-font-ar:'Tajawal',Arial,sans-serif;--target-font-en:'Manrope',Arial,sans-serif;--target-text-xs:.78rem;--target-text-sm:.9rem;--target-text-base:1rem;--target-text-lead:1.1rem}
+:root{--target-font-ar:'IBM Plex Sans Arabic',Arial,sans-serif;--target-font-en:'Manrope',Arial,sans-serif;--target-text-xs:.78rem;--target-text-sm:.9rem;--target-text-base:1rem;--target-text-lead:1.1rem}
 html[lang='ar'] body{font-family:var(--target-font-ar)!important;font-weight:500;line-height:1.78}
 html[lang='en'] body{font-family:var(--target-font-en)!important;font-weight:500;line-height:1.68}
 h1,h2,h3,h4,h5,h6,.btn-premium,.nav-link,.lang-button,.section-head .kicker{font-family:inherit}
