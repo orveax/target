@@ -16,7 +16,7 @@ function contactHref(c: any) { const subject = isAr.value ? `مناقشة منت
   <section class="portfolio-app" :dir="isAr ? 'rtl' : 'ltr'">
     <div class="portfolio-company-grid" role="tablist" :aria-label="isAr ? 'الشركات والمنتجات محل الاهتمام' : 'Companies and products in focus'">
       <button v-for="(c, ci) in companies" :key="c.id" type="button" class="company-tile" :class="{ active: store.companyIndex === ci }" role="tab" :aria-selected="store.companyIndex === ci" @click="store.selectCompany(ci)">
-        <span class="company-tile-mark">{{ String(ci + 1).padStart(2, '0') }}</span><span class="company-tile-content"><span class="company-kicker">{{ isAr ? 'ضمن نطاق الاهتمام' : 'Within current focus' }}</span><strong>{{ isAr ? c.nameAr : c.nameEn }}</strong><small>{{ isAr ? c.categoryAr : c.categoryEn }}</small><span class="company-count">{{ c.products.length }} {{ isAr ? 'أصناف مدرجة' : 'listed items' }}</span></span>
+        <span class="company-tile-top"><span class="company-tile-mark">{{ String(ci + 1).padStart(2, '0') }}</span><span class="company-tile-state">{{ isAr ? 'استعرض السجل' : 'View record' }}</span></span><span class="company-tile-content"><span class="company-kicker">{{ isAr ? 'ضمن نطاق الاهتمام' : 'Within current focus' }}</span><strong>{{ isAr ? c.nameAr : c.nameEn }}</strong><small>{{ isAr ? c.categoryAr : c.categoryEn }}</small><span class="company-count">{{ c.products.length }} {{ isAr ? 'أصناف مدرجة' : 'listed items' }}</span></span>
       </button>
     </div>
     <article class="portfolio-detail" role="tabpanel">
