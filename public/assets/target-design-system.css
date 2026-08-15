@@ -185,8 +185,8 @@ html[dir='ltr'] .route-arrow svg,html[dir='ltr'] .v7-role-arrow{transform:none}
   html[dir='ltr'] .site-header .nav-actions{grid-column:3!important;justify-self:end!important;direction:ltr}
 }
 html[dir='rtl'] .premium-mobile-nav{right:0!important;left:auto!important;transform:translateX(100%)!important}
-html[dir='rtl'] .premium-mobile-nav.show{transform:none!important}
+html[dir='rtl'] .premium-mobile-nav.showing,html[dir='rtl'] .premium-mobile-nav.show:not(.hiding){transform:none!important}
 html[dir='ltr'] .premium-mobile-nav{left:0!important;right:auto!important;transform:translateX(-100%)!important}
-html[dir='ltr'] .premium-mobile-nav.show{transform:none!important}
+html[dir='ltr'] .premium-mobile-nav.showing,html[dir='ltr'] .premium-mobile-nav.show:not(.hiding){transform:none!important}
 html[dir='rtl'] .premium-mobile-head{direction:rtl}
 html[dir='ltr'] .premium-mobile-head{direction:ltr}
