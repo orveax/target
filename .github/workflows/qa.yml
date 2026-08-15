@@ -37,6 +37,7 @@ jobs:
           test -f dist/assets/company-profile-v1.css
           test -f dist/assets/faq-v1.css
           test -f dist/assets/privacy-v1.css
+          test -f dist/assets/terms-v1.css
           test -f dist/content/target-design-tokens-v1.json
           test -f dist/content/companies.json
       - name: Verify internal company brochure resources
@@ -85,3 +86,22 @@ jobs:
           ! grep -q 'Legal Review Required' dist/privacy.html
           ! grep -q 'Set at publication' dist/privacy.html
           ! grep -q 'noindex,nofollow' dist/privacy.html
+      - name: Verify approved Terms and Conditions
+        run: |
+          grep -q 'id="use"' dist/terms.html
+          grep -q 'id="purpose"' dist/terms.html
+          grep -q 'id="commitment"' dist/terms.html
+          grep -q 'id="information"' dist/terms.html
+          grep -q 'id="submissions"' dist/terms.html
+          grep -q 'id="ip"' dist/terms.html
+          grep -q 'id="prohibited"' dist/terms.html
+          grep -q 'id="third"' dist/terms.html
+          grep -q 'id="accuracy"' dist/terms.html
+          grep -q 'id="law"' dist/terms.html
+          grep -q 'الموقع لا ينشئ التزامًا تجاريًا تلقائيًا' dist/terms.html
+          grep -q 'info@targetft.com' dist/terms.html
+          grep -q 'privacy.html' dist/terms.html
+          grep -q 'contact.html' dist/terms.html
+          ! grep -q 'Legal Review Required' dist/terms.html
+          ! grep -q 'Set at publication' dist/terms.html
+          ! grep -q 'noindex,nofollow' dist/terms.html
