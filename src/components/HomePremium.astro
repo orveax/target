@@ -1,170 +1,94 @@
 ---
-const capabilities = [
-  { icon: 'ship-wheel', title: 'التجارة والاستيراد', body: 'نتعامل مع المنتجات الغذائية المختارة ونطوّر فرص دخولها إلى قطر.' },
-  { icon: 'handshake', title: 'الشراكات التجارية', body: 'نبني علاقات عمل مع المصنعين والعلامات والموردين حول الفرص المناسبة للسوق.' },
-  { icon: 'network', title: 'الوصول والتوزيع', body: 'نعمل على تطوير قنوات الوصول المناسبة للمنتج داخل السوق القطري.' },
-  { icon: 'chart-no-axes-combined', title: 'تطوير السوق', body: 'ندعم استمرار المنتج وتطور حضوره التجاري داخل السوق وفق الفرصة والنموذج المناسب.' },
+const trust = [
+  ['building-2','شركة تعمل من قطر','حضور محلي لفهم ومناقشة فرص السوق.','Qatar-Based','Local market context for commercial discussions.'],
+  ['ship','تجارة واستيراد أغذية','منتجات وفئات غذائية مختارة.','Food Trading & Import','Selected food products and categories.'],
+  ['factory','مصنعون وموردون وعلامات','نقاش مباشر حول المنتج والفرصة.','Manufacturers, Suppliers & Brands','Direct discussion around the product and opportunity.'],
+  ['file-check-2','مراجعة المنتج قبل الالتزام','مناقشة المنتج لا تعني قبولًا تلقائيًا.','Product Fit Before Commitment','A discussion does not mean automatic acceptance.'],
+];
+const work = [
+  ['ship','الاستيراد والتجارة','نتعامل مع المنتجات الغذائية المختارة وندرس فرصة إدخالها إلى قطر ضمن نشاط التجارة والاستيراد.','منتج مناسب · فرصة في قطر · استيراد وتجارة','Import & Trading','We work with selected food products and assess opportunities to bring them into Qatar through our trading and import activity.','Suitable Product · Qatar Opportunity · Import & Trading'],
+  ['handshake','العمل مع المصنعين والموردين','نناقش المنتج والفرصة مباشرة مع المصنع أو العلامة أو المورد، ونحدد طريقة العمل المناسبة إذا كانت الفرصة ملائمة.','مصنعون · موردون · علامات غذائية','Working with Manufacturers & Suppliers','We discuss the product and opportunity directly with the manufacturer, brand or supplier and define an appropriate commercial arrangement where there is a fit.','Manufacturers · Suppliers · Food Brands'],
+  ['network','قنوات البيع والتوزيع','نعمل على الوصول بالمنتج إلى قنوات البيع والتوزيع المناسبة داخل قطر بحسب طبيعة الفئة والفرصة.','قنوات بيع · توزيع · السوق القطري','Sales & Distribution Channels','We work on connecting the product with suitable sales and distribution channels in Qatar based on the category and opportunity.','Sales Channels · Distribution · Qatar Market'],
+  ['route','متابعة فرصة المنتج','بعد دخول المنتج، نراجع إمكانية استمرار الفرصة وتوسيع الوصول عندما يكون ذلك مناسبًا للمنتج والسوق.','استمرار المنتج · توسيع الوصول · مراجعة الفرصة','Product Opportunity Development','After market entry, we review the potential to continue developing the opportunity and expand reach where it makes sense for the product and market.','Product Continuity · Wider Reach · Opportunity Review'],
 ];
 const categories = [
-  ['coffee','الشاي والمشروبات العشبية'],
-  ['package-open','العصائر والمشروبات التقليدية'],
-  ['package-open','العسل والدبس والحلويات'],
-  ['snowflake','الألبان والمجمدات والأغذية المجهزة'],
-  ['shopping-basket','الأغذية المعبأة وFMCG'],
+  ['cup-soda','الشاي والمشروبات العشبية','Tea & Herbal Infusions'],
+  ['glass-water','العصائر والمشروبات التقليدية','Juices & Traditional Beverages'],
+  ['honey','العسل والدبس والحلويات التقليدية','Honey, Molasses & Traditional Sweets'],
+  ['snowflake','الألبان والمجمدات والأغذية المجهزة','Dairy, Frozen & Prepared Foods'],
+  ['package-check','الأغذية المعبأة ومنتجات FMCG المختارة','Packaged & Selected Food FMCG'],
+];
+const why = [
+  ['map-pinned','تركيز واضح على قطر','نراجع المنتج والفرصة في سياق السوق القطري بدل تقديم وعود عامة عن أسواق متعددة.','Clear Qatar Focus','We review the product and opportunity in the context of Qatar rather than making broad multi-market promises.'],
+  ['package-check','ملاءمة المنتج أولًا','لا نتعامل مع كل منتج تلقائيًا؛ نراجع الفئة والمنتج والفرصة قبل تحديد الخطوات التالية.','Product Fit First','Not every product moves forward automatically; we review the category, product and opportunity first.'],
+  ['messages-square','نقاش تجاري مباشر','التواصل يدور حول المصنع أو المورد، المنتج، وما الذي يبحث عنه في قطر — دون طبقات استشارية غير ضرورية.','Direct Commercial Discussion','The discussion focuses on the manufacturer or supplier, the product and what they are seeking in Qatar — without unnecessary consulting layers.'],
+  ['file-check-2','اتفاق واضح قبل التنفيذ','لا يبدأ التزام تجاري إلا بعد الاتفاق على طريقة العمل المناسبة ونطاق الخطوات التالية.','Clear Agreement Before Execution','Commercial commitment starts only after an appropriate way of working and next-step scope are agreed.'],
+];
+const steps = [
+  ['شاركنا المنتج','أرسل اسم الشركة أو المصنع، المنتج والفئة الأساسية.','Share the Product','Share the company or manufacturer name, product and main category.'],
+  ['نراجع الملاءمة','نراجع المنتج والفئة ومدى ارتباط الفرصة بتوجه تارقت والسوق القطري.','We Review the Fit','We review the product, category and whether the opportunity fits TARGET’s direction and the Qatar market.'],
+  ['نتفق على طريقة العمل','إذا كانت الفرصة مناسبة، نحدد طريقة التعامل والخطوات التجارية التالية.','Agree How to Work','If there is a fit, we define the commercial arrangement and next steps.'],
+  ['نبدأ الخطوات التالية','تبدأ الخطوات المرتبطة بالاستيراد أو دخول السوق أو قنوات البيع بحسب الفرصة المتفق عليها.','Move to the Next Steps','The relevant import, market-entry or sales-channel steps begin according to the agreed opportunity.'],
+];
+const faqs = [
+  ['هل تتعامل تارقت مع جميع المنتجات الغذائية؟','لا. نعمل على فئات ومنتجات غذائية مختارة، ونراجع كل منتج وفرصة بشكل منفصل قبل تحديد ما إذا كان مناسبًا للمناقشة التالية.','Does TARGET work with every food product?','No. We focus on selected food categories and review each product and opportunity individually before deciding whether it fits the next stage of discussion.'],
+  ['هل إرسال المنتج يعني قبوله أو الالتزام باستيراده؟','لا. إرسال المنتج أو بدء المناقشة لا يعني قبولًا تلقائيًا أو التزامًا بالاستيراد أو التوزيع. أي التزام يبدأ بعد اتفاق واضح بين الطرفين.','Does submitting a product mean it is accepted or will be imported?','No. Submitting a product or starting a discussion does not mean automatic acceptance or a commitment to import or distribute it. Any commitment begins after clear agreement between both sides.'],
+  ['ما المعلومات المطلوبة لبدء مناقشة المنتج؟','نحتاج في البداية اسم الشركة أو المصنع، الدولة، المنتج أو الفئة، بيانات التواصل، وملخصًا قصيرًا لما تبحث عنه في السوق القطري.','What information is needed to start a product discussion?','Start with the company or manufacturer name, country, product or category, contact details and a short summary of what you are seeking in Qatar.'],
 ];
 ---
-<div class="hp">
-  <section class="hp-hero">
-    <div class="hp-hero-overlay"></div>
-    <div class="container hp-hero-inner">
-      <div class="hp-copy">
-        <span class="hp-eyebrow"><i data-lucide="badge-check"></i> تجارة أغذية وشراكات تجارية في قطر</span>
-        <h1>من المصنع إلى<br />السوق القطري.</h1>
-        <p>تعمل تارقت مع المصنعين والعلامات الغذائية والموردين لتقييم الفرص، دخول السوق، وتطوير قنوات الوصول المناسبة داخل قطر.</p>
-        <div class="hp-actions">
-          <a class="hp-btn hp-btn-light" href="contact.html"><i data-lucide="send"></i> ناقش فرصة تجارية</a>
-          <a class="hp-btn hp-btn-ghost" href="capabilities.html"><i data-lucide="arrow-up-left"></i> استكشف مجالات عملنا</a>
+<div class="home-canonical">
+  <section class="hc-hero">
+    <div class="container hc-hero-grid">
+      <div class="hc-hero-copy">
+        <span class="hc-eyebrow"><i data-lucide="ship"></i><span data-ar="تجارة واستيراد الأغذية في قطر" data-en="Food Trading & Import in Qatar">تجارة واستيراد الأغذية في قطر</span></span>
+        <h1 data-ar="من المصنع إلى السوق القطري." data-en="From Manufacturer to the Qatar Market.">من المصنع إلى السوق القطري.</h1>
+        <p data-ar="نعمل مع المصنعين والعلامات والموردين على المنتجات المناسبة للسوق القطري — من مراجعة المنتج والفرصة، إلى الاستيراد، ثم الوصول إلى قنوات البيع والتوزيع المناسبة." data-en="We work with manufacturers, brands and suppliers on products suited to Qatar — from reviewing the product and opportunity, through import and trading, to suitable sales and distribution channels.">نعمل مع المصنعين والعلامات والموردين على المنتجات المناسبة للسوق القطري — من مراجعة المنتج والفرصة، إلى الاستيراد، ثم الوصول إلى قنوات البيع والتوزيع المناسبة.</p>
+        <div class="hc-actions">
+          <a class="btn-premium btn-primary-premium" href="suppliers.html"><i data-lucide="send"></i><span data-ar="ناقش منتجك معنا" data-en="Discuss Your Product">ناقش منتجك معنا</span></a>
+          <a class="hc-button-secondary" href="capabilities.html"><span data-ar="تعرف على طريقة عملنا" data-en="See How We Work">تعرف على طريقة عملنا</span><i data-lucide="arrow-up-left"></i></a>
         </div>
       </div>
-      <aside class="hp-route" aria-label="المسار التجاري" data-hp-route-label>
-        <span class="hp-route-label">من المصنع إلى السوق القطري</span>
-        <div class="hp-route-step"><span><i data-lucide="factory"></i></span><div><strong>المصنع أو العلامة</strong><small>منتج وفرصة تجارية</small></div></div>
-        <div class="hp-route-line"></div>
-        <div class="hp-route-step hp-route-target"><span><i data-lucide="target"></i></span><div><strong>TARGET</strong><small>نقيّم الفرصة ونبني المسار</small></div></div>
-        <div class="hp-route-line"></div>
-        <div class="hp-route-step"><span><i data-lucide="map-pin"></i></span><div><strong>السوق القطري</strong><small>دخول السوق والوصول إلى القنوات</small></div></div>
+      <aside class="hc-route" aria-label="المسار التجاري" data-ar-aria="المسار التجاري" data-en-aria="Commercial route">
+        <span class="hc-route-label" data-ar="مسار تجاري واضح" data-en="A Clear Commercial Route">مسار تجاري واضح</span>
+        <div class="hc-route-nodes">
+          <article><span class="hc-route-icon"><i data-lucide="factory"></i></span><div><strong data-ar="المصنع / العلامة / المورد" data-en="Manufacturer / Brand / Supplier">المصنع / العلامة / المورد</strong><small data-ar="المنتج والفرصة" data-en="Product & Opportunity">المنتج والفرصة</small></div></article>
+          <i class="hc-route-link" data-lucide="arrow-left"></i>
+          <article class="is-target"><span class="hc-route-icon"><i data-lucide="target"></i></span><div><strong>TARGET</strong><small data-ar="نراجع الملاءمة وطريقة العمل" data-en="Review Fit & Commercial Arrangement">نراجع الملاءمة وطريقة العمل</small></div></article>
+          <i class="hc-route-link" data-lucide="arrow-left"></i>
+          <article><span class="hc-route-icon"><i data-lucide="map-pinned"></i></span><div><strong data-ar="السوق القطري" data-en="Qatar Market">السوق القطري</strong><small data-ar="الاستيراد · البيع · التوزيع" data-en="Import · Sales · Distribution">الاستيراد · البيع · التوزيع</small></div></article>
+        </div>
       </aside>
     </div>
   </section>
 
-  <section class="hp-proof">
-    <div class="container">
-      <div class="hp-proof-grid">
-        <article><span><i data-lucide="badge-check"></i></span><div><strong>شركة قطرية</strong><small>تعمل من دولة قطر</small></div></article>
-        <article><span><i data-lucide="briefcase-business"></i></span><div><strong>تجارة أغذية</strong><small>منتجات وفئات مختارة</small></div></article>
-        <article><span><i data-lucide="map-pinned"></i></span><div><strong>شراكات مع المصنعين والعلامات</strong><small>علاقات عمل حول المنتج والفرصة</small></div></article>
-        <article><span><i data-lucide="package-check"></i></span><div><strong>تركيز على السوق القطري</strong><small>تقييم الفرصة ضمن سياق السوق</small></div></article>
-      </div>
-    </div>
-  </section>
+  <section class="hc-trust"><div class="container"><div class="hc-trust-grid">{trust.map(([icon,ar,arCopy,en,enCopy]) => <article><i data-lucide={icon}></i><div><strong data-ar={ar} data-en={en}>{ar}</strong><small data-ar={arCopy} data-en={enCopy}>{arCopy}</small></div></article>)}</div></div></section>
 
-  <section class="hp-capabilities">
-    <div class="container">
-      <header class="hp-section-heading">
-        <span>كيف نعمل</span>
-        <h2>كيف نعمل مع المصنعين<br />والعلامات الغذائية؟</h2>
-        <p>نجمع بين التجارة، بناء العلاقات، تطوير قنوات الوصول، وفهم السوق القطري لدعم المنتجات المناسبة من مرحلة الفرصة إلى السوق.</p>
-      </header>
-      <div class="hp-cap-grid">
-        {capabilities.map((item, index) => <article class:list={['hp-cap-card', `hp-cap-${index + 1}`]}>
-          <div class="hp-cap-image"></div>
-          <div class="hp-cap-content"><span class="hp-cap-index">0{index + 1}</span><span class="hp-cap-icon"><i data-lucide={item.icon}></i></span><h3>{item.title}</h3><p>{item.body}</p><a href="capabilities.html">استكشف المجال <i data-lucide="arrow-left"></i></a></div>
-        </article>)}
-      </div>
-    </div>
-  </section>
+  <section class="hc-section hc-work"><div class="container">
+    <header class="hc-heading"><span class="hc-kicker" data-ar="كيف نعمل" data-en="How We Work">كيف نعمل</span><h2 data-ar="من المنتج إلى قنوات البيع في قطر" data-en="From Product to Sales Channels in Qatar">من المنتج إلى قنوات البيع في قطر</h2><p data-ar="نعمل مع المصنعين والعلامات والموردين على المنتجات المناسبة للسوق القطري — من مراجعة المنتج والفرصة، إلى الاستيراد، ثم الوصول إلى قنوات البيع والتوزيع المناسبة." data-en="We work with manufacturers, brands and suppliers on products suited to Qatar — from reviewing the product and opportunity, through import and trading, to suitable sales and distribution channels.">نعمل مع المصنعين والعلامات والموردين على المنتجات المناسبة للسوق القطري — من مراجعة المنتج والفرصة، إلى الاستيراد، ثم الوصول إلى قنوات البيع والتوزيع المناسبة.</p></header>
+    <div class="hc-work-grid">{work.map(([icon,ar,arCopy,arPoints,en,enCopy,enPoints],index) => <article class="hc-feature-card"><span class="hc-card-number">0{index + 1}</span><span class="hc-icon-tile"><i data-lucide={icon}></i></span><h3 data-ar={ar} data-en={en}>{ar}</h3><p data-ar={arCopy} data-en={enCopy}>{arCopy}</p><small data-ar={arPoints} data-en={enPoints}>{arPoints}</small></article>)}</div>
+    <a class="hc-explore-link" href="capabilities.html"><span data-ar="تعرف على طريقة عملنا" data-en="See How We Work">تعرف على طريقة عملنا</span><i data-lucide="arrow-up-left"></i></a>
+  </div></section>
 
-  <section class="hp-process">
-    <div class="container hp-process-grid">
-      <div class="hp-process-copy"><span class="hp-label">كيف نعمل</span><h2>من المصنع إلى<br />السوق القطري</h2><p>تعمل تارقت كحلقة تجارية محلية تربط المنتج المناسب بفرص دخوله ووصوله إلى السوق القطري.</p><a class="hp-text-link" href="company-profile.html">تعرف على تارقت <i data-lucide="arrow-left"></i></a></div>
-      <div class="hp-process-flow">
-        <article><span class="hp-flow-icon"><i data-lucide="factory"></i></span><strong>المصنع أو العلامة</strong><small>منتج يبحث عن فرصة مناسبة في قطر</small></article>
-        <i class="hp-flow-arrow" data-lucide="arrow-left"></i>
-        <article class="hp-flow-target"><span class="hp-flow-icon"><i data-lucide="target"></i></span><strong>TARGET</strong><small>نفهم المنتج، نقيّم الفرصة، ونبني المسار التجاري المناسب</small></article>
-        <i class="hp-flow-arrow" data-lucide="arrow-left"></i>
-        <article><span class="hp-flow-icon"><i data-lucide="map-pin"></i></span><strong>السوق القطري</strong><small>دخول السوق، الوصول إلى القنوات المناسبة، والتطور التجاري</small></article>
-      </div>
-    </div>
-  </section>
+  <section class="hc-section hc-categories"><div class="container">
+    <header class="hc-heading"><span class="hc-kicker" data-ar="نطاق اهتمامنا" data-en="Our Focus">نطاق اهتمامنا</span><h2 data-ar="فئات ومنتجات نركز عليها" data-en="Products & Categories We Focus On">فئات ومنتجات نركز عليها</h2><p data-ar="نعمل ضمن فئات غذائية مختارة، مع مرونة لتقييم المنتجات التي تتناسب مع توجه تارقت وفرص السوق القطري." data-en="We focus on selected food categories while remaining open to evaluating products that fit TARGET's commercial direction and Qatar-market opportunities.">نعمل ضمن فئات غذائية مختارة، مع مرونة لتقييم المنتجات التي تتناسب مع توجه تارقت وفرص السوق القطري.</p></header>
+    <div class="hc-category-grid">{categories.map(([icon,ar,en]) => <a href="food-portfolio.html"><span class="hc-icon-tile"><i data-lucide={icon}></i></span><strong data-ar={ar} data-en={en}>{ar}</strong><i class="hc-category-arrow" data-lucide="arrow-up-left"></i></a>)}</div>
+    <a class="hc-explore-link" href="food-portfolio.html"><span data-ar="استعرض المنتجات والشركات" data-en="Explore Products & Companies">استعرض المنتجات والشركات</span><i data-lucide="arrow-up-left"></i></a>
+  </div></section>
 
-  <section class="hp-categories">
-    <div class="container"><header class="hp-categories-head"><span>نطاق اهتمامنا</span><h2>فئات ومنتجات نركز عليها</h2><p>نعمل ضمن فئات غذائية مختارة، مع مرونة لتقييم المنتجات التي تتناسب مع توجه تارقت وفرص السوق القطري.</p></header><div class="hp-category-grid">{categories.map(([icon, title]) => <a href="food-portfolio.html"><span><i data-lucide={icon}></i></span><strong>{title}</strong><i class="hp-category-arrow" data-lucide="arrow-up-left"></i></a>)}</div></div>
-  </section>
+  <section class="hc-section hc-why"><div class="container"><div class="hc-why-layout">
+    <header class="hc-heading"><span class="hc-kicker" data-ar="لماذا تارقت؟" data-en="Why TARGET?">لماذا تارقت؟</span><h2 data-ar="طريقة عمل واضحة حول المنتج والفرصة" data-en="A Clear Way to Discuss the Product and Opportunity">طريقة عمل واضحة حول المنتج والفرصة</h2><p data-ar="نفضّل أن يعرف المصنع أو المورد منذ البداية ما الذي نراجعه، وما الذي تعنيه المناقشة، ومتى يبدأ الالتزام التجاري." data-en="We want manufacturers and suppliers to understand from the start what is reviewed, what a discussion means, and when a commercial commitment begins.">نفضّل أن يعرف المصنع أو المورد منذ البداية ما الذي نراجعه، وما الذي تعنيه المناقشة، ومتى يبدأ الالتزام التجاري.</p></header>
+    <div class="hc-why-grid">{why.map(([icon,ar,arCopy,en,enCopy]) => <article><span class="hc-icon-tile"><i data-lucide={icon}></i></span><div><h3 data-ar={ar} data-en={en}>{ar}</h3><p data-ar={arCopy} data-en={enCopy}>{arCopy}</p></div></article>)}</div>
+  </div></div></section>
 
-  <section class="hp-final-cta">
-    <div class="container"><div class="hp-final-box"><div><span>لديك فرصة مناسبة؟</span><h2>لديك منتج أو فرصة مناسبة للسوق القطري؟</h2><p>شاركنا نبذة عن الشركة أو العلامة والمنتج، وسنراجع مدى ملاءمة الفرصة للنقاش التجاري.</p><small>إرسال الاستفسار لا يعني قبول المنتج أو إنشاء علاقة تجارية.</small></div><a class="hp-btn hp-btn-light" href="contact.html"><i data-lucide="send"></i> ناقش فرصة تجارية</a></div></div>
-  </section>
+  <section class="hc-section hc-start"><div class="container"><header class="hc-heading"><span class="hc-kicker" data-ar="كيف نبدأ؟" data-en="How to Start">كيف نبدأ؟</span><h2 data-ar="أربع خطوات لبدء مناقشة المنتج" data-en="Four Steps to Start a Product Discussion">أربع خطوات لبدء مناقشة المنتج</h2><p data-ar="البداية لا تحتاج ملفًا معقدًا. نحتاج معلومات واضحة تساعدنا على فهم الشركة والمنتج والفرصة في قطر." data-en="The first step does not require a complicated submission. We need clear information that helps us understand the company, product and Qatar opportunity.">البداية لا تحتاج ملفًا معقدًا. نحتاج معلومات واضحة تساعدنا على فهم الشركة والمنتج والفرصة في قطر.</p></header>
+    <ol class="hc-steps">{steps.map(([ar,arCopy,en,enCopy],index) => <li><span>0{index + 1}</span><div><h3 data-ar={ar} data-en={en}>{ar}</h3><p data-ar={arCopy} data-en={enCopy}>{arCopy}</p></div></li>)}</ol>
+    <a class="hc-explore-link" href="capabilities.html"><span data-ar="تعرف على طريقة عملنا بالكامل" data-en="See the Full Process">تعرف على طريقة عملنا بالكامل</span><i data-lucide="arrow-up-left"></i></a>
+  </div></section>
+
+  <section class="hc-section hc-faq"><div class="container"><header class="hc-heading"><span class="hc-kicker" data-ar="أسئلة قبل أن تبدأ" data-en="Before You Start">أسئلة قبل أن تبدأ</span><h2 data-ar="أسئلة شائعة من المصنعين والموردين" data-en="Common Questions from Manufacturers & Suppliers">أسئلة شائعة من المصنعين والموردين</h2></header>
+    <div class="hc-faq-list">{faqs.map(([ar,arAnswer,en,enAnswer],index) => <article class:list={['hc-faq-item',index === 0 && 'is-open']}><button type="button" aria-expanded={index === 0 ? 'true' : 'false'} data-home-faq><span data-ar={ar} data-en={en}>{ar}</span><i data-lucide="plus"></i></button><div class="hc-faq-panel" hidden={index !== 0}><p data-ar={arAnswer} data-en={enAnswer}>{arAnswer}</p></div></article>)}</div>
+    <a class="hc-explore-link" href="faq.html"><span data-ar="عرض جميع الأسئلة الشائعة" data-en="View All FAQs">عرض جميع الأسئلة الشائعة</span><i data-lucide="arrow-up-left"></i></a>
+  </div></section>
+
+  <section class="hc-final"><div class="container"><div class="hc-final-panel"><div><span class="hc-kicker" data-ar="لديك منتج مناسب؟" data-en="Have a Relevant Product?">لديك منتج مناسب؟</span><h2 data-ar="لديك منتج غذائي وتريد مناقشة فرصته في قطر؟" data-en="Have a Food Product You Want to Discuss for Qatar?">لديك منتج غذائي وتريد مناقشة فرصته في قطر؟</h2><p data-ar="شاركنا نبذة عن شركتك أو المصنع والمنتج، وسنراجع ما إذا كانت الفرصة مناسبة لبدء نقاش مباشر." data-en="Share a brief introduction to your company or manufacturing business and the product, and we will review whether the opportunity is suitable for a direct discussion.">شاركنا نبذة عن شركتك أو المصنع والمنتج، وسنراجع ما إذا كانت الفرصة مناسبة لبدء نقاش مباشر.</p><small data-ar="إرسال الطلب لا يعني قبول المنتج أو إنشاء التزام تجاري." data-en="Submitting an enquiry does not constitute product acceptance or create a commercial commitment.">إرسال الطلب لا يعني قبول المنتج أو إنشاء التزام تجاري.</small></div><div class="hc-final-actions"><a class="btn-premium btn-primary-premium" href="suppliers.html"><i data-lucide="send"></i><span data-ar="ناقش منتجك معنا" data-en="Discuss Your Product">ناقش منتجك معنا</span></a><a class="hc-final-secondary" href="contact.html"><span data-ar="الاتصال بنا" data-en="Contact Us">الاتصال بنا</span><i data-lucide="arrow-up-left"></i></a></div></div></div></section>
 </div>
-
-<script>
-  const hpEnglish = {
-    eyebrow:'Food Trading & Commercial Partnerships in Qatar',
-    hero:'From Manufacturer to the Qatar Market.',
-    heroText:'TARGET works with food manufacturers, brands and suppliers to evaluate opportunities, enter the market and develop suitable routes to customers in Qatar.',
-    primary:'Discuss an Opportunity', secondary:'Explore What We Do', route:'From Manufacturer to the Qatar Market',
-    routeFactory:'Manufacturer or Brand', routeFactorySmall:'A product seeking the right opportunity in Qatar.',
-    routeTargetSmall:'We evaluate the opportunity and shape the route.', routeMarket:'Qatar Market', routeMarketSmall:'Market entry and access to suitable channels.',
-    proof:['Qatar-based Company','Food Trading','Manufacturer & Brand Relationships','Qatar Market Focus'],
-    proofSmall:['Operating from Qatar','Selected products and categories','Commercial engagement around products and opportunities','Opportunity assessment in market context'],
-    what:'How We Work', whatTitle:'How We Work with Food Manufacturers and Brands',
-    whatText:'We combine trading, commercial relationships, route-to-market development and local market focus to support suitable products from opportunity to market.',
-    cards:[
-      ['Trading & Import','We work with selected food products and develop opportunities for entry into Qatar.'],
-      ['Commercial Partnerships','We build commercial relationships with manufacturers, brands and suppliers around relevant market opportunities.'],
-      ['Market Access & Distribution','We work on developing suitable routes and distribution channels for products in Qatar.'],
-      ['Market Development',"We support the product's ongoing commercial development in Qatar where the opportunity and model are suitable."]
-    ],
-    cardLink:'Explore What We Do', processLabel:'From Manufacturer to the Qatar Market',
-    processTitle:'From Manufacturer to the Qatar Market', processText:'TARGET acts as a local commercial bridge connecting suitable products with opportunities to enter and reach the Qatar market.',
-    processLink:'About TARGET',
-    flow:[
-      ['Manufacturer or Brand','A product seeking the right opportunity in Qatar.'],
-      ['TARGET','We understand the product, evaluate the opportunity and shape the appropriate commercial route.'],
-      ['Qatar Market','Market entry, access to suitable channels and commercial development.']
-    ],
-    categoryLabel:'Our Focus', categoryTitle:'Products & Categories We Focus On',
-    categoryText:"We focus on selected food categories while remaining open to evaluating products that fit TARGET's commercial direction and Qatar-market opportunities.",
-    categories:['Tea & Herbal Infusions','Juices & Traditional Beverages','Honey, Molasses & Traditional Sweets','Dairy, Frozen & Prepared Foods','Packaged & Selected Food FMCG'],
-    finalLabel:'Have a relevant opportunity?', finalTitle:'Have a Product or Opportunity for the Qatar Market?',
-    finalText:'Tell us about your company or brand and product, and we will review whether the opportunity is relevant for a commercial discussion.',
-    finalNote:'Submitting an enquiry does not constitute product acceptance or establish a commercial relationship.'
-  };
-  const hpArabic = {
-    eyebrow:'تجارة أغذية وشراكات تجارية في قطر', hero:'من المصنع إلى السوق القطري.', heroText:'تعمل تارقت مع المصنعين والعلامات الغذائية والموردين لتقييم الفرص، دخول السوق، وتطوير قنوات الوصول المناسبة داخل قطر.',
-    primary:'ناقش فرصة تجارية', secondary:'استكشف مجالات عملنا', route:'من المصنع إلى السوق القطري',
-    routeFactory:'المصنع أو العلامة', routeFactorySmall:'منتج يبحث عن فرصة مناسبة في قطر.', routeTargetSmall:'نقيّم الفرصة ونبني المسار', routeMarket:'السوق القطري', routeMarketSmall:'دخول السوق والوصول إلى القنوات',
-    proof:['شركة قطرية','تجارة أغذية','شراكات مع المصنعين والعلامات','تركيز على السوق القطري'],
-    proofSmall:['تعمل من دولة قطر','منتجات وفئات مختارة','علاقات عمل حول المنتج والفرصة','تقييم الفرصة ضمن سياق السوق'],
-    what:'كيف نعمل', whatTitle:'كيف نعمل مع المصنعين والعلامات الغذائية؟', whatText:'نجمع بين التجارة، بناء العلاقات، تطوير قنوات الوصول، وفهم السوق القطري لدعم المنتجات المناسبة من مرحلة الفرصة إلى السوق.',
-    cards:[['التجارة والاستيراد','نتعامل مع المنتجات الغذائية المختارة ونطوّر فرص دخولها إلى قطر.'],['الشراكات التجارية','نبني علاقات عمل مع المصنعين والعلامات والموردين حول الفرص المناسبة للسوق.'],['الوصول والتوزيع','نعمل على تطوير قنوات الوصول المناسبة للمنتج داخل السوق القطري.'],['تطوير السوق','ندعم استمرار المنتج وتطور حضوره التجاري داخل السوق وفق الفرصة والنموذج المناسب.']],
-    cardLink:'استكشف المجال', processLabel:'من المصنع إلى السوق القطري', processTitle:'من المصنع إلى السوق القطري', processText:'تعمل تارقت كحلقة تجارية محلية تربط المنتج المناسب بفرص دخوله ووصوله إلى السوق القطري.', processLink:'تعرف على تارقت',
-    flow:[['المصنع أو العلامة','منتج يبحث عن فرصة مناسبة في قطر'],['TARGET','نفهم المنتج، نقيّم الفرصة، ونبني المسار التجاري المناسب'],['السوق القطري','دخول السوق، الوصول إلى القنوات المناسبة، والتطور التجاري']],
-    categoryLabel:'نطاق اهتمامنا', categoryTitle:'فئات ومنتجات نركز عليها', categoryText:'نعمل ضمن فئات غذائية مختارة، مع مرونة لتقييم المنتجات التي تتناسب مع توجه تارقت وفرص السوق القطري.', categories:['الشاي والمشروبات العشبية','العصائر والمشروبات التقليدية','العسل والدبس والحلويات التقليدية','منتجات الألبان والأغذية المجمدة والمجهزة','الأغذية المعبأة والمنتجات الغذائية الاستهلاكية المختارة'],
-    finalLabel:'لديك فرصة مناسبة؟', finalTitle:'لديك منتج أو فرصة مناسبة للسوق القطري؟', finalText:'شاركنا نبذة عن الشركة أو العلامة والمنتج، وسنراجع مدى ملاءمة الفرصة للنقاش التجاري.', finalNote:'إرسال الاستفسار لا يعني قبول المنتج أو إنشاء علاقة تجارية.'
-  };
-  const updateHomeLanguage=()=>{
-    const c=document.documentElement.lang==='en'?hpEnglish:hpArabic;
-    const routeRegion=document.querySelector('[data-hp-route-label]');if(routeRegion)routeRegion.setAttribute('aria-label',document.documentElement.lang==='en'?'Commercial route':'المسار التجاري');
-    const set=(selector,value)=>{const el=document.querySelector(selector);if(el)el.textContent=value;};
-    set('.hp-eyebrow',c.eyebrow);set('.hp-copy h1',c.hero);set('.hp-copy p',c.heroText);
-    document.querySelectorAll('.hp-actions .hp-btn').forEach((el,i)=>{const icon=el.querySelector('svg');el.textContent=i?c.secondary:c.primary;if(icon)el.prepend(icon);});
-    set('.hp-route-label',c.route);const route=document.querySelectorAll('.hp-route-step');[[c.routeFactory,c.routeFactorySmall],[null,c.routeTargetSmall],[c.routeMarket,c.routeMarketSmall]].forEach((v,i)=>{if(route[i]){if(v[0])route[i].querySelector('strong').textContent=v[0];route[i].querySelector('small').textContent=v[1];}});
-    document.querySelectorAll('.hp-proof-grid article').forEach((el,i)=>{el.querySelector('strong').textContent=c.proof[i];el.querySelector('small').textContent=c.proofSmall[i];});
-    set('.hp-section-heading>span',c.what);set('.hp-section-heading h2',c.whatTitle);set('.hp-section-heading p',c.whatText);
-    document.querySelectorAll('.hp-cap-card').forEach((el,i)=>{el.querySelector('h3').textContent=c.cards[i][0];el.querySelector('p').textContent=c.cards[i][1];el.querySelector('a').childNodes[0].textContent=c.cardLink+' ';});
-    set('.hp-process-copy .hp-label',c.processLabel);set('.hp-process-copy h2',c.processTitle);set('.hp-process-copy p',c.processText);set('.hp-text-link',c.processLink);
-    document.querySelectorAll('.hp-process-flow article').forEach((el,i)=>{el.querySelector('strong').textContent=c.flow[i][0];el.querySelector('small').textContent=c.flow[i][1];});
-    set('.hp-categories-head>span',c.categoryLabel);set('.hp-categories-head h2',c.categoryTitle);set('.hp-categories-head p',c.categoryText);document.querySelectorAll('.hp-category-grid strong').forEach((el,i)=>el.textContent=c.categories[i]);
-    set('.hp-final-box>div>span',c.finalLabel);set('.hp-final-box h2',c.finalTitle);set('.hp-final-box p',c.finalText);set('.hp-final-box small',c.finalNote);
-    const final=document.querySelector('.hp-final-box .hp-btn');if(final){const icon=final.querySelector('svg');final.textContent=c.primary;if(icon)final.prepend(icon);}
-  };
-  document.addEventListener('DOMContentLoaded',()=>{updateHomeLanguage();new MutationObserver(updateHomeLanguage).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});});
-</script>
-
-<style is:global>
-.hp{background:#fffdf9;color:#202820;overflow:hidden}
-.hp-hero{position:relative;min-height:clamp(610px,52vw,760px);display:flex;align-items:center;background:url('/images/hero-qatar-trade.webp') center/cover no-repeat;color:#fff}
-.hp-hero-overlay{position:absolute;inset:0;background:linear-gradient(270deg,rgba(5,53,35,.94) 2%,rgba(5,57,39,.79) 34%,rgba(5,57,39,.29) 63%,rgba(5,57,39,.06) 100%)}html[dir='ltr'] .hp-hero-overlay{background:linear-gradient(90deg,rgba(5,53,35,.94) 2%,rgba(5,57,39,.79) 34%,rgba(5,57,39,.29) 63%,rgba(5,57,39,.06) 100%)}html[dir='ltr'] .hp-copy{text-align:left}html[dir='ltr'] .hp-route-line{margin-left:24px;margin-right:0;border-right:0;border-left:1px dashed rgba(215,180,124,.8)}html[dir='ltr'] .hp-flow-arrow{transform:scaleX(-1)}
-.hp-hero-inner{position:relative;z-index:1;width:100%;display:grid;grid-template-columns:minmax(0,630px) minmax(250px,300px);justify-content:space-between;align-items:center;gap:56px;padding-block:78px}
-.hp-copy{max-width:630px}.hp-eyebrow,.hp-label,.hp-section-heading>span,.hp-categories-head>span{display:inline-flex;align-items:center;gap:8px;color:#d7b47c;font-size:.83rem;font-weight:800;letter-spacing:.01em}.hp-eyebrow{padding:9px 13px;border:1px solid rgba(255,255,255,.22);border-radius:999px;background:rgba(255,255,255,.09);color:#fff}
-.hp-eyebrow svg{width:17px;color:#d7b47c}.hp-copy h1{max-width:11ch;margin:20px 0;color:#fff;font-size:clamp(3.2rem,5.25vw,5.9rem);font-weight:800;line-height:1.01;letter-spacing:-.05em}.hp-copy p{max-width:55ch;margin:0;color:rgba(255,255,255,.86);font-size:1.08rem;line-height:1.9}.hp-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}.hp-btn{display:inline-flex;min-height:54px;align-items:center;justify-content:center;gap:9px;padding:0 21px;border-radius:13px;font-weight:800;text-decoration:none;transition:transform .2s ease,background .2s ease}.hp-btn:hover{transform:translateY(-3px)}.hp-btn svg{width:18px}.hp-btn-light{background:#f4ede4;color:#0c4931}.hp-btn-ghost{border:1px solid rgba(255,255,255,.38);background:rgba(255,255,255,.1);color:#fff}
-.hp-route{padding:25px 22px;border:1px solid rgba(255,255,255,.21);border-radius:23px;background:rgba(4,48,32,.54);box-shadow:0 24px 60px rgba(0,0,0,.2);backdrop-filter:blur(15px)}.hp-route-label{display:block;margin-bottom:20px;color:#d7b47c;font-size:.78rem;font-weight:800}.hp-route-step{display:flex;align-items:center;gap:12px}.hp-route-step>span{display:grid;place-items:center;width:50px;height:50px;flex:0 0 50px;border:1px solid rgba(255,255,255,.25);border-radius:15px;background:rgba(255,255,255,.09)}.hp-route-step svg{width:22px;color:#fff}.hp-route-step strong,.hp-route-step small{display:block}.hp-route-step strong{font-size:.98rem}.hp-route-step small{margin-top:2px;color:rgba(255,255,255,.64);font-size:.76rem}.hp-route-target>span{background:#f4ede4;border-color:#f4ede4}.hp-route-target svg{color:#0c4931}.hp-route-line{height:23px;margin:3px 0 3px 24px;border-right:1px dashed rgba(215,180,124,.8)}
-.hp-proof{position:relative;z-index:3;margin-top:-43px}.hp-proof-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;padding:17px;border:1px solid rgba(12,73,49,.1);border-radius:22px;background:rgba(255,255,255,.98);box-shadow:0 24px 60px rgba(12,73,49,.13)}.hp-proof-grid article{display:flex;align-items:center;gap:12px;min-height:72px;padding:8px 17px;border-inline-start:1px solid rgba(12,73,49,.11)}.hp-proof-grid article:last-child{border-inline-start:0}.hp-proof-grid article>span{display:grid;place-items:center;width:48px;height:48px;flex:0 0 48px;border-radius:14px;background:#eef5f0;color:#0c4931}.hp-proof-grid svg{width:23px}.hp-proof-grid strong,.hp-proof-grid small{display:block}.hp-proof-grid strong{font-size:.96rem}.hp-proof-grid small{margin-top:3px;color:#708078;font-size:.78rem}
-.hp-capabilities{padding:120px 0 110px;background:linear-gradient(180deg,#fffdf9,#f7f3eb)}.hp-section-heading{max-width:690px;margin-bottom:38px}.hp-section-heading>span,.hp-categories-head>span{color:#0c4931}.hp-section-heading>span:before,.hp-categories-head>span:before,.hp-label:before{content:'';width:28px;height:2px;background:#cfa66b}.hp-section-heading h2,.hp-process-copy h2,.hp-categories-head h2{margin:14px 0 13px;color:#15271d;font-size:clamp(2.25rem,3.8vw,4rem);font-weight:800;line-height:1.12;letter-spacing:-.035em}.hp-section-heading p{max-width:61ch;margin:0;color:#66736b;font-size:1.02rem;line-height:1.85}.hp-cap-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:17px}.hp-cap-card{overflow:hidden;border:1px solid rgba(12,73,49,.1);border-radius:20px;background:#fff;box-shadow:0 12px 32px rgba(12,73,49,.065);transition:transform .22s ease,box-shadow .22s ease}.hp-cap-card:hover{transform:translateY(-8px);box-shadow:0 25px 52px rgba(12,73,49,.14)}.hp-cap-image{height:140px;background:center/cover no-repeat}.hp-cap-1 .hp-cap-image{background-image:url('https://images.pexels.com/photos/4481327/pexels-photo-4481327.jpeg?auto=compress&cs=tinysrgb&w=1100')}.hp-cap-2 .hp-cap-image{background-image:url('https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=1100')}.hp-cap-3 .hp-cap-image{background-image:url('https://images.pexels.com/photos/8783533/pexels-photo-8783533.jpeg?auto=compress&cs=tinysrgb&w=1100')}.hp-cap-4 .hp-cap-image{background-image:url('https://images.pexels.com/photos/33564207/pexels-photo-33564207/free-photo-of-vibrant-market-stall-with-spices-in-doha.jpeg?auto=compress&cs=tinysrgb&w=1100')}.hp-cap-content{position:relative;padding:26px 20px 21px}.hp-cap-icon{position:absolute;top:-24px;right:20px;display:grid;place-items:center;width:49px;height:49px;border:4px solid #fff;border-radius:15px;background:#0c4931;color:#fff}.hp-cap-icon svg{width:21px}.hp-cap-content h3{min-height:54px;margin:7px 0 9px;color:#173323;font-size:1.12rem;font-weight:800;line-height:1.4}.hp-cap-content p{min-height:78px;margin:0;color:#67736b;font-size:.88rem;line-height:1.75}.hp-cap-content a{display:inline-flex;align-items:center;gap:7px;margin-top:19px;color:#0c4931;font-size:.84rem;font-weight:800}.hp-cap-content a svg{width:16px}
-.hp-process{padding:100px 0;background:#0c4931;color:#fff}.hp-process-grid{display:grid;grid-template-columns:.85fr 1.6fr;gap:80px;align-items:center}.hp-process-copy h2{color:#fff}.hp-process-copy p{max-width:38ch;color:rgba(255,255,255,.72);font-size:1rem;line-height:1.9}.hp-text-link{display:inline-flex;align-items:center;gap:8px;margin-top:11px;color:#d7b47c;font-weight:800}.hp-text-link svg{width:17px}.hp-process-flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:center;gap:15px}.hp-process-flow article{text-align:center}.hp-flow-icon{display:grid;place-items:center;width:80px;height:80px;margin:0 auto 15px;border:1px solid rgba(255,255,255,.23);border-radius:22px;background:rgba(255,255,255,.08)}.hp-flow-icon svg{width:34px;color:#fff}.hp-process-flow strong,.hp-process-flow small{display:block}.hp-process-flow strong{font-size:1.02rem}.hp-process-flow small{margin:7px auto 0;color:rgba(255,255,255,.63);font-size:.78rem;line-height:1.5}.hp-flow-target .hp-flow-icon{border-color:#f4ede4;background:#f4ede4}.hp-flow-target .hp-flow-icon svg{color:#0c4931}.hp-flow-arrow{width:24px;color:#d7b47c}
-.hp-categories{padding:102px 0;background:#fffdf9}.hp-categories-head{margin-bottom:35px;text-align:center}.hp-categories-head p{max-width:650px;margin:0 auto;color:#66736b;line-height:1.8}.hp-final-box small{display:block;margin-top:12px;color:rgba(255,255,255,.52);font-size:.76rem}.hp-category-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:13px}.hp-category-grid a{position:relative;min-height:176px;display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;padding:21px;border:1px solid rgba(12,73,49,.1);border-radius:19px;background:#fff;color:#173323;box-shadow:0 9px 25px rgba(12,73,49,.05);text-decoration:none;transition:.2s ease}.hp-category-grid a:hover{transform:translateY(-6px);border-color:#0c4931;background:#0c4931;color:#fff}.hp-category-grid a>span{display:grid;place-items:center;width:49px;height:49px;border-radius:15px;background:#eef5f0;color:#0c4931}.hp-category-grid a:hover>span{background:rgba(255,255,255,.12);color:#fff}.hp-category-grid a>span svg{width:25px}.hp-category-grid strong{max-width:13ch;font-size:1rem;line-height:1.45}.hp-category-arrow{position:absolute;left:20px;bottom:23px;width:17px;opacity:.65}
-.hp-final-cta{padding:0 0 92px;background:#fffdf9}.hp-final-box{display:flex;align-items:center;justify-content:space-between;gap:30px;padding:48px 54px;border-radius:25px;background:linear-gradient(120deg,#0c4931,#0a3d2a);box-shadow:0 24px 58px rgba(4,59,39,.21)}.hp-final-box>div>span{color:#d7b47c;font-size:.8rem;font-weight:800}.hp-final-box h2{margin:7px 0;color:#fff;font-size:clamp(1.8rem,3vw,2.75rem);font-weight:800}.hp-final-box p{margin:0;color:rgba(255,255,255,.72)}
-/* Shared chrome, adjusted only for this redesigned home. */.hp~*{}body.home-v7 .site-header{background:#0a4a31!important;border-bottom-color:rgba(255,255,255,.13)!important;box-shadow:0 10px 30px rgba(0,0,0,.14)!important}.site-header .navbar{padding-block:10px!important}.site-header .nav-link{font-size:.88rem!important}.site-header .brand-logo{width:184px!important}.target-mega-menu{top:calc(100% + 16px)!important;inset-inline-start:50%!important;transform:translateX(-50%)!important;width:min(760px,calc(100vw - 48px))!important;gap:12px!important;padding:16px!important;border-radius:22px!important;background:rgba(255,253,249,.98)!important;box-shadow:0 28px 78px rgba(0,0,0,.25)!important;backdrop-filter:blur(18px)!important}.target-mega-menu a{min-height:104px!important;padding:18px!important;border:1px solid rgba(12,73,49,.08)!important;border-radius:16px!important;background:#fff!important}.target-mega-menu a:hover{background:#edf5ef!important;transform:translateY(-2px)}.target-mega-menu i{display:grid!important;place-items:center!important;width:42px!important;height:42px!important;border-radius:13px!important;background:#eef5f0!important}.site-footer{background:#073b29!important}.site-footer .footer-logo{width:225px!important}.site-footer .premium-footer-grid{gap:36px!important}.site-footer .footer-bottom{margin-top:40px!important}
-@media(max-width:1199.98px){.hp-hero-inner{grid-template-columns:minmax(0,1fr) 255px;gap:30px}.hp-cap-grid{grid-template-columns:repeat(2,1fr)}.hp-process-grid{grid-template-columns:1fr;gap:42px}.hp-proof-grid{grid-template-columns:repeat(2,1fr)}.hp-proof-grid article:nth-child(2){border-inline-start:0}.hp-category-grid{grid-template-columns:repeat(3,1fr)}.hp-category-grid a:last-child{grid-column:2}}
-@media(max-width:767px){.hp-hero{min-height:auto}.hp-hero-overlay{background:linear-gradient(180deg,rgba(5,53,35,.57),rgba(5,53,35,.93))}.hp-hero-inner{display:block;padding-block:92px 36px}.hp-copy{text-align:center}.hp-eyebrow{font-size:.75rem}.hp-copy h1{max-width:10ch;margin:18px auto;font-size:clamp(2.7rem,12vw,4.2rem)}.hp-copy p{font-size:.98rem;line-height:1.8}.hp-actions{display:grid;grid-template-columns:1fr;max-width:390px;margin:28px auto 0}.hp-route{max-width:410px;margin:35px auto 0;text-align:right}.hp-proof{margin-top:0;padding:16px 0;background:#fff}.hp-proof-grid{padding:8px;border-radius:15px;box-shadow:none}.hp-proof-grid article{min-height:75px;padding:9px;border-inline-start:0!important}.hp-proof-grid article>span{width:40px;height:40px;flex-basis:40px;border-radius:12px}.hp-proof-grid strong{font-size:.81rem}.hp-proof-grid small{font-size:.67rem}.hp-capabilities,.hp-categories{padding:64px 0}.hp-section-heading{text-align:center}.hp-section-heading>span,.hp-categories-head>span{justify-content:center}.hp-section-heading h2,.hp-process-copy h2,.hp-categories-head h2{font-size:clamp(2rem,9vw,2.8rem)}.hp-cap-grid{grid-template-columns:1fr}.hp-cap-card{max-width:460px;margin-inline:auto}.hp-cap-image{height:160px}.hp-cap-content p{min-height:0}.hp-process{padding:67px 0}.hp-process-copy{text-align:center}.hp-process-copy p{margin-inline:auto}.hp-process-flow{grid-template-columns:1fr;gap:14px}.hp-flow-arrow{margin:auto;transform:rotate(-90deg)}.hp-category-grid{grid-template-columns:1fr 1fr}.hp-category-grid a{min-height:145px;padding:17px}.hp-category-grid a:last-child{grid-column:1/-1;max-width:none}.hp-final-cta{padding-bottom:62px}.hp-final-box{display:block;padding:32px 24px;text-align:center}.hp-final-box .hp-btn{width:100%;margin-top:24px}.site-footer{text-align:center}.site-footer .footer-logo{margin-inline:auto}.site-footer .footer-links{justify-items:center}.site-footer .footer-contact-item{justify-content:center}}
-</style>
