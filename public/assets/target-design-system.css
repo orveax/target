@@ -62,3 +62,21 @@ html[dir='ltr'] .premium-page-hero-overlay{background:linear-gradient(90deg,rgba
 .quick-whatsapp{background:#25d366!important;color:var(--target-forest-950)!important}.quick-top{background:var(--target-forest-800)!important;color:#fff!important}
 .target-mega-menu{background:rgba(255,253,249,.98)!important;border-color:rgba(12,73,49,.14)!important}.target-mega-menu a{color:var(--target-ink-950)!important}.target-mega-menu a:hover{background:#edf6f0!important;color:var(--target-forest-800)!important}.target-mega-menu i{color:var(--target-forest-800)!important}.target-mega-menu small{color:var(--target-muted)!important}
 @media (max-width:767px){.visual-hero::before,.premium-page-hero-overlay{background:linear-gradient(180deg,rgba(6,45,32,.56),rgba(6,45,32,.91))!important}}
+
+/* HF-03 Typography system */
+:root{--target-font-ar:'Tajawal',Arial,sans-serif;--target-font-en:'Manrope',Arial,sans-serif;--target-text-xs:.78rem;--target-text-sm:.9rem;--target-text-base:1rem;--target-text-lead:1.1rem}
+html[lang='ar'] body{font-family:var(--target-font-ar)!important;font-weight:500;line-height:1.78}
+html[lang='en'] body{font-family:var(--target-font-en)!important;font-weight:500;line-height:1.68}
+h1,h2,h3,h4,h5,h6,.btn-premium,.nav-link,.lang-button,.section-head .kicker{font-family:inherit}
+h1,h2,h3,h4{font-weight:800;letter-spacing:-.025em;text-wrap:balance}
+h1{font-size:clamp(2.55rem,5vw,5rem);line-height:1.05}
+h2{font-size:clamp(2rem,3.5vw,3.35rem);line-height:1.16}
+h3{font-size:clamp(1.12rem,1.5vw,1.35rem);line-height:1.38}
+p{font-size:var(--target-text-base);line-height:1.82}
+.section-head h2{margin-bottom:.85rem!important}.section-head p{font-size:var(--target-text-lead)!important;line-height:1.82!important}
+.site-header .nav-link{font-size:.9rem!important;font-weight:750!important;letter-spacing:0!important}
+.site-header .btn-premium,.site-header .lang-button{font-size:.86rem!important;font-weight:800!important}
+.target-mega-menu span{font-weight:800!important}.target-mega-menu small{font-size:.79rem!important;line-height:1.62!important}
+.site-footer h3{font-size:.98rem!important;font-weight:800!important}.site-footer p,.site-footer a,.footer-contact-item{font-size:.87rem!important;line-height:1.65!important}
+.form-label{font-size:.92rem!important;font-weight:800!important}.form-control,.form-select{font-family:inherit!important;font-size:1rem!important}
+@media(max-width:767px){body{font-size:1rem!important;line-height:1.76!important}h1{font-size:clamp(2.35rem,11vw,3.4rem)!important;line-height:1.08!important}h2{font-size:clamp(1.82rem,8.5vw,2.55rem)!important;line-height:1.18!important}h3{font-size:1.15rem!important}.section-head p{font-size:1rem!important}.site-header .nav-link{font-size:.96rem!important}}
