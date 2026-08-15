@@ -48,7 +48,15 @@ const faqs = [
           <a class="hc-button-secondary" href="capabilities.html"><span data-ar="تعرف على طريقة عملنا" data-en="See How We Work">تعرف على طريقة عملنا</span><i data-lucide="arrow-up-left"></i></a>
         </div>
       </div>
-      <aside class="hc-route" aria-label="المسار التجاري" data-ar-aria="المسار التجاري" data-en-aria="Commercial route">
+      <div class="hc-hero-visual">
+        <div class="hc-hero-media" aria-hidden="true">
+          <span class="hc-hero-orbit hc-hero-orbit--one"></span>
+          <span class="hc-hero-orbit hc-hero-orbit--two"></span>
+          <span class="hc-hero-gridline hc-hero-gridline--one"></span>
+          <span class="hc-hero-gridline hc-hero-gridline--two"></span>
+          <span class="hc-hero-market-mark">QATAR</span>
+        </div>
+        <aside class="hc-route" aria-label="المسار التجاري" data-ar-aria="المسار التجاري" data-en-aria="Commercial route">
         <span class="hc-route-label" data-ar="مسار تجاري واضح" data-en="A Clear Commercial Route">مسار تجاري واضح</span>
         <div class="hc-route-nodes">
           <article><span class="hc-route-icon"><i data-lucide="factory"></i></span><div><strong data-ar="المصنع / العلامة / المورد" data-en="Manufacturer / Brand / Supplier">المصنع / العلامة / المورد</strong><small data-ar="المنتج والفرصة" data-en="Product & Opportunity">المنتج والفرصة</small></div></article>
@@ -58,6 +66,7 @@ const faqs = [
           <article><span class="hc-route-icon"><i data-lucide="map-pinned"></i></span><div><strong data-ar="السوق القطري" data-en="Qatar Market">السوق القطري</strong><small data-ar="الاستيراد · البيع · التوزيع" data-en="Import · Sales · Distribution">الاستيراد · البيع · التوزيع</small></div></article>
         </div>
       </aside>
+      </div>
     </div>
   </section>
 
@@ -71,7 +80,7 @@ const faqs = [
 
   <section class="hc-section hc-categories"><div class="container">
     <header class="hc-heading"><span class="hc-kicker" data-ar="نطاق اهتمامنا" data-en="Our Focus">نطاق اهتمامنا</span><h2 data-ar="فئات ومنتجات نركز عليها" data-en="Products & Categories We Focus On">فئات ومنتجات نركز عليها</h2><p data-ar="نعمل ضمن فئات غذائية مختارة، مع مرونة لتقييم المنتجات التي تتناسب مع توجه تارقت وفرص السوق القطري." data-en="We focus on selected food categories while remaining open to evaluating products that fit TARGET's commercial direction and Qatar-market opportunities.">نعمل ضمن فئات غذائية مختارة، مع مرونة لتقييم المنتجات التي تتناسب مع توجه تارقت وفرص السوق القطري.</p></header>
-    <div class="hc-category-grid">{categories.map(([icon,ar,en]) => <a href="food-portfolio.html"><span class="hc-icon-tile"><i data-lucide={icon}></i></span><strong data-ar={ar} data-en={en}>{ar}</strong><i class="hc-category-arrow" data-lucide="arrow-up-left"></i></a>)}</div>
+    <div class="hc-category-grid">{categories.map(([icon,ar,en]) => <a href="food-portfolio.html"><span class="hc-category-media"><span class="hc-icon-tile"><i data-lucide={icon}></i></span></span><strong data-ar={ar} data-en={en}>{ar}</strong><i class="hc-category-arrow" data-lucide="arrow-up-left"></i></a>)}</div>
     <a class="hc-explore-link" href="food-portfolio.html"><span data-ar="استعرض المنتجات والشركات" data-en="Explore Products & Companies">استعرض المنتجات والشركات</span><i data-lucide="arrow-up-left"></i></a>
   </div></section>
 
