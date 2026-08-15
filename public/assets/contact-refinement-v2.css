@@ -7,6 +7,24 @@
 .page-contact .ct-map-open svg{width:19px;height:19px;color:var(--target-sand)}
 .page-contact .ct-location-fact{border-inline-start-color:var(--target-sand);background:rgba(192,149,82,.11)}
 
+/* Verified phone / WhatsApp / social block. */
+.page-contact .ct-verified-contact{padding-block:72px;background:#fff}
+.page-contact .ct-verified-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.page-contact .ct-direct-card,.page-contact .ct-social-card{padding:32px;border:1px solid rgba(38,38,38,.10);border-radius:22px;box-shadow:0 14px 34px rgba(38,38,38,.055)}
+.page-contact .ct-direct-card{background:var(--target-charcoal,#262626);color:var(--target-cream,#F4EDE4)}
+.page-contact .ct-direct-card .ct-kicker{color:var(--target-sand,#C09552)}
+.page-contact .ct-direct-card h2{color:#fff!important}
+.page-contact .ct-direct-card p{color:rgba(244,237,228,.75)!important}
+.page-contact .ct-social-card{background:var(--target-cream,#F4EDE4)}
+.page-contact .ct-social-card h2{color:var(--target-charcoal,#262626)!important}
+.page-contact .ct-social-card p{color:rgba(38,38,38,.68)!important}
+.page-contact .ct-direct-actions,.page-contact .ct-social-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.page-contact .ct-phone-link,.page-contact .ct-whatsapp-link,.page-contact .ct-social-link{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding-inline:17px;border-radius:12px;font-weight:750;text-decoration:none;transition:.18s ease}
+.page-contact .ct-phone-link{border:1px solid rgba(244,237,228,.28);background:#fff;color:var(--target-charcoal,#262626)}
+.page-contact .ct-whatsapp-link{border:1px solid #25D366;background:#25D366;color:#073b29}
+.page-contact .ct-social-link{border:1px solid rgba(12,73,49,.14);background:#fff;color:var(--target-forest,#0C4931)}
+.page-contact .ct-social-link:hover,.page-contact .ct-phone-link:hover{transform:translateY(-1px);box-shadow:0 9px 22px rgba(38,38,38,.08)}
+
 /* Support routes: one Charcoal card, one White card on a Sand/Off-white field. */
 .page-contact .ct-support{background:linear-gradient(180deg,#efe3d0 0%,var(--target-cream) 100%)}
 .page-contact .ct-support-panel{display:grid;grid-template-columns:1.08fr .92fr;gap:18px;overflow:visible;background:transparent;box-shadow:none}
@@ -35,11 +53,13 @@
 .page-contact .privacy-check .invalid-feedback{grid-column:2;margin:0!important;text-align:start!important}
 
 @media(max-width:991.98px){
-  .page-contact .ct-support-panel{grid-template-columns:1fr}
+  .page-contact .ct-verified-grid,.page-contact .ct-support-panel{grid-template-columns:1fr}
   .page-contact .ct-support-panel article+article{border-inline-start:1px solid rgba(38,38,38,.10);border-top:1px solid rgba(38,38,38,.10)}
 }
 @media(max-width:575.98px){
   .page-contact .ct-map-context{min-height:330px}
   .page-contact .ct-map-open{inset-inline:12px;inset-block-end:12px;width:calc(100% - 24px)}
-  .page-contact .ct-support-panel article{padding:28px 23px}
+  .page-contact .ct-verified-contact{padding-block:52px}
+  .page-contact .ct-direct-card,.page-contact .ct-social-card,.page-contact .ct-support-panel article{padding:28px 23px}
+  .page-contact .ct-phone-link,.page-contact .ct-whatsapp-link,.page-contact .ct-social-link{width:100%}
 }
