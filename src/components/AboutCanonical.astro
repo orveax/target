@@ -1,9 +1,9 @@
 ---
 const facts = [
-  ['map-pin', 'شركة تعمل من قطر', 'Qatar-Based'],
-  ['ship-wheel', 'تجارة واستيراد أغذية', 'Food Trading & Import'],
-  ['users-round', 'مصنعون وموردون وعلامات', 'Manufacturers, Suppliers & Brands'],
-  ['route', 'تركيز على السوق القطري', 'Qatar Market Focus'],
+  ['building-2', 'شركة تعمل من قطر', 'Qatar-Based'],
+  ['ship', 'تجارة واستيراد أغذية', 'Food Trading & Import'],
+  ['factory', 'مصنعون وموردون وعلامات', 'Manufacturers, Suppliers & Brands'],
+  ['map-pinned', 'تركيز على السوق القطري', 'Qatar Market Focus'],
 ];
 const values = [
   {
@@ -23,7 +23,7 @@ const values = [
 ];
 const trust = [
   ['file-search', 'معلومات واضحة', 'Clear Information', 'نراجع بيانات الشركة والمنتج والفئة والفرصة قبل اتخاذ أي خطوة.', 'We review the company, product, category and opportunity information before taking the next step.'],
-  ['handshake', 'لا التزام تلقائي', 'No Automatic Commitment', 'إرسال منتج أو بدء مناقشة لا يعني تلقائيًا استيرادًا أو توزيعًا أو قبولًا للفرصة.', 'Sending a product or starting a discussion does not automatically mean import, distribution or acceptance of the opportunity.'],
+  ['shield-check', 'لا التزام تلقائي', 'No Automatic Commitment', 'إرسال منتج أو بدء مناقشة لا يعني تلقائيًا استيرادًا أو توزيعًا أو قبولًا للفرصة.', 'Sending a product or starting a discussion does not automatically mean import, distribution or acceptance of the opportunity.'],
   ['clipboard-check', 'نتفق قبل التنفيذ', 'Agree Before Execution', 'الأسعار والكميات ونطاق العمل وأي التزامات تجارية تُحدد في الاتفاق المناسب قبل التنفيذ.', 'Pricing, quantities, scope and other commercial commitments are defined in the appropriate agreement before execution.'],
   ['badge-check', 'لا وكالة أو حصرية دون توثيق', 'No Agency or Exclusivity Without Documentation', 'لا تُفهم أي مناقشة على أنها وكالة أو حصرية أو تمثيل رسمي ما لم يتم الاتفاق عليها وتوثيقها صراحة.', 'No discussion should be understood as agency, exclusivity or official representation unless it is expressly agreed and documented.'],
 ];
@@ -38,7 +38,13 @@ const trust = [
         <p data-ar="تعمل تارقت مع المصنعين والعلامات الغذائية والموردين لمناقشة المنتجات والفرص المناسبة، وتقييم ملاءمتها للسوق القطري، ثم تحديد طريقة العمل المناسبة عندما تكون الفرصة ملائمة للطرفين." data-en="TARGET works with food manufacturers, brands and suppliers to discuss suitable products and opportunities, assess their fit for Qatar, and define an appropriate commercial arrangement where the opportunity fits both sides.">تعمل تارقت مع المصنعين والعلامات الغذائية والموردين لمناقشة المنتجات والفرص المناسبة، وتقييم ملاءمتها للسوق القطري، ثم تحديد طريقة العمل المناسبة عندما تكون الفرصة ملائمة للطرفين.</p>
         <a class="about-resource-link" href="company-profile.html"><i data-lucide="file-text"></i><span data-ar="عرض الملف التعريفي" data-en="View Company Profile">عرض الملف التعريفي</span><i class="about-arrow" data-lucide="arrow-left"></i></a>
       </div>
-      <div class="about-hero__cue" aria-hidden="true"><i data-lucide="route"></i><span>01</span><b>TARGET</b></div>
+      <figure class="about-hero__media" aria-label="TARGET food trading context">
+        <img src="/images/hero-food-portfolio-clean2.webp" alt="" loading="eager" decoding="async" />
+        <figcaption class="about-hero__media-card">
+          <span><i data-lucide="building-2"></i><b data-ar="شركة تعمل من قطر" data-en="Qatar-Based">شركة تعمل من قطر</b></span>
+          <span><i data-lucide="ship"></i><b data-ar="تجارة واستيراد أغذية" data-en="Food Trading & Import">تجارة واستيراد أغذية</b></span>
+        </figcaption>
+      </figure>
     </div>
   </section>
 
@@ -50,13 +56,16 @@ const trust = [
         <p data-ar="تارقت شركة تعمل من قطر في تجارة واستيراد الأغذية. نركز على منتجات وفئات مختارة، ونتعامل مباشرة مع المصنعين والعلامات والموردين لمناقشة فرص دخول المنتجات المناسبة إلى السوق القطري والوصول إلى قنوات البيع والتوزيع الملائمة." data-en="TARGET is a Qatar-based food trading and import company focused on selected products and categories. We work directly with manufacturers, brands and suppliers to discuss opportunities for suitable products to enter Qatar and reach appropriate sales and distribution channels.">تارقت شركة تعمل من قطر في تجارة واستيراد الأغذية. نركز على منتجات وفئات مختارة، ونتعامل مباشرة مع المصنعين والعلامات والموردين لمناقشة فرص دخول المنتجات المناسبة إلى السوق القطري والوصول إلى قنوات البيع والتوزيع الملائمة.</p>
         <p data-ar="دورنا تجاري ومرتبط بالمنتج والفرصة الفعلية في السوق؛ لسنا منصة استشارات عامة، ولا يعني بدء النقاش قبول المنتج أو الالتزام باستيراده أو توزيعه." data-en="Our role is commercial and tied to the product and the actual market opportunity. We are not presenting a general consulting service, and starting a discussion does not mean automatic product acceptance, import or distribution commitment.">دورنا تجاري ومرتبط بالمنتج والفرصة الفعلية في السوق؛ لسنا منصة استشارات عامة، ولا يعني بدء النقاش قبول المنتج أو الالتزام باستيراده أو توزيعه.</p>
       </div>
-      <ul class="about-facts" aria-label="TARGET facts">
-        {facts.map(([icon, ar, en]) => <li><span class="about-icon"><i data-lucide={icon}></i></span><span data-ar={ar} data-en={en}>{ar}</span></li>)}
-      </ul>
+      <div class="about-who__aside">
+        <figure class="about-who__media" aria-hidden="true"><img src="/images/home-food-trade-editorial-v1.png" alt="" loading="lazy" decoding="async" /></figure>
+        <ul class="about-facts" aria-label="TARGET facts">
+          {facts.map(([icon, ar, en]) => <li><span class="about-icon"><i data-lucide={icon}></i></span><span data-ar={ar} data-en={en}>{ar}</span></li>)}
+        </ul>
+      </div>
     </div>
   </section>
 
-  <section class="about-section about-soft">
+  <section class="about-section about-soft about-values-section">
     <div class="container">
       <div class="about-section-head about-section-head--center">
         <span class="about-kicker" data-ar="رؤيتنا ورسالتنا" data-en="Vision & Mission">رؤيتنا ورسالتنا</span>
@@ -78,7 +87,7 @@ const trust = [
       <div class="about-flow">
         <article class="about-flow-node"><span class="about-icon"><i data-lucide="factory"></i></span><h3 data-ar="المصنع / العلامة / المورد" data-en="Manufacturer / Brand / Supplier">المصنع / العلامة / المورد</h3><p data-ar="شركة · منتج · فئة · فرصة" data-en="Company · Product · Category · Opportunity">شركة · منتج · فئة · فرصة</p></article>
         <span class="about-flow-link" aria-hidden="true"><i data-lucide="arrow-left"></i></span>
-        <article class="about-flow-node about-flow-node--target"><span class="about-icon"><i data-lucide="crosshair"></i></span><h3>TARGET</h3><p data-ar="مراجعة الملاءمة · طريقة العمل · الخطوة التالية" data-en="Fit Review · Commercial Arrangement · Next Step">مراجعة الملاءمة · طريقة العمل · الخطوة التالية</p></article>
+        <article class="about-flow-node about-flow-node--target"><span class="about-icon"><i data-lucide="target"></i></span><h3>TARGET</h3><p data-ar="مراجعة الملاءمة · طريقة العمل · الخطوة التالية" data-en="Fit Review · Commercial Arrangement · Next Step">مراجعة الملاءمة · طريقة العمل · الخطوة التالية</p></article>
         <span class="about-flow-link" aria-hidden="true"><i data-lucide="arrow-left"></i></span>
         <article class="about-flow-node"><span class="about-icon"><i data-lucide="map-pinned"></i></span><h3 data-ar="السوق القطري" data-en="Qatar Market">السوق القطري</h3><p data-ar="استيراد · تجارة · قنوات بيع وتوزيع حسب الفرصة" data-en="Import · Trading · Sales & Distribution Channels as Applicable">استيراد · تجارة · قنوات بيع وتوزيع حسب الفرصة</p></article>
       </div>
