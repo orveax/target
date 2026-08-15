@@ -11,7 +11,7 @@ const primaryNav = [
 <header class="site-header premium-header">
   <nav class="navbar navbar-expand-xl" aria-label="Main navigation">
     <div class="container premium-header-grid">
-      <a class="navbar-brand" href="index.html" aria-label="TARGET home"><img class="brand-logo" src="/assets/brand/target-logo-horizontal-forest.svg" alt="TARGET — تارقت"></a>
+      <a class="navbar-brand" href="index.html" aria-label="TARGET home"><img class="brand-logo" src="/assets/brand/target-logo-horizontal-light.svg" alt="TARGET — تارقت"></a>
       <div class="collapse navbar-collapse premium-desktop-nav">
         <ul class="navbar-nav mx-auto">
           {primaryNav.map(([href,key,ar,en]) => (<li><a class:list={['nav-link', active===key && 'active']} href={href} data-ar={ar} data-en={en}>{ar}</a></li>))}
@@ -29,7 +29,7 @@ const primaryNav = [
 <div class="offcanvas offcanvas-start premium-mobile-nav" tabindex="-1" id="mobileNav" aria-labelledby="mobileNavLabel">
   <div class="offcanvas-header premium-mobile-head">
     <div class="premium-mobile-brand">
-      <img class="mobile-brand-logo" src="/assets/brand/target-logo-horizontal-forest.svg" alt="TARGET">
+      <img class="mobile-brand-logo" src="/assets/brand/target-logo-horizontal-light.svg" alt="TARGET">
       <div><span class="premium-mobile-eyebrow" data-ar="التنقل" data-en="Navigation">التنقل</span><strong id="mobileNavLabel" data-ar="استكشف تارقت" data-en="Explore TARGET">استكشف تارقت</strong></div>
     </div>
     <button type="button" class="premium-mobile-close" data-bs-dismiss="offcanvas" aria-label="إغلاق القائمة" data-ar-aria="إغلاق القائمة" data-en-aria="Close menu"><i data-lucide="x"></i></button>
