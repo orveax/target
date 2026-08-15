@@ -1,0 +1,12 @@
+/* T4 — Information architecture navigation layer */
+.nav-contact-utility{align-items:center;gap:.42rem;color:rgba(255,255,255,.9);font-size:.82rem;font-weight:700;white-space:nowrap;text-decoration:none;transition:color .18s ease}
+.nav-contact-utility:hover,.nav-contact-utility:focus-visible{color:var(--target-cream)}
+.nav-contact-utility svg{width:17px;height:17px}
+.premium-mobile-cta{display:grid;gap:.7rem}
+.premium-mobile-profile-link{display:grid;grid-template-columns:22px minmax(0,1fr) 20px;align-items:center;gap:.65rem;padding:.9rem 1rem;border:1px solid var(--target-border-default);border-radius:16px;background:var(--target-bg-surface);color:var(--target-text-primary);font-weight:800;text-decoration:none}
+.premium-mobile-profile-link svg{width:20px;height:20px;color:var(--target-color-primary)}
+.premium-mobile-profile-link svg:last-child{margin-inline-start:auto}
+.premium-mobile-secondary>div:first-child{display:grid;gap:.1rem}
+.premium-mobile-secondary>div:first-child>a{display:flex;align-items:center;gap:.65rem;padding:.72rem 0;color:var(--target-text-primary);font-weight:750;text-decoration:none;border-bottom:1px solid var(--target-border-default)}
+.premium-mobile-secondary>div:first-child>a svg{width:19px;height:19px;color:var(--target-color-primary)}
+.premium-mobile-secondary>div:first-child>a:last-child{border-bottom:0}
