@@ -133,3 +133,17 @@ jobs:
           grep -q 'initWhatsAppVisibility' dist/assets/target-interactions-v1.js
           grep -q 'prefers-reduced-motion' dist/assets/target-interactions-v1.js
           grep -q 'saveData' dist/assets/target-interactions-v1.js
+      - name: Verify experience and brand layer v1
+        run: |
+          test -f dist/assets/target-experience-v1.js
+          grep -q 'target-experience-v1.js' dist/assets/premium-v6.js
+          grep -q 'initBrandedMotion' dist/assets/target-experience-v1.js
+          grep -q 'initSectionNavigation' dist/assets/target-experience-v1.js
+          grep -q 'initContextualCTA' dist/assets/target-experience-v1.js
+          grep -q 'initContextualWhatsApp' dist/assets/target-experience-v1.js
+          grep -q 'initCompanyDeepLinking' dist/assets/target-experience-v1.js
+          grep -q 'TargetFeedback' dist/assets/target-experience-v1.js
+          grep -q 'target-section-nav' dist/assets/target-experience-v1.js
+          grep -q '97477910919?text=' dist/assets/target-experience-v1.js
+          grep -q 'searchParams.set' dist/assets/target-experience-v1.js
+          grep -q 'prefers-reduced-motion' dist/assets/target-experience-v1.js
