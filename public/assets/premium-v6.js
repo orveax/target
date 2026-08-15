@@ -76,3 +76,6 @@
 
 /* Post-baseline interaction layer loader — JavaScript only; no layout/CSS mutation. */
 import('/assets/target-interactions-v1.js?v=20260816-01').catch((error)=>console.warn('[TARGET interactions] layer unavailable',error));
+
+/* Post-baseline experience and brand layer loader — runtime-only enhancement. */
+import('/assets/target-experience-v1.js?v=20260816-01').catch((error)=>console.warn('[TARGET experience] layer unavailable',error));
