@@ -3,7 +3,6 @@ const { active = '' } = Astro.props;
 const nav = [
   ['index.html','home','الرئيسية','Home'],
   ['about.html','about','عن تارقت','About'],
-  ['capabilities.html','capabilities','مجالات عملنا','What We Do'],
   ['food-portfolio.html','portfolio','المنتجات والفئات','Products & Categories'],
   ['qatar-market.html','market','الوصول إلى السوق القطري','Qatar Market Access'],
   ['contact.html','contact','تواصل معنا','Contact'],
@@ -13,7 +12,23 @@ const nav = [
   <nav class="navbar navbar-expand-xl" aria-label="Main navigation">
     <div class="container premium-header-grid">
       <a class="navbar-brand" href="index.html" aria-label="TARGET home"><img class="brand-logo" src="/assets/brand/target-logo-horizontal-cream.svg" alt="TARGET — تارقت"></a>
-      <div class="collapse navbar-collapse premium-desktop-nav"><ul class="navbar-nav mx-auto">{nav.map(([href,key,ar,en]) => (<li><a class:list={['nav-link', active===key && 'active']} href={href} data-ar={ar} data-en={en}>{ar}</a></li>))}</ul></div>
+      <div class="collapse navbar-collapse premium-desktop-nav">
+        <ul class="navbar-nav mx-auto">
+          <li><a class:list={['nav-link', active==='home' && 'active']} href="index.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
+          <li><a class:list={['nav-link', active==='about' && 'active']} href="about.html" data-ar="عن تارقت" data-en="About">عن تارقت</a></li>
+          <li class="mega-nav-item">
+            <a class:list={['nav-link', active==='capabilities' && 'active']} href="capabilities.html" data-ar="مجالات عملنا" data-en="What We Do">مجالات عملنا</a>
+            <button class="mega-toggle" type="button" aria-expanded="false" aria-controls="target-mega-menu"><i data-lucide="chevron-down"></i><span class="visually-hidden">فتح القائمة التجارية</span></button>
+            <div class="target-mega-menu" id="target-mega-menu">
+              <a href="capabilities.html"><i data-lucide="handshake"></i><span data-ar="حلولنا التجارية" data-en="Commercial Solutions">حلولنا التجارية</span><small data-ar="استيراد وتمثيل وشراكات" data-en="Import, representation & partnerships">استيراد وتمثيل وشراكات</small></a>
+              <a href="food-portfolio.html"><i data-lucide="package-open"></i><span data-ar="المنتجات والفئات" data-en="Products & Categories">المنتجات والفئات</span><small data-ar="نطاق المنتجات والشركات" data-en="Products and companies in focus">نطاق المنتجات والشركات</small></a>
+              <a href="company-profile.html"><i data-lucide="building-2"></i><span data-ar="ملف الشركة" data-en="Company Profile">ملف الشركة</span><small data-ar="نبذة وقدرات تارقت" data-en="Target overview and capabilities">نبذة وقدرات تارقت</small></a>
+              <a href="product-profile.html"><i data-lucide="book-open-check"></i><span data-ar="ملف المنتجات" data-en="Product Profile">ملف المنتجات</span><small data-ar="الفئات والمنتجات محل الاهتمام" data-en="Categories and products in focus">الفئات والمنتجات محل الاهتمام</small></a>
+            </div>
+          </li>
+          {nav.slice(2).map(([href,key,ar,en]) => (<li><a class:list={['nav-link', active===key && 'active']} href={href} data-ar={ar} data-en={en}>{ar}</a></li>))}
+        </ul>
+      </div>
       <div class="nav-actions premium-nav-actions">
         <button class="lang-button" type="button" data-lang-toggle>EN</button>
         <a class="btn-premium btn-primary-premium premium-header-cta" href="contact.html"><i data-lucide="send"></i><span data-ar="ناقش فرصة تجارية" data-en="Discuss an Opportunity">ناقش فرصة تجارية</span></a>
@@ -24,5 +39,17 @@ const nav = [
 </header>
 <div class="offcanvas offcanvas-start premium-mobile-nav" tabindex="-1" id="mobileNav" aria-labelledby="mobileNavLabel">
   <div class="offcanvas-header premium-mobile-head"><img class="mobile-brand-logo" src="/assets/brand/target-logo-horizontal-forest.svg" alt="TARGET"><button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button></div>
-  <div class="offcanvas-body"><nav class="premium-mobile-links">{nav.map(([href,key,ar,en]) => (<a class:list={['nav-link', active===key && 'active']} href={href}><span data-ar={ar} data-en={en}>{ar}</span><i data-lucide="arrow-up-left"></i></a>))}</nav><div class="premium-mobile-cta"><a class="btn-premium btn-primary-premium w-100" href="contact.html"><i data-lucide="send"></i><span data-ar="ناقش فرصة تجارية" data-en="Discuss an Opportunity">ناقش فرصة تجارية</span></a></div></div>
+  <div class="offcanvas-body">
+    <nav class="premium-mobile-links">
+      <a class:list={['nav-link', active==='home' && 'active']} href="index.html"><span data-ar="الرئيسية" data-en="Home">الرئيسية</span><i data-lucide="arrow-up-left"></i></a>
+      <a class:list={['nav-link', active==='about' && 'active']} href="about.html"><span data-ar="عن تارقت" data-en="About">عن تارقت</span><i data-lucide="arrow-up-left"></i></a>
+      <a class:list={['nav-link', active==='capabilities' && 'active']} href="capabilities.html"><span data-ar="مجالات عملنا" data-en="What We Do">مجالات عملنا</span><i data-lucide="arrow-up-left"></i></a>
+      <a class:list={['nav-link', active==='portfolio' && 'active']} href="food-portfolio.html"><span data-ar="المنتجات والفئات" data-en="Products & Categories">المنتجات والفئات</span><i data-lucide="arrow-up-left"></i></a>
+      <a href="company-profile.html"><span data-ar="ملف الشركة" data-en="Company Profile">ملف الشركة</span><i data-lucide="arrow-up-left"></i></a>
+      <a href="product-profile.html"><span data-ar="ملف المنتجات" data-en="Product Profile">ملف المنتجات</span><i data-lucide="arrow-up-left"></i></a>
+      <a class:list={['nav-link', active==='market' && 'active']} href="qatar-market.html"><span data-ar="الوصول إلى السوق القطري" data-en="Qatar Market Access">الوصول إلى السوق القطري</span><i data-lucide="arrow-up-left"></i></a>
+      <a class:list={['nav-link', active==='contact' && 'active']} href="contact.html"><span data-ar="تواصل معنا" data-en="Contact">تواصل معنا</span><i data-lucide="arrow-up-left"></i></a>
+    </nav>
+    <div class="premium-mobile-cta"><a class="btn-premium btn-primary-premium w-100" href="contact.html"><i data-lucide="send"></i><span data-ar="ناقش فرصة تجارية" data-en="Discuss an Opportunity">ناقش فرصة تجارية</span></a></div>
+  </div>
 </div>
