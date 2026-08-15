@@ -439,3 +439,9 @@ main .section .row>[class*='col']>.p-card:not(.card-service):not(.card-audience)
   .site-header .premium-header-cta{min-height:46px!important;padding-inline:.85rem!important;font-size:.78rem!important}
   .site-header .nav-actions{gap:9px!important}
 }
+
+/* T01.1 — CSS Grid follows inline direction: column 1 is visual right in RTL */
+@media(min-width:1200px){
+  html[dir='rtl'] .site-header .navbar-brand{grid-column:1!important;justify-self:start!important}
+  html[dir='rtl'] .site-header .nav-actions{grid-column:3!important;justify-self:end!important}
+}
