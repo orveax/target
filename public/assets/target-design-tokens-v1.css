@@ -1,0 +1,80 @@
+:root {
+  --target-forest:#0C4931;
+  --target-cream:#F4EDE4;
+  --target-charcoal:#262626;
+  --target-sand:#C09552;
+  --target-white:#FFFFFF;
+
+  --target-bg-page:var(--target-cream);
+  --target-bg-surface:var(--target-white);
+  --target-bg-subtle:rgba(12,73,49,.045);
+  --target-text-primary:var(--target-charcoal);
+  --target-text-secondary:rgba(38,38,38,.76);
+  --target-text-muted:rgba(38,38,38,.62);
+  --target-text-inverse:var(--target-cream);
+  --target-border-default:rgba(12,73,49,.12);
+  --target-border-strong:rgba(12,73,49,.22);
+  --target-action-primary:var(--target-forest);
+  --target-action-primary-hover:#083D29;
+  --target-action-primary-active:#073522;
+  --target-focus-ring:rgba(12,73,49,.34);
+
+  --target-container-max:1200px;
+  --target-gutter-desktop:32px;
+  --target-gutter-tablet:24px;
+  --target-gutter-mobile:20px;
+
+  --target-space-2xs:4px;
+  --target-space-xs:8px;
+  --target-space-sm:12px;
+  --target-space-md:16px;
+  --target-space-lg:20px;
+  --target-space-xl:24px;
+  --target-space-2xl:32px;
+  --target-space-3xl:40px;
+  --target-space-4xl:48px;
+  --target-space-5xl:64px;
+  --target-space-6xl:80px;
+  --target-space-7xl:96px;
+  --target-space-8xl:104px;
+  --target-space-9xl:112px;
+
+  --target-section-mobile:52px;
+  --target-section-tablet:68px;
+  --target-section-desktop-md:80px;
+  --target-section-desktop:96px;
+  --target-section-compact-mobile:40px;
+  --target-section-compact-desktop:64px;
+
+  --target-radius-control:12px;
+  --target-radius-card:16px;
+  --target-radius-panel:18px;
+  --target-radius-media:20px;
+  --target-radius-hero:24px;
+
+  --target-shadow-card:0 8px 24px rgba(38,38,38,.05);
+  --target-shadow-resource:0 12px 32px rgba(38,38,38,.07);
+
+  --target-control-min:48px;
+  --target-button-height:52px;
+  --target-button-pad-x:26px;
+
+  --target-duration-fast:180ms;
+  --target-duration-standard:220ms;
+  --target-ease-standard:cubic-bezier(.2,.7,.2,1);
+
+  --target-font-ar:"Tajawal",system-ui,sans-serif;
+  --target-font-en:"Manrope",system-ui,sans-serif;
+  --target-h1-home:clamp(3rem,5.5vw,5rem);
+  --target-h1-internal:clamp(2.6rem,4.5vw,4.1rem);
+  --target-h2:clamp(2rem,3.2vw,3rem);
+  --target-h3:clamp(1.25rem,1.8vw,1.55rem);
+  --target-lead:clamp(1.08rem,1.4vw,1.25rem);
+  --target-body:1.05rem;
+  --target-body-min:1rem;
+  --target-meta:.875rem;
+
+  --target-hero-text:55%;
+  --target-hero-media:45%;
+  --target-hero-media-ratio:5/4;
+}
