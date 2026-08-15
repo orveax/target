@@ -7,6 +7,7 @@
   function applyLanguage(lang){
     const ar=lang!=='en';root.lang=ar?'ar':'en';root.dir=ar?'rtl':'ltr';
     document.querySelectorAll('[data-ar][data-en]').forEach((node)=>{const value=ar?node.dataset.ar:node.dataset.en;if(node.matches('input,textarea')) node.placeholder=value;else node.textContent=value;});
+    document.querySelectorAll('[data-ar-aria][data-en-aria]').forEach((node)=>node.setAttribute('aria-label',ar?node.dataset.arAria:node.dataset.enAria));
     document.querySelectorAll('[data-lang-toggle]').forEach((button)=>{button.textContent=ar?'EN':'AR';button.setAttribute('aria-label',ar?'Switch to English':'التبديل إلى العربية');});
     document.querySelectorAll('[data-ar-placeholder][data-en-placeholder]').forEach((node)=>{node.placeholder=ar?node.dataset.arPlaceholder:node.dataset.enPlaceholder;});
     try{localStorage.setItem('target-language',ar?'ar':'en')}catch(_){ } requestAnimationFrame(initIcons);
