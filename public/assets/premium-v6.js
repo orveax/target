@@ -13,7 +13,16 @@
     try{localStorage.setItem('target-language',ar?'ar':'en')}catch(_){ } requestAnimationFrame(initIcons);
   }
   function initIcons(){if(window.lucide&&typeof window.lucide.createIcons==='function'){window.lucide.createIcons({attrs:{'aria-hidden':'true'}});}}
-  function initLanguage(){let lang='ar';try{lang=localStorage.getItem('target-language')||'ar'}catch(_){ }applyLanguage(lang);document.querySelectorAll('[data-lang-toggle]').forEach((button)=>{button.addEventListener('click',()=>applyLanguage(isArabic()?'en':'ar'));});}
+  function initLanguage(){
+    let lang='ar';try{lang=localStorage.getItem('target-language')||'ar'}catch(_){ }
+    applyLanguage(lang);
+    document.addEventListener('click',(event)=>{
+      const button=event.target.closest('[data-lang-toggle]');
+      if(!button)return;
+      event.preventDefault();event.stopPropagation();
+      applyLanguage(isArabic()?'en':'ar');
+    });
+  }
   function fieldMessage(field){const ar=isArabic();if(field.validity.valueMissing)return ar?'هذا الحقل مطلوب.':'This field is required.';if(field.validity.typeMismatch)return ar?'يرجى إدخال بريد إلكتروني صحيح.':'Enter a valid email address.';if(field.validity.tooShort)return ar?'يرجى إضافة تفاصيل أكثر.':'Please add a little more detail.';if(field.validity.patternMismatch)return ar?'يرجى مراجعة صيغة هذا الحقل.':'Please check this field format.';return ar?'يرجى مراجعة هذا الحقل.':'Please review this field.';}
   function errorNode(field){const id=field.id+'-error';let node=document.getElementById(id);if(!node){node=document.createElement('div');node.id=id;node.className='invalid-feedback';field.insertAdjacentElement('afterend',node);}field.setAttribute('aria-describedby',id);return node;}
   function validateField(field){if(field.type==='checkbox'){const valid=field.checked||!field.required;field.setAttribute('aria-invalid',valid?'false':'true');const wrapper=field.closest('.privacy-check')||field.parentElement;let message=wrapper.querySelector('.invalid-feedback');if(!message){message=document.createElement('div');message.className='invalid-feedback d-block w-100';wrapper.appendChild(message)}message.textContent=valid?'':fieldMessage(field);return valid;}const valid=field.checkValidity();field.classList.toggle('is-invalid',!valid);field.setAttribute('aria-invalid',valid?'false':'true');const node=errorNode(field);node.textContent=valid?'':fieldMessage(field);return valid;}
