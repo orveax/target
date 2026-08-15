@@ -48,5 +48,11 @@
     document.addEventListener('click',(event)=>{if(!item.contains(event.target))close();});
     document.addEventListener('keydown',(event)=>{if(event.key==='Escape')close();});
   }
-  document.addEventListener('DOMContentLoaded',()=>{normalizeFooter();initLanguage();initMegaMenu();initIcons();initForms();initDisabledSocial();setActiveNav();});
+  function initHeaderAndUtilities(){
+    document.querySelectorAll('.site-header .brand-logo,.mobile-brand-logo').forEach((logo)=>{logo.src='/assets/brand/target-logo-horizontal-cream.png';});
+    document.querySelectorAll('.site-header .btn-premium').forEach((cta)=>{const label=cta.querySelector('[data-ar][data-en]');if(label){label.dataset.ar='ناقش فرصة تجارية';label.dataset.en='Discuss a Commercial Opportunity';label.textContent=isArabic()?'ناقش فرصة تجارية':'Discuss a Commercial Opportunity';}});
+    if(!document.querySelector('.site-quick-actions')){document.body.insertAdjacentHTML('beforeend','<div class="site-quick-actions" aria-label="Quick actions"><a class="quick-whatsapp" href="https://wa.me/97400000000" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i><span data-ar="واتساب" data-en="WhatsApp">واتساب</span></a><button class="quick-top" type="button" aria-label="Go to top"><i class="bi bi-arrow-up"></i><span data-ar="أعلى" data-en="Top">أعلى</span></button></div>');document.querySelector('.quick-top')?.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));}
+    document.querySelectorAll('[data-company-profile-download]').forEach((button)=>button.addEventListener('click',(event)=>{event.preventDefault();window.print();}));
+  }
+  document.addEventListener('DOMContentLoaded',()=>{normalizeFooter();initLanguage();initMegaMenu();initHeaderAndUtilities();initIcons();initForms();initDisabledSocial();setActiveNav();});
 })();
