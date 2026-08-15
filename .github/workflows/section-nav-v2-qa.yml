@@ -15,8 +15,12 @@ jobs:
         run: |
           test -f public/assets/target-section-nav-v2.js
           node --check public/assets/target-section-nav-v2.js
-          grep -q 'target-section-nav-v2.js' public/assets/premium-v6.js
+          grep -q 'target-section-nav-v2.js?v=20260816-02' public/assets/premium-v6.js
           grep -q 'target-section-nav--under-header' public/assets/target-section-nav-v2.js
           grep -q 'header.insertAdjacentElement' public/assets/target-section-nav-v2.js
           grep -q 'target-section-nav-track' public/assets/target-section-nav-v2.js
           grep -q 'aria-current' public/assets/target-section-nav-v2.js
+          grep -q 'function updateScrollSpy' public/assets/target-section-nav-v2.js
+          grep -q 'function installScrollSpy' public/assets/target-section-nav-v2.js
+          grep -q "addEventListener('scroll', queueUpdate" public/assets/target-section-nav-v2.js
+          grep -q 'setActiveEntry' public/assets/target-section-nav-v2.js
