@@ -73,3 +73,6 @@
   }
   document.addEventListener('DOMContentLoaded',()=>{initLanguage();normalizeFooter();initMegaMenu();initHeaderAndUtilities();initIcons();initForms();initDisabledSocial();setActiveNav();});
 })();
+
+/* Post-baseline interaction layer loader — JavaScript only; no layout/CSS mutation. */
+import('/assets/target-interactions-v1.js?v=20260816-01').catch((error)=>console.warn('[TARGET interactions] layer unavailable',error));
