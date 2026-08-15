@@ -94,3 +94,13 @@ html[dir='rtl'] .section-head,html[dir='rtl'] .visual-hero .container,html[dir='
 html[dir='ltr'] .section-head,html[dir='ltr'] .visual-hero .container,html[dir='ltr'] .premium-page-hero-content{text-align:left}
 @media(max-width:991.98px){:root{--target-section:clamp(3.75rem,8vw,5.5rem)}.premium-footer-grid{gap:2rem!important}}
 @media(max-width:767px){:root{--target-gutter:1rem;--target-section:3.75rem;--target-section-compact:2.8rem}.container{padding-inline:var(--target-gutter)!important}.section{padding-block:var(--target-section)!important}.section-head{margin-bottom:1.55rem!important}.p-card,.legal-card{padding:1.15rem!important}.site-footer{padding-top:3.25rem!important}.footer-bottom{margin-top:2.25rem!important}.hero-actions{margin-top:1.4rem!important}}
+
+/* HF-05 Image treatment and visual consistency */
+img{max-width:100%;height:auto}.visual-hero,.premium-page-hero{isolation:isolate;background-color:var(--target-forest-900)!important;background-position:center!important}.visual-hero{min-height:clamp(420px,50vw,640px)!important}.premium-page-hero{min-height:clamp(360px,42vw,520px)!important}
+.visual-hero::after,.premium-page-hero::after{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(180deg,rgba(255,255,255,.04),transparent 38%,rgba(3,34,24,.12))}
+.visual-hero>.container,.visual-hero>.container-fluid,.premium-page-hero-content{z-index:2!important}
+.hp-cap-image,.premium-category-media,.company-tile-photo,.company-summary-photo,.product-visual{background-position:center!important;background-size:cover!important}.hp-cap-image,.premium-category-media{background-color:var(--target-cream-200)}.company-tile-photo,.company-summary-photo,.product-visual{background-color:#dbe7df!important}
+.hp-cap-image,.premium-category-media{position:relative;overflow:hidden}.hp-cap-image:after,.premium-category-media:after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,59,41,.03),rgba(7,59,41,.22))}
+.home-v7 .v7-cap-card::before{background-size:cover!important;background-position:center!important;filter:saturate(.85) contrast(1.04)!important}
+.product-visual img,.company-tile img,.company-summary img{width:100%;height:100%;object-fit:cover}.portfolio-brochure{background:var(--target-cream-100)!important;border-color:rgba(12,73,49,.13)!important}
+@media(max-width:767px){.visual-hero{min-height:clamp(500px,85svh,660px)!important;background-position:58% center!important}.premium-page-hero{min-height:340px!important;background-position:56% center!important}.hp-cap-image{height:180px!important}}
