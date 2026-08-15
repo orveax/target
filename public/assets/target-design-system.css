@@ -104,3 +104,19 @@ img{max-width:100%;height:auto}.visual-hero,.premium-page-hero{isolation:isolate
 .home-v7 .v7-cap-card::before{background-size:cover!important;background-position:center!important;filter:saturate(.85) contrast(1.04)!important}
 .product-visual img,.company-tile img,.company-summary img{width:100%;height:100%;object-fit:cover}.portfolio-brochure{background:var(--target-cream-100)!important;border-color:rgba(12,73,49,.13)!important}
 @media(max-width:767px){.visual-hero{min-height:clamp(500px,85svh,660px)!important;background-position:58% center!important}.premium-page-hero{min-height:340px!important;background-position:56% center!important}.hp-cap-image{height:180px!important}}
+
+/* HF-06 Final interaction and accessibility polish */
+:where(a,button,input,select,textarea){-webkit-tap-highlight-color:transparent}
+.btn-premium,.icon-button,.lang-button,.social-mini,.target-mega-menu a,.p-card,.contact-card,.legal-card,.faq-item,.premium-category-grid article,.company-tile{transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease,background-color .2s ease,color .2s ease}
+.btn-premium:active,.icon-button:active,.lang-button:active{transform:translateY(1px) scale(.985)}
+.btn-premium svg,.icon-button svg,.lang-button svg{stroke-width:2!important}
+.icon-tile svg,.icon-tile-dark svg,.hp-cap-icon svg{stroke-width:2!important}
+.p-card,.contact-card,.legal-card,.faq-item{border-radius:16px!important}
+.site-header .nav-link{position:relative}.site-header .nav-link.active:after{content:'';position:absolute;inset-inline:14px;bottom:6px;height:2px;border-radius:2px;background:var(--target-sand-400)}
+.target-mega-menu{overflow:hidden}.target-mega-menu a{position:relative}.target-mega-menu a:before{content:'';position:absolute;inset-block:15px;inset-inline-start:0;width:3px;border-radius:0 4px 4px 0;background:transparent}.target-mega-menu a:hover:before{background:var(--target-sand-400)}
+.site-footer .footer-links a{transition:color .18s ease,transform .18s ease}.site-footer .footer-links a:hover{transform:translateX(-3px)}html[dir='ltr'] .site-footer .footer-links a:hover{transform:translateX(3px)}
+.faq-item summary{transition:background-color .18s ease}.faq-item[open] summary{background:var(--target-cream-100)}
+.quick-whatsapp,.quick-top{transition:transform .2s ease,box-shadow .2s ease}.quick-whatsapp:hover,.quick-top:hover{transform:translateY(-3px);box-shadow:0 15px 32px rgba(4,45,30,.27)}
+@media(hover:hover){.p-card:hover,.contact-card:hover,.legal-card:hover,.premium-category-grid article:hover,.company-tile:hover{transform:translateY(-4px);box-shadow:0 20px 42px rgba(12,73,49,.12)!important}}
+@media(max-width:767px){.btn-premium{min-height:52px!important}.icon-button,.lang-button{min-width:46px!important;min-height:46px!important}.site-header .nav-link.active:after{display:none}.site-footer .footer-links a:hover{transform:none}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
