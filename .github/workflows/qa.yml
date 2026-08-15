@@ -38,6 +38,8 @@ jobs:
           test -f dist/assets/faq-v1.css
           test -f dist/assets/privacy-v1.css
           test -f dist/assets/terms-v1.css
+          test -f dist/assets/visual-hard-audit-v1.css
+          test -f dist/assets/visual-hard-audit-v1.js
           test -f dist/content/target-design-tokens-v1.json
           test -f dist/content/companies.json
       - name: Verify internal company brochure resources
@@ -105,3 +107,15 @@ jobs:
           ! grep -q 'Legal Review Required' dist/terms.html
           ! grep -q 'Set at publication' dist/terms.html
           ! grep -q 'noindex,nofollow' dist/terms.html
+      - name: Verify visual hard audit fixes
+        run: |
+          grep -q 'visual-hard-audit-v1.css' dist/index.html
+          grep -q 'visual-hard-audit-v1.js' dist/index.html
+          grep -q 'visual-hard-audit-v1.css' dist/capabilities.html
+          grep -q 'visual-hard-audit-v1.css' dist/food-portfolio.html
+          grep -q 'visual-hard-audit-v1.css' dist/suppliers.html
+          grep -q 'visual-hard-audit-v1.css' dist/company-profile.html
+          grep -q 'data-lucide=\"candy\"' dist/assets/visual-hard-audit-v1.js
+          grep -q 'work-info-media' dist/assets/visual-hard-audit-v1.js
+          grep -q 'company-logo-slot:not(:has(img))' dist/assets/visual-hard-audit-v1.css
+          grep -q 'cp-next-panel' dist/assets/visual-hard-audit-v1.css
