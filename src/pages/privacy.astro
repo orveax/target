@@ -1,44 +1,152 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
 const toc = [
-  ['scope','النطاق والجهة المسؤولة','Scope & Responsible Entity'],
-  ['collect','المعلومات التي نجمعها','Information We Collect'],
-  ['how','كيف تصلنا المعلومات','How Information Is Collected'],
-  ['use','أغراض الاستخدام','Purposes of Use'],
-  ['sharing','الوصول والمشاركة','Access & Sharing'],
-  ['retention','الاحتفاظ بالبيانات','Data Retention'],
-  ['security','أمن المعلومات','Information Security'],
-  ['rights','حقوق الأفراد','Individual Rights'],
-  ['cookies','ملفات الارتباط والتحليلات','Cookies & Analytics'],
-  ['contact','طلبات الخصوصية','Privacy Requests'],
+  ['scope','01','النطاق والجهة المسؤولة','Scope & Responsible Entity'],
+  ['collect','02','البيانات التي قد نجمعها','Information We May Collect'],
+  ['how','03','كيفية جمع البيانات','How Information Is Collected'],
+  ['use','04','أغراض الاستخدام','Purposes of Use'],
+  ['consent','05','الموافقة والغرض المشروع','Consent & Lawful Purpose'],
+  ['sharing','06','الوصول والمشاركة ومقدمو الخدمات','Access, Sharing & Service Providers'],
+  ['retention','07','الاحتفاظ بالبيانات','Data Retention'],
+  ['security','08','أمن المعلومات','Information Security'],
+  ['rights','09','حقوق الأفراد والطلبات','Individual Rights & Requests'],
+  ['cookies','10','ملفات الارتباط والتحليلات والتحديثات','Cookies, Analytics & Policy Updates'],
 ];
 ---
-<BaseLayout active="privacy" bodyClass="page-privacy" title="سياسة الخصوصية | TARGET" description="سياسة الخصوصية لموقع تارقت لتجارة الأغذية." robots="noindex,nofollow">
-  <section class="target-hero"><div class="container target-hero__grid"><div class="target-hero__copy"><span class="target-kicker"><i data-lucide="shield-check"></i><span data-ar="الخصوصية والبيانات" data-en="Privacy & Data">الخصوصية والبيانات</span></span><h1 data-ar="سياسة الخصوصية" data-en="Privacy Policy">سياسة الخصوصية</h1><p data-ar="توضح هذه السياسة بصورة عملية نوع المعلومات التي قد ترسلها عبر موقع تارقت، وكيف نستخدمها لمعالجة الاستفسارات وطلبات مراجعة المنتجات، وحدود التعامل معها." data-en="This policy explains the information you may submit through the TARGET website, how it is used to handle enquiries and product-review requests, and the boundaries around that processing.">توضح هذه السياسة بصورة عملية نوع المعلومات التي قد ترسلها عبر موقع تارقت، وكيف نستخدمها لمعالجة الاستفسارات وطلبات مراجعة المنتجات، وحدود التعامل معها.</p></div><div class="legal-hero-visual"><div class="legal-visual-stack"><span class="target-icon-tile"><i data-lucide="file-lock"></i></span><strong data-ar="بيانات واضحة · استخدام محدد · حماية مناسبة" data-en="Clear Data · Defined Use · Appropriate Protection">بيانات واضحة · استخدام محدد · حماية مناسبة</strong></div></div></div></section>
+<BaseLayout active="privacy" bodyClass="page-privacy premium-v8-page" title="سياسة الخصوصية | TARGET For Food Trading" description="توضح سياسة الخصوصية كيفية تعامل تارقت لتجارة الأغذية مع البيانات الشخصية المقدمة عبر الموقع وقنوات التواصل الرسمية.">
+  <section class="privacy-hero">
+    <div class="container privacy-hero-grid">
+      <div class="privacy-hero-copy">
+        <span class="privacy-eyebrow"><i data-lucide="shield-check"></i><span data-ar="الخصوصية والبيانات" data-en="Privacy & Data">الخصوصية والبيانات</span></span>
+        <h1 data-ar="سياسة الخصوصية" data-en="Privacy Policy">سياسة الخصوصية</h1>
+        <p data-ar="توضح هذه السياسة كيفية تعامل تارقت لتجارة الأغذية مع البيانات الشخصية التي يقدمها زوار الموقع أو يرسلونها عبر قنوات التواصل المعتمدة." data-en="This Policy explains how Target For Food Trading handles personal information submitted through the website or approved contact channels.">توضح هذه السياسة كيفية تعامل تارقت لتجارة الأغذية مع البيانات الشخصية التي يقدمها زوار الموقع أو يرسلونها عبر قنوات التواصل المعتمدة.</p>
+        <div class="privacy-hero-utility">
+          <a href="contact.html"><i data-lucide="mail"></i><span data-ar="اتصل بنا" data-en="Contact Us">اتصل بنا</span></a>
+        </div>
+      </div>
 
-  <section class="target-section target-section--white"><div class="container legal-layout"><aside class="legal-toc"><strong data-ar="في هذه الصفحة" data-en="On This Page">في هذه الصفحة</strong><nav>{toc.map(([id,ar,en]) => <a href={`#${id}`} data-ar={ar} data-en={en}>{ar}</a>)}</nav></aside><article class="legal-body">
-    <div class="legal-meta"><span data-ar="الموقع: targetft.com" data-en="Website: targetft.com">الموقع: targetft.com</span><span data-ar="الجهة: Target For Food Trading" data-en="Entity: Target For Food Trading">الجهة: Target For Food Trading</span></div>
+      <div class="privacy-visual" aria-label="Privacy information graphic">
+        <article class="privacy-document">
+          <div class="privacy-document-brand">
+            <img src="/assets/brand/target-logo-horizontal-forest.svg" alt="TARGET — تارقت لتجارة الأغذية" width="420" height="130" />
+            <span class="privacy-document-badge"><i data-lucide="file-lock"></i></span>
+          </div>
+          <div class="privacy-document-copy">
+            <span>PRIVACY & DATA</span>
+            <strong data-ar="بيانات واضحة. استخدام محدد. حماية مناسبة." data-en="Clear data. Defined use. Appropriate protection.">بيانات واضحة. استخدام محدد. حماية مناسبة.</strong>
+            <p data-ar="سياسة موجهة لبيانات التواصل ومراجعة المنتجات والقنوات الرسمية المرتبطة بالموقع." data-en="A policy focused on enquiry data, product-review submissions and the website's official communication channels.">سياسة موجهة لبيانات التواصل ومراجعة المنتجات والقنوات الرسمية المرتبطة بالموقع.</p>
+          </div>
+          <div class="privacy-document-icons" aria-hidden="true">
+            <span><i data-lucide="shield-check"></i></span>
+            <span><i data-lucide="user-round-check"></i></span>
+            <span><i data-lucide="file-lock-2"></i></span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
 
-    <section id="scope"><h2 data-ar="1. النطاق والجهة المسؤولة" data-en="1. Scope & Responsible Entity">1. النطاق والجهة المسؤولة</h2><p data-ar="تنطبق هذه السياسة على المعلومات التي يتم تقديمها من خلال موقع تارقت لتجارة الأغذية ونماذج التواصل ومراجعة المنتجات المرتبطة به. تشير كلمة «تارقت» في هذه الصفحة إلى Target For Food Trading في قطر." data-en="This policy applies to information submitted through the Target For Food Trading website and its related contact and product-review forms. 'TARGET' on this page refers to Target For Food Trading in Qatar.">تنطبق هذه السياسة على المعلومات التي يتم تقديمها من خلال موقع تارقت لتجارة الأغذية ونماذج التواصل ومراجعة المنتجات المرتبطة به. تشير كلمة «تارقت» في هذه الصفحة إلى Target For Food Trading في قطر.</p></section>
+  <section class="privacy-meta-strip">
+    <div class="container privacy-meta-row">
+      <div class="privacy-meta-item"><i data-lucide="globe-2"></i><span data-ar="الموقع" data-en="Website">الموقع</span><strong>targetft.com</strong></div>
+      <div class="privacy-meta-item"><i data-lucide="mail"></i><span data-ar="طلبات الخصوصية" data-en="Privacy Requests">طلبات الخصوصية</span><strong>info@targetft.com</strong></div>
+    </div>
+  </section>
 
-    <section id="collect"><h2 data-ar="2. المعلومات التي نجمعها" data-en="2. Information We Collect">2. المعلومات التي نجمعها</h2><p data-ar="تعتمد المعلومات على المسار الذي تستخدمه، وقد تشمل:" data-en="The information depends on the route you use and may include:">تعتمد المعلومات على المسار الذي تستخدمه، وقد تشمل:</p><ul><li data-ar="في نموذج الاتصال: الاسم، البريد الإلكتروني، الهاتف أو WhatsApp إذا اخترت تقديمه، نوع الاستفسار، الموضوع والرسالة." data-en="Contact form: name, email, phone or WhatsApp if you choose to provide it, enquiry type, subject and message.">في نموذج الاتصال: الاسم، البريد الإلكتروني، الهاتف أو WhatsApp إذا اخترت تقديمه، نوع الاستفسار، الموضوع والرسالة.</li><li data-ar="في نموذج الموردين: الاسم، الشركة أو العلامة، الدولة، البريد التجاري، الهاتف أو WhatsApp إذا تم تقديمه، المنتج أو الفئة، موضوع النقاش وملخص المنتج والفرصة." data-en="Supplier form: name, company or brand, country, business email, phone or WhatsApp if provided, product or category, discussion type, and product and opportunity summary.">في نموذج الموردين: الاسم، الشركة أو العلامة، الدولة، البريد التجاري، الهاتف أو WhatsApp إذا تم تقديمه، المنتج أو الفئة، موضوع النقاش وملخص المنتج والفرصة.</li></ul><p data-ar="لا يطلب الموقع حاليًا رفع ملفات ضمن هذه النماذج، ولا نفترض جمع فئات بيانات أخرى غير موثقة في التنفيذ الفعلي." data-en="The current forms do not request file uploads, and we do not assume collection of other data categories that are not supported by the actual implementation.">لا يطلب الموقع حاليًا رفع ملفات ضمن هذه النماذج، ولا نفترض جمع فئات بيانات أخرى غير موثقة في التنفيذ الفعلي.</p></section>
+  <section class="privacy-main">
+    <div class="container privacy-layout">
+      <aside class="privacy-toc" aria-label="Privacy policy sections">
+        <div class="privacy-toc-title"><i data-lucide="list"></i><span data-ar="في هذه الصفحة" data-en="On This Page">في هذه الصفحة</span></div>
+        <nav>
+          {toc.map(([id,num,ar,en]) => <a href={`#${id}`} data-num={num} data-ar={ar} data-en={en}>{ar}</a>)}
+        </nav>
+      </aside>
 
-    <section id="how"><h2 data-ar="3. كيف تصلنا المعلومات" data-en="3. How Information Is Collected">3. كيف تصلنا المعلومات</h2><p data-ar="تصل المعلومات عندما ترسلها طوعًا من خلال النماذج أو تراسل عناوين البريد المنشورة على الموقع. قد تُنتج أنظمة الاستضافة والأمن سجلات تقنية ضرورية لتشغيل الموقع وحمايته وفق إعدادات مزود الخدمة الفعلي." data-en="Information is received when you voluntarily submit a form or contact the published email addresses. Hosting and security systems may generate technical logs necessary to operate and protect the website according to the actual service-provider configuration.">تصل المعلومات عندما ترسلها طوعًا من خلال النماذج أو تراسل عناوين البريد المنشورة على الموقع. قد تُنتج أنظمة الاستضافة والأمن سجلات تقنية ضرورية لتشغيل الموقع وحمايته وفق إعدادات مزود الخدمة الفعلي.</p></section>
+      <article class="privacy-reading">
+        <header class="privacy-reading-intro">
+          <span class="privacy-kicker" data-ar="سياسة الموقع" data-en="Website Policy">سياسة الموقع</span>
+          <h2 data-ar="كيف نتعامل مع البيانات التي ترسلها إلينا." data-en="How we handle the information you send to us.">كيف نتعامل مع البيانات التي ترسلها إلينا.</h2>
+          <p data-ar="تطبق هذه السياسة على المعلومات التي تُقدَّم من خلال موقع تارقت أو قنوات التواصل الرسمية المرتبطة به. لا تضيف هذه الصفحة فئات بيانات أو أدوات تتبع غير مستخدمة فعليًا." data-en="This Policy applies to information submitted through the TARGET website or its related official communication channels. It does not add data categories or tracking tools that are not actually in use.">تطبق هذه السياسة على المعلومات التي تُقدَّم من خلال موقع تارقت أو قنوات التواصل الرسمية المرتبطة به. لا تضيف هذه الصفحة فئات بيانات أو أدوات تتبع غير مستخدمة فعليًا.</p>
+        </header>
 
-    <section id="use"><h2 data-ar="4. أغراض الاستخدام" data-en="4. Purposes of Use">4. أغراض الاستخدام</h2><p data-ar="نستخدم المعلومات المقدمة لفهم الطلب، توجيه الاستفسار للقناة المناسبة، الرد أو المتابعة عند الحاجة، مراجعة المنتجات والفرص التجارية، وحماية وتشغيل الموقع. تقديم نموذج مورد لا يعني قبول المنتج أو إنشاء التزام تجاري." data-en="Submitted information is used to understand the request, route an enquiry to the appropriate channel, respond or follow up where needed, review products and commercial opportunities, and operate and protect the website. A supplier submission does not mean product acceptance or create a commercial commitment.">نستخدم المعلومات المقدمة لفهم الطلب، توجيه الاستفسار للقناة المناسبة، الرد أو المتابعة عند الحاجة، مراجعة المنتجات والفرص التجارية، وحماية وتشغيل الموقع. تقديم نموذج مورد لا يعني قبول المنتج أو إنشاء التزام تجاري.</p></section>
+        <section class="privacy-section" id="scope">
+          <div class="privacy-section-head"><span class="privacy-section-num">01</span><h2 data-ar="النطاق والجهة المسؤولة" data-en="Scope & Responsible Entity">النطاق والجهة المسؤولة</h2></div>
+          <p data-ar="توضح هذه السياسة كيفية تعامل Target For Food Trading / تارقت لتجارة الأغذية مع البيانات الشخصية التي يتم تقديمها من خلال موقعها الإلكتروني أو قنوات التواصل الرسمية المرتبطة به." data-en="This Policy explains how Target For Food Trading handles personal information submitted through its website or related official contact channels.">توضح هذه السياسة كيفية تعامل Target For Food Trading / تارقت لتجارة الأغذية مع البيانات الشخصية التي يتم تقديمها من خلال موقعها الإلكتروني أو قنوات التواصل الرسمية المرتبطة به.</p>
+        </section>
 
-    <section id="sharing"><h2 data-ar="5. الوصول والمشاركة ومقدمو الخدمة" data-en="5. Access, Sharing & Service Providers">5. الوصول والمشاركة ومقدمو الخدمة</h2><p data-ar="يقتصر الوصول إلى المعلومات على من يحتاجها لمعالجة الطلب أو تشغيل الأنظمة ذات الصلة. وقد تعتمد معالجة الموقع أو البريد أو النماذج على مزودي خدمة تقنيين يتم تحديدهم فعليًا عند التكامل والإطلاق. لا يحق للمطور إضافة CRM أو أدوات تتبع أو معالج بيانات جديد دون تحديث سجل الخصوصية والسياسة عند الحاجة." data-en="Access is limited to those who need the information to handle the request or operate the relevant systems. Website, email or form processing may rely on technical service providers that are confirmed during integration and launch. A developer must not add a CRM, tracking tool or new processor without updating the privacy record and policy where required.">يقتصر الوصول إلى المعلومات على من يحتاجها لمعالجة الطلب أو تشغيل الأنظمة ذات الصلة. وقد تعتمد معالجة الموقع أو البريد أو النماذج على مزودي خدمة تقنيين يتم تحديدهم فعليًا عند التكامل والإطلاق. لا يحق للمطور إضافة CRM أو أدوات تتبع أو معالج بيانات جديد دون تحديث سجل الخصوصية والسياسة عند الحاجة.</p></section>
+        <section class="privacy-section" id="collect">
+          <div class="privacy-section-head"><span class="privacy-section-num">02</span><h2 data-ar="البيانات التي قد نجمعها" data-en="Information We May Collect">البيانات التي قد نجمعها</h2></div>
+          <p data-ar="تعتمد البيانات التي نجمعها على طريقة تواصلك معنا. قد تشمل بيانات نموذج الاتصال العام: الاسم، البريد الإلكتروني، رقم الهاتف أو WhatsApp عند تقديمه، نوع الاستفسار، الموضوع ومحتوى الرسالة." data-en="The information we collect depends on how you contact us. General Contact form data may include name, email, phone or WhatsApp if provided, enquiry type, subject and message.">تعتمد البيانات التي نجمعها على طريقة تواصلك معنا. قد تشمل بيانات نموذج الاتصال العام: الاسم، البريد الإلكتروني، رقم الهاتف أو WhatsApp عند تقديمه، نوع الاستفسار، الموضوع ومحتوى الرسالة.</p>
+          <p data-ar="وقد تشمل بيانات صفحة الموردين: الاسم، الشركة أو العلامة، الدولة، البريد التجاري، الهاتف أو WhatsApp عند تقديمه، المنتج أو الفئة، موضوع النقاش وملخص المنتج أو الفرصة. كما قد نتلقى أي معلومات تختار إرسالها مباشرة عبر قنوات البريد الإلكتروني المعتمدة." data-en="Supplier-page data may include name, company or brand, country, business email, phone or WhatsApp if provided, product or category, discussion topic, and a product or opportunity summary. We may also receive information you choose to send directly through approved email channels.">وقد تشمل بيانات صفحة الموردين: الاسم، الشركة أو العلامة، الدولة، البريد التجاري، الهاتف أو WhatsApp عند تقديمه، المنتج أو الفئة، موضوع النقاش وملخص المنتج أو الفرصة. كما قد نتلقى أي معلومات تختار إرسالها مباشرة عبر قنوات البريد الإلكتروني المعتمدة.</p>
+        </section>
 
-    <section id="retention"><h2 data-ar="6. الاحتفاظ بالبيانات" data-en="6. Data Retention">6. الاحتفاظ بالبيانات</h2><p data-ar="لا نحدد في هذه النسخة مدة رقمية غير موثقة للاحتفاظ. يجب أن تتوافق الممارسة الفعلية مع الغرض من المعالجة والمتطلبات النظامية والتشغيلية ذات الصلة، ويجب توثيق أي مدة محددة قبل نشرها كالتزام على الموقع." data-en="This version does not invent an unverified numeric retention period. Actual practice should reflect the processing purpose and relevant legal and operational requirements, and any specific period must be documented before it is published as a website commitment.">لا نحدد في هذه النسخة مدة رقمية غير موثقة للاحتفاظ. يجب أن تتوافق الممارسة الفعلية مع الغرض من المعالجة والمتطلبات النظامية والتشغيلية ذات الصلة، ويجب توثيق أي مدة محددة قبل نشرها كالتزام على الموقع.</p></section>
+        <section class="privacy-section" id="how">
+          <div class="privacy-section-head"><span class="privacy-section-num">03</span><h2 data-ar="كيفية جمع البيانات" data-en="How Information Is Collected">كيفية جمع البيانات</h2></div>
+          <p data-ar="تُجمع البيانات عندما ترسل نموذجًا على الموقع أو تتواصل مع تارقت من خلال قناة رسمية. وتعكس هذه السياسة طريقة الإرسال والمعالجة المستخدمة فعليًا في النسخة المنشورة من الموقع." data-en="Information is collected when you submit a website form or contact TARGET through an official channel. This Policy reflects the actual submission and processing methods used by the published website.">تُجمع البيانات عندما ترسل نموذجًا على الموقع أو تتواصل مع تارقت من خلال قناة رسمية. وتعكس هذه السياسة طريقة الإرسال والمعالجة المستخدمة فعليًا في النسخة المنشورة من الموقع.</p>
+        </section>
 
-    <section id="security"><h2 data-ar="7. أمن المعلومات" data-en="7. Information Security">7. أمن المعلومات</h2><p data-ar="تسعى تارقت إلى تطبيق ضوابط تقنية وتنظيمية مناسبة لطبيعة المعلومات والأنظمة المستخدمة. لا يمكن ضمان انعدام المخاطر بالكامل، ولذلك تتم مراجعة ضوابط الاستضافة والنماذج والوصول ضمن بوابة الإطلاق الفني." data-en="TARGET aims to apply technical and organizational safeguards appropriate to the information and systems used. No environment can be represented as risk-free, so hosting, form and access controls are reviewed as part of the technical launch gate.">تسعى تارقت إلى تطبيق ضوابط تقنية وتنظيمية مناسبة لطبيعة المعلومات والأنظمة المستخدمة. لا يمكن ضمان انعدام المخاطر بالكامل، ولذلك تتم مراجعة ضوابط الاستضافة والنماذج والوصول ضمن بوابة الإطلاق الفني.</p></section>
+        <section class="privacy-section" id="use">
+          <div class="privacy-section-head"><span class="privacy-section-num">04</span><h2 data-ar="أغراض الاستخدام" data-en="Purposes of Use">أغراض الاستخدام</h2></div>
+          <p data-ar="نستخدم البيانات لفهم الاستفسار أو الطلب، والرد على المراسلات، ومراجعة المنتجات أو الفرص المقدمة، وتوجيه الطلب إلى القسم المناسب، وإدارة المتابعة التجارية أو التشغيلية ذات الصلة، وحماية الموقع وقنوات التواصل عند الحاجة." data-en="We use information to understand inquiries or requests, respond to communications, review submitted products or opportunities, route requests to the appropriate function, manage relevant commercial or operational follow-up, and protect the website and communication channels where necessary.">نستخدم البيانات لفهم الاستفسار أو الطلب، والرد على المراسلات، ومراجعة المنتجات أو الفرص المقدمة، وتوجيه الطلب إلى القسم المناسب، وإدارة المتابعة التجارية أو التشغيلية ذات الصلة، وحماية الموقع وقنوات التواصل عند الحاجة.</p>
+        </section>
 
-    <section id="rights"><h2 data-ar="8. حقوق الأفراد" data-en="8. Individual Rights">8. حقوق الأفراد</h2><p data-ar="وفق القواعد القانونية المنطبقة، قد تكون لك حقوق تتعلق بالوصول إلى بياناتك أو مراجعتها أو تصحيحها أو الاعتراض على بعض أوجه المعالجة أو طلب حذفها أو سحب موافقة عندما يكون ذلك قابلًا للتطبيق. تتم مراجعة الطلب وفق نوع البيانات والأساس القانوني والالتزامات المنطبقة." data-en="Subject to applicable law, you may have rights relating to access, review or correction of your data, objection to certain processing, deletion requests, or withdrawal of consent where applicable. Requests are assessed according to the data, legal basis and applicable obligations.">وفق القواعد القانونية المنطبقة، قد تكون لك حقوق تتعلق بالوصول إلى بياناتك أو مراجعتها أو تصحيحها أو الاعتراض على بعض أوجه المعالجة أو طلب حذفها أو سحب موافقة عندما يكون ذلك قابلًا للتطبيق. تتم مراجعة الطلب وفق نوع البيانات والأساس القانوني والالتزامات المنطبقة.</p></section>
+        <section class="privacy-section" id="consent">
+          <div class="privacy-section-head"><span class="privacy-section-num">05</span><h2 data-ar="الموافقة والغرض المشروع" data-en="Consent & Lawful Purpose">الموافقة والغرض المشروع</h2></div>
+          <p data-ar="تتم معالجة البيانات للأغراض التي جُمعت من أجلها وبما يتوافق مع المتطلبات القانونية المطبقة. عندما تكون الموافقة مطلوبة، يتم الحصول عليها بصورة واضحة، ويمكن التعامل مع طلبات سحبها وفق الحقوق والمتطلبات المطبقة." data-en="Personal information is processed for the purposes for which it was collected and in accordance with applicable legal requirements. Where consent is required, it is obtained clearly, and withdrawal requests are handled in accordance with applicable rights and requirements.">تتم معالجة البيانات للأغراض التي جُمعت من أجلها وبما يتوافق مع المتطلبات القانونية المطبقة. عندما تكون الموافقة مطلوبة، يتم الحصول عليها بصورة واضحة، ويمكن التعامل مع طلبات سحبها وفق الحقوق والمتطلبات المطبقة.</p>
+        </section>
 
-    <section id="cookies"><h2 data-ar="9. ملفات الارتباط والتحليلات والتغييرات التقنية" data-en="9. Cookies, Analytics & Technical Changes">9. ملفات الارتباط والتحليلات والتغييرات التقنية</h2><p data-ar="لا تسجل هذه السياسة أداة تحليلات أو إعلانات أو تتبع تسويقي على أنها مفعلة ما لم تكن موجودة فعلًا في نسخة الإنتاج. إضافة Analytics أو Pixel أو CRM أو Chat أو رفع ملفات أو معالج جديد تعتبر تغييرًا في مسار البيانات وتتطلب مراجعة الخصوصية قبل التفعيل." data-en="This policy does not state that analytics, advertising or marketing tracking is active unless it is actually present in production. Adding analytics, a pixel, CRM, chat, file uploads or a new processor is a data-flow change and requires privacy review before activation.">لا تسجل هذه السياسة أداة تحليلات أو إعلانات أو تتبع تسويقي على أنها مفعلة ما لم تكن موجودة فعلًا في نسخة الإنتاج. إضافة Analytics أو Pixel أو CRM أو Chat أو رفع ملفات أو معالج جديد تعتبر تغييرًا في مسار البيانات وتتطلب مراجعة الخصوصية قبل التفعيل.</p></section>
+        <section class="privacy-section" id="sharing">
+          <div class="privacy-section-head"><span class="privacy-section-num">06</span><h2 data-ar="الوصول والمشاركة ومقدمو الخدمات" data-en="Access, Sharing & Service Providers">الوصول والمشاركة ومقدمو الخدمات</h2></div>
+          <p data-ar="يقتصر الوصول إلى البيانات على الأشخاص والجهات التي تحتاج إليها لمعالجة الاستفسار أو تشغيل الموقع والخدمات المرتبطة به. وقد تُستخدم خدمات تقنية لازمة لتشغيل الموقع أو البريد أو معالجة النماذج. ويتم تحديث السياسة عند اعتماد مزود خدمة أو معالج بيانات جوهري يؤثر على طريقة معالجة البيانات." data-en="Access to information is limited to people and parties that need it to handle an inquiry or operate the website and related services. Technical services may be used for website, email or form operations. The Policy is updated when a material service provider or data processor changes how information is processed.">يقتصر الوصول إلى البيانات على الأشخاص والجهات التي تحتاج إليها لمعالجة الاستفسار أو تشغيل الموقع والخدمات المرتبطة به. وقد تُستخدم خدمات تقنية لازمة لتشغيل الموقع أو البريد أو معالجة النماذج. ويتم تحديث السياسة عند اعتماد مزود خدمة أو معالج بيانات جوهري يؤثر على طريقة معالجة البيانات.</p>
+        </section>
 
-    <section id="contact"><div class="legal-contact-panel"><h2 data-ar="10. طلبات الخصوصية" data-en="10. Privacy Requests">10. طلبات الخصوصية</h2><p data-ar="لأي سؤال أو طلب متعلق بالبيانات المقدمة عبر الموقع، استخدم البريد العام المعتمد واكتب بوضوح أن الطلب متعلق بالخصوصية." data-en="For a question or request related to information submitted through the website, use the approved general email and clearly state that the request concerns privacy.">لأي سؤال أو طلب متعلق بالبيانات المقدمة عبر الموقع، استخدم البريد العام المعتمد واكتب بوضوح أن الطلب متعلق بالخصوصية.</p><a href="mailto:info@targetft.com">info@targetft.com</a></div></section>
-  </article></div></section>
+        <section class="privacy-section" id="retention">
+          <div class="privacy-section-head"><span class="privacy-section-num">07</span><h2 data-ar="الاحتفاظ بالبيانات" data-en="Data Retention">الاحتفاظ بالبيانات</h2></div>
+          <p data-ar="تحتفظ تارقت بالبيانات فقط للمدة اللازمة للغرض الذي جُمعت من أجله، وللمتابعة التجارية أو التشغيلية ذات الصلة، وأي متطلبات قانونية مطبقة. وعندما لا يعود الاحتفاظ بالبيانات ضروريًا، يتم التعامل معها أو حذفها وفق الممارسة المعتمدة والمتطلبات المطبقة." data-en="TARGET retains information only for as long as necessary for the purpose for which it was collected, related commercial or operational follow-up, and applicable legal requirements. When retention is no longer necessary, the information is handled or deleted in accordance with approved practice and applicable requirements.">تحتفظ تارقت بالبيانات فقط للمدة اللازمة للغرض الذي جُمعت من أجله، وللمتابعة التجارية أو التشغيلية ذات الصلة، وأي متطلبات قانونية مطبقة. وعندما لا يعود الاحتفاظ بالبيانات ضروريًا، يتم التعامل معها أو حذفها وفق الممارسة المعتمدة والمتطلبات المطبقة.</p>
+        </section>
 
-  <section class="target-section target-section--subtle"><div class="container d-flex flex-wrap gap-3"><a href="terms.html" class="btn-premium btn-light-premium"><i data-lucide="scroll-text"></i><span data-ar="الشروط والأحكام" data-en="Terms & Conditions">الشروط والأحكام</span></a><a href="contact.html" class="btn-premium btn-light-premium"><i data-lucide="mail"></i><span data-ar="الاتصال بنا" data-en="Contact Us">الاتصال بنا</span></a></div></section>
+        <section class="privacy-section" id="security">
+          <div class="privacy-section-head"><span class="privacy-section-num">08</span><h2 data-ar="أمن المعلومات" data-en="Information Security">أمن المعلومات</h2></div>
+          <p data-ar="تتخذ تارقت تدابير تنظيمية وتقنية مناسبة لحماية البيانات من الوصول أو الاستخدام أو التعديل أو الإفصاح غير المصرح به، بما يتناسب مع طبيعة البيانات والأدوات المستخدمة فعليًا." data-en="TARGET applies appropriate organizational and technical measures to protect information against unauthorized access, use, alteration or disclosure, taking into account the nature of the information and the tools actually used.">تتخذ تارقت تدابير تنظيمية وتقنية مناسبة لحماية البيانات من الوصول أو الاستخدام أو التعديل أو الإفصاح غير المصرح به، بما يتناسب مع طبيعة البيانات والأدوات المستخدمة فعليًا.</p>
+        </section>
+
+        <section class="privacy-section" id="rights">
+          <div class="privacy-section-head"><span class="privacy-section-num">09</span><h2 data-ar="حقوق الأفراد والطلبات" data-en="Individual Rights & Requests">حقوق الأفراد والطلبات</h2></div>
+          <p data-ar="وفق المتطلبات القانونية المطبقة، يمكن للأفراد تقديم طلبات تتعلق ببياناتهم، بما في ذلك طلبات الوصول أو المراجعة أو التصحيح أو الاعتراض أو سحب الموافقة أو الحذف حيثما تنطبق هذه الحقوق. يمكن إرسال طلبات الخصوصية إلى info@targetft.com." data-en="Subject to applicable legal requirements, individuals may submit requests regarding their personal information, including access or review, correction, objection, withdrawal of consent, or deletion where those rights apply. Privacy requests may be sent to info@targetft.com.">وفق المتطلبات القانونية المطبقة، يمكن للأفراد تقديم طلبات تتعلق ببياناتهم، بما في ذلك طلبات الوصول أو المراجعة أو التصحيح أو الاعتراض أو سحب الموافقة أو الحذف حيثما تنطبق هذه الحقوق. يمكن إرسال طلبات الخصوصية إلى <a href="mailto:info@targetft.com">info@targetft.com</a>.</p>
+        </section>
+
+        <section class="privacy-section" id="cookies">
+          <div class="privacy-section-head"><span class="privacy-section-num">10</span><h2 data-ar="ملفات الارتباط والتحليلات والتحديثات" data-en="Cookies, Analytics & Policy Updates">ملفات الارتباط والتحليلات والتحديثات</h2></div>
+          <p data-ar="تصف النسخة المنشورة من هذه السياسة ملفات الارتباط وأدوات التحليلات المستخدمة فعليًا فقط. لا يتم افتراض وجود أدوات تحليل أو تسويق غير موثقة في الموقع. وقد يتم تحديث هذه السياسة عند تغير الموقع أو الأدوات أو الممارسات أو المتطلبات ذات الصلة." data-en="The published Policy describes only the cookies and analytics tools actually in use. It does not assume analytics or marketing tools that are not documented on the website. This Policy may be updated when the website, tools, practices or related requirements change.">تصف النسخة المنشورة من هذه السياسة ملفات الارتباط وأدوات التحليلات المستخدمة فعليًا فقط. لا يتم افتراض وجود أدوات تحليل أو تسويق غير موثقة في الموقع. وقد يتم تحديث هذه السياسة عند تغير الموقع أو الأدوات أو الممارسات أو المتطلبات ذات الصلة.</p>
+        </section>
+      </article>
+    </div>
+  </section>
+
+  <section class="privacy-request-wrap">
+    <div class="container">
+      <div class="privacy-request">
+        <div>
+          <span class="privacy-kicker" data-ar="طلبات الخصوصية" data-en="Privacy Requests">طلبات الخصوصية</span>
+          <h2 data-ar="لديك طلب متعلق ببياناتك؟" data-en="Have a request about your personal information?">لديك طلب متعلق ببياناتك؟</h2>
+          <p data-ar="يمكنك التواصل معنا بخصوص طلبات الخصوصية من خلال البريد المعتمد أدناه." data-en="You can contact us regarding privacy requests using the approved email below.">يمكنك التواصل معنا بخصوص طلبات الخصوصية من خلال البريد المعتمد أدناه.</p>
+        </div>
+        <a class="privacy-request-action" href="mailto:info@targetft.com"><i data-lucide="mail"></i><span>info@targetft.com</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="privacy-related">
+    <div class="container privacy-related-row">
+      <div class="privacy-related-copy">
+        <strong data-ar="روابط قانونية ومساندة" data-en="Legal & Support Links">روابط قانونية ومساندة</strong>
+        <span data-ar="راجع الشروط أو تواصل معنا إذا كان لديك استفسار عام." data-en="Review the Terms or contact us if you have a general enquiry.">راجع الشروط أو تواصل معنا إذا كان لديك استفسار عام.</span>
+      </div>
+      <div class="privacy-related-links">
+        <a href="terms.html"><i data-lucide="scroll-text"></i><span data-ar="الشروط والأحكام" data-en="Terms & Conditions">الشروط والأحكام</span></a>
+        <a href="contact.html"><i data-lucide="mail"></i><span data-ar="اتصل بنا" data-en="Contact Us">اتصل بنا</span></a>
+      </div>
+    </div>
+  </section>
 </BaseLayout>
