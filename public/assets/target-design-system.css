@@ -275,3 +275,87 @@ html[dir='ltr'] .route-node,html[dir='ltr'] .journey-step,html[dir='ltr'] .cta-b
   .hp-route{padding:23px 20px!important;border-radius:22px!important}.hp-route-label{margin-bottom:17px!important;font-size:.8rem!important}.hp-route-step{gap:13px!important}.hp-route-step>span{width:54px!important;height:54px!important;flex-basis:54px!important;border-radius:16px!important}.hp-route-step strong{font-size:1rem!important}.hp-route-step small{font-size:.79rem!important;line-height:1.5!important}.hp-route-line{height:18px!important;margin-inline-start:26px!important}
   .premium-category-grid{overflow:visible!important;display:grid!important;grid-template-columns:1fr!important;padding:0!important}.premium-category-grid article{min-width:0!important;max-width:none!important;display:grid!important;grid-template-columns:112px minmax(0,1fr)!important;align-items:stretch!important;overflow:hidden!important;border-radius:19px!important}.premium-category-media{height:100%!important;min-height:128px!important}.premium-category-grid article>div{min-height:128px!important;padding:17px!important;grid-template-columns:38px minmax(0,1fr)!important;gap:11px!important}.premium-category-grid article>div>i{width:29px!important;height:29px!important}.premium-category-grid article strong{font-size:1rem!important}.premium-category-grid article:last-child{grid-column:auto!important}
 }
+
+
+/* T01–T03 — Approved Brand Token Lock (Notion + M1 Brand Sheet) */
+:root{
+  /* Canonical TARGET brand tokens — do not substitute */
+  --target-forest-green:#0C4931;
+  --target-charcoal:#262626;
+  --target-warm-sand:#C09552;
+  --target-cream:#F4EDE4;
+
+  /* Semantic application layer */
+  --target-color-primary:var(--target-forest-green);
+  --target-color-text:var(--target-charcoal);
+  --target-color-accent:var(--target-warm-sand);
+  --target-color-background:var(--target-cream);
+  --target-bg-page:var(--target-cream);
+  --target-bg-surface:#fff;
+  --target-bg-subtle:#F8F4ED;
+  --target-text-primary:var(--target-charcoal);
+  --target-text-secondary:#667269;
+  --target-text-inverse:#fff;
+  --target-border-default:rgba(12,73,49,.14);
+  --target-border-strong:rgba(12,73,49,.28);
+  --target-action-primary:var(--target-forest-green);
+  --target-action-primary-hover:#1E5B44;
+  --target-action-primary-active:#0C4931;
+  --target-accent:var(--target-warm-sand);
+  --target-focus-ring:rgba(192,149,82,.54);
+
+  /* Compatibility aliases for legacy components */
+  --target-forest-950:var(--target-forest-green);
+  --target-forest-900:var(--target-forest-green);
+  --target-forest-800:var(--target-forest-green);
+  --target-forest-700:#1E5B44;
+  --target-cream-50:var(--target-cream);
+  --target-cream-100:#F8F4ED;
+  --target-cream-200:#EDE3D5;
+  --target-sand-400:var(--target-warm-sand);
+  --target-sand-500:#A97E42;
+  --target-ink-950:var(--target-charcoal);
+  --target-ink-800:#38443D;
+  --target-muted:var(--target-text-secondary);
+  --target-line:var(--target-border-default);
+  --target-focus:var(--target-focus-ring);
+}
+
+/* T01 — shared global identity */
+html,body,main{background:var(--target-bg-page)!important;color:var(--target-text-primary)!important}
+h1,h2,h3,h4,h5,h6{color:var(--target-text-primary)!important}
+p,.text-muted-premium{color:var(--target-text-secondary)!important}
+.site-header,.site-footer{background:var(--target-color-primary)!important}
+.site-header .btn-primary-premium{background:var(--target-cream)!important;border-color:var(--target-cream)!important;color:var(--target-color-primary)!important}
+.site-header .btn-primary-premium:hover{background:var(--target-warm-sand)!important;border-color:var(--target-warm-sand)!important;color:var(--target-charcoal)!important}
+.btn-primary-premium{background:var(--target-action-primary)!important;border-color:var(--target-action-primary)!important}
+.btn-primary-premium:hover{background:var(--target-action-primary-hover)!important;border-color:var(--target-action-primary-hover)!important}
+.kicker::before,.site-header .nav-link.active:after{background:var(--target-accent)!important}
+
+/* T02 — navigation stays corporate: flat surfaces, one restrained accent */
+.premium-mobile-nav{background:var(--target-cream)!important}
+.premium-mobile-head{background:var(--target-bg-surface)!important}
+.premium-mobile-close{background:var(--target-color-primary)!important}
+.premium-mobile-social a,.target-mega-menu{background:var(--target-bg-surface)!important}
+.target-mega-menu a:hover{background:var(--target-bg-subtle)!important;color:var(--target-color-primary)!important}
+.target-mega-menu a:hover:before{background:var(--target-accent)!important}
+
+/* T03 — card hierarchy uses surface, primary, and accent; gradients are removed */
+.p-card,.route-node,.journey-step,.contact-card,.premium-eval-cards article,.premium-category-grid article,.company-tile,.company-summary,.product-stage,.card-service,.card-audience,.card-action{
+  background:var(--target-bg-surface)!important;
+  border-color:var(--target-border-default)!important;
+}
+.card-service::before,.card-action::after{display:none!important}
+.card-service::after{background:var(--target-accent)!important}
+.card-service--trade{background:var(--target-color-primary)!important;color:var(--target-text-inverse)!important}
+.card-service--trade h2{color:var(--target-text-inverse)!important}
+.card-service--trade p{color:rgba(255,255,255,.80)!important}
+.card-service--trade .icon-tile{background:rgba(255,255,255,.12)!important;color:var(--target-text-inverse)!important;border-color:rgba(255,255,255,.25)!important}
+.card-service--trade .kicker{color:#E6CAA0!important}
+.card-service--partnership,.card-service--distribution,.card-service--market,.card-action{background:var(--target-bg-surface)!important}
+.card-service--partnership::after,.card-service--distribution::after,.card-service--market::after{background:var(--target-color-primary)!important}
+.card-service .icon-tile,.icon-tile{background:var(--target-bg-subtle)!important;color:var(--target-color-primary)!important;border-color:var(--target-border-default)!important}
+.card-route::before{background:var(--target-accent)!important}
+.card-route .journey-num{background:var(--target-color-primary)!important}
+.p-card:hover,.contact-card:hover,.legal-card:hover,.faq-item:hover,.company-tile:hover{border-color:var(--target-accent)!important}
+.cta-box{background:var(--target-bg-subtle)!important;border:1px solid var(--target-border-default)!important}
