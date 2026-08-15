@@ -67,18 +67,17 @@ html[lang='en'] .about-canonical .about-hero p{line-height:1.65}
 .about-canonical .about-resource-link svg,.about-canonical .about-arrow{width:18px;height:18px;stroke-width:1.8}
 html[dir='ltr'] .about-canonical .about-arrow{transform:scaleX(-1)}
 
+/* Hero image: reliable local asset with visible food/manufacturing context. */
 .about-canonical .about-hero__media{
   position:relative;margin:0;aspect-ratio:5/4;overflow:visible;
-}
-.about-canonical .about-hero__media>img{
-  display:block;width:100%;height:100%;object-fit:cover;object-position:center;
   border:1px solid rgba(244,237,228,.20);border-radius:24px;
+  background:url('/images/home-food-trade-hero-v1.png') center 50%/cover no-repeat;
   box-shadow:0 26px 54px rgba(2,31,20,.28);
-  filter:saturate(.90) contrast(.99);
 }
+.about-canonical .about-hero__media>img{display:block;width:100%;height:100%;opacity:0;pointer-events:none}
 .about-canonical .about-hero__media::after{
   content:"";position:absolute;inset:0;border-radius:24px;
-  background:linear-gradient(180deg,rgba(12,73,49,.02),rgba(12,73,49,.16));pointer-events:none;
+  background:linear-gradient(180deg,rgba(12,73,49,.01),rgba(12,73,49,.14));pointer-events:none;
 }
 .about-canonical .about-hero__media-card{
   position:absolute;z-index:2;inset-inline:22px;inset-block-end:-28px;
@@ -106,7 +105,7 @@ html[dir='ltr'] .about-canonical .about-arrow{transform:scaleX(-1)}
   color:rgba(38,38,38,.74)!important;font-size:1.04rem;line-height:1.8;
 }
 
-/* WHO WE ARE — narrative + actual visual + compact fact rail. */
+/* WHO WE ARE — narrative + visual + compact fact rail. */
 .about-canonical .about-who{background:#fff}
 .about-canonical .about-two-col{
   display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:56px;align-items:start;
@@ -133,49 +132,70 @@ html[dir='ltr'] .about-canonical .about-arrow{transform:scaleX(-1)}
 .about-canonical .about-icon--large{width:60px;height:60px;border-radius:16px}
 .about-canonical .about-icon--large svg{width:30px;height:30px}
 
-/* VISION & MISSION — two deliberate panels, not generic hover cards. */
+/* VISION & MISSION — centered icon/label hierarchy. */
 .about-canonical .about-values-section{background:var(--ac-cream)}
 .about-canonical .about-values{display:grid;grid-template-columns:1fr 1fr;gap:24px}
 .about-canonical .about-value-card{
-  position:relative;min-height:300px;padding:32px;border:1px solid var(--ac-line);border-radius:18px;background:#fff;box-shadow:none!important;
+  position:relative;min-height:320px;padding:34px 32px 32px;
+  border:1px solid var(--ac-line);border-radius:18px;background:#fff;box-shadow:none!important;
+  text-align:center;
 }
 .about-canonical .about-value-card::before{
-  content:"";position:absolute;inset-inline:32px auto;top:0;width:74px;height:3px;border-radius:0 0 4px 4px;background:var(--ac-sand);
+  content:"";position:absolute;left:50%;top:0;transform:translateX(-50%);width:74px;height:3px;border-radius:0 0 4px 4px;background:var(--ac-sand);
 }
 .about-canonical .about-value-card:nth-child(2)::before{background:var(--ac-forest)}
-.about-canonical .about-card-label{display:block;margin-top:20px;color:var(--ac-forest);font-size:.82rem;font-weight:700}
-.about-canonical .about-value-card h3{max-width:24ch;margin:10px 0 12px;font-size:clamp(1.35rem,2vw,1.7rem)!important;font-weight:700;line-height:1.35}
-.about-canonical .about-value-card p{max-width:58ch;margin:0;color:rgba(38,38,38,.72)!important;font-size:1rem;line-height:1.75}
+.about-canonical .about-value-card>.about-icon--large{
+  width:72px;height:72px;margin:0 auto;border-radius:20px;background:rgba(244,237,228,.72);
+  box-shadow:0 10px 24px rgba(12,73,49,.07);
+}
+.about-canonical .about-value-card>.about-icon--large svg{width:34px;height:34px}
+.about-canonical .about-card-label{
+  display:block;margin:16px auto 0;color:var(--ac-forest);
+  font-size:1rem;font-weight:800;line-height:1.4;text-align:center;
+}
+.about-canonical .about-value-card h3{
+  max-width:25ch;margin:12px auto 12px;font-size:clamp(1.35rem,2vw,1.7rem)!important;font-weight:700;line-height:1.35;
+}
+.about-canonical .about-value-card p{
+  max-width:58ch;margin:0 auto;color:rgba(38,38,38,.72)!important;font-size:1rem;line-height:1.75;
+}
 .about-canonical .about-values .about-value-card:hover{transform:none!important;box-shadow:none!important;border-color:var(--ac-line)!important}
 
-/* COMMERCIAL ROLE — main visual signature of About. */
+/* COMMERCIAL ROLE — larger centered semantic icons. */
 .about-canonical .about-role{background:#fff}
 .about-canonical .about-role .about-section-head{margin-bottom:42px}
 .about-canonical .about-flow{
   display:grid;grid-template-columns:1fr 56px 1.05fr 56px 1fr;gap:12px;align-items:stretch;
 }
 .about-canonical .about-flow-node{
-  position:relative;display:flex;min-height:220px;flex-direction:column;justify-content:flex-end;
-  padding:28px;border:1px solid var(--ac-line);border-radius:18px;background:#fff;box-shadow:0 10px 24px rgba(12,73,49,.045)!important;
+  position:relative;display:flex;min-height:230px;flex-direction:column;justify-content:flex-start;align-items:center;text-align:center;
+  padding:30px 26px 28px;border:1px solid var(--ac-line);border-radius:18px;background:#fff;box-shadow:0 10px 24px rgba(12,73,49,.045)!important;
 }
-.about-canonical .about-flow-node h3{margin:18px 0 8px;font-size:1.18rem!important;font-weight:700;line-height:1.35}
-.about-canonical .about-flow-node p{margin:0;color:rgba(38,38,38,.66)!important;font-size:.92rem;line-height:1.65}
+.about-canonical .about-flow-node>.about-icon{
+  width:64px;height:64px;flex:0 0 64px;border-radius:18px;background:rgba(244,237,228,.58);
+  box-shadow:0 8px 20px rgba(12,73,49,.06);
+}
+.about-canonical .about-flow-node>.about-icon svg{width:31px;height:31px}
+.about-canonical .about-flow-node h3{margin:20px 0 8px;font-size:1.22rem!important;font-weight:700;line-height:1.35}
+.about-canonical .about-flow-node p{max-width:28ch;margin:0 auto;color:rgba(38,38,38,.66)!important;font-size:.92rem;line-height:1.65}
 .about-canonical .about-flow-node--target{
   background:var(--ac-forest);border-color:var(--ac-forest);color:var(--ac-cream);box-shadow:0 20px 38px rgba(7,53,35,.18)!important;
 }
-.about-canonical .about-flow-node--target .about-icon{background:rgba(244,237,228,.94);border-color:rgba(244,237,228,.24);color:var(--ac-forest)}
+.about-canonical .about-flow-node--target .about-icon{background:var(--ac-cream);border-color:rgba(244,237,228,.24);color:var(--ac-forest)}
 .about-canonical .about-flow-node--target h3{color:var(--ac-cream)!important}
 .about-canonical .about-flow-node--target p{color:rgba(244,237,228,.78)!important}
 .about-canonical .about-flow-link{display:grid;place-items:center;color:var(--ac-sand)}
 .about-canonical .about-flow-link svg{width:26px;height:26px;stroke-width:1.6}
 html[dir='ltr'] .about-canonical .about-flow-link svg{transform:scaleX(-1)}
 
-/* COMMERCIAL CLARITY — aligned card grammar with Home. */
+/* COMMERCIAL CLARITY — icon/title alignment corrected. */
 .about-canonical .about-trust{background:var(--ac-cream)}
 .about-canonical .about-trust .about-section-head{margin-bottom:36px}
 .about-canonical .about-trust-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 .about-canonical .about-trust-card{
-  position:relative;min-height:220px;padding:28px;border:1px solid var(--ac-line)!important;border-inline-start:1px solid var(--ac-line)!important;border-radius:16px;background:#fff;box-shadow:none!important;
+  position:relative;min-height:220px;padding:28px;
+  border:1px solid var(--ac-line)!important;border-inline-start:1px solid var(--ac-line)!important;border-radius:16px;background:#fff;box-shadow:none!important;
+  display:grid;grid-template-columns:62px minmax(0,1fr);grid-template-rows:auto 1fr;column-gap:16px;align-items:start;
 }
 .about-canonical .about-trust-card::after{
   content:"";position:absolute;inset-block:0;inset-inline-end:0;width:3px;background:var(--ac-forest);border-radius:0 16px 16px 0;
@@ -185,13 +205,21 @@ html[dir='ltr'] .about-canonical .about-trust-card::after{inset-inline-end:auto;
 .about-canonical .about-trust-index{
   position:absolute;inset-inline-end:20px;top:18px;color:rgba(12,73,49,.13);font-family:Manrope,sans-serif;font-size:1rem;font-weight:800;
 }
-.about-canonical .about-trust-card h3{margin:18px 0 10px;font-size:1.2rem!important;font-weight:700;line-height:1.35}
-.about-canonical .about-trust-card p{margin:0;color:rgba(38,38,38,.70)!important;font-size:.98rem;line-height:1.72}
+.about-canonical .about-trust-card>.about-icon--large{
+  grid-column:1;grid-row:1 / span 2;width:60px;height:60px;margin:0;border-radius:16px;background:rgba(244,237,228,.62);
+}
+.about-canonical .about-trust-card h3{
+  grid-column:2;grid-row:1;margin:4px 34px 8px 0;font-size:1.2rem!important;font-weight:700;line-height:1.35;
+}
+html[dir='ltr'] .about-canonical .about-trust-card h3{margin:4px 0 8px 34px}
+.about-canonical .about-trust-card p{
+  grid-column:2;grid-row:2;margin:0;color:rgba(38,38,38,.70)!important;font-size:.98rem;line-height:1.72;
+}
 .about-canonical .about-boundary{
   margin:22px 0 0;padding:14px 16px;border-inline-start:3px solid var(--ac-sand);background:rgba(192,149,82,.07);color:rgba(38,38,38,.62);font-size:.84rem;line-height:1.65;
 }
 
-/* FINAL — Resource + Charcoal next step, same closing language as frozen Home. */
+/* FINAL — Resource + Charcoal next step. */
 .about-canonical .about-final{background:#fff}
 .about-canonical .about-final__grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:24px;align-items:stretch}
 .about-canonical .about-profile-panel,.about-canonical .about-final-cta{
@@ -203,7 +231,11 @@ html[dir='ltr'] .about-canonical .about-trust-card::after{inset-inline-end:auto;
 .about-canonical .about-profile-panel::after{
   content:"";position:absolute;width:180px;height:180px;inset:auto -70px -90px auto;border:1px solid rgba(12,73,49,.10);border-radius:50%;pointer-events:none;
 }
-.about-canonical .about-profile-panel .about-kicker{margin-top:22px}
+.about-canonical .about-profile-panel>.about-icon--large{
+  width:72px;height:72px;border-radius:20px;background:#fff;box-shadow:0 10px 24px rgba(12,73,49,.07);
+}
+.about-canonical .about-profile-panel>.about-icon--large svg{width:34px;height:34px}
+.about-canonical .about-profile-panel .about-kicker{margin-top:20px}
 .about-canonical .about-profile-panel .about-resource-link{color:var(--ac-forest)}
 .about-canonical .about-final-cta{
   color:var(--ac-cream);background:var(--ac-charcoal);box-shadow:0 18px 38px rgba(38,38,38,.14)!important;
@@ -240,26 +272,29 @@ html[dir='ltr'] .about-canonical .about-trust-card::after{inset-inline-end:auto;
   .about-canonical .about-hero__media{max-width:720px;width:100%}
   .about-canonical .about-section{padding-block:68px}
   .about-canonical .about-flow{grid-template-columns:1fr 44px 1fr 44px 1fr}
-  .about-canonical .about-flow-node{min-height:200px;padding:22px}
+  .about-canonical .about-flow-node{min-height:205px;padding:24px 20px}
 }
 @media(max-width:767.98px){
   .about-canonical .about-hero{padding-block:56px 70px}
   .about-canonical .about-hero__grid{gap:28px}
   .about-canonical .about-hero h1{max-width:14ch;font-size:clamp(2.35rem,10vw,3.15rem)!important;line-height:1.1!important}
   .about-canonical .about-hero p{font-size:1rem;line-height:1.8}
-  .about-canonical .about-hero__media{aspect-ratio:4/3}
+  .about-canonical .about-hero__media{aspect-ratio:4/3;background-position:center 48%}
   .about-canonical .about-hero__media-card{inset-inline:10px;inset-block-end:-24px;grid-template-columns:1fr;padding:8px}
   .about-canonical .about-section{padding-block:52px}
-  .about-canonical .about-section-head--center{text-align:start;margin-bottom:30px}
+  .about-canonical .about-section-head--center{text-align:center;margin-bottom:30px}
   .about-canonical .about-who__media{aspect-ratio:4/3}
   .about-canonical .about-facts{grid-template-columns:1fr}
   .about-canonical .about-values,.about-canonical .about-trust-grid{grid-template-columns:1fr;gap:14px}
-  .about-canonical .about-value-card,.about-canonical .about-trust-card{min-height:0;padding:24px}
+  .about-canonical .about-value-card{min-height:0;padding:28px 22px}
+  .about-canonical .about-trust-card{min-height:0;padding:22px;grid-template-columns:56px minmax(0,1fr);column-gap:14px}
+  .about-canonical .about-trust-card>.about-icon--large{width:54px;height:54px}
+  .about-canonical .about-trust-card h3{margin-top:2px;font-size:1.12rem!important}
   .about-canonical .about-flow{grid-template-columns:1fr;gap:10px}
   .about-canonical .about-flow-link{height:28px;transform:rotate(-90deg)}
   html[dir='ltr'] .about-canonical .about-flow-link{transform:rotate(90deg)}
   html[dir='ltr'] .about-canonical .about-flow-link svg{transform:none}
-  .about-canonical .about-flow-node{min-height:0;padding:22px}
+  .about-canonical .about-flow-node{min-height:0;padding:24px 22px}
   .about-canonical .about-profile-panel,.about-canonical .about-final-cta{padding:28px 24px;border-radius:20px}
   .about-canonical .about-final-actions{display:grid;width:100%}
   .about-canonical .about-final-actions>a{width:100%}
