@@ -1,0 +1,59 @@
+{
+  "version": "1.0.0",
+  "brand": {
+    "forest": "#0C4931",
+    "cream": "#F4EDE4",
+    "charcoal": "#262626",
+    "sand": "#C09552"
+  },
+  "fonts": {
+    "ar": "Tajawal",
+    "en": "Manrope"
+  },
+  "container": {
+    "max": 1200,
+    "gutterDesktop": 32,
+    "gutterTablet": 24,
+    "gutterMobile": 20
+  },
+  "section": {
+    "mobile": 52,
+    "tablet": 68,
+    "desktopMedium": 80,
+    "desktop": 96,
+    "compactMobile": 40,
+    "compactDesktop": 64
+  },
+  "radius": {
+    "control": 12,
+    "card": 16,
+    "panel": 18,
+    "media": 20,
+    "hero": 24
+  },
+  "interaction": {
+    "controlMin": 48,
+    "buttonHeight": 52,
+    "hoverTranslateMax": -2,
+    "durationFast": 180,
+    "durationStandard": 220
+  },
+  "hero": {
+    "textPercent": 55,
+    "mediaPercent": 45,
+    "desktopRatio": "5:4",
+    "mobileOrder": ["text", "actions", "media"]
+  },
+  "icons": {
+    "library": "Lucide",
+    "socialLibrary": "Bootstrap Icons",
+    "sizes": {
+      "micro": 16,
+      "inline": 18,
+      "button": 20,
+      "standard": 24,
+      "feature": 32,
+      "support": 40
+    }
+  }
+}
