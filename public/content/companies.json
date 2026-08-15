@@ -1,10 +1,11 @@
 {
-  "schemaVersion": 1,
-  "updatedAt": "2026-08-14",
+  "schemaVersion": 2,
+  "updatedAt": "2026-08-15",
   "governance": {
     "sourceOfTruth": "TARGET Business Foundation in Notion",
     "publicLabelAr": "شركات ومنتجات محل اهتمامنا",
     "publicLabelEn": "Companies & Products in Focus",
+    "visualPolicy": "Controlled internal editorial imagery may be used until verified supplier originals replace it without redesign.",
     "forbiddenRelationshipLabels": [
       "Our Brands",
       "Our Agencies",
@@ -23,14 +24,22 @@
       "countryEn": null,
       "categoryAr": "الشاي والمشروبات العشبية",
       "categoryEn": "Tea & Herbal Infusions",
+      "summaryAr": "مجموعة مختارة من الشاي والأعشاب والمشروبات العشبية ضمن نطاق الاهتمام التجاري الحالي للسوق القطري.",
+      "summaryEn": "A selected tea and herbal infusion range within the current commercial focus for Qatar.",
       "productsAr": ["شاي", "ينسون", "كمومايل", "قرفة", "شاي أخضر", "نعناع", "تليا", "شاي أبيض", "زعتر", "كركديه"],
       "productsEn": ["Tea", "Anise", "Chamomile", "Cinnamon", "Green Tea", "Mint", "Linden / Tilia", "White Tea", "Thyme", "Hibiscus"],
+      "productVisualIndices": [7, 0, 1, 2, 3, 6, 5, 9, 8, 4],
       "logo": null,
+      "visual": {
+        "coverImage": "https://images.pexels.com/photos/6978215/pexels-photo-6978215.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        "coverPosition": "center",
+        "assetType": "controlled-editorial-placeholder"
+      },
       "brochure": {
-        "enabled": false,
+        "enabled": true,
         "path": "assets/companies/falcon/brochure.pdf",
         "driveSourceFileId": "1JyQzHZE5tEr-sSpV_8MzprLXtNwG1DaQ",
-        "status": "placeholder"
+        "status": "temporary_internal_placeholder"
       }
     },
     {
@@ -43,8 +52,11 @@
       "countryEn": null,
       "categoryAr": "منتجات الألبان والأغذية المجمدة والمجهزة",
       "categoryEn": "Dairy, Frozen & Prepared Foods",
+      "summaryAr": "منتجات ألبان وأغذية مجمدة ومجهزة ضمن نطاق المراجعة التجارية الحالية، مع عرض البيانات الغذائية فقط في المحفظة العامة.",
+      "summaryEn": "Dairy, frozen and prepared foods within the current commercial review, with only food-related items shown in the public portfolio.",
       "productsAr": ["جبنة رومي", "حمام", "كفتة", "محشي", "ممبار"],
       "productsEn": ["Roumy Cheese", "Pigeon", "Kofta", "Mahshi / Stuffed Vegetables", "Mombar"],
+      "productVisualIndices": [14, 13, 10, 11, 12],
       "adjacentProducts": [
         {
           "nameAr": "فحم شيشة",
@@ -54,11 +66,16 @@
         }
       ],
       "logo": null,
+      "visual": {
+        "coverImage": "https://images.pexels.com/photos/5953831/pexels-photo-5953831.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        "coverPosition": "center",
+        "assetType": "controlled-editorial-placeholder"
+      },
       "brochure": {
-        "enabled": false,
+        "enabled": true,
         "path": "assets/companies/al-nada/brochure.pdf",
         "driveSourceFileId": "1YOSbMvZRnZEbZ5bPZacWqZ2tVabixGzh",
-        "status": "placeholder"
+        "status": "temporary_internal_placeholder"
       }
     },
     {
@@ -71,14 +88,22 @@
       "countryEn": null,
       "categoryAr": "العسل والدبس والحلويات التقليدية",
       "categoryEn": "Honey, Molasses & Traditional Sweets",
+      "summaryAr": "عسل ودبس وحلويات تقليدية مختارة ضمن نطاق الاهتمام التجاري الحالي ومراجعة فرص المنتجات في قطر.",
+      "summaryEn": "Selected honey, molasses and traditional sweets within the current commercial focus and Qatar product-opportunity review.",
       "productsAr": ["عسل نحل", "عسل أسود", "حلويات شامية"],
       "productsEn": ["Bee Honey", "Sugarcane Molasses", "Levantine Sweets"],
+      "productVisualIndices": [15, 17, 16],
       "logo": null,
+      "visual": {
+        "coverImage": "https://images.pexels.com/photos/5634207/pexels-photo-5634207.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        "coverPosition": "center",
+        "assetType": "controlled-editorial-placeholder"
+      },
       "brochure": {
-        "enabled": false,
+        "enabled": true,
         "path": "assets/companies/al-dar/brochure.pdf",
         "driveSourceFileId": "1--RrwB0rUFEkqmptxmi_WbQ18WSNis5o",
-        "status": "placeholder"
+        "status": "temporary_internal_placeholder"
       }
     },
     {
@@ -91,14 +116,22 @@
       "countryEn": null,
       "categoryAr": "العصائر والمشروبات التقليدية",
       "categoryEn": "Juices & Traditional Beverages",
+      "summaryAr": "عصائر ومشروبات تقليدية بنكهات مختارة ضمن نطاق الاهتمام الحالي وفرص المراجعة للسوق القطري.",
+      "summaryEn": "Selected juices and traditional beverages within the current focus and Qatar market review scope.",
       "productsAr": ["برتقال", "كركديه", "خروب", "تمر هندي", "جوافة", "مانجو", "رمان"],
       "productsEn": ["Orange", "Hibiscus", "Carob", "Tamarind", "Guava", "Mango", "Pomegranate"],
+      "productVisualIndices": [22, 20, 18, 24, 19, 21, 23],
       "logo": null,
+      "visual": {
+        "coverImage": "https://images.pexels.com/photos/5156695/pexels-photo-5156695.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        "coverPosition": "center",
+        "assetType": "controlled-editorial-placeholder"
+      },
       "brochure": {
-        "enabled": false,
+        "enabled": true,
         "path": "assets/companies/al-reem/brochure.pdf",
         "driveSourceFileId": "1-hofWlSOqO1gNYqlHw6RKXgmiMCs8-t2",
-        "status": "placeholder"
+        "status": "temporary_internal_placeholder"
       }
     },
     {
