@@ -173,3 +173,20 @@ html[dir='ltr'] .route-arrow svg,html[dir='ltr'] .v7-role-arrow{transform:none}
   html[dir='rtl'] .site-quick-actions{inset-inline-end:13px;inset-inline-start:auto}
   html[dir='ltr'] .site-quick-actions{inset-inline-start:13px;inset-inline-end:auto}
 }
+
+
+/* T01 — Bilingual layout foundation: shared header/mobile direction */
+@media(max-width:1199.98px){
+  html[dir='rtl'] .site-header .navbar>.container{direction:rtl;grid-template-columns:auto minmax(0,1fr) auto!important}
+  html[dir='rtl'] .site-header .navbar-brand{grid-column:3!important;justify-self:end!important}
+  html[dir='rtl'] .site-header .nav-actions{grid-column:1!important;justify-self:start!important;direction:rtl}
+  html[dir='ltr'] .site-header .navbar>.container{direction:ltr;grid-template-columns:auto minmax(0,1fr) auto!important}
+  html[dir='ltr'] .site-header .navbar-brand{grid-column:1!important;justify-self:start!important}
+  html[dir='ltr'] .site-header .nav-actions{grid-column:3!important;justify-self:end!important;direction:ltr}
+}
+html[dir='rtl'] .premium-mobile-nav{right:0!important;left:auto!important;transform:translateX(100%)!important}
+html[dir='rtl'] .premium-mobile-nav.show{transform:none!important}
+html[dir='ltr'] .premium-mobile-nav{left:0!important;right:auto!important;transform:translateX(-100%)!important}
+html[dir='ltr'] .premium-mobile-nav.show{transform:none!important}
+html[dir='rtl'] .premium-mobile-head{direction:rtl}
+html[dir='ltr'] .premium-mobile-head{direction:ltr}
