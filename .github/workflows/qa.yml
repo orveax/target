@@ -119,3 +119,17 @@ jobs:
           grep -q 'work-info-media' dist/assets/visual-hard-audit-v1.js
           grep -q 'company-logo-slot:not(:has(img))' dist/assets/visual-hard-audit-v1.css
           grep -q 'cp-next-panel' dist/assets/visual-hard-audit-v1.css
+      - name: Verify interaction enhancement layer v1
+        run: |
+          test -f dist/assets/target-interactions-v1.js
+          grep -q 'target-interactions-v1.js' dist/assets/premium-v6.js
+          grep -q 'initPageTransitions' dist/assets/target-interactions-v1.js
+          grep -q 'initScrollReveal' dist/assets/target-interactions-v1.js
+          grep -q 'initPrefetch' dist/assets/target-interactions-v1.js
+          grep -q 'initFormUX' dist/assets/target-interactions-v1.js
+          grep -q 'initNavigation' dist/assets/target-interactions-v1.js
+          grep -q 'initCompanyTransition' dist/assets/target-interactions-v1.js
+          grep -q 'initFAQ' dist/assets/target-interactions-v1.js
+          grep -q 'initWhatsAppVisibility' dist/assets/target-interactions-v1.js
+          grep -q 'prefers-reduced-motion' dist/assets/target-interactions-v1.js
+          grep -q 'saveData' dist/assets/target-interactions-v1.js
