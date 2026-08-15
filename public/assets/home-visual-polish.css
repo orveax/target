@@ -78,7 +78,9 @@ html[dir='rtl'] .home-canonical .hc-hero-visual{padding:16px 16px 0 0}
   overflow:hidden;
   border:1px solid rgba(244,237,228,.20)!important;
   border-radius:var(--target-radius-hero,24px)!important;
-  background:#d8ddd8!important;
+  background:
+    linear-gradient(180deg,rgba(7,53,35,.02),rgba(7,53,35,.13)),
+    url('/images/home-food-trade-hero-v1.png') center 50%/cover no-repeat!important;
   box-shadow:0 26px 54px rgba(2,31,20,.30)!important;
 }
 .home-canonical .hc-hero-photo{
@@ -127,6 +129,23 @@ html[dir='rtl'] .home-canonical .hc-hero-visual{padding:16px 16px 0 0}
 }
 .home-canonical .hc-route-nodes article.is-target{
   box-shadow:inset 0 0 0 1px rgba(244,237,228,.10),0 6px 14px rgba(12,73,49,.14);
+}
+.home-canonical .hc-route-nodes:has(article:not(.is-target):hover) article.is-target,
+.home-canonical .hc-route-nodes:has(article:not(.is-target):focus-within) article.is-target{
+  background:var(--target-cream,#F4EDE4)!important;
+  border-color:rgba(12,73,49,.08)!important;
+  color:var(--target-charcoal,#262626)!important;
+  box-shadow:none;
+}
+.home-canonical .hc-route-nodes:has(article:not(.is-target):hover) article.is-target small,
+.home-canonical .hc-route-nodes:has(article:not(.is-target):focus-within) article.is-target small{
+  color:var(--target-text-muted,rgba(38,38,38,.62))!important;
+}
+.home-canonical .hc-route-nodes:has(article:not(.is-target):hover) article.is-target .hc-route-icon,
+.home-canonical .hc-route-nodes:has(article:not(.is-target):focus-within) article.is-target .hc-route-icon{
+  color:var(--target-forest,#0C4931)!important;
+  background:#fff!important;
+  border-color:var(--target-border-default,rgba(12,73,49,.12))!important;
 }
 
 /* CATEGORY VISUAL — stronger hierarchy between icon, title and card body. */
@@ -266,7 +285,7 @@ html[dir='rtl'] .home-canonical .hc-hero-visual{padding:16px 16px 0 0}
 @media(max-width:575.98px){
   .home-canonical .hc-hero-visual{padding:8px 0 0 8px}
   html[dir='rtl'] .home-canonical .hc-hero-visual{padding:8px 8px 0 0}
-  .home-canonical .hc-hero-media{aspect-ratio:4/3;border-radius:20px!important}
+  .home-canonical .hc-hero-media{aspect-ratio:4/3;border-radius:20px!important;background-position:center 48%!important}
   .home-canonical .hc-hero-photo{object-position:62% center}
   .home-canonical .hc-hero-visual .hc-route{width:calc(100% - 8px);margin-top:-38px!important;padding:13px!important}
   .home-canonical .hc-category-editorial{aspect-ratio:4/3;margin-bottom:18px;border-radius:16px}
