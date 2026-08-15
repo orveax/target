@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import html from '../legacy/capabilities.html?raw';
-import { extractLegacyMain } from '../lib/legacy';
+import HowWeWorkCanonical from '../components/HowWeWorkCanonical.astro';
 ---
-<BaseLayout active="capabilities" bodyClass="page-capabilities" title="مجالات عملنا | TARGET"><Fragment set:html={extractLegacyMain(html)} /></BaseLayout>
+<BaseLayout active="capabilities" bodyClass="page-capabilities work-canonical-page" title="كيف نعمل | TARGET" description="كيف تعمل تارقت مع المصنعين والموردين والعلامات الغذائية.">
+  <HowWeWorkCanonical />
+</BaseLayout>
