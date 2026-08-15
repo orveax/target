@@ -58,7 +58,7 @@ const categories = [
       <div class="hp-cap-grid">
         {capabilities.map((item, index) => <article class:list={['hp-cap-card', `hp-cap-${index + 1}`]}>
           <div class="hp-cap-image"></div>
-          <div class="hp-cap-content"><span class="hp-cap-icon"><i data-lucide={item.icon}></i></span><h3>{item.title}</h3><p>{item.body}</p><a href="capabilities.html">استكشف المجال <i data-lucide="arrow-left"></i></a></div>
+          <div class="hp-cap-content"><span class="hp-cap-index">0{index + 1}</span><span class="hp-cap-icon"><i data-lucide={item.icon}></i></span><h3>{item.title}</h3><p>{item.body}</p><a href="capabilities.html">استكشف المجال <i data-lucide="arrow-left"></i></a></div>
         </article>)}
       </div>
     </div>
