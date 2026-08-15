@@ -1,6 +1,31 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import html from '../legacy/contact.html?raw';
-import { extractLegacyMain } from '../lib/legacy';
 ---
-<BaseLayout active="contact" bodyClass="page-contact" title="تواصل معنا | TARGET"><Fragment set:html={extractLegacyMain(html)} /></BaseLayout>
+<BaseLayout active="contact" bodyClass="page-contact premium-v8-page" title="الاتصال بنا | TARGET">
+  <section class="premium-page-hero portfolio-hero">
+    <div class="premium-page-hero-overlay"></div>
+    <div class="container premium-page-hero-content">
+      <div class="hero-kicker"><i data-lucide="messages-square"></i><span data-ar="الاتصال بنا" data-en="Contact Us">الاتصال بنا</span></div>
+      <h1 data-ar="تواصل مع تارقت" data-en="Contact TARGET">تواصل مع تارقت</h1>
+      <p data-ar="للاستفسارات العامة والمبيعات وطلبات المعلومات والتواصل المؤسسي. إذا كنت مصنعًا أو موردًا ولديك منتج أو فرصة، استخدم صفحة الموردين المخصصة." data-en="For general enquiries, sales, information requests and corporate contact. Manufacturers and suppliers with a product or opportunity should use the dedicated supplier page.">للاستفسارات العامة والمبيعات وطلبات المعلومات والتواصل المؤسسي. إذا كنت مصنعًا أو موردًا ولديك منتج أو فرصة، استخدم صفحة الموردين المخصصة.</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div class="kicker" data-ar="اختر المسار المناسب" data-en="Choose the right route">اختر المسار المناسب</div>
+        <h2 data-ar="تواصل واضح حسب نوع الطلب" data-en="Clear contact by enquiry type">تواصل واضح حسب نوع الطلب</h2>
+        <p data-ar="سيضاف نموذج التواصل السريع وتوجيه الأقسام في المرحلة التالية. حتى ذلك الحين، استخدم القناة المباشرة المناسبة." data-en="A quick-contact form and department routing will be added in the next phase. Until then, use the appropriate direct channel.">سيضاف نموذج التواصل السريع وتوجيه الأقسام في المرحلة التالية. حتى ذلك الحين، استخدم القناة المباشرة المناسبة.</p>
+      </div>
+      <div class="row g-3 g-lg-4">
+        <div class="col-md-6 col-xl-3"><article class="p-card card-interactive"><span class="icon-tile"><i data-lucide="mail"></i></span><strong data-ar="استفسار عام" data-en="General Inquiry">استفسار عام</strong><p data-ar="معلومات عامة، مستندات أو أي استفسار مؤسسي." data-en="General information, documents or corporate enquiries.">معلومات عامة، مستندات أو أي استفسار مؤسسي.</p><a href="mailto:info@targetft.com">info@targetft.com</a></article></div>
+        <div class="col-md-6 col-xl-3"><article class="p-card card-interactive"><span class="icon-tile"><i data-lucide="badge-dollar-sign"></i></span><strong data-ar="المبيعات وطلب عرض سعر" data-en="Sales & Request a Quote">المبيعات وطلب عرض سعر</strong><p data-ar="للمحادثات التجارية وطلبات عروض الأسعار المتاحة." data-en="For commercial enquiries and applicable quote requests.">للمحادثات التجارية وطلبات عروض الأسعار المتاحة.</p><a href="mailto:sales@targetft.com">sales@targetft.com</a></article></div>
+        <div class="col-md-6 col-xl-3"><article class="p-card card-interactive"><span class="icon-tile"><i data-lucide="shopping-cart"></i></span><strong data-ar="المشتريات" data-en="Procurement">المشتريات</strong><p data-ar="للتواصل المرتبط بالمشتريات والتنسيق ذي الصلة." data-en="For procurement-related communication and coordination.">للتواصل المرتبط بالمشتريات والتنسيق ذي الصلة.</p><a href="mailto:procurement@targetft.com">procurement@targetft.com</a></article></div>
+        <div class="col-md-6 col-xl-3"><article class="p-card card-interactive"><span class="icon-tile"><i data-lucide="factory"></i></span><strong data-ar="للموردين والمصنعين" data-en="Suppliers & Manufacturers">للموردين والمصنعين</strong><p data-ar="لمنتج أو علامة أو فرصة توريد؛ ابدأ من نموذج الموردين المؤهل." data-en="For a product, brand or supplier opportunity; start with the qualified supplier form.">لمنتج أو علامة أو فرصة توريد؛ ابدأ من نموذج الموردين المؤهل.</p><a href="suppliers.html" data-ar="اذهب إلى صفحة الموردين" data-en="Go to For Suppliers">اذهب إلى صفحة الموردين</a></article></div>
+      </div>
+    </div>
+  </section>
+  <section class="section pt-0">
+    <div class="container"><div class="cta-box"><div><div class="kicker" data-ar="لديك منتج أو علامة؟" data-en="Have a product or brand?">لديك منتج أو علامة؟</div><h2 data-ar="نخصص للموردين مسارًا واضحًا للمراجعة" data-en="A clear review route for suppliers">نخصص للموردين مسارًا واضحًا للمراجعة</h2><p data-ar="نموذج الموردين يجمع المعلومات التي نحتاجها لفهم الشركة والمنتج والفرصة قبل أي نقاش تجاري." data-en="The supplier form gathers the information needed to understand the company, product and opportunity before any commercial discussion.">نموذج الموردين يجمع المعلومات التي نحتاجها لفهم الشركة والمنتج والفرصة قبل أي نقاش تجاري.</p></div><a class="btn-premium btn-primary-premium" href="suppliers.html"><i data-lucide="send"></i><span data-ar="ناقش منتجك معنا" data-en="Discuss Your Product">ناقش منتجك معنا</span></a></div></div>
+  </section>
+</BaseLayout>
