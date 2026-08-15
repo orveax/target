@@ -34,6 +34,7 @@ jobs:
           test -f dist/assets/final-freeze-media-v1.css
           test -f dist/assets/content-pages-final-v1.css
           test -f dist/assets/verified-contact-v1.css
+          test -f dist/assets/company-profile-v1.css
           test -f dist/content/target-design-tokens-v1.json
           test -f dist/content/companies.json
       - name: Verify internal company brochure resources
@@ -52,3 +53,10 @@ jobs:
           grep -q 'tiktok.com/@targetft' dist/contact.html
           ! grep -R -q '97400000000' dist
           ! grep -R -q '+974 XX' dist
+      - name: Verify company profile resource route
+        run: |
+          grep -q 'أربع مسارات تكمل الصورة' dist/company-profile.html
+          grep -q 'حمّل النسخة الرسمية من الملف التعريفي' dist/company-profile.html
+          grep -q 'food-portfolio.html' dist/company-profile.html
+          grep -q 'qatar-market.html' dist/company-profile.html
+          ! grep -q 'href="#"' dist/company-profile.html
