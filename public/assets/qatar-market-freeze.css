@@ -1,0 +1,31 @@
+.page-qatar-market .qm-checkpoint-track article.is-focus,
+.page-qatar-market .qm-channel-network article.is-center{
+  color:var(--target-cream,#F4EDE4);
+}
+
+.page-qatar-market .qm-checkpoint-track article.is-focus h3,
+.page-qatar-market .qm-channel-network article.is-center h3{
+  color:#fff !important;
+}
+
+.page-qatar-market .qm-checkpoint-track article.is-focus p,
+.page-qatar-market .qm-channel-network article.is-center p{
+  color:rgba(244,237,228,.9) !important;
+}
+
+.page-qatar-market .qm-checkpoint-track article.is-focus .qm-track-number{
+  color:var(--target-sand,#C09552) !important;
+}
+
+.page-qatar-market .qm-checkpoint-track article.is-focus .qm-icon,
+.page-qatar-market .qm-channel-network article.is-center .qm-icon{
+  border-color:rgba(192,149,82,.55);
+  background:var(--target-cream,#F4EDE4);
+  color:var(--target-forest,#0C4931);
+}
+
+.page-qatar-market .qm-checkpoint-track article:not(.is-focus),
+.page-qatar-market .qm-channel-network article:not(.is-center){
+  background:linear-gradient(180deg,#fff 0%,rgba(244,237,228,.7) 100%);
+  border-color:rgba(38,38,38,.12);
+}
