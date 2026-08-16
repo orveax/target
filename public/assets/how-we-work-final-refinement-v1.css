@@ -1,10 +1,11 @@
-/* TARGET — How We Work Final Refinement V1
- * Post-Baseline visual refinement for capabilities.html only.
+/* TARGET — How We Work Final Refinement V2
+ * Explicit design-instruction pass — 2026-08-16.
  * Canonical sequence/content unchanged.
- * Real trade photography: warehouse/logistics 4483862; food quality inspection 24394699; packaging process 11679687.
+ * Visual authority: TARGET Final Pre-Implementation Visual Composition Matrix V1.
+ * Page center of gravity: connected six-step product-to-market process.
  */
 
-/* HERO — make the route panel genuinely media-led while preserving Product → TARGET → Qatar. */
+/* HERO — manufacturing/packaging is the primary visual, while Product → TARGET → Qatar remains compact. */
 .page-capabilities .work-canonical .work-hero__route{
   aspect-ratio:5/4;
   justify-content:center;
@@ -12,9 +13,9 @@
   padding:24px;
   border-radius:24px;
   background:
-    linear-gradient(180deg,rgba(7,53,35,.04) 0%,rgba(7,53,35,.12) 44%,rgba(7,53,35,.72) 100%),
-    url('https://images.pexels.com/photos/4483862/pexels-photo-4483862.jpeg?auto=compress&dpr=1&h=1100&w=900') center 50%/cover no-repeat!important;
-  box-shadow:0 28px 58px rgba(2,31,20,.28)!important;
+    linear-gradient(180deg,rgba(7,53,35,.03) 0%,rgba(7,53,35,.10) 42%,rgba(7,53,35,.76) 100%),
+    url('https://images.pexels.com/photos/11679687/pexels-photo-11679687.jpeg?auto=compress&dpr=1&h=1100&w=900') center 52%/cover no-repeat!important;
+  box-shadow:0 28px 58px rgba(2,31,20,.24)!important;
 }
 .page-capabilities .work-canonical .work-hero__route::before{
   content:"PRODUCT  ·  TARGET  ·  QATAR";
@@ -25,9 +26,9 @@
   padding:8px 11px;
   border:1px solid rgba(244,237,228,.22);
   border-radius:999px;
-  background:rgba(7,53,35,.28);
+  background:rgba(7,53,35,.30);
   backdrop-filter:blur(8px);
-  color:rgba(244,237,228,.9);
+  color:rgba(244,237,228,.92);
   letter-spacing:.13em;
 }
 .page-capabilities .work-canonical .work-hero__route>span,
@@ -43,7 +44,7 @@
 }
 .page-capabilities .work-canonical .work-hero__route>i{color:var(--w-sand)!important}
 
-/* FOUR WAYS — stronger question/answer hierarchy without adding claims. */
+/* FOUR CORE WAYS — heavy 2×2 supplier-answer cards. */
 .page-capabilities .work-canonical .work-ways{gap:22px}
 .page-capabilities .work-canonical .work-way{
   min-height:380px;
@@ -81,56 +82,113 @@
   color:rgba(12,73,49,.15);
 }
 
-/* SIX-STEP PROCESS — the signature section, now with a real packaging/process media moment. */
-.page-capabilities .work-canonical .work-steps{gap:20px}
+/* SIX-STEP PRODUCT-TO-MARKET — connected operational timeline, the page's visual signature. */
+.page-capabilities .work-canonical .work-steps{
+  position:relative;
+  display:block!important;
+  margin:8px 0 0;
+  padding:12px 0 0;
+}
 .page-capabilities .work-canonical .work-steps::before{
   content:"";
-  display:block;
-  grid-column:1/-1;
-  aspect-ratio:16/5;
-  margin-bottom:4px;
-  border:1px solid rgba(12,73,49,.12);
-  border-radius:22px;
-  background:
-    linear-gradient(180deg,rgba(12,73,49,.00),rgba(12,73,49,.12)),
-    url('https://images.pexels.com/photos/11679687/pexels-photo-11679687.jpeg?auto=compress&dpr=1&h=900&w=1600') center 54%/cover no-repeat!important;
-  box-shadow:0 16px 38px rgba(38,38,38,.07);
+  position:absolute;
+  inset-block:10px 22px;
+  inset-inline-start:50%;
+  width:2px;
+  margin:0;
+  border:0;
+  border-radius:999px;
+  background:linear-gradient(180deg,rgba(12,73,49,.18),rgba(12,73,49,.62) 18%,rgba(192,149,82,.72) 58%,rgba(12,73,49,.34));
+  box-shadow:none;
+  aspect-ratio:auto;
 }
 .page-capabilities .work-canonical .work-steps li{
-  min-height:248px;
-  padding:28px;
-  border-radius:18px!important;
-  background:#fff!important;
-  box-shadow:0 10px 26px rgba(12,73,49,.04)!important;
-  overflow:hidden;
+  position:relative;
+  width:calc(50% - 42px);
+  min-height:0;
+  margin:0 0 34px;
+  padding:6px 0 8px;
+  display:grid;
+  grid-template-columns:62px minmax(0,1fr);
+  align-items:start;
+  gap:18px;
+  overflow:visible;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+.page-capabilities .work-canonical .work-steps li:nth-child(even){
+  margin-inline-start:calc(50% + 42px);
+}
+.page-capabilities .work-canonical .work-steps li::before{
+  content:"";
+  position:absolute;
+  top:36px;
+  inset-inline-end:-42px;
+  width:42px;
+  height:2px;
+  background:rgba(12,73,49,.24);
+}
+.page-capabilities .work-canonical .work-steps li:nth-child(even)::before{
+  inset-inline-start:-42px;
+  inset-inline-end:auto;
 }
 .page-capabilities .work-canonical .work-steps li::after{
   content:"";
   position:absolute;
-  inset-block-end:0;
-  inset-inline:0;
-  height:3px;
-  background:var(--w-green);
-  opacity:.16;
+  top:30px;
+  inset-inline-end:-49px;
+  width:14px;
+  height:14px;
+  border:3px solid var(--w-green);
+  border-radius:50%;
+  background:var(--w-cream);
+  box-shadow:0 0 0 5px rgba(244,237,228,.95);
+  opacity:1;
 }
-.page-capabilities .work-canonical .work-steps li:nth-child(2)::after,
-.page-capabilities .work-canonical .work-steps li:nth-child(5)::after{background:var(--w-sand);opacity:.55}
-.page-capabilities .work-canonical .work-steps li:nth-child(3)::after,
-.page-capabilities .work-canonical .work-steps li:nth-child(6)::after{opacity:.34}
+.page-capabilities .work-canonical .work-steps li:nth-child(even)::after{
+  inset-inline-start:-49px;
+  inset-inline-end:auto;
+  border-color:var(--w-sand);
+}
 .page-capabilities .work-canonical .work-steps .work-icon{
   width:58px;height:58px;border-radius:16px;
-  background:var(--w-cream)!important;
+  background:#fff!important;
+  border:1px solid rgba(12,73,49,.12);
   box-shadow:0 8px 20px rgba(12,73,49,.055);
 }
-.page-capabilities .work-canonical .work-steps .work-icon svg{width:28px;height:28px}
+.page-capabilities .work-canonical .work-steps .work-icon svg{width:27px;height:27px}
 .page-capabilities .work-canonical .work-step-num{
-  top:20px;inset-inline-end:22px;
-  font-size:1.05rem;
-  color:rgba(12,73,49,.16);
+  position:static!important;
+  display:inline-block;
+  grid-column:2;
+  grid-row:1;
+  justify-self:start;
+  margin:1px 0 7px;
+  font-size:.78rem;
+  font-weight:800;
+  line-height:1;
+  letter-spacing:.08em;
+  color:var(--w-green)!important;
+  opacity:.58;
 }
-.page-capabilities .work-canonical .work-steps h3{font-size:1.2rem!important}
+.page-capabilities .work-canonical .work-steps li>div{
+  grid-column:2;
+  grid-row:1 / span 2;
+  padding-top:25px;
+}
+.page-capabilities .work-canonical .work-steps h3{
+  margin:0 0 8px!important;
+  font-size:1.22rem!important;
+  line-height:1.35;
+}
+.page-capabilities .work-canonical .work-steps p{
+  margin:0;
+  max-width:46ch;
+}
 
-/* WHO WE WORK WITH — lighter resource layer, visually subordinate. */
+/* WHO WE WORK WITH — lighter audience cues, deliberately subordinate. */
 .page-capabilities .work-canonical .work-audiences{gap:16px}
 .page-capabilities .work-canonical .work-audiences article{
   min-height:184px;
@@ -140,11 +198,9 @@
   box-shadow:none!important;
 }
 .page-capabilities .work-canonical .work-audiences article:hover{transform:none!important}
-.page-capabilities .work-canonical .work-audiences .work-icon{
-  background:rgba(244,237,228,.7)!important;
-}
+.page-capabilities .work-canonical .work-audiences .work-icon{background:rgba(244,237,228,.7)!important}
 
-/* AT THE START — specific, real food-production quality inspection photography. */
+/* AT THE START — second and final supporting media moment. */
 .page-capabilities .work-canonical .work-info-layout::before{
   aspect-ratio:16/10;
   border-radius:22px;
@@ -161,7 +217,7 @@
 }
 .page-capabilities .work-canonical .work-info-cues li{min-height:64px}
 
-/* COMMERCIAL CLARITY — one stronger trust boundary. */
+/* COMMERCIAL CLARITY — one quiet trust boundary, not another card grid. */
 .page-capabilities .work-canonical .work-clarity__panel{
   position:relative;
   grid-template-columns:78px minmax(0,1fr);
@@ -179,21 +235,45 @@
   box-shadow:0 10px 24px rgba(12,73,49,.06);
 }
 
-/* FINAL CTA — stronger close, still the shared Charcoal/Sand/White system. */
+/* FINAL CTA — shared Charcoal/Sand/White close. */
 .page-capabilities .work-canonical .work-final>.container{
   border:1px solid rgba(255,255,255,.08);
   box-shadow:0 22px 46px rgba(38,38,38,.16)!important;
 }
-.page-capabilities .work-canonical .work-final .btn-light-premium{
-  box-shadow:0 8px 20px rgba(0,0,0,.12)!important;
+.page-capabilities .work-canonical .work-final .btn-light-premium{box-shadow:0 8px 20px rgba(0,0,0,.12)!important}
+
+/* ACCESSIBILITY + REDUCED MOTION */
+.page-capabilities .work-canonical a:focus-visible,
+.page-capabilities .work-canonical button:focus-visible{
+  outline:3px solid var(--w-sand);
+  outline-offset:4px;
 }
 
 @media(max-width:991.98px){
   .page-capabilities .work-canonical .work-hero__route{aspect-ratio:16/10;max-width:760px}
   .page-capabilities .work-canonical .work-way{min-height:0}
-  .page-capabilities .work-canonical .work-steps::before{aspect-ratio:16/7}
   .page-capabilities .work-canonical .work-info-layout::before{aspect-ratio:16/9}
+
+  .page-capabilities .work-canonical .work-steps::before{inset-inline-start:30px}
+  .page-capabilities .work-canonical .work-steps li,
+  .page-capabilities .work-canonical .work-steps li:nth-child(even){
+    width:auto;
+    margin-inline-start:72px;
+    margin-bottom:26px;
+  }
+  .page-capabilities .work-canonical .work-steps li::before,
+  .page-capabilities .work-canonical .work-steps li:nth-child(even)::before{
+    inset-inline-start:-42px;
+    inset-inline-end:auto;
+    width:42px;
+  }
+  .page-capabilities .work-canonical .work-steps li::after,
+  .page-capabilities .work-canonical .work-steps li:nth-child(even)::after{
+    inset-inline-start:-49px;
+    inset-inline-end:auto;
+  }
 }
+
 @media(max-width:767.98px){
   .page-capabilities .work-canonical .work-hero__route{aspect-ratio:4/3;padding:18px;border-radius:18px}
   .page-capabilities .work-canonical .work-hero__route::before{top:16px;inset-inline:16px;font-size:.6rem;letter-spacing:.1em}
@@ -201,11 +281,36 @@
   .page-capabilities .work-canonical .work-hero__route>strong{width:108px;height:52px;min-height:52px;font-size:.8rem}
   .page-capabilities .work-canonical .work-way{padding:26px 24px}
   .page-capabilities .work-canonical .work-way .work-icon{width:58px;height:58px}
-  .page-capabilities .work-canonical .work-steps::before{aspect-ratio:16/9;border-radius:16px;background-position:center 52%!important}
-  .page-capabilities .work-canonical .work-steps li{min-height:0;padding:24px}
   .page-capabilities .work-canonical .work-info-layout::before{aspect-ratio:4/3;border-radius:16px;background-position:center 50%!important}
   .page-capabilities .work-canonical .work-clarity__panel{grid-template-columns:1fr;padding:28px 24px}
+
+  .page-capabilities .work-canonical .work-steps{padding-top:4px}
+  .page-capabilities .work-canonical .work-steps::before{inset-inline-start:24px;inset-block:6px 18px}
+  .page-capabilities .work-canonical .work-steps li,
+  .page-capabilities .work-canonical .work-steps li:nth-child(even){
+    grid-template-columns:52px minmax(0,1fr);
+    gap:14px;
+    margin-inline-start:58px;
+    margin-bottom:22px;
+    padding:4px 0 6px;
+  }
+  .page-capabilities .work-canonical .work-steps li::before,
+  .page-capabilities .work-canonical .work-steps li:nth-child(even)::before{
+    top:31px;
+    inset-inline-start:-34px;
+    width:34px;
+  }
+  .page-capabilities .work-canonical .work-steps li::after,
+  .page-capabilities .work-canonical .work-steps li:nth-child(even)::after{
+    top:25px;
+    inset-inline-start:-41px;
+  }
+  .page-capabilities .work-canonical .work-steps .work-icon{width:50px;height:50px;border-radius:14px}
+  .page-capabilities .work-canonical .work-steps .work-icon svg{width:24px;height:24px}
+  .page-capabilities .work-canonical .work-steps li>div{padding-top:23px}
+  .page-capabilities .work-canonical .work-steps h3{font-size:1.08rem!important}
 }
+
 @media(prefers-reduced-motion:reduce){
   .page-capabilities .work-canonical *{transition-duration:.01ms!important;animation-duration:.01ms!important}
 }
