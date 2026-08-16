@@ -92,11 +92,7 @@
     return /^(sticky|fixed)$/.test(position) ? Math.ceil(header.getBoundingClientRect().height) : 0;
   }
 
-  /*
-   * RTL-safe centering: do not calculate a target scrollLeft value.
-   * Instead calculate the physical center delta and scroll relatively.
-   * This works with negative/reversed RTL scrollLeft implementations.
-   */
+  /* RTL-safe: use physical center delta rather than an absolute scrollLeft target. */
   function centerActiveButton(nav) {
     const track = nav.querySelector('.target-section-nav-track');
     const active = track?.querySelector('button[aria-current="true"]');
@@ -105,15 +101,11 @@
     const trackRect = track.getBoundingClientRect();
     const activeRect = active.getBoundingClientRect();
     const delta = (activeRect.left + activeRect.width / 2) - (trackRect.left + trackRect.width / 2);
-
     if (Math.abs(delta) < 3) return;
-    const behavior = reducedMotion() ? 'auto' : 'smooth';
 
-    if (typeof track.scrollBy === 'function') {
-      track.scrollBy({ left: delta, behavior });
-    } else {
-      active.scrollIntoView({ behavior, block: 'nearest', inline: 'center' });
-    }
+    const behavior = reducedMotion() ? 'auto' : 'smooth';
+    if (typeof track.scrollBy === 'function') track.scrollBy({ left: delta, behavior });
+    else active.scrollIntoView({ behavior, block: 'nearest', inline: 'center' });
   }
 
   function trackedEntries(track) {
@@ -128,19 +120,17 @@
   function setActiveEntry(nav, entries, activeEntry) {
     if (!activeEntry) return;
     const current = entries.find(({ button }) => button.getAttribute('aria-current') === 'true');
-    if (current === activeEntry) return;
+    if (current === activeEntry) {
+      window.requestAnimationFrame(() => centerActiveButton(nav));
+      return;
+    }
 
-    entries.forEach(({ button }) => {
-      const selected = button === activeEntry.button;
-      button.setAttribute('aria-current', selected ? 'true' : 'false');
-    });
-
+    entries.forEach(({ button }) => button.setAttribute('aria-current', button === activeEntry.button ? 'true' : 'false'));
     window.requestAnimationFrame(() => centerActiveButton(nav));
   }
 
   function updateScrollSpy(nav, header, entries) {
     if (!entries.length) return;
-
     const stickyDepth = headerStickyOffset(header) + Math.ceil(nav.getBoundingClientRect().height) + 24;
     const probe = window.scrollY + stickyDepth;
     let active = entries[0];
@@ -152,9 +142,7 @@
     }
 
     const last = entries[entries.length - 1];
-    const nearPageEnd = window.innerHeight + window.scrollY >= doc.documentElement.scrollHeight - 8;
-    if (nearPageEnd) active = last;
-
+    if (window.innerHeight + window.scrollY >= doc.documentElement.scrollHeight - 8) active = last;
     setActiveEntry(nav, entries, active);
   }
 
@@ -176,6 +164,14 @@
     window.addEventListener('resize', queueUpdate, { passive: true });
     window.addEventListener('orientationchange', queueUpdate, { passive: true });
     window.addEventListener('load', queueUpdate, { once: true });
+
+    /* Keep V2 synchronized when the legacy observer or any other module changes aria-current. */
+    const activeObserver = new MutationObserver((mutations) => {
+      if (mutations.some((mutation) => mutation.attributeName === 'aria-current')) {
+        window.requestAnimationFrame(() => centerActiveButton(nav));
+      }
+    });
+    entries.forEach(({ button }) => activeObserver.observe(button, { attributes: true, attributeFilter: ['aria-current'] }));
 
     /* Re-center after AR/EN direction changes. */
     new MutationObserver(() => {
@@ -200,7 +196,6 @@
 
     [...nav.children].forEach((child) => track.appendChild(child));
     nav.appendChild(track);
-
     if (header) header.insertAdjacentElement('afterend', nav);
 
     const syncOffset = () => nav.style.setProperty('--target-section-nav-top', `${headerStickyOffset(header)}px`);
