@@ -1,7 +1,7 @@
 /* TARGET — How We Work Final Refinement V1
  * Post-Baseline visual refinement for capabilities.html only.
  * Canonical sequence/content unchanged.
- * Real trade photography: warehouse/logistics 4483862; quality inspection 5953751.
+ * Real trade photography: warehouse/logistics 4483862; food quality inspection 24394699; packaging process 11679687.
  */
 
 /* HERO — make the route panel genuinely media-led while preserving Product → TARGET → Qatar. */
@@ -81,8 +81,21 @@
   color:rgba(12,73,49,.15);
 }
 
-/* SIX-STEP PROCESS — the signature section. */
+/* SIX-STEP PROCESS — the signature section, now with a real packaging/process media moment. */
 .page-capabilities .work-canonical .work-steps{gap:20px}
+.page-capabilities .work-canonical .work-steps::before{
+  content:"";
+  display:block;
+  grid-column:1/-1;
+  aspect-ratio:16/5;
+  margin-bottom:4px;
+  border:1px solid rgba(12,73,49,.12);
+  border-radius:22px;
+  background:
+    linear-gradient(180deg,rgba(12,73,49,.00),rgba(12,73,49,.12)),
+    url('https://images.pexels.com/photos/11679687/pexels-photo-11679687.jpeg?auto=compress&dpr=1&h=900&w=1600') center 54%/cover no-repeat!important;
+  box-shadow:0 16px 38px rgba(38,38,38,.07);
+}
 .page-capabilities .work-canonical .work-steps li{
   min-height:248px;
   padding:28px;
@@ -131,13 +144,13 @@
   background:rgba(244,237,228,.7)!important;
 }
 
-/* AT THE START — real quality/product-review photography. */
+/* AT THE START — specific, real food-production quality inspection photography. */
 .page-capabilities .work-canonical .work-info-layout::before{
   aspect-ratio:16/10;
   border-radius:22px;
   background:
-    linear-gradient(180deg,rgba(12,73,49,.01),rgba(12,73,49,.13)),
-    url('https://images.pexels.com/photos/5953751/pexels-photo-5953751.jpeg?auto=compress&dpr=1&h=900&w=1400') center 48%/cover no-repeat!important;
+    linear-gradient(180deg,rgba(12,73,49,.00),rgba(12,73,49,.10)),
+    url('https://images.pexels.com/photos/24394699/pexels-photo-24394699/free-photo-of-man-working-in-factory.jpeg?auto=compress&dpr=1&h=900&w=1400') center 48%/cover no-repeat!important;
   box-shadow:0 18px 40px rgba(38,38,38,.08);
 }
 .page-capabilities .work-canonical .work-info-cues{
@@ -178,6 +191,7 @@
 @media(max-width:991.98px){
   .page-capabilities .work-canonical .work-hero__route{aspect-ratio:16/10;max-width:760px}
   .page-capabilities .work-canonical .work-way{min-height:0}
+  .page-capabilities .work-canonical .work-steps::before{aspect-ratio:16/7}
   .page-capabilities .work-canonical .work-info-layout::before{aspect-ratio:16/9}
 }
 @media(max-width:767.98px){
@@ -187,8 +201,9 @@
   .page-capabilities .work-canonical .work-hero__route>strong{width:108px;height:52px;min-height:52px;font-size:.8rem}
   .page-capabilities .work-canonical .work-way{padding:26px 24px}
   .page-capabilities .work-canonical .work-way .work-icon{width:58px;height:58px}
+  .page-capabilities .work-canonical .work-steps::before{aspect-ratio:16/9;border-radius:16px;background-position:center 52%!important}
   .page-capabilities .work-canonical .work-steps li{min-height:0;padding:24px}
-  .page-capabilities .work-canonical .work-info-layout::before{aspect-ratio:4/3;border-radius:16px}
+  .page-capabilities .work-canonical .work-info-layout::before{aspect-ratio:4/3;border-radius:16px;background-position:center 50%!important}
   .page-capabilities .work-canonical .work-clarity__panel{grid-template-columns:1fr;padding:28px 24px}
 }
 @media(prefers-reduced-motion:reduce){
