@@ -1,0 +1,31 @@
+name: TARGET How We Work Final Refinement V1 QA
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'public/assets/how-we-work-final-refinement-v1.css'
+      - 'src/layouts/BaseLayout.astro'
+      - '.github/workflows/how-we-work-final-refinement-v1-qa.yml'
+  workflow_dispatch:
+
+jobs:
+  how-we-work-final-refinement-v1:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify How We Work final refinement layer
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f public/assets/how-we-work-final-refinement-v1.css
+          grep -Fq 'how-we-work-final-refinement-v1.css?v=20260816-01' src/layouts/BaseLayout.astro
+          grep -Fq '4483862' public/assets/how-we-work-final-refinement-v1.css
+          grep -Fq '5953751' public/assets/how-we-work-final-refinement-v1.css
+          grep -Fq '.work-hero__route' public/assets/how-we-work-final-refinement-v1.css
+          grep -Fq '.work-ways' public/assets/how-we-work-final-refinement-v1.css
+          grep -Fq '.work-steps' public/assets/how-we-work-final-refinement-v1.css
+          grep -Fq '.work-audiences' public/assets/how-we-work-final-refinement-v1.css
+          grep -Fq '.work-info-layout::before' public/assets/how-we-work-final-refinement-v1.css
+          grep -Fq '.work-clarity__panel' public/assets/how-we-work-final-refinement-v1.css
+          grep -Fq '.work-final>.container' public/assets/how-we-work-final-refinement-v1.css
