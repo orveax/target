@@ -1,0 +1,246 @@
+/* TARGET — Products & Companies Polish V1
+ * Canonical visual refinement — 2026-08-17
+ * Scope: product-led hero, 3+2 category composition, stronger 2x2 company selectors,
+ * restrained principle cards, cleaner public-facing portfolio detail, RTL/LTR responsive polish.
+ */
+
+.page-food-portfolio{--pc-green:#0c4931;--pc-deep:#073b29;--pc-sand:#c09552;--pc-cream:#f4ede4;--pc-charcoal:#262626;--pc-line:rgba(12,73,49,.12)}
+
+/* HERO — real food/product photography, not editorial artwork. */
+.page-food-portfolio .portfolio-hero-media{
+  overflow:visible;
+  border-radius:24px;
+  background:
+    linear-gradient(180deg,rgba(7,59,41,.02) 0%,rgba(7,59,41,.10) 58%,rgba(7,59,41,.28) 100%),
+    url('https://images.pexels.com/photos/10907746/pexels-photo-10907746.jpeg?auto=compress&cs=tinysrgb&w=1600') center 52%/cover no-repeat;
+  box-shadow:0 26px 54px rgba(2,31,20,.24);
+}
+.page-food-portfolio .portfolio-hero-media>img{
+  opacity:0!important;
+  pointer-events:none;
+}
+.page-food-portfolio .portfolio-hero-media::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border:1px solid rgba(244,237,228,.20);
+  border-radius:24px;
+  pointer-events:none;
+}
+.page-food-portfolio .portfolio-hero-media figcaption{
+  inset-inline:18px!important;
+  inset-block-end:-22px!important;
+  align-items:stretch;
+  border-radius:16px!important;
+  padding:9px!important;
+  background:rgba(255,254,251,.96)!important;
+  backdrop-filter:blur(14px);
+}
+.page-food-portfolio .portfolio-hero-media figcaption span{
+  min-height:54px;
+  justify-content:center;
+  text-align:center;
+  border:1px solid rgba(12,73,49,.07);
+  background:rgba(244,237,228,.62)!important;
+}
+.page-food-portfolio .portfolio-hero-copy h1{max-width:15.5ch!important;text-wrap:balance}
+
+/* PORTFOLIO PRINCIPLES — explanatory, restrained, lighter than company cards. */
+.page-food-portfolio .portfolio-principles{gap:16px!important}
+.page-food-portfolio .portfolio-principles article{
+  min-height:0!important;
+  padding:24px!important;
+  border-radius:18px!important;
+  border:1px solid rgba(12,73,49,.10)!important;
+  background:#fff!important;
+  box-shadow:0 8px 22px rgba(38,38,38,.025)!important;
+}
+.page-food-portfolio .portfolio-principles article:hover{
+  transform:translateY(-2px)!important;
+  border-color:rgba(12,73,49,.24)!important;
+  background:#fff!important;
+  color:var(--pc-charcoal)!important;
+  box-shadow:0 14px 28px rgba(12,73,49,.065)!important;
+}
+.page-food-portfolio .portfolio-principles article:hover .portfolio-icon{
+  border-color:rgba(12,73,49,.14)!important;
+  background:rgba(244,237,228,.72)!important;
+  color:var(--pc-green)!important;
+}
+.page-food-portfolio .portfolio-principles article:hover p{color:rgba(38,38,38,.69)!important}
+
+/* FIVE CATEGORIES — readable centered 3+2 composition on wide screens. */
+.page-food-portfolio .portfolio-category-grid{
+  display:grid!important;
+  grid-template-columns:repeat(6,minmax(0,1fr))!important;
+  gap:18px!important;
+}
+.page-food-portfolio .portfolio-category-grid article{
+  grid-column:span 2;
+  border-radius:20px!important;
+  border:1px solid rgba(12,73,49,.11)!important;
+  box-shadow:0 9px 24px rgba(38,38,38,.04)!important;
+}
+.page-food-portfolio .portfolio-category-grid article:nth-child(4){grid-column:2/span 2}
+.page-food-portfolio .portfolio-category-grid article:nth-child(5){grid-column:4/span 2}
+.page-food-portfolio .portfolio-category-media{aspect-ratio:16/10!important;min-height:170px}
+.page-food-portfolio .portfolio-category-body{
+  min-height:126px!important;
+  display:grid!important;
+  grid-template-columns:50px minmax(0,1fr)!important;
+  align-items:center!important;
+  gap:14px!important;
+  padding:20px!important;
+}
+.page-food-portfolio .portfolio-category-body .portfolio-icon{margin:0!important}
+.page-food-portfolio .portfolio-category-body strong{font-size:1.04rem!important;line-height:1.5!important}
+
+/* COMPANIES — page center of gravity: strong 2x2 product-led selectors. */
+.page-food-portfolio .portfolio-companies-section{padding-top:104px!important;padding-bottom:104px!important}
+.page-food-portfolio .portfolio-companies-head{max-width:900px!important;margin-bottom:38px!important}
+.page-food-portfolio .portfolio-company-grid{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:22px!important;
+  margin-bottom:28px!important;
+  overflow:visible!important;
+  padding:0!important;
+}
+.page-food-portfolio .company-tile{
+  min-width:0!important;
+  min-height:250px!important;
+  display:grid!important;
+  grid-template-columns:minmax(210px,.9fr) minmax(0,1.1fr)!important;
+  overflow:hidden!important;
+  border-radius:22px!important;
+  border:1px solid rgba(12,73,49,.12)!important;
+  background:#fff!important;
+  box-shadow:0 12px 30px rgba(38,38,38,.045)!important;
+  scroll-snap-align:none!important;
+}
+.page-food-portfolio .company-tile:hover,
+.page-food-portfolio .company-tile.active{
+  transform:translateY(-3px)!important;
+  border-color:rgba(12,73,49,.30)!important;
+  box-shadow:0 20px 42px rgba(12,73,49,.10)!important;
+}
+.page-food-portfolio .company-tile.active{box-shadow:0 0 0 2px rgba(12,73,49,.05),0 20px 42px rgba(12,73,49,.10)!important}
+.page-food-portfolio .company-tile-cover{
+  height:100%!important;
+  min-height:250px!important;
+  aspect-ratio:auto!important;
+  border-bottom:0!important;
+  border-inline-end:1px solid rgba(12,73,49,.10)!important;
+  background-position:center!important;
+}
+.page-food-portfolio .company-tile-cover::after{background:linear-gradient(180deg,rgba(7,59,41,.02),rgba(7,59,41,.40))!important}
+.page-food-portfolio .company-tile-body{
+  min-height:250px!important;
+  grid-template-columns:58px minmax(0,1fr)!important;
+  align-content:center!important;
+  gap:16px!important;
+  padding:26px!important;
+}
+.page-food-portfolio .company-logo-slot{width:58px!important;height:58px!important;border-radius:16px!important;background:rgba(244,237,228,.74)!important}
+.page-food-portfolio .company-tile-copy{gap:7px!important}
+.page-food-portfolio .company-tile-copy strong{font-size:1.45rem!important;line-height:1.2!important}
+.page-food-portfolio .company-tile-copy small{font-size:.88rem!important;line-height:1.6!important;color:#626c66!important}
+.page-food-portfolio .company-count{
+  margin-top:8px!important;
+  padding:7px 10px!important;
+  border:1px solid rgba(12,73,49,.09)!important;
+  background:rgba(12,73,49,.045)!important;
+  color:var(--pc-green)!important;
+}
+.page-food-portfolio .company-tile.active .company-count{background:var(--pc-green)!important;color:#fff!important;border-color:var(--pc-green)!important}
+
+/* SELECTED COMPANY DETAIL — keep useful product detail, remove internal-production language. */
+.page-food-portfolio .portfolio-detail{
+  gap:22px!important;
+  padding:12px!important;
+  border-radius:28px!important;
+  border:1px solid rgba(12,73,49,.08)!important;
+  background:linear-gradient(145deg,#f0f5f1,#fbf8f2)!important;
+  box-shadow:0 22px 46px rgba(38,38,38,.055)!important;
+}
+.page-food-portfolio .company-profile-card,
+.page-food-portfolio .company-products{border-radius:20px!important;border:1px solid rgba(12,73,49,.09)!important;box-shadow:none!important}
+.page-food-portfolio .visual-note,
+.page-food-portfolio .claim-note,
+.page-food-portfolio .products-intro{display:none!important}
+.page-food-portfolio .company-profile-body{padding:28px!important}
+.page-food-portfolio .company-products{padding:28px!important}
+.page-food-portfolio .product-gallery{gap:12px!important}
+.page-food-portfolio .product-gallery article{border-radius:15px!important;box-shadow:0 7px 18px rgba(38,38,38,.035)!important}
+.page-food-portfolio .product-tags{gap:8px!important;margin-top:20px!important}
+.page-food-portfolio .product-tags span{background:rgba(244,237,228,.45)!important}
+.page-food-portfolio .company-resource-row:not(:has(a)){display:none!important}
+.page-food-portfolio .company-resource-row small{display:none!important}
+
+/* REVIEW + CLARITY — keep compact and commercially readable. */
+.page-food-portfolio .portfolio-review-steps{border-radius:20px!important;box-shadow:0 10px 24px rgba(38,38,38,.035)}
+.page-food-portfolio .portfolio-review-steps article{min-height:74px!important}
+.page-food-portfolio .portfolio-clarity-panel{
+  border-inline-start:4px solid var(--pc-sand)!important;
+  border-radius:22px!important;
+  background:linear-gradient(135deg,var(--pc-cream),#fff)!important;
+  box-shadow:0 12px 28px rgba(38,38,38,.04)!important;
+}
+.page-food-portfolio .portfolio-final-panel{border:1px solid rgba(255,255,255,.07)!important;box-shadow:0 22px 44px rgba(38,38,38,.14)!important}
+
+@media(max-width:1199.98px){
+  .page-food-portfolio .portfolio-category-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .page-food-portfolio .portfolio-category-grid article,
+  .page-food-portfolio .portfolio-category-grid article:nth-child(4),
+  .page-food-portfolio .portfolio-category-grid article:nth-child(5){grid-column:auto!important}
+  .page-food-portfolio .portfolio-category-grid article:last-child{grid-column:1/-1!important}
+  .page-food-portfolio .portfolio-company-grid{gap:18px!important}
+  .page-food-portfolio .company-tile{grid-template-columns:170px minmax(0,1fr)!important}
+}
+
+@media(max-width:991.98px){
+  .page-food-portfolio .portfolio-hero-media{max-width:760px!important;aspect-ratio:4/3!important}
+  .page-food-portfolio .portfolio-companies-section{padding-block:76px!important}
+  .page-food-portfolio .portfolio-company-grid{grid-template-columns:1fr!important}
+  .page-food-portfolio .company-tile{grid-template-columns:minmax(210px,.8fr) minmax(0,1.2fr)!important}
+  .page-food-portfolio .company-tile-cover{min-height:220px!important}
+  .page-food-portfolio .company-tile-body{min-height:220px!important}
+}
+
+@media(max-width:767.98px){
+  .page-food-portfolio .portfolio-hero-copy h1{max-width:16.5ch!important}
+  .page-food-portfolio .portfolio-hero-media{aspect-ratio:4/3!important;border-radius:18px!important}
+  .page-food-portfolio .portfolio-hero-media::before{border-radius:18px!important}
+  .page-food-portfolio .portfolio-hero-media figcaption{inset-inline:10px!important;inset-block-end:-28px!important;grid-template-columns:1fr 1fr!important}
+  .page-food-portfolio .portfolio-hero-media figcaption span{min-height:48px;padding:8px!important}
+  .page-food-portfolio .portfolio-category-grid{grid-template-columns:1fr!important;gap:14px!important}
+  .page-food-portfolio .portfolio-category-grid article:last-child{grid-column:auto!important}
+  .page-food-portfolio .portfolio-category-grid article{display:grid!important;grid-template-columns:126px minmax(0,1fr)!important}
+  .page-food-portfolio .portfolio-category-media{height:100%!important;min-height:132px!important;aspect-ratio:auto!important}
+  .page-food-portfolio .portfolio-category-body{grid-template-columns:44px minmax(0,1fr)!important;min-height:132px!important;padding:16px!important}
+  .page-food-portfolio .portfolio-company-grid{grid-template-columns:1fr!important;gap:14px!important;margin-bottom:20px!important}
+  .page-food-portfolio .company-tile{display:grid!important;grid-template-columns:132px minmax(0,1fr)!important;min-height:180px!important;border-radius:18px!important}
+  .page-food-portfolio .company-tile-cover{min-height:180px!important}
+  .page-food-portfolio .company-tile-body{min-height:180px!important;grid-template-columns:46px minmax(0,1fr)!important;padding:18px!important;gap:12px!important}
+  .page-food-portfolio .company-logo-slot{width:46px!important;height:46px!important;border-radius:13px!important}
+  .page-food-portfolio .company-tile-copy strong{font-size:1.2rem!important}
+  .page-food-portfolio .company-tile-state{display:none!important}
+  .page-food-portfolio .portfolio-detail{padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important}
+  .page-food-portfolio .company-profile-body,.page-food-portfolio .company-products{padding:22px 18px!important}
+  .page-food-portfolio .product-gallery{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+
+@media(max-width:480px){
+  .page-food-portfolio .portfolio-hero-media figcaption{grid-template-columns:1fr!important}
+  .page-food-portfolio .company-tile{grid-template-columns:112px minmax(0,1fr)!important}
+  .page-food-portfolio .company-tile-body{grid-template-columns:40px minmax(0,1fr)!important;padding:15px!important}
+  .page-food-portfolio .company-logo-slot{width:40px!important;height:40px!important}
+  .page-food-portfolio .company-kicker{font-size:.66rem!important}
+  .page-food-portfolio .company-tile-copy strong{font-size:1.08rem!important}
+  .page-food-portfolio .company-tile-copy small{font-size:.74rem!important}
+  .page-food-portfolio .company-count{font-size:.65rem!important}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .page-food-portfolio *{transition-duration:.01ms!important;animation-duration:.01ms!important}
+}
