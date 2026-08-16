@@ -1,11 +1,22 @@
 /* TARGET — Mobile Navigation Refinement V2 runtime
    Post-baseline refinement — 2026-08-16
-   Scope: scroll cue visibility + direction sync.
+   Scope: stylesheet loader, scroll cue visibility + direction sync.
 */
 (function(){
   'use strict';
 
+  const ensureStyles = () => {
+    if (document.querySelector('link[data-target-mobile-nav-v2]')) return;
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = '/assets/mobile-nav-refinement-v2.css?v=20260816-01';
+    link.dataset.targetMobileNavV2 = 'true';
+    document.head.appendChild(link);
+  };
+
   const init = () => {
+    ensureStyles();
+
     const drawer = document.querySelector('.premium-mobile-nav');
     const scroller = drawer?.querySelector('[data-mobile-nav-scroll]');
     const cue = drawer?.querySelector('.premium-mobile-scroll-cue');
@@ -50,6 +61,7 @@
     syncCue();
   };
 
+  ensureStyles();
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, {once:true});
   else init();
 })();
