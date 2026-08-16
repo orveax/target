@@ -1,0 +1,41 @@
+name: TARGET Contact Us Polish V3 QA
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'public/assets/contact-polish-v3.css'
+      - 'src/layouts/BaseLayout.astro'
+      - 'src/pages/contact.astro'
+      - '.github/workflows/contact-polish-v3-qa.yml'
+  workflow_dispatch:
+
+jobs:
+  contact-polish-v3:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify contact visual contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f public/assets/contact-polish-v3.css
+          grep -Fq 'contact-polish-v3.css?v=20260817-01' src/layouts/BaseLayout.astro
+          grep -Fq '35642370' public/assets/contact-polish-v3.css
+          grep -Fq '.page-contact .ct-form-layout' public/assets/contact-polish-v3.css
+          grep -Fq '1.76fr' public/assets/contact-polish-v3.css
+          grep -Fq '.page-contact .ct-route-note' public/assets/contact-polish-v3.css
+          grep -Fq '.page-contact .ct-channel-grid' public/assets/contact-polish-v3.css
+          grep -Fq 'repeat(2,minmax(0,1fr))' public/assets/contact-polish-v3.css
+          grep -Fq '.page-contact .ct-map-context' public/assets/contact-polish-v3.css
+          grep -Fq 'prefers-reduced-motion:reduce' public/assets/contact-polish-v3.css
+          grep -Fq 'info@targetft.com' src/pages/contact.astro
+          grep -Fq 'sales@targetft.com' src/pages/contact.astro
+          grep -Fq 'procurement@targetft.com' src/pages/contact.astro
+          grep -Fq 'partners@targetft.com' src/pages/contact.astro
+          grep -Fq 'suppliers.html' src/pages/contact.astro
+          ! grep -Fq '+974 XXXX' src/pages/contact.astro
+      - name: Build Astro site
+        run: |
+          npm install
+          npm run build
