@@ -1,0 +1,27 @@
+name: TARGET Global Footer V2 QA
+on:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  footer-v2:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install
+      - run: npm run build
+      - name: Verify Footer V2 contract
+        run: |
+          test -f dist/assets/footer-premium-v2.css
+          grep -q 'footer-premium-v2.css' dist/index.html
+          grep -q 'premium-footer-v2' dist/index.html
+          grep -q 'footer-v2-contact-strip' dist/about.html
+          grep -q 'footer-v2-cta' dist/contact.html
+          grep -q 'partners@targetft.com' dist/index.html
+          grep -q 'sales@targetft.com' dist/index.html
+          grep -q '97477910919' dist/index.html
+          grep -q 'if(footer.classList.contains' dist/assets/premium-v6.js
+          ! grep -R -q 'RFX' dist
