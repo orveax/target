@@ -1,10 +1,10 @@
-name: TARGET Global Footer V2 QA
+name: TARGET Global Footer V3 QA
 on:
   pull_request:
   push:
     branches: [main]
 jobs:
-  footer-v2:
+  footer-v3:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -13,15 +13,22 @@ jobs:
           node-version: 22
       - run: npm install
       - run: npm run build
-      - name: Verify Footer V2 contract
+      - name: Verify Footer V3 contract
         run: |
           test -f dist/assets/footer-premium-v2.css
-          grep -q 'footer-premium-v2.css' dist/index.html
-          grep -q 'premium-footer-v2' dist/index.html
-          grep -q 'footer-v2-contact-strip' dist/about.html
-          grep -q 'footer-v2-cta' dist/contact.html
+          test -f dist/assets/footer-premium-v3.css
+          grep -q 'footer-premium-v3.css?v=20260817-01' dist/index.html
+          grep -q 'premium-footer-v3' dist/index.html
+          grep -q 'footer-v3-nav-grid' dist/about.html
+          grep -q 'footer-v3-contact-strip' dist/contact.html
+          grep -q 'footer-v3-brand-mark' dist/index.html
+          grep -q 'footer-v3-delivery' dist/index.html
+          grep -q 'Digital Experience & Implementation' dist/index.html
+          grep -q 'https://orveax.com' dist/index.html
           grep -q 'partners@targetft.com' dist/index.html
           grep -q 'sales@targetft.com' dist/index.html
           grep -q '97477910919' dist/index.html
+          grep -q 'grid-template-columns:repeat(4,minmax(0,1fr))' dist/assets/footer-premium-v3.css
+          grep -q 'footer-v3-logo-link:hover' dist/assets/footer-premium-v3.css
           grep -q 'if(footer.classList.contains' dist/assets/premium-v6.js
           ! grep -R -q 'RFX' dist
