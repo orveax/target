@@ -1,0 +1,24 @@
+name: TARGET Final Site Freeze QA
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  final-freeze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install dependencies
+        run: npm install
+      - name: Build Astro site
+        run: npm run build
+      - name: Check final delivery scripts
+        run: |
+          node --check public/assets/form-delivery-v1.js
+          node --check scripts/final-audit.mjs
+      - name: Run site-wide final audit
+        run: node scripts/final-audit.mjs
