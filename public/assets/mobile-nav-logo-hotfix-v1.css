@@ -1,0 +1,49 @@
+/* TARGET — Mobile Navigation Logo Hotfix V1
+ * Guarantees visible brand mark on the light mobile offcanvas header.
+ */
+@media (max-width:1199.98px){
+  .premium-mobile-nav .premium-mobile-head::before,
+  .premium-mobile-nav .offcanvas-header::before{
+    content:none!important;
+    display:none!important;
+  }
+  .premium-mobile-nav .premium-mobile-head{
+    align-items:center!important;
+    gap:12px!important;
+  }
+  .premium-mobile-nav .premium-mobile-brand{
+    display:flex!important;
+    align-items:center!important;
+    min-width:0!important;
+    flex:1 1 auto!important;
+  }
+  .premium-mobile-nav .mobile-brand-logo{
+    display:block!important;
+    width:154px!important;
+    max-width:min(58vw,180px)!important;
+    height:auto!important;
+    min-height:42px!important;
+    object-fit:contain!important;
+    object-position:center!important;
+    padding:7px 10px!important;
+    margin:0!important;
+    border:1px solid rgba(192,149,82,.34)!important;
+    border-radius:11px!important;
+    background:#0C4931!important;
+    box-shadow:0 7px 18px rgba(12,73,49,.14)!important;
+    filter:none!important;
+    opacity:1!important;
+    visibility:visible!important;
+  }
+  .premium-mobile-nav .premium-mobile-brand > div{
+    min-width:0!important;
+    margin-inline-start:10px!important;
+  }
+}
+@media (max-width:575.98px){
+  .premium-mobile-nav .mobile-brand-logo{
+    width:138px!important;
+    min-height:39px!important;
+    padding:6px 9px!important;
+  }
+}
