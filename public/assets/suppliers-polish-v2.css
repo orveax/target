@@ -1,0 +1,228 @@
+/* TARGET — For Suppliers Polish V2 — conversion hierarchy + real food-manufacturing photography */
+.page-suppliers .fs-hero-media>img{
+  content:url('https://images.pexels.com/photos/11679687/pexels-photo-11679687.jpeg?auto=compress&cs=tinysrgb&w=1600');
+  object-fit:cover;
+  object-position:center 48%;
+  filter:saturate(.92) contrast(1.025);
+}
+.page-suppliers .fs-prepare-media img{
+  content:url('https://images.pexels.com/photos/5953728/pexels-photo-5953728.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  object-fit:cover;
+  object-position:center 45%;
+  filter:saturate(.9) contrast(1.02);
+}
+.page-suppliers .fs-hero-media,
+.page-suppliers .fs-prepare-media{
+  background:#e8e1d7;
+}
+.page-suppliers .fs-hero-media>img,
+.page-suppliers .fs-prepare-media img{
+  transition:transform .35s ease,filter .35s ease;
+}
+@media (hover:hover) and (pointer:fine){
+  .page-suppliers .fs-hero-media:hover>img,
+  .page-suppliers .fs-prepare-media:hover img{
+    transform:scale(1.012);
+    filter:saturate(.98) contrast(1.035);
+  }
+}
+
+/* Audience cues stay fast and light — not heavy capability cards. */
+.page-suppliers .fs-audience-grid{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+}
+.page-suppliers .fs-audience-grid article{
+  min-height:150px;
+  padding:19px 20px;
+  border:1px solid rgba(12,73,49,.11);
+  border-radius:18px;
+  background:linear-gradient(180deg,#fff 0%,rgba(244,237,228,.58) 100%);
+  box-shadow:none;
+  transition:border-color .2s ease,background .2s ease,transform .2s ease;
+}
+.page-suppliers .fs-audience-grid .fs-icon{
+  background:rgba(12,73,49,.055);
+  border-color:rgba(12,73,49,.11);
+}
+@media (hover:hover) and (pointer:fine){
+  .page-suppliers .fs-audience-grid article:hover{
+    transform:translateY(-2px);
+    border-color:rgba(12,73,49,.21);
+    background:linear-gradient(180deg,#fff 0%,rgba(244,237,228,.82) 100%);
+  }
+}
+.page-suppliers .fs-general-note{
+  margin-top:18px;
+  border-radius:14px;
+  background:rgba(255,255,255,.7);
+}
+
+/* Prepare section reads like an intake checklist, not another feature grid. */
+.page-suppliers .fs-prepare-grid{align-items:stretch}
+.page-suppliers .fs-checklist{
+  overflow:hidden;
+  margin-top:24px;
+  border:1px solid rgba(12,73,49,.12);
+  border-radius:18px;
+  background:#fff;
+}
+.page-suppliers .fs-checklist article{
+  min-height:104px;
+  padding:18px 18px;
+  border-bottom:1px solid rgba(12,73,49,.09);
+  background:transparent;
+}
+.page-suppliers .fs-checklist article:last-child{border-bottom:0}
+.page-suppliers .fs-support-note{
+  margin-top:16px;
+  padding:14px 16px;
+  border-inline-start:3px solid var(--target-sand,#C09552);
+  border-radius:10px;
+  background:rgba(244,237,228,.75);
+}
+.page-suppliers .fs-prepare-media{
+  overflow:hidden;
+  border-radius:22px;
+  box-shadow:0 18px 42px rgba(38,38,38,.08);
+}
+
+/* Product Review Request is the conversion focal point. */
+.page-suppliers .fs-form-section{
+  background:linear-gradient(180deg,#fff 0%,rgba(244,237,228,.7) 100%);
+}
+.page-suppliers .fs-form-layout{
+  grid-template-columns:minmax(0,1.58fr) minmax(300px,.72fr);
+  gap:28px;
+  align-items:start;
+}
+.page-suppliers .fs-form{
+  border:1px solid rgba(12,73,49,.13);
+  border-radius:22px;
+  background:#fff;
+  box-shadow:0 18px 46px rgba(38,38,38,.055);
+}
+.page-suppliers .fs-form-head{
+  padding-bottom:22px;
+  margin-bottom:22px;
+  border-bottom:1px solid rgba(12,73,49,.10);
+}
+.page-suppliers .fs-form-icon{
+  background:var(--target-cream,#F4EDE4);
+  color:var(--target-forest,#0C4931);
+  border:1px solid rgba(12,73,49,.12);
+}
+.page-suppliers .fs-field label{
+  margin-bottom:8px;
+  color:var(--target-charcoal,#262626);
+  font-weight:700;
+}
+.page-suppliers .fs-field .form-control,
+.page-suppliers .fs-field .form-select{
+  min-height:54px;
+  border-color:rgba(38,38,38,.16);
+  border-radius:12px;
+  background:#fff;
+  box-shadow:none;
+}
+.page-suppliers .fs-field textarea.form-control{
+  min-height:170px;
+  resize:vertical;
+}
+.page-suppliers .fs-field .form-control:focus,
+.page-suppliers .fs-field .form-select:focus{
+  border-color:rgba(12,73,49,.62);
+  box-shadow:0 0 0 4px rgba(12,73,49,.09);
+}
+.page-suppliers .privacy-check{
+  padding:14px 15px;
+  border-radius:12px;
+  background:rgba(244,237,228,.64);
+}
+.page-suppliers .fs-submit{
+  min-height:56px;
+  padding-inline:30px;
+  border-radius:13px;
+  box-shadow:0 10px 24px rgba(12,73,49,.14);
+}
+.page-suppliers .fs-submit:hover,
+.page-suppliers .fs-submit:focus-visible{
+  background:#073b29;
+  border-color:#073b29;
+  color:#fff;
+}
+
+/* After-submit rail = clear supporting state, visually distinct from the form. */
+.page-suppliers .fs-after{
+  position:sticky;
+  top:104px;
+  overflow:hidden;
+  padding:26px 24px;
+  border:1px solid rgba(192,149,82,.42);
+  border-radius:22px;
+  background:linear-gradient(150deg,#0C4931 0%,#093b29 78%,#0d5238 100%);
+  color:var(--target-cream,#F4EDE4);
+  box-shadow:0 18px 38px rgba(12,73,49,.14);
+}
+.page-suppliers .fs-after .fs-kicker{color:var(--target-sand,#C09552)!important}
+.page-suppliers .fs-after h2{color:#fff!important}
+.page-suppliers .fs-after-steps article{
+  border-color:rgba(255,255,255,.13);
+}
+.page-suppliers .fs-after-steps h3{color:#fff!important}
+.page-suppliers .fs-after-steps p{color:rgba(244,237,228,.82)!important}
+.page-suppliers .fs-after .fs-step-number{color:#d8b57c!important}
+.page-suppliers .fs-after .fs-icon{
+  border-color:rgba(192,149,82,.38);
+  background:var(--target-cream,#F4EDE4);
+  color:var(--target-forest,#0C4931);
+}
+.page-suppliers .fs-after-note{
+  border-color:rgba(192,149,82,.34);
+  background:rgba(255,255,255,.08);
+  color:var(--target-cream,#F4EDE4);
+}
+.page-suppliers .fs-after-note svg{color:var(--target-sand,#C09552)}
+
+/* Commercial clarity stays calm, compact and highly scannable. */
+.page-suppliers .fs-clarity-panel{
+  border-radius:22px;
+  box-shadow:none;
+}
+.page-suppliers .fs-clarity-list{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+}
+.page-suppliers .fs-clarity-list article{
+  min-height:138px;
+  border:1px solid rgba(12,73,49,.10);
+  border-radius:16px;
+  background:rgba(255,255,255,.72);
+}
+
+@media(max-width:991.98px){
+  .page-suppliers .fs-form-layout{grid-template-columns:1fr}
+  .page-suppliers .fs-after{position:relative;top:auto}
+  .page-suppliers .fs-hero-media>img{object-position:center center}
+  .page-suppliers .fs-prepare-media img{object-position:center center}
+}
+@media(max-width:767.98px){
+  .page-suppliers .fs-audience-grid,
+  .page-suppliers .fs-clarity-list{grid-template-columns:1fr}
+  .page-suppliers .fs-audience-grid article{min-height:auto}
+}
+@media(max-width:575.98px){
+  .page-suppliers .fs-hero-media,
+  .page-suppliers .fs-prepare-media{aspect-ratio:4/3}
+  .page-suppliers .fs-form,
+  .page-suppliers .fs-after{border-radius:18px}
+  .page-suppliers .fs-submit{width:100%}
+}
+@media(prefers-reduced-motion:reduce){
+  .page-suppliers .fs-hero-media>img,
+  .page-suppliers .fs-prepare-media img,
+  .page-suppliers .fs-audience-grid article{
+    transition:none!important;
+    transform:none!important;
+  }
+}
