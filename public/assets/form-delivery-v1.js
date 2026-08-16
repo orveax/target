@@ -97,12 +97,22 @@
     holder.insertAdjacentElement('beforebegin', note);
   }
 
+  function normalizeFooterCredit() {
+    const bottom = doc.querySelector('.site-footer .footer-bottom');
+    const credit = bottom?.querySelector('span:last-child');
+    if (!credit) return;
+    credit.dataset.ar = 'جميع الحقوق محفوظة © TARGET 2026';
+    credit.dataset.en = 'TARGET 2026 © All rights reserved';
+    credit.textContent = isAr() ? credit.dataset.ar : credit.dataset.en;
+  }
+
   function initialize() {
     doc.querySelectorAll('form[data-target-form]').forEach((form) => {
       form.dataset.deliveryMode = 'email-client';
       setDeliveryStatus(form);
       addDeliveryNote(form);
     });
+    window.setTimeout(normalizeFooterCredit, 0);
   }
 
   doc.addEventListener('submit', (event) => {
