@@ -5,6 +5,8 @@ on:
     branches: [main]
     paths:
       - 'public/assets/how-we-work-final-refinement-v1.css'
+      - 'public/assets/how-we-work-polish-v3.css'
+      - 'src/components/HowWeWorkCanonical.astro'
       - 'src/layouts/BaseLayout.astro'
       - '.github/workflows/how-we-work-final-refinement-v1-qa.yml'
   workflow_dispatch:
@@ -14,22 +16,31 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Verify How We Work locked composition layer
+      - name: Verify How We Work locked composition and polish V3
         shell: bash
         run: |
           set -euo pipefail
           test -f public/assets/how-we-work-final-refinement-v1.css
+          test -f public/assets/how-we-work-polish-v3.css
           grep -Fq 'how-we-work-final-refinement-v1.css?v=20260816-05' src/layouts/BaseLayout.astro
-          grep -Fq '11679687' public/assets/how-we-work-final-refinement-v1.css
-          grep -Fq '24394699' public/assets/how-we-work-final-refinement-v1.css
-          ! grep -Fq '4483862' public/assets/how-we-work-final-refinement-v1.css
-          grep -Fq '.work-hero__route' public/assets/how-we-work-final-refinement-v1.css
-          grep -Fq '.work-ways' public/assets/how-we-work-final-refinement-v1.css
+          grep -Fq 'how-we-work-polish-v3.css?v=20260817-01' src/layouts/BaseLayout.astro
+          grep -Fq '5953777' public/assets/how-we-work-polish-v3.css
+          grep -Fq 'display:flex!important' public/assets/how-we-work-polish-v3.css
+          grep -Fq 'max-inline-size:17.5ch' public/assets/how-we-work-polish-v3.css
+          grep -Fq '.work-way::after' public/assets/how-we-work-polish-v3.css
+          grep -Fq 'content:none!important' public/assets/how-we-work-polish-v3.css
+          grep -Fq '.work-audience-focus-label' public/assets/how-we-work-polish-v3.css
+          grep -Fq '.work-audience-focus' public/assets/how-we-work-polish-v3.css
+          grep -Fq 'فئات نركز عليها' src/components/HowWeWorkCanonical.astro
+          grep -Fq 'الشاي والمشروبات العشبية' src/components/HowWeWorkCanonical.astro
+          grep -Fq 'العصائر والمشروبات التقليدية' src/components/HowWeWorkCanonical.astro
+          grep -Fq 'العسل والدبس والحلويات التقليدية' src/components/HowWeWorkCanonical.astro
+          grep -Fq 'الألبان والمجمدات والأغذية المجهزة' src/components/HowWeWorkCanonical.astro
+          grep -Fq 'منتجات غذائية استهلاكية مختارة' src/components/HowWeWorkCanonical.astro
           grep -Fq '.work-steps::before' public/assets/how-we-work-final-refinement-v1.css
           grep -Fq 'inset-inline-start:50%' public/assets/how-we-work-final-refinement-v1.css
           grep -Fq '.work-steps li:nth-child(even)' public/assets/how-we-work-final-refinement-v1.css
           grep -Fq 'grid-template-areas:' public/assets/how-we-work-final-refinement-v1.css
-          grep -Fq '.work-audiences' public/assets/how-we-work-final-refinement-v1.css
           grep -Fq '.work-info-layout::before' public/assets/how-we-work-final-refinement-v1.css
           grep -Fq '.work-clarity__panel' public/assets/how-we-work-final-refinement-v1.css
           grep -Fq '.work-final>.container' public/assets/how-we-work-final-refinement-v1.css
