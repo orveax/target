@@ -29,5 +29,8 @@ jobs:
           grep -q "attributeFilter: \['aria-current'\]" public/assets/target-section-nav-v2.js
           grep -q 'activeObserver' public/assets/target-section-nav-v2.js
           grep -q "track.dir = root.dir" public/assets/target-section-nav-v2.js
-          grep -q 'target-logo-horizontal-forest.svg' src/components/SiteHeader.astro
-          ! grep -q 'mobile-brand-logo.*target-logo-horizontal-light.svg' src/components/SiteHeader.astro
+          test -f public/assets/mobile-nav-logo-hotfix-v1.css
+          grep -q 'mobile-nav-logo-hotfix-v1.css?v=20260816-01' src/layouts/BaseLayout.astro
+          grep -q 'mobile-brand-logo.*target-logo-horizontal-light.svg' src/components/SiteHeader.astro
+          grep -q 'background:#0C4931' public/assets/mobile-nav-logo-hotfix-v1.css
+          grep -q 'content:none!important' public/assets/mobile-nav-logo-hotfix-v1.css
