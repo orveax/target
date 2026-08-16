@@ -27,14 +27,14 @@ const primaryNav = [
   </nav>
 </header>
 <div class="offcanvas offcanvas-start premium-mobile-nav" tabindex="-1" id="mobileNav" aria-labelledby="mobileNavLabel">
+  <span id="mobileNavLabel" class="visually-hidden" data-ar="قائمة تارقت" data-en="TARGET navigation">قائمة تارقت</span>
   <div class="offcanvas-header premium-mobile-head">
     <div class="premium-mobile-brand">
       <img class="mobile-brand-logo" src="/assets/brand/target-logo-horizontal-light.svg" alt="TARGET — تارقت">
-      <div><span class="premium-mobile-eyebrow" data-ar="التنقل" data-en="Navigation">التنقل</span><strong id="mobileNavLabel" data-ar="استكشف تارقت" data-en="Explore TARGET">استكشف تارقت</strong></div>
     </div>
     <button type="button" class="premium-mobile-close" data-bs-dismiss="offcanvas" aria-label="إغلاق القائمة" data-ar-aria="إغلاق القائمة" data-en-aria="Close menu"><i data-lucide="x"></i></button>
   </div>
-  <div class="offcanvas-body">
+  <div class="offcanvas-body" data-mobile-nav-scroll>
     <p class="premium-mobile-intro" data-ar="روابط واضحة للوصول السريع إلى ما تحتاجه." data-en="A clear route to the information you need.">روابط واضحة للوصول السريع إلى ما تحتاجه.</p>
     <nav class="premium-mobile-links" aria-label="Mobile navigation">
       <a class:list={['nav-link', active==='home' && 'active']} href="index.html"><span><i data-lucide="house"></i><b data-ar="الرئيسية" data-en="Home">الرئيسية</b></span><i data-lucide="arrow-up-left"></i></a>
@@ -45,13 +45,12 @@ const primaryNav = [
     </nav>
     <div class="premium-mobile-cta">
       <a class="btn-premium btn-primary-premium w-100" href="suppliers.html"><i data-lucide="send"></i><span data-ar="ناقش منتجك معنا" data-en="Discuss Your Product">ناقش منتجك معنا</span></a>
-      <a class="premium-mobile-profile-link" href="company-profile.html"><i data-lucide="book-open-text"></i><span data-ar="الملف التعريفي" data-en="Company Profile">الملف التعريفي</span><i data-lucide="arrow-up-left"></i></a>
     </div>
-    <div class="premium-mobile-secondary">
-      <div>
-        <a href="contact.html"><i data-lucide="mail"></i><span data-ar="الاتصال بنا" data-en="Contact Us">الاتصال بنا</span></a>
-        <a href="faq.html"><i data-lucide="circle-help"></i><span data-ar="الأسئلة الشائعة والدعم" data-en="FAQ & Support">الأسئلة الشائعة والدعم</span></a>
-      </div>
-    </div>
+    <nav class="premium-mobile-secondary" aria-label="Secondary mobile navigation">
+      <a href="company-profile.html"><span><i data-lucide="book-open-text"></i><b data-ar="الملف التعريفي" data-en="Company Profile">الملف التعريفي</b></span><i data-lucide="arrow-up-left"></i></a>
+      <a href="contact.html"><span><i data-lucide="mail"></i><b data-ar="الاتصال بنا" data-en="Contact Us">الاتصال بنا</b></span><i data-lucide="arrow-up-left"></i></a>
+      <a href="faq.html"><span><i data-lucide="circle-help"></i><b data-ar="الأسئلة الشائعة والدعم" data-en="FAQ & Support">الأسئلة الشائعة والدعم</b></span><i data-lucide="arrow-up-left"></i></a>
+    </nav>
   </div>
+  <div class="premium-mobile-scroll-cue" aria-hidden="true"></div>
 </div>
