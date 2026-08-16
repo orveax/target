@@ -1,0 +1,20 @@
+name: TARGET About Final Refinement V1 QA
+on:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  about-final-refinement-v1:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify About final refinement layer
+        run: |
+          test -f public/assets/about-final-refinement-v1.css
+          grep -q 'about-final-refinement-v1.css?v=20260816-01' src/layouts/BaseLayout.astro
+          grep -q '.page-about .about-canonical .about-values' public/assets/about-final-refinement-v1.css
+          grep -q '.page-about .about-canonical .about-flow' public/assets/about-final-refinement-v1.css
+          grep -q '.page-about .about-canonical .about-trust-card' public/assets/about-final-refinement-v1.css
+          grep -q '.page-about .about-canonical .about-profile-panel' public/assets/about-final-refinement-v1.css
+          grep -q '.page-about .about-canonical .about-final-cta' public/assets/about-final-refinement-v1.css
+          grep -q 'prefers-reduced-motion' public/assets/about-final-refinement-v1.css
