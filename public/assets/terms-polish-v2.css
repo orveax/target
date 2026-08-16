@@ -110,13 +110,35 @@ html[dir="rtl"] .page-terms .terms-section:target{background:linear-gradient(270
   .page-terms .terms-meta-item{justify-content:flex-start;padding:10px 14px;min-width:46%}
   .page-terms .terms-meta-item+ .terms-meta-item{border-inline-start:0}
   .page-terms .terms-main{padding-block:60px 70px}
-  .page-terms .terms-layout{gap:28px}
+
+  /* Explicit single-column reset: this selector matches the desktop specificity and prevents the legal reading body from being squeezed beside the TOC. */
+  .page-terms .terms-layout{
+    grid-template-columns:minmax(0,1fr);
+    gap:28px;
+    width:100%;
+  }
+  .page-terms .terms-layout > *,
+  .page-terms .terms-toc,
+  .page-terms .terms-reading{
+    min-width:0;
+    width:100%;
+    max-width:none;
+  }
+  .page-terms .terms-reading{justify-self:stretch}
+  .page-terms .terms-reading-intro h2,
+  .page-terms .terms-reading-intro>p,
+  .page-terms .terms-section h2,
+  .page-terms .terms-section p{max-width:100%}
+  .page-terms .terms-section h2,
+  .page-terms .terms-section p{word-break:normal;overflow-wrap:break-word}
 
   /* Compact horizontal jump navigation instead of a tall 10-item block. */
   .page-terms .terms-toc{position:static;max-height:none;overflow:visible;padding:14px;border-radius:15px}
   .page-terms .terms-toc-title{margin-bottom:10px}
   .page-terms .terms-toc nav{
     display:flex;
+    width:100%;
+    max-width:100%;
     gap:8px;
     overflow-x:auto;
     padding-bottom:5px;
@@ -148,12 +170,16 @@ html[dir="rtl"] .page-terms .terms-section:target{background:linear-gradient(270
   .page-terms .terms-document-badge{width:48px;height:48px;border-radius:14px}
   .page-terms .terms-meta-item{flex-basis:100%;padding-inline:0;justify-content:flex-start}
   .page-terms .terms-main{padding-block:48px 58px}
-  .page-terms .terms-toc{margin-inline:-4px;padding:12px}
-  .page-terms .terms-toc a{min-width:185px;max-width:78vw;font-size:.82rem}
+  .page-terms .terms-layout{grid-template-columns:minmax(0,1fr);gap:24px}
+  .page-terms .terms-toc{margin-inline:0;padding:12px;width:100%;max-width:100%}
+  .page-terms .terms-toc a{min-width:min(185px,72vw);max-width:78vw;font-size:.82rem}
+  .page-terms .terms-reading{width:100%;max-width:100%;overflow:visible}
   .page-terms .terms-reading-intro{padding-bottom:25px}
-  .page-terms .terms-boundary{padding:18px 17px;border-radius:14px}
-  .page-terms .terms-section{padding-block:27px}
-  .page-terms .terms-section:target{margin-inline:-10px;padding-inline:10px}
+  .page-terms .terms-reading-intro h2{max-width:100%;text-wrap:balance}
+  .page-terms .terms-boundary{width:100%;padding:18px 17px;border-radius:14px}
+  .page-terms .terms-section{width:100%;padding-block:27px}
+  .page-terms .terms-section-head{min-width:0}
+  .page-terms .terms-section:target{margin-inline:0;padding-inline:10px}
   .page-terms .terms-related-wrap{padding-bottom:58px}
   .page-terms .terms-related-panel{padding:28px 23px;border-radius:18px}
   .page-terms .terms-related-actions{display:grid;grid-template-columns:1fr;width:100%}
