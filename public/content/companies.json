@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-08-15",
+  "updatedAt": "2026-08-17",
   "governance": {
     "sourceOfTruth": "TARGET Business Foundation in Notion",
     "publicLabelAr": "شركات ومنتجات محل اهتمامنا",
@@ -36,7 +36,7 @@
         "assetType": "controlled-editorial-placeholder"
       },
       "brochure": {
-        "enabled": true,
+        "enabled": false,
         "path": "assets/companies/falcon/brochure.pdf",
         "driveSourceFileId": "1JyQzHZE5tEr-sSpV_8MzprLXtNwG1DaQ",
         "status": "temporary_internal_placeholder"
@@ -72,7 +72,7 @@
         "assetType": "controlled-editorial-placeholder"
       },
       "brochure": {
-        "enabled": true,
+        "enabled": false,
         "path": "assets/companies/al-nada/brochure.pdf",
         "driveSourceFileId": "1YOSbMvZRnZEbZ5bPZacWqZ2tVabixGzh",
         "status": "temporary_internal_placeholder"
@@ -100,7 +100,7 @@
         "assetType": "controlled-editorial-placeholder"
       },
       "brochure": {
-        "enabled": true,
+        "enabled": false,
         "path": "assets/companies/al-dar/brochure.pdf",
         "driveSourceFileId": "1--RrwB0rUFEkqmptxmi_WbQ18WSNis5o",
         "status": "temporary_internal_placeholder"
@@ -128,7 +128,7 @@
         "assetType": "controlled-editorial-placeholder"
       },
       "brochure": {
-        "enabled": true,
+        "enabled": false,
         "path": "assets/companies/al-reem/brochure.pdf",
         "driveSourceFileId": "1-hofWlSOqO1gNYqlHw6RKXgmiMCs8-t2",
         "status": "temporary_internal_placeholder"
