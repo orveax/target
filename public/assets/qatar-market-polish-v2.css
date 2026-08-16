@@ -1,0 +1,80 @@
+/* TARGET — Qatar Market Polish V2 — real photography + responsive crop refinement */
+.page-qatar-market .qm-hero-media>img{
+  content:url('https://images.pexels.com/photos/10907746/pexels-photo-10907746.jpeg?auto=compress&cs=tinysrgb&w=1600');
+  object-fit:cover;
+  object-position:center 48%;
+  filter:saturate(.92) contrast(1.02);
+}
+.page-qatar-market .qm-context-media img{
+  content:url('https://images.pexels.com/photos/12081286/pexels-photo-12081286.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  object-fit:cover;
+  object-position:center 52%;
+  filter:saturate(.9) contrast(1.02);
+}
+
+/* Keep the market page editorial and operational — not tourism-led. */
+.page-qatar-market .qm-hero-media,
+.page-qatar-market .qm-context-media{
+  background:#e8e1d7;
+}
+.page-qatar-market .qm-hero-media>img,
+.page-qatar-market .qm-context-media img{
+  transition:transform .35s ease,filter .35s ease;
+}
+@media (hover:hover) and (pointer:fine){
+  .page-qatar-market .qm-hero-media:hover>img,
+  .page-qatar-market .qm-context-media:hover img{
+    transform:scale(1.012);
+    filter:saturate(.98) contrast(1.03);
+  }
+}
+
+/* Tighten the market-context hierarchy while preserving the locked structure. */
+.page-qatar-market .qm-context-points article{
+  border-radius:14px;
+  padding-inline:16px;
+  transition:background .2s ease,border-color .2s ease;
+}
+.page-qatar-market .qm-context-points article:hover{
+  background:rgba(244,237,228,.5);
+  border-color:rgba(12,73,49,.16);
+}
+
+/* Keep the review block reading as one continuous commercial checklist. */
+.page-qatar-market .qm-checklist{
+  box-shadow:none;
+  border-color:rgba(12,73,49,.14);
+}
+.page-qatar-market .qm-checklist article{
+  min-height:112px;
+}
+
+/* Preserve the single Forest commercial anchor and improve card geometry. */
+.page-qatar-market .qm-checkpoint-track article,
+.page-qatar-market .qm-channel-network article{
+  overflow:hidden;
+  border-radius:20px;
+}
+.page-qatar-market .qm-checkpoint-track article.is-focus,
+.page-qatar-market .qm-channel-network article.is-center{
+  border-color:rgba(192,149,82,.76);
+}
+
+@media(max-width:991.98px){
+  .page-qatar-market .qm-hero-media>img{object-position:center center}
+  .page-qatar-market .qm-context-media img{object-position:center 48%}
+}
+@media(max-width:575.98px){
+  .page-qatar-market .qm-hero-media{aspect-ratio:4/3}
+  .page-qatar-market .qm-context-media{aspect-ratio:4/3}
+  .page-qatar-market .qm-hero-media figcaption{
+    grid-template-columns:1fr;
+    inset-inline:10px;
+    inset-block-end:10px;
+  }
+  .page-qatar-market .qm-checklist article{min-height:auto}
+}
+@media(prefers-reduced-motion:reduce){
+  .page-qatar-market .qm-hero-media>img,
+  .page-qatar-market .qm-context-media img{transition:none!important;transform:none!important}
+}
