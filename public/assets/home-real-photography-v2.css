@@ -4,6 +4,7 @@
  * Sources: Pexels free-to-use editorial photography.
  * Hero: real industrial food production facility — photo 36823725.
  * Categories: real supermarket / food retail environment — photo 7451955.
+ * Why TARGET: real warehouse / pallets / supply-chain environment — photo 4481326.
  */
 
 /* 01 — Hero: manufacturer / food production context */
@@ -38,13 +39,36 @@
   visibility:hidden!important;
 }
 
+/* 03 — Why TARGET: real trade handling / warehouse context.
+ * Uses the existing text column; no extra HTML, section, grid or card is introduced.
+ */
+.page-home .home-canonical .hc-why .hc-heading::after{
+  content:"";
+  display:block;
+  width:100%;
+  aspect-ratio:16/9;
+  margin-top:28px;
+  border:1px solid rgba(12,73,49,.12);
+  border-radius:20px;
+  background:
+    linear-gradient(180deg,rgba(12,73,49,.015),rgba(12,73,49,.10)),
+    url('https://images.pexels.com/photos/4481326/pexels-photo-4481326.jpeg?auto=compress&dpr=1&h=850&w=1400') center 54%/cover no-repeat;
+  box-shadow:0 14px 32px rgba(38,38,38,.07);
+}
+
 /* Fine crop control only — layout/aspect ratio stays canonical. */
 @media(max-width:991.98px){
   .page-home .home-canonical .hc-hero-media{background-position:center 50%!important}
   .page-home .home-canonical .hc-category-editorial{background-position:center 54%!important}
+  .page-home .home-canonical .hc-why .hc-heading::after{background-position:center 50%;}
 }
 
 @media(max-width:575.98px){
   .page-home .home-canonical .hc-hero-media{background-position:54% center!important}
   .page-home .home-canonical .hc-category-editorial{background-position:center center!important}
+  .page-home .home-canonical .hc-why .hc-heading::after{
+    margin-top:22px;
+    border-radius:16px;
+    background-position:center 48%;
+  }
 }
