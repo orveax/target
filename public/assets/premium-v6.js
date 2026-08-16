@@ -85,3 +85,6 @@ import('/assets/target-section-nav-v2.js?v=20260816-04').catch((error)=>console.
 
 /* Real Trade Photography V1 — real free-to-use editorial imagery only. */
 import('/assets/real-trade-photography-v1.js?v=20260816-01').catch((error)=>console.warn('[TARGET photography] V1 unavailable',error));
+
+/* Mobile Navigation Refinement V2 — direction-aware drawer, compact hierarchy and scroll affordance. */
+import('/assets/mobile-nav-refinement-v2.js?v=20260816-01').catch((error)=>console.warn('[TARGET mobile nav] V2 unavailable',error));
