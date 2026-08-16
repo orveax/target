@@ -18,11 +18,15 @@ jobs:
       - name: Verify Terms legal-reading contract
         run: |
           test -f public/assets/terms-polish-v2.css
-          grep -q 'terms-polish-v2.css?v=20260817-01' src/layouts/BaseLayout.astro
+          grep -q 'terms-polish-v2.css?v=20260817-02' src/layouts/BaseLayout.astro
           grep -q 'Commercial boundary is the center of gravity' public/assets/terms-polish-v2.css
           grep -q '.terms-section:target' public/assets/terms-polish-v2.css
           grep -q 'overflow-x:auto' public/assets/terms-polish-v2.css
           grep -q 'scroll-snap-type:x proximity' public/assets/terms-polish-v2.css
+          grep -q 'Explicit single-column reset' public/assets/terms-polish-v2.css
+          grep -q 'grid-template-columns:minmax(0,1fr)' public/assets/terms-polish-v2.css
+          grep -q '.page-terms .terms-layout > \*' public/assets/terms-polish-v2.css
+          grep -q 'min-width:0' public/assets/terms-polish-v2.css
           grep -q 'prefers-reduced-motion:reduce' public/assets/terms-polish-v2.css
           grep -q 'terms-boundary' src/pages/terms.astro
           grep -q 'info@targetft.com' src/pages/terms.astro
