@@ -1,0 +1,36 @@
+name: TARGET 404 Recovery V1 QA
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/pages/404.astro'
+      - 'public/assets/404-polish-v1.css'
+      - 'src/layouts/BaseLayout.astro'
+      - '.github/workflows/404-polish-v1-qa.yml'
+  workflow_dispatch:
+
+jobs:
+  recovery-page:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify native 404 recovery contract
+        run: |
+          test -f public/assets/404-polish-v1.css
+          grep -q '404-polish-v1.css?v=20260817-01' src/layouts/BaseLayout.astro
+          grep -q 'robots="noindex,follow"' src/pages/404.astro
+          grep -q 'not-found-shell' src/pages/404.astro
+          grep -q 'index.html' src/pages/404.astro
+          grep -q 'food-portfolio.html' src/pages/404.astro
+          grep -q 'contact.html' src/pages/404.astro
+          grep -q 'grid-template-columns:minmax(0,1fr)' public/assets/404-polish-v1.css
+          grep -q 'prefers-reduced-motion:reduce' public/assets/404-polish-v1.css
+          if grep -q "legacy/404.html" src/pages/404.astro; then
+            echo '404 must not depend on legacy HTML'
+            exit 1
+          fi
+      - name: Build Astro site
+        run: |
+          npm install
+          npm run build
