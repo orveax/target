@@ -1,0 +1,227 @@
+/* TARGET — Contact Us Polish V3 — final routing / conversion hierarchy */
+
+/* HERO — real product + commercial desk context, not generic customer-service stock. */
+.page-contact .ct-hero-media>img{
+  content:url('https://images.pexels.com/photos/35642370/pexels-photo-35642370.jpeg?auto=compress&cs=tinysrgb&w=1600');
+  object-fit:cover;
+  object-position:center 50%;
+  filter:saturate(.92) contrast(1.025);
+}
+.page-contact .ct-hero-media{
+  overflow:hidden;
+  border-radius:24px;
+  background:#e9e2d8;
+}
+.page-contact .ct-hero-media>img{
+  transition:transform .35s ease,filter .35s ease;
+}
+@media (hover:hover) and (pointer:fine){
+  .page-contact .ct-hero-media:hover>img{
+    transform:scale(1.012);
+    filter:saturate(.98) contrast(1.035);
+  }
+}
+
+/* QUICK ENQUIRY — unmistakable functional center of gravity. */
+.page-contact .ct-form-section{
+  background:linear-gradient(180deg,#fff 0%,rgba(244,237,228,.62) 100%);
+}
+.page-contact .ct-form-layout{
+  grid-template-columns:minmax(0,1.76fr) minmax(285px,.64fr);
+  gap:26px;
+  align-items:start;
+}
+.page-contact .ct-form{
+  padding:32px;
+  border:1px solid rgba(12,73,49,.13);
+  border-radius:22px;
+  background:#fff;
+  box-shadow:0 18px 44px rgba(38,38,38,.055);
+}
+.page-contact .ct-form-head{
+  padding-bottom:22px;
+  margin-bottom:22px;
+  border-bottom:1px solid rgba(12,73,49,.09);
+}
+.page-contact .ct-form-icon{
+  border:1px solid rgba(12,73,49,.12);
+  background:var(--target-cream,#F4EDE4);
+  color:var(--target-forest,#0C4931);
+}
+.page-contact .ct-field label{
+  margin-bottom:8px;
+  color:var(--target-charcoal,#262626);
+  font-weight:700;
+}
+.page-contact .ct-field .form-control,
+.page-contact .ct-field .form-select{
+  min-height:54px;
+  border-color:rgba(38,38,38,.16);
+  border-radius:12px;
+  background:#fff;
+  box-shadow:none;
+}
+.page-contact .ct-field textarea.form-control{min-height:168px;resize:vertical}
+.page-contact .ct-field .form-control:focus,
+.page-contact .ct-field .form-select:focus{
+  border-color:rgba(12,73,49,.62);
+  box-shadow:0 0 0 4px rgba(12,73,49,.09);
+}
+.page-contact .ct-submit{
+  min-height:56px;
+  padding-inline:30px;
+  border-radius:13px;
+  box-shadow:0 10px 24px rgba(12,73,49,.14);
+}
+
+/* Supplier redirect = clear supporting route, but quieter than the enquiry form. */
+.page-contact .ct-route-note{
+  position:sticky;
+  top:104px;
+  padding:26px 23px;
+  border:1px solid rgba(192,149,82,.34);
+  border-radius:21px;
+  background:linear-gradient(180deg,rgba(244,237,228,.96),#fff 100%);
+  box-shadow:0 14px 30px rgba(38,38,38,.045);
+}
+.page-contact .ct-route-note h2{
+  margin-bottom:10px;
+  color:var(--target-charcoal,#262626)!important;
+  font-size:clamp(1.45rem,2.15vw,1.9rem)!important;
+  line-height:1.25;
+}
+.page-contact .ct-route-note>p{
+  color:rgba(38,38,38,.7)!important;
+  line-height:1.7;
+}
+.page-contact .ct-route-note>a{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  min-height:50px;
+  margin-top:8px;
+  padding-inline:18px;
+  border:1px solid var(--target-forest,#0C4931);
+  border-radius:12px;
+  background:var(--target-forest,#0C4931);
+  color:#fff;
+  font-weight:750;
+  text-decoration:none;
+}
+.page-contact .ct-route-note>a:hover,
+.page-contact .ct-route-note>a:focus-visible{background:#073b29;color:#fff}
+.page-contact .ct-route-meta{
+  display:grid;
+  gap:8px;
+  margin-top:18px;
+  padding-top:16px;
+  border-top:1px solid rgba(12,73,49,.10);
+}
+.page-contact .ct-route-meta span{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  color:rgba(38,38,38,.66);
+  font-size:.86rem;
+}
+.page-contact .ct-route-meta svg{width:17px;height:17px;color:var(--target-sand,#C09552)}
+
+/* CONTACT CHANNELS — 2×2, action-led and quieter than the form. */
+.page-contact .ct-channels{background:var(--target-cream,#F4EDE4)}
+.page-contact .ct-channel-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:16px;
+}
+.page-contact .ct-channel-card{
+  min-height:190px;
+  padding:24px;
+  border:1px solid rgba(12,73,49,.11);
+  border-radius:18px;
+  background:#fff;
+  box-shadow:none;
+  transition:border-color .2s ease,transform .2s ease,box-shadow .2s ease;
+}
+.page-contact .ct-channel-card .ct-icon{
+  width:48px;
+  height:48px;
+  border-radius:13px;
+  background:rgba(12,73,49,.055);
+  border-color:rgba(12,73,49,.11);
+}
+.page-contact .ct-channel-card h3{color:var(--target-charcoal,#262626)!important}
+.page-contact .ct-channel-card p{color:rgba(38,38,38,.68)!important;line-height:1.7}
+.page-contact .ct-channel-card a{
+  color:var(--target-forest,#0C4931);
+  font-weight:800;
+  text-underline-offset:3px;
+}
+.page-contact .ct-channel-card:last-child{
+  background:linear-gradient(180deg,#fff 0%,rgba(244,237,228,.72) 100%);
+  border-color:rgba(192,149,82,.30);
+}
+@media (hover:hover) and (pointer:fine){
+  .page-contact .ct-channel-card:hover{
+    transform:translateY(-2px);
+    border-color:rgba(12,73,49,.20);
+    box-shadow:0 12px 26px rgba(38,38,38,.045);
+  }
+}
+
+/* VERIFIED DIRECT CONTACT — compact and subordinate to Quick Enquiry. */
+.page-contact .ct-verified-contact{padding-block:64px}
+.page-contact .ct-verified-grid{gap:16px}
+.page-contact .ct-direct-card,
+.page-contact .ct-social-card{
+  padding:28px 30px;
+  border-radius:20px;
+  box-shadow:0 10px 28px rgba(38,38,38,.045);
+}
+.page-contact .ct-direct-actions,
+.page-contact .ct-social-links{margin-top:18px}
+
+/* LOCATION — one controlled wide map moment, no fake visual clutter. */
+.page-contact .ct-location-grid{gap:28px;align-items:center}
+.page-contact .ct-map-context{
+  min-height:430px;
+  border-radius:22px;
+  box-shadow:0 14px 34px rgba(38,38,38,.065);
+}
+.page-contact .ct-location-copy{max-width:590px}
+.page-contact .ct-location-fact{
+  margin-top:18px;
+  padding:15px 16px;
+  border-radius:12px;
+}
+
+/* SUPPORT — maintain two routes but reduce visual competition with primary contact flow. */
+.page-contact .ct-support{padding-block:72px}
+.page-contact .ct-support-panel article{padding:34px 36px}
+.page-contact .ct-support-panel h2{font-size:clamp(1.55rem,2.4vw,2.05rem)!important}
+
+@media(max-width:991.98px){
+  .page-contact .ct-form-layout{grid-template-columns:1fr}
+  .page-contact .ct-route-note{position:relative;top:auto}
+  .page-contact .ct-location-grid{align-items:start}
+  .page-contact .ct-map-context{min-height:390px}
+}
+@media(max-width:767.98px){
+  .page-contact .ct-channel-grid{grid-template-columns:1fr}
+  .page-contact .ct-channel-card{min-height:auto}
+  .page-contact .ct-form{padding:26px 22px}
+  .page-contact .ct-map-context{min-height:350px}
+}
+@media(max-width:575.98px){
+  .page-contact .ct-hero-media{aspect-ratio:4/3}
+  .page-contact .ct-form{padding:22px 18px;border-radius:18px}
+  .page-contact .ct-route-note{padding:22px 18px;border-radius:18px}
+  .page-contact .ct-route-note>a,.page-contact .ct-submit{width:100%}
+  .page-contact .ct-direct-card,.page-contact .ct-social-card{padding:25px 22px}
+  .page-contact .ct-map-context{min-height:320px}
+  .page-contact .ct-support-panel article{padding:28px 22px}
+}
+@media(prefers-reduced-motion:reduce){
+  .page-contact .ct-hero-media>img,
+  .page-contact .ct-channel-card{transition:none!important;transform:none!important}
+}
