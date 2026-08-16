@@ -1,0 +1,42 @@
+/* TARGET — Final Site Freeze V1 — 2026-08-17
+ * Cross-site utility refinements only. Page-specific canonical layers remain authoritative.
+ */
+
+.form-delivery-note{
+  grid-column:1/-1;
+  display:flex;
+  align-items:flex-start;
+  gap:9px;
+  margin:2px 0 0;
+  padding:12px 14px;
+  border-inline-start:3px solid var(--target-sand,#C09552);
+  border-radius:10px;
+  background:rgba(244,237,228,.72);
+  color:rgba(38,38,38,.72);
+  font-size:.82rem;
+  line-height:1.65;
+}
+.form-delivery-note::before{
+  content:'✉';
+  flex:0 0 auto;
+  color:var(--target-forest,#0C4931);
+  font-weight:800;
+  line-height:1.45;
+}
+
+/* Global containment guard for long bilingual strings and form values. */
+.page-contact .ct-form,
+.page-suppliers .fs-form,
+.page-privacy .privacy-layout,
+.page-terms .terms-layout,
+.page-company-profile .cp-resource-panel{
+  min-width:0;
+}
+
+@media(max-width:575.98px){
+  .form-delivery-note{padding:11px 12px;font-size:.78rem}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .form-delivery-note{scroll-behavior:auto}
+}
