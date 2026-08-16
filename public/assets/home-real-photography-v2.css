@@ -1,0 +1,50 @@
+/* TARGET — Homepage Real Photography V2
+ * Direct source-level photography pass for Home only.
+ * No structural/layout changes. No JS dependency.
+ * Sources: Pexels free-to-use editorial photography.
+ * Hero: real industrial food production facility — photo 36823725.
+ * Categories: real supermarket / food retail environment — photo 7451955.
+ */
+
+/* 01 — Hero: manufacturer / food production context */
+.page-home .home-canonical .hc-hero-media{
+  background-image:
+    linear-gradient(180deg,rgba(7,53,35,.02),rgba(7,53,35,.16)),
+    url('https://images.pexels.com/photos/36823725/pexels-photo-36823725/free-photo-of-modern-industrial-food-production-facility-interior.jpeg?auto=compress&dpr=1&h=750&w=1260')!important;
+  background-repeat:no-repeat!important;
+  background-size:cover!important;
+  background-position:center 52%!important;
+}
+
+/* Existing hero overlay remains restrained; preserve route-card legibility. */
+.page-home .home-canonical .hc-hero-media::after{
+  background:linear-gradient(180deg,rgba(7,53,35,.015),rgba(7,53,35,.14))!important;
+}
+
+/* 02 — Products & Categories: real food retail / assortment context */
+.page-home .home-canonical .hc-category-editorial{
+  background-image:
+    linear-gradient(90deg,rgba(244,237,228,.01),rgba(12,73,49,.07)),
+    url('https://images.pexels.com/photos/7451955/pexels-photo-7451955.jpeg?auto=compress&dpr=1&h=750&w=1260')!important;
+  background-repeat:no-repeat!important;
+  background-size:cover!important;
+  background-position:center 58%!important;
+  background-color:#e6e2dc!important;
+}
+
+/* Keep the existing semantic/media slot but prevent the old editorial source from painting. */
+.page-home .home-canonical .hc-category-editorial>img{
+  opacity:0!important;
+  visibility:hidden!important;
+}
+
+/* Fine crop control only — layout/aspect ratio stays canonical. */
+@media(max-width:991.98px){
+  .page-home .home-canonical .hc-hero-media{background-position:center 50%!important}
+  .page-home .home-canonical .hc-category-editorial{background-position:center 54%!important}
+}
+
+@media(max-width:575.98px){
+  .page-home .home-canonical .hc-hero-media{background-position:54% center!important}
+  .page-home .home-canonical .hc-category-editorial{background-position:center center!important}
+}
