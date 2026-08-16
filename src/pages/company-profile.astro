@@ -14,12 +14,6 @@ const explore = [
   ['package','المنتجات والشركات','Products & Companies','الفئات الحالية والشركات والمنتجات الموجودة ضمن نطاق الاهتمام.','Current categories, companies and products within the active focus.','food-portfolio.html'],
   ['map-pinned','السوق القطري','Qatar Market','كيف ننظر إلى ملاءمة المنتج والقنوات والسياق التجاري داخل قطر.','How product fit, channels and commercial context are considered in Qatar.','qatar-market.html'],
 ];
-
-const documentMeta = [
-  ['اللغات','العربية / الإنجليزية','Languages','Arabic / English'],
-  ['نوع الملف','PDF','File Type','PDF'],
-  ['هيكل المحتوى','ملف تعريفي من 10 صفحات','Content Structure','10-page Company Profile'],
-];
 ---
 <BaseLayout active="profile" bodyClass="page-company-profile premium-v8-page" title="الملف التعريفي | TARGET For Food Trading" description="تعرف على تارقت ونشاطها في تجارة واستيراد الأغذية داخل قطر، واستكشف الملف التعريفي والمسارات الرئيسية للموقع.">
   <section class="cp-hero">
@@ -29,21 +23,25 @@ const documentMeta = [
         <h1 data-ar="تعرف على تارقت ونشاطها التجاري في الأغذية داخل قطر." data-en="An overview of TARGET and its food-trading activity in Qatar.">تعرف على تارقت ونشاطها التجاري في الأغذية داخل قطر.</h1>
         <p data-ar="يقدم الملف التعريفي نظرة مركزة على تارقت، نشاطها في تجارة واستيراد الأغذية، الفئات والمنتجات محل الاهتمام، وطريقة تعاملها مع المصنعين والموردين والسوق القطري." data-en="The Company Profile provides a focused overview of TARGET, its food trading and import activity, the categories and products in focus, and how it works with manufacturers, suppliers and the Qatar market.">يقدم الملف التعريفي نظرة مركزة على تارقت، نشاطها في تجارة واستيراد الأغذية، الفئات والمنتجات محل الاهتمام، وطريقة تعاملها مع المصنعين والموردين والسوق القطري.</p>
         <div class="cp-actions">
-          <span class="cp-btn cp-btn-primary" aria-disabled="true"><i data-lucide="file-down"></i><span data-ar="تحميل الملف التعريفي PDF" data-en="Download Company Profile PDF">تحميل الملف التعريفي PDF</span></span>
+          <span class="cp-availability"><i data-lucide="file-clock"></i><span data-ar="نسخة PDF النهائية قيد الإضافة" data-en="Final PDF asset pending">نسخة PDF النهائية قيد الإضافة</span></span>
           <a class="cp-btn cp-btn-secondary" href="about.html"><i data-lucide="building-2"></i><span data-ar="عن تارقت" data-en="About TARGET">عن تارقت</span></a>
         </div>
       </div>
 
-      <div class="cp-document-stage" aria-label="معاينة داخلية مضبوطة لغلاف الملف التعريفي">
-        <article class="cp-document">
-          <img class="cp-document-logo" src="/assets/brand/target-logo-horizontal-forest.svg" alt="TARGET — تارقت لتجارة الأغذية" width="420" height="130" />
-          <span class="cp-document-stamp" data-ar="INTERNAL PREVIEW" data-en="INTERNAL PREVIEW">INTERNAL<br/>PREVIEW</span>
-          <div class="cp-document-main">
-            <span class="cp-document-label">TARGET FOR FOOD TRADING</span>
-            <strong data-ar="الملف التعريفي" data-en="Company Profile">الملف التعريفي</strong>
-            <small data-ar="تجارة واستيراد الأغذية — قطر" data-en="Food Trading & Import — Qatar">تجارة واستيراد الأغذية — قطر</small>
-          </div>
-        </article>
+      <div class="cp-document-stage" aria-label="حالة مورد الملف التعريفي">
+        <div class="cp-document-stack" aria-hidden="true">
+          <span class="cp-paper cp-paper-back"></span>
+          <span class="cp-paper cp-paper-mid"></span>
+          <article class="cp-document cp-document-pending">
+            <img class="cp-document-logo" src="/assets/brand/target-logo-horizontal-forest.svg" alt="" width="420" height="130" />
+            <span class="cp-document-stamp">PDF<br/>PENDING</span>
+            <div class="cp-document-main">
+              <span class="cp-document-label">TARGET FOR FOOD TRADING</span>
+              <strong data-ar="الملف التعريفي" data-en="Company Profile">الملف التعريفي</strong>
+              <small data-ar="سيتم استبدال هذه الحالة بالمعاينة الرسمية بعد اعتماد الملف." data-en="This state will be replaced by the approved document preview once the final file is available.">سيتم استبدال هذه الحالة بالمعاينة الرسمية بعد اعتماد الملف.</small>
+            </div>
+          </article>
+        </div>
       </div>
     </div>
   </section>
@@ -74,11 +72,14 @@ const documentMeta = [
         <p data-ar="الملف التعريفي يقدم النظرة المركزة، بينما توضح الصفحات التالية دور تارقت وطريقة العمل والمنتجات وسياق السوق القطري بمزيد من التفاصيل." data-en="The Company Profile provides the focused overview, while these routes explain TARGET, how it works, products and the Qatar market in more detail.">الملف التعريفي يقدم النظرة المركزة، بينما توضح الصفحات التالية دور تارقت وطريقة العمل والمنتجات وسياق السوق القطري بمزيد من التفاصيل.</p>
       </header>
       <div class="cp-route-grid">
-        {explore.map(([icon,ar,en,arBody,enBody,href]) => (
+        {explore.map(([icon,ar,en,arBody,enBody,href],index) => (
           <a class="cp-route" href={href}>
+            <span class="cp-route-number">0{index + 1}</span>
             <span class="cp-icon"><i data-lucide={icon}></i></span>
-            <h3 data-ar={ar} data-en={en}>{ar}</h3>
-            <p data-ar={arBody} data-en={enBody}>{arBody}</p>
+            <div class="cp-route-copy">
+              <h3 data-ar={ar} data-en={en}>{ar}</h3>
+              <p data-ar={arBody} data-en={enBody}>{arBody}</p>
+            </div>
             <span class="cp-route-arrow"><i data-lucide="arrow-up-left"></i></span>
           </a>
         ))}
@@ -90,37 +91,37 @@ const documentMeta = [
     <div class="container">
       <div class="cp-resource-panel">
         <div class="cp-resource-preview">
-          <article class="cp-document">
-            <img class="cp-document-logo" src="/assets/brand/target-logo-horizontal-forest.svg" alt="TARGET — تارقت لتجارة الأغذية" width="420" height="130" />
-            <span class="cp-document-stamp" data-ar="INTERNAL PREVIEW" data-en="INTERNAL PREVIEW">INTERNAL<br/>PREVIEW</span>
-            <div class="cp-document-main">
-              <span class="cp-document-label">TARGET FOR FOOD TRADING</span>
-              <strong data-ar="الملف التعريفي" data-en="Company Profile">الملف التعريفي</strong>
-              <small data-ar="تجارة واستيراد الأغذية — قطر" data-en="Food Trading & Import — Qatar">تجارة واستيراد الأغذية — قطر</small>
-            </div>
-          </article>
+          <div class="cp-document-stack cp-document-stack-resource" aria-hidden="true">
+            <span class="cp-paper cp-paper-back"></span>
+            <span class="cp-paper cp-paper-mid"></span>
+            <article class="cp-document cp-document-pending">
+              <img class="cp-document-logo" src="/assets/brand/target-logo-horizontal-forest.svg" alt="" width="420" height="130" />
+              <span class="cp-document-stamp">PDF<br/>PENDING</span>
+              <div class="cp-document-main">
+                <span class="cp-document-label">TARGET FOR FOOD TRADING</span>
+                <strong data-ar="الملف التعريفي" data-en="Company Profile">الملف التعريفي</strong>
+                <small data-ar="معاينة المورد ستظهر هنا بعد اعتماد النسخة النهائية." data-en="The approved document preview will appear here when the final asset is ready.">معاينة المورد ستظهر هنا بعد اعتماد النسخة النهائية.</small>
+              </div>
+            </article>
+          </div>
         </div>
         <div class="cp-resource-copy">
-          <span class="cp-resource-status"><i data-lucide="file-check-2"></i><span data-ar="مسار المورد جاهز — الأصل النهائي قيد الاستبدال" data-en="Resource route ready — final asset to replace preview">مسار المورد جاهز — الأصل النهائي قيد الاستبدال</span></span>
+          <span class="cp-resource-status"><i data-lucide="file-clock"></i><span data-ar="حالة المورد: النسخة النهائية غير مضافة بعد" data-en="Resource status: final PDF not added yet">حالة المورد: النسخة النهائية غير مضافة بعد</span></span>
           <h2 data-ar="حمّل النسخة الرسمية من الملف التعريفي." data-en="Download the official Company Profile.">حمّل النسخة الرسمية من الملف التعريفي.</h2>
           <p data-ar="تتضمن النسخة الرسمية المحتوى المعتمد للملف التعريفي بصيغة مناسبة للمشاركة مع المصنعين والموردين والجهات التجارية." data-en="The official PDF contains the approved Company Profile content in a format suitable for sharing with manufacturers, suppliers and commercial stakeholders.">تتضمن النسخة الرسمية المحتوى المعتمد للملف التعريفي بصيغة مناسبة للمشاركة مع المصنعين والموردين والجهات التجارية.</p>
-          <div class="cp-resource-actions">
-            <span class="cp-btn cp-btn-primary" aria-disabled="true"><i data-lucide="file-down"></i><span data-ar="تحميل الملف التعريفي PDF" data-en="Download Company Profile PDF">تحميل الملف التعريفي PDF</span></span>
-            <a class="cp-btn cp-btn-secondary" href="about.html"><span data-ar="عن تارقت" data-en="About TARGET">عن تارقت</span><i data-lucide="arrow-up-left"></i></a>
-          </div>
-          <small class="cp-resource-note" data-ar="المعاينة الحالية داخلية ومضبوطة بصريًا. عند استلام الملف النهائي يُستبدل في نفس المسار دون إعادة تصميم الصفحة." data-en="The current preview is a controlled internal visual. The final file can replace it on the same route without redesigning the page.">المعاينة الحالية داخلية ومضبوطة بصريًا. عند استلام الملف النهائي يُستبدل في نفس المسار دون إعادة تصميم الصفحة.</small>
 
-          <div class="cp-meta">
-            <span class="cp-kicker" data-ar="معلومات المستند" data-en="Document Information">معلومات المستند</span>
-            <div class="cp-meta-grid">
-              {documentMeta.map(([arLabel,arValue,enLabel,enValue]) => (
-                <div class="cp-meta-item">
-                  <small data-ar={arLabel} data-en={enLabel}>{arLabel}</small>
-                  <strong data-ar={arValue} data-en={enValue}>{arValue}</strong>
-                </div>
-              ))}
+          <div class="cp-pending-box">
+            <span class="cp-pending-icon"><i data-lucide="shield-check"></i></span>
+            <div>
+              <strong data-ar="لن يظهر رابط تحميل قبل اعتماد الملف." data-en="No download link will be shown before the file is approved.">لن يظهر رابط تحميل قبل اعتماد الملف.</strong>
+              <p data-ar="عند إضافة النسخة النهائية المعتمدة إلى مسار الإنتاج، سيظهر رابط التحميل والمعاينة الرسمية هنا دون الحاجة إلى إعادة تصميم الصفحة." data-en="Once the approved final PDF is added to the production path, the official preview and download action will appear here without redesigning the page.">عند إضافة النسخة النهائية المعتمدة إلى مسار الإنتاج، سيظهر رابط التحميل والمعاينة الرسمية هنا دون الحاجة إلى إعادة تصميم الصفحة.</p>
             </div>
           </div>
+
+          <div class="cp-resource-actions">
+            <a class="cp-btn cp-btn-secondary" href="about.html"><span data-ar="استكشف عن تارقت" data-en="Explore About TARGET">استكشف عن تارقت</span><i data-lucide="arrow-up-left"></i></a>
+          </div>
+          <small class="cp-resource-note" data-ar="بيانات الإصدار وعدد الصفحات وحجم الملف لا تُعرض إلا بعد التحقق من النسخة النهائية نفسها." data-en="Version, page count and file-size metadata are shown only after verification of the final PDF asset itself.">بيانات الإصدار وعدد الصفحات وحجم الملف لا تُعرض إلا بعد التحقق من النسخة النهائية نفسها.</small>
         </div>
       </div>
     </div>
