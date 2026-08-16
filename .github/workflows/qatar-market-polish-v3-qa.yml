@@ -27,7 +27,7 @@ jobs:
           grep -Fq '.qm-channel-copy::after' public/assets/qatar-market-polish-v2.css
           grep -Fq '.qm-checkpoint-track article.is-focus' public/assets/qatar-market-polish-v2.css
           grep -Fq 'background:linear-gradient(150deg,#0C4931' public/assets/qatar-market-polish-v2.css
-          grep -Fq 'index === 1 ? '\''is-focus' src/pages/qatar-market.astro
+          grep -Fq "index === 1 ? 'is-focus'" src/pages/qatar-market.astro
           grep -Fq 'prefers-reduced-motion' public/assets/qatar-market-polish-v2.css
       - name: Build Astro site
         run: |
