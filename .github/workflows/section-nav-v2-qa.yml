@@ -15,7 +15,7 @@ jobs:
         run: |
           test -f public/assets/target-section-nav-v2.js
           node --check public/assets/target-section-nav-v2.js
-          grep -q 'target-section-nav-v2.js?v=20260816-02' public/assets/premium-v6.js
+          grep -q 'target-section-nav-v2.js?v=20260816-03' public/assets/premium-v6.js
           grep -q 'target-section-nav--under-header' public/assets/target-section-nav-v2.js
           grep -q 'header.insertAdjacentElement' public/assets/target-section-nav-v2.js
           grep -q 'target-section-nav-track' public/assets/target-section-nav-v2.js
@@ -24,3 +24,8 @@ jobs:
           grep -q 'function installScrollSpy' public/assets/target-section-nav-v2.js
           grep -q "addEventListener('scroll', queueUpdate" public/assets/target-section-nav-v2.js
           grep -q 'setActiveEntry' public/assets/target-section-nav-v2.js
+          grep -q 'track.scrollBy' public/assets/target-section-nav-v2.js
+          grep -q "attributeFilter: \['dir', 'lang'\]" public/assets/target-section-nav-v2.js
+          grep -q "track.dir = root.dir" public/assets/target-section-nav-v2.js
+          grep -q 'target-logo-horizontal-forest.svg' src/components/SiteHeader.astro
+          ! grep -q 'mobile-brand-logo.*target-logo-horizontal-light.svg' src/components/SiteHeader.astro
