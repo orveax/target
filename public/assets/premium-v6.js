@@ -82,3 +82,6 @@ import('/assets/target-experience-v1.js?v=20260816-01').catch((error)=>console.w
 
 /* Smart Section Navigation V2 — under-header journey strip. */
 import('/assets/target-section-nav-v2.js?v=20260816-02').catch((error)=>console.warn('[TARGET section nav] V2 unavailable',error));
+
+/* Real Trade Photography V1 — real free-to-use editorial imagery only. */
+import('/assets/real-trade-photography-v1.js?v=20260816-01').catch((error)=>console.warn('[TARGET photography] V1 unavailable',error));
