@@ -6,8 +6,14 @@
   const library = {
     'شاي': { src: pexels('6448540') },
     'Tea': { src: pexels('6448540') },
-    'ينسون': { src: pexels('5475172') },
-    'Anise': { src: pexels('5475172') },
+    'ينسون': {
+      src: commons('AniseSeeds.jpg'),
+      credit: { href: 'https://commons.wikimedia.org/wiki/File:AniseSeeds.jpg', ar: 'Wikimedia Commons · Public Domain', en: 'Wikimedia Commons · Public Domain' }
+    },
+    'Anise': {
+      src: commons('AniseSeeds.jpg'),
+      credit: { href: 'https://commons.wikimedia.org/wiki/File:AniseSeeds.jpg', ar: 'Wikimedia Commons · Public Domain', en: 'Wikimedia Commons · Public Domain' }
+    },
     'كمومايل': { src: pexels('16221903') },
     'Chamomile': { src: pexels('16221903') },
     'قرفة': { src: pexels('71128') },
