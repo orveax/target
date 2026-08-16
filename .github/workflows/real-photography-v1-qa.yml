@@ -1,0 +1,30 @@
+name: TARGET Real Trade Photography V1 QA
+on:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  photography-v1:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify real photography runtime
+        run: |
+          test -f public/assets/real-trade-photography-v1.js
+          node --check public/assets/real-trade-photography-v1.js
+          grep -q 'real-trade-photography-v1.js' public/assets/premium-v6.js
+          grep -q "36823725" public/assets/real-trade-photography-v1.js
+          grep -q "4481260" public/assets/real-trade-photography-v1.js
+          grep -q "31583097" public/assets/real-trade-photography-v1.js
+          grep -q "35296431" public/assets/real-trade-photography-v1.js
+          grep -q "5953751" public/assets/real-trade-photography-v1.js
+          grep -q "8330390" public/assets/real-trade-photography-v1.js
+          grep -q "8679342" public/assets/real-trade-photography-v1.js
+          grep -q "5634207" public/assets/real-trade-photography-v1.js
+          grep -q "10591603" public/assets/real-trade-photography-v1.js
+          grep -q "12081286" public/assets/real-trade-photography-v1.js
+          grep -q 'Company-specific product/logo media is intentionally excluded' public/assets/real-trade-photography-v1.js
+          grep -q 'data-real-trade-photo' public/assets/real-trade-photography-v1.js
