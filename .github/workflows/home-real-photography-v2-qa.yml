@@ -1,0 +1,20 @@
+name: TARGET Home Real Photography V2 QA
+on:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  home-real-photography-v2:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify direct homepage photography sources
+        run: |
+          test -f public/assets/home-real-photography-v2.css
+          grep -q 'home-real-photography-v2.css?v=20260816-01' src/layouts/BaseLayout.astro
+          grep -q '36823725' public/assets/home-real-photography-v2.css
+          grep -q '7451955' public/assets/home-real-photography-v2.css
+          grep -q '.page-home .home-canonical .hc-hero-media' public/assets/home-real-photography-v2.css
+          grep -q '.page-home .home-canonical .hc-category-editorial' public/assets/home-real-photography-v2.css
+          grep -q 'background-size:cover' public/assets/home-real-photography-v2.css
+          grep -q 'No structural/layout changes' public/assets/home-real-photography-v2.css
