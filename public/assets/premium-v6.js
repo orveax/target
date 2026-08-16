@@ -53,8 +53,10 @@
   function normalizeFooter(){
     document.querySelectorAll('.site-footer').forEach((footer)=>{
       footer.querySelectorAll('.footer-logo').forEach((logo)=>{logo.src='/assets/brand/target-logo-horizontal-cream.svg';});
+      /* Footer V2 owns its authored legal/bottom structure. Legacy runtime no longer replaces it. */
+      if(footer.classList.contains('premium-footer-v2')) return;
       const bottom=footer.querySelector('.footer-bottom');
-      if(bottom){bottom.innerHTML='<span>targetft.com</span><span data-ar="جميع الحقوق محفوظة © TARGET 2026 — RFX" data-en="TARGET 2026 © All rights reserved — RFX">جميع الحقوق محفوظة © TARGET 2026 — RFX</span>';}
+      if(bottom){bottom.innerHTML='<span>targetft.com</span><span data-ar="جميع الحقوق محفوظة © TARGET 2026" data-en="TARGET 2026 © All rights reserved">جميع الحقوق محفوظة © TARGET 2026</span>';}
     });
   }
   function initMegaMenu(){
