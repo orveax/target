@@ -121,9 +121,7 @@
   background:transparent!important;
   box-shadow:none!important;
 }
-.page-capabilities .work-canonical .work-steps li:nth-child(even){
-  margin-inline-start:calc(50% + 42px);
-}
+.page-capabilities .work-canonical .work-steps li:nth-child(even){margin-inline-start:calc(50% + 42px)}
 .page-capabilities .work-canonical .work-steps li::before{
   content:"";
   position:absolute;
@@ -177,19 +175,13 @@
   color:var(--w-green)!important;
   opacity:.58;
 }
-.page-capabilities .work-canonical .work-steps li>div{
-  grid-area:copy;
-  padding:0;
-}
+.page-capabilities .work-canonical .work-steps li>div{grid-area:copy;padding:0}
 .page-capabilities .work-canonical .work-steps h3{
   margin:0 0 8px!important;
   font-size:1.22rem!important;
   line-height:1.35;
 }
-.page-capabilities .work-canonical .work-steps p{
-  margin:0;
-  max-width:46ch;
-}
+.page-capabilities .work-canonical .work-steps p{margin:0;max-width:46ch}
 
 /* WHO WE WORK WITH — lighter audience cues, deliberately subordinate. */
 .page-capabilities .work-canonical .work-audiences{gap:16px}
@@ -301,12 +293,14 @@
   .page-capabilities .work-canonical .work-steps li:nth-child(even)::before{
     top:31px;
     inset-inline-start:-34px;
+    inset-inline-end:auto;
     width:34px;
   }
   .page-capabilities .work-canonical .work-steps li::after,
   .page-capabilities .work-canonical .work-steps li:nth-child(even)::after{
     top:25px;
     inset-inline-start:-41px;
+    inset-inline-end:auto;
   }
   .page-capabilities .work-canonical .work-steps .work-icon{width:50px;height:50px;border-radius:14px}
   .page-capabilities .work-canonical .work-steps .work-icon svg{width:24px;height:24px}
