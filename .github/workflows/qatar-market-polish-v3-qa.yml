@@ -1,0 +1,35 @@
+name: TARGET Qatar Market Polish V3 QA
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'public/assets/qatar-market-polish-v2.css'
+      - 'src/layouts/BaseLayout.astro'
+      - 'src/pages/qatar-market.astro'
+      - '.github/workflows/qatar-market-polish-v3-qa.yml'
+  workflow_dispatch:
+
+jobs:
+  qatar-market-polish-v3:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify Qatar Market photography density and checkpoint state
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f public/assets/qatar-market-polish-v2.css
+          grep -Fq 'qatar-market-polish-v2.css?v=20260817-02' src/layouts/BaseLayout.astro
+          grep -Fq '7362950' public/assets/qatar-market-polish-v2.css
+          grep -Fq '17546505' public/assets/qatar-market-polish-v2.css
+          grep -Fq '.qm-review .qm-section-head::after' public/assets/qatar-market-polish-v2.css
+          grep -Fq '.qm-channel-copy::after' public/assets/qatar-market-polish-v2.css
+          grep -Fq '.qm-checkpoint-track article.is-focus' public/assets/qatar-market-polish-v2.css
+          grep -Fq 'background:linear-gradient(150deg,#0C4931' public/assets/qatar-market-polish-v2.css
+          grep -Fq 'index === 1 ? '\''is-focus' src/pages/qatar-market.astro
+          grep -Fq 'prefers-reduced-motion' public/assets/qatar-market-polish-v2.css
+      - name: Build Astro site
+        run: |
+          npm install
+          npm run build
