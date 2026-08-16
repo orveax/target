@@ -1,6 +1,82 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import html from '../legacy/404.html?raw';
-import { extractLegacyMain } from '../lib/legacy';
 ---
-<BaseLayout bodyClass="page-404" title="الصفحة غير موجودة | TARGET"><Fragment set:html={extractLegacyMain(html)} /></BaseLayout>
+<BaseLayout
+  bodyClass="page-404"
+  title="الصفحة غير موجودة | TARGET"
+  description="الصفحة المطلوبة غير متاحة. يمكنك العودة للرئيسية أو الانتقال إلى المنتجات والشركات أو التواصل مع TARGET."
+  robots="noindex,follow"
+>
+  <section class="not-found-shell" aria-labelledby="not-found-title">
+    <div class="container not-found-grid">
+      <div class="not-found-copy">
+        <span class="not-found-eyebrow">
+          <i data-lucide="route-off" aria-hidden="true"></i>
+          <span data-ar="مسار غير متاح" data-en="Route Unavailable">مسار غير متاح</span>
+        </span>
+
+        <div class="not-found-code" aria-hidden="true">4<span>0</span>4</div>
+
+        <h1 id="not-found-title" data-ar="الصفحة التي تبحث عنها غير موجودة." data-en="The page you're looking for isn't here.">الصفحة التي تبحث عنها غير موجودة.</h1>
+        <p data-ar="قد يكون الرابط قد تغيّر أو لم يعد متاحًا. استخدم أحد المسارات التالية للعودة إلى محتوى TARGET بدون فقدان طريقك داخل الموقع." data-en="The link may have changed or may no longer be available. Use one of the routes below to continue through the TARGET website.">قد يكون الرابط قد تغيّر أو لم يعد متاحًا. استخدم أحد المسارات التالية للعودة إلى محتوى TARGET بدون فقدان طريقك داخل الموقع.</p>
+
+        <div class="not-found-actions">
+          <a class="primary" href="index.html">
+            <i data-lucide="home" aria-hidden="true"></i>
+            <span data-ar="العودة للرئيسية" data-en="Back to Home">العودة للرئيسية</span>
+          </a>
+          <a class="secondary" href="contact.html">
+            <i data-lucide="mail" aria-hidden="true"></i>
+            <span data-ar="تواصل معنا" data-en="Contact Us">تواصل معنا</span>
+          </a>
+        </div>
+
+        <a class="not-found-products-link" href="food-portfolio.html">
+          <i data-lucide="package-search" aria-hidden="true"></i>
+          <span data-ar="استعرض المنتجات والشركات" data-en="Explore Products & Companies">استعرض المنتجات والشركات</span>
+        </a>
+      </div>
+
+      <aside class="not-found-recovery" aria-label="Alternative site routes">
+        <div class="recovery-head">
+          <div>
+            <small>RECOVERY ROUTES</small>
+            <strong data-ar="اختر المسار المناسب" data-en="Choose your next route">اختر المسار المناسب</strong>
+          </div>
+          <span class="recovery-status">404</span>
+        </div>
+
+        <div class="recovery-route">
+          <a href="index.html">
+            <span class="recovery-icon"><i data-lucide="home" aria-hidden="true"></i></span>
+            <span>
+              <strong data-ar="الرئيسية" data-en="Home">الرئيسية</strong>
+              <span data-ar="ابدأ من نظرة TARGET العامة." data-en="Start from the TARGET overview.">ابدأ من نظرة TARGET العامة.</span>
+            </span>
+            <i data-lucide="arrow-left" aria-hidden="true"></i>
+          </a>
+
+          <a href="food-portfolio.html">
+            <span class="recovery-icon"><i data-lucide="packages" aria-hidden="true"></i></span>
+            <span>
+              <strong data-ar="المنتجات والشركات" data-en="Products & Companies">المنتجات والشركات</strong>
+              <span data-ar="راجع الفئات والمنتجات محل الاهتمام." data-en="Review product categories and companies in focus.">راجع الفئات والمنتجات محل الاهتمام.</span>
+            </span>
+            <i data-lucide="arrow-left" aria-hidden="true"></i>
+          </a>
+
+          <a href="contact.html">
+            <span class="recovery-icon"><i data-lucide="messages-square" aria-hidden="true"></i></span>
+            <span>
+              <strong data-ar="تواصل معنا" data-en="Contact Us">تواصل معنا</strong>
+              <span data-ar="أرسل استفسارك عبر قناة التواصل المناسبة." data-en="Send your enquiry through the appropriate contact route.">أرسل استفسارك عبر قناة التواصل المناسبة.</span>
+            </span>
+            <i data-lucide="arrow-left" aria-hidden="true"></i>
+          </a>
+        </div>
+
+        <p class="recovery-note" data-ar="هذه الصفحة لا تعني وجود مشكلة في حسابك أو في إرسال أي نموذج؛ هي فقط مسار غير موجود داخل الموقع." data-en="This page does not indicate an account or form-submission problem; it only means the requested website route was not found.">هذه الصفحة لا تعني وجود مشكلة في حسابك أو في إرسال أي نموذج؛ هي فقط مسار غير موجود داخل الموقع.</p>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>
