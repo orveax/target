@@ -1,4 +1,4 @@
-name: TARGET Mobile Menu Viewport Fit V2.1 QA
+name: TARGET Mobile Menu Five Routes First V2.2 QA
 on:
   push:
     branches: [main]
@@ -15,15 +15,16 @@ jobs:
         run: npm install
       - name: Build Astro site
         run: npm run build
-      - name: Verify mobile viewport-fit contract
+      - name: Verify five-routes-first mobile contract
         run: |
           test -f public/assets/mobile-menu-viewport-fit-v21.css
           grep -q 'height:100dvh!important' public/assets/mobile-menu-viewport-fit-v21.css
           grep -q 'min-height:0!important' public/assets/mobile-menu-viewport-fit-v21.css
           grep -q 'overflow-y:auto!important' public/assets/mobile-menu-viewport-fit-v21.css
-          grep -q 'min-height:54px!important' public/assets/mobile-menu-viewport-fit-v21.css
-          grep -q 'max-height: 760px' public/assets/mobile-menu-viewport-fit-v21.css
-          grep -q 'max-height: 640px' public/assets/mobile-menu-viewport-fit-v21.css
+          grep -q '.th2-mobile-intro{display:none!important}' public/assets/mobile-menu-viewport-fit-v21.css
+          grep -q 'height:48px!important' public/assets/mobile-menu-viewport-fit-v21.css
+          grep -q 'height:44px!important' public/assets/mobile-menu-viewport-fit-v21.css
+          grep -q 'max-height: 680px' public/assets/mobile-menu-viewport-fit-v21.css
+          grep -q 'max-height: 520px' public/assets/mobile-menu-viewport-fit-v21.css
           grep -q 'mobile-menu-viewport-fit-v21.css?v=20260817-01' src/layouts/BaseLayout.astro
-          test "$(grep -o 'th2-mobile-primary .nav-link' public/assets/mobile-menu-viewport-fit-v21.css | wc -l)" -ge 1
           test "$(grep -o '<a class:list={[[]'\''nav-link' src/components/SiteHeader.astro | wc -l)" -ge 5
