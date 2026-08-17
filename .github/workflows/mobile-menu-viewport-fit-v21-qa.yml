@@ -1,4 +1,4 @@
-name: TARGET Mobile Menu Authoritative V2.4 QA
+name: TARGET Mobile Menu Premium V2.5 QA
 on:
   push:
     branches: [main]
@@ -15,7 +15,7 @@ jobs:
         run: npm install
       - name: Build Astro site
         run: npm run build
-      - name: Verify V2.4 authoritative mobile contract
+      - name: Verify V2.5 premium mobile contract
         run: |
           set -euo pipefail
           CSS='public/assets/mobile-menu-viewport-fit-v21.css'
@@ -23,19 +23,25 @@ jobs:
           LAYOUT='src/layouts/BaseLayout.astro'
           test -f "$CSS"
           grep -q 'height:100dvh!important' "$CSS"
-          grep -q '.th2-mobile-intro{display:none!important}' "$CSS"
-          grep -q 'grid-template-columns:24px 34px minmax(0,1fr) 18px!important' "$CSS"
-          grep -q 'grid-template-rows:48px!important' "$CSS"
-          grep -q '.th2-mobile-route-icon' "$CSS"
-          grep -q 'stroke-width:1.85!important' "$CSS"
-          grep -q 'background:transparent!important' "$CSS"
-          grep -q 'border-radius:0!important' "$CSS"
-          grep -q 'target-logo-horizontal-light.svg' "$HEADER"
+          grep -q 'flex:0 0 88px!important' "$CSS"
+          grep -q 'grid-template-columns:24px 36px minmax(0,1fr) 18px!important' "$CSS"
+          grep -q 'grid-template-rows:52px!important' "$CSS"
+          grep -q 'width:36px!important' "$CSS"
+          grep -q 'max-height:680px' "$CSS"
+          grep -q 'grid-template-rows:44px!important' "$CSS"
+          grep -q '.th2-mobile-social' "$CSS"
+          grep -q '.th2-mobile-social-links' "$CSS"
+          grep -q '.th2-mobile-profile-resource' "$CSS"
+          grep -q 'https://www.instagram.com/targetft/' "$HEADER"
+          grep -q 'https://www.facebook.com/targetft' "$HEADER"
+          grep -q 'https://www.tiktok.com/@targetft' "$HEADER"
+          grep -q 'class="th2-mobile-profile-resource"' "$HEADER"
+          grep -q 'data-ar="صفحة التحميل" data-en="Download page"' "$HEADER"
           test "$(grep -o 'class=\"th2-mobile-route-icon\"' "$HEADER" | wc -l)" -eq 5
           test "$(grep -o 'class=\"th2-mobile-route-arrow\"' "$HEADER" | wc -l)" -eq 5
           ! grep -q 'premium-mobile-head th2-mobile-head' "$HEADER"
           ! grep -q 'premium-mobile-brand th2-mobile-brand' "$HEADER"
           ! grep -q 'premium-mobile-links th2-mobile-primary' "$HEADER"
           ! grep -q 'premium-mobile-secondary th2-mobile-secondary' "$HEADER"
-          grep -q 'mobile-menu-viewport-fit-v21.css?v=20260817-04' "$LAYOUT"
-          echo 'TARGET MOBILE MENU V2.4: PASS'
+          grep -q 'mobile-menu-viewport-fit-v21.css?v=20260817-05' "$LAYOUT"
+          echo 'TARGET MOBILE MENU V2.5: PASS'
