@@ -127,7 +127,7 @@ html[lang='en'] .home-canonical .hc-hero-copy>p{line-height:1.66}
 .home-canonical .hc-button-secondary svg,.home-canonical .hc-final-secondary svg,.home-canonical .hc-explore-link svg{width:18px;height:18px;stroke-width:1.8}
 html[dir='ltr'] .home-canonical .hc-button-secondary svg,html[dir='ltr'] .home-canonical .hc-final-secondary svg,html[dir='ltr'] .home-canonical .hc-explore-link svg,html[dir='ltr'] .home-canonical .hc-category-arrow{transform:scaleX(-1)}
 
-/* Hero media: real manufacturing/packing context. */
+/* Hero media: visible food product on a real processing line. */
 .home-canonical .hc-hero-visual{position:relative;min-width:0;padding-block:16px 62px}
 .home-canonical .hc-media-tag{
   position:absolute;
@@ -159,17 +159,17 @@ html[dir='ltr'] .home-canonical .hc-button-secondary svg,html[dir='ltr'] .home-c
   border:1px solid rgba(244,237,228,.20);
   border-radius:32px 32px 92px 32px;
   background:
-    linear-gradient(180deg,rgba(5,44,30,.02),rgba(5,44,30,.19)),
-    url('https://images.pexels.com/photos/11679687/pexels-photo-11679687.jpeg?auto=compress&cs=tinysrgb&w=1800') center 52%/cover no-repeat;
+    linear-gradient(180deg,rgba(5,44,30,.015),rgba(5,44,30,.16)),
+    url('https://images.pexels.com/photos/11679685/pexels-photo-11679685.jpeg?auto=compress&cs=tinysrgb&w=1800') center 50%/cover no-repeat;
   box-shadow:var(--hc-shadow-hero);
-  filter:saturate(.92) contrast(1.02);
+  filter:saturate(.96) contrast(1.02);
 }
 html[dir='ltr'] .home-canonical .hc-hero-media{border-radius:32px 32px 32px 92px}
 .home-canonical .hc-hero-media::after{
   content:"";
   position:absolute;
   inset:0;
-  background:linear-gradient(180deg,transparent 50%,rgba(4,37,25,.25) 100%);
+  background:linear-gradient(180deg,transparent 52%,rgba(4,37,25,.22) 100%);
   pointer-events:none;
 }
 .home-canonical .hc-route{
@@ -369,7 +369,7 @@ html[dir='rtl'] .home-canonical .hc-category-media::after{transform:translateX(5
   .home-canonical .hc-actions a{width:100%;justify-content:center}
   .home-canonical .hc-hero-visual{padding-block:4px 20px}
   .home-canonical .hc-media-tag{inset-block-start:16px;inset-inline-end:12px;font-size:.58rem}
-  .home-canonical .hc-hero-media{min-height:0;aspect-ratio:4/3;border-radius:21px 21px 50px 21px;background-position:54% center}
+  .home-canonical .hc-hero-media{min-height:0;aspect-ratio:4/3;border-radius:21px 21px 50px 21px;background-position:center center}
   html[dir='ltr'] .home-canonical .hc-hero-media{border-radius:21px 21px 21px 50px}
   .home-canonical .hc-route{position:relative;inset:auto;margin:-22px 10px 0;padding:11px;border-radius:15px}
   .home-canonical .hc-route-label{margin-bottom:7px;font-size:.64rem}
