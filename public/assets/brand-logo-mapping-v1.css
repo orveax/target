@@ -1,7 +1,7 @@
-/* TARGET — Official Logo Application Mapping V1 | 2026-08-17
- * Brand master is unchanged. This layer only maps the correct approved lockup
- * to each surface and protects logo legibility at real mobile and handheld
- * browser Desktop Site viewports.
+/* TARGET — Official Logo Application Mapping V1 | corrected 2026-08-17
+ * Brand master is unchanged. This layer maps approved lockups to surfaces.
+ * Mobile Header V2.4 uses the horizontal light lockup directly on Charcoal;
+ * no green card, border, padding or shadow may wrap the logo.
  */
 
 /* Desktop/main header: horizontal lockup belongs in the long navigation rail. */
@@ -26,31 +26,30 @@
   object-fit:contain!important;
 }
 
-/* Mobile drawer: the primary stacked lockup gives the Arabic wordmark enough scale. */
+/* Mobile drawer: horizontal light lockup sits directly on the Charcoal head. */
 @media(max-width:1199.98px){
-  .premium-mobile-nav .premium-mobile-head{
-    min-height:112px!important;
-    padding:10px 14px!important;
-  }
-  .premium-mobile-nav .premium-mobile-brand{
-    display:flex!important;
+  .premium-mobile-nav .th2-mobile-brand{
+    display:inline-flex!important;
     align-items:center!important;
-    justify-content:center!important;
-    flex:0 0 auto!important;
-    min-width:176px!important;
-    min-height:92px!important;
-    padding:7px 13px!important;
-    border:1px solid rgba(192,149,82,.24)!important;
-    border-radius:14px!important;
-    background:#0C4931!important;
-    box-shadow:0 8px 22px rgba(12,73,49,.11)!important;
-  }
-  .premium-mobile-nav .premium-mobile-brand .mobile-brand-logo{
-    display:block!important;
-    width:148px!important;
-    max-width:148px!important;
+    justify-content:flex-start!important;
+    flex:0 1 auto!important;
+    min-width:0!important;
+    min-height:0!important;
+    width:auto!important;
     height:auto!important;
-    max-height:88px!important;
+    margin:0!important;
+    padding:0!important;
+    border:0!important;
+    border-radius:0!important;
+    background:transparent!important;
+    box-shadow:none!important;
+  }
+  .premium-mobile-nav .th2-mobile-brand .mobile-brand-logo{
+    display:block!important;
+    width:176px!important;
+    max-width:min(48vw,176px)!important;
+    height:auto!important;
+    max-height:58px!important;
     min-height:0!important;
     margin:0!important;
     padding:0!important;
@@ -68,9 +67,11 @@
     max-width:168px!important;
     max-height:58px!important;
   }
-  .premium-mobile-nav .premium-mobile-head{min-height:106px!important;padding-inline:12px!important}
-  .premium-mobile-nav .premium-mobile-brand{min-width:164px!important;min-height:86px!important;padding:6px 11px!important}
-  .premium-mobile-nav .premium-mobile-brand .mobile-brand-logo{width:136px!important;max-width:136px!important;max-height:82px!important}
+  .premium-mobile-nav .th2-mobile-brand .mobile-brand-logo{
+    width:166px!important;
+    max-width:min(48vw,166px)!important;
+    max-height:56px!important;
+  }
 }
 
 /* Footer V6: primary stacked lockup is the correct use-case on the dark brand surface. */
