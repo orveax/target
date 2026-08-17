@@ -92,8 +92,10 @@ jobs:
               const page=await context.newPage();
               await page.goto(origin,{waitUntil:'networkidle'});
               await page.evaluate(async()=>{if(document.fonts) await document.fonts.ready;});
-              await page.waitForSelector('.portfolio-company-grid .company-tile',{timeout:12000});
-              await page.waitForTimeout(800);
+              const app=page.locator('.portfolio-app');
+              await app.scrollIntoViewIfNeeded();
+              await page.waitForSelector('.portfolio-company-grid .company-tile',{state:'visible',timeout:12000});
+              await page.waitForTimeout(1000);
               const m=await page.evaluate(()=>({
                 width:innerWidth,
                 overflowX:document.documentElement.scrollWidth>document.documentElement.clientWidth,
