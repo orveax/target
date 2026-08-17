@@ -12,14 +12,15 @@
       figure.className = 'work-info-media';
       figure.innerHTML = `
         <img
-          src="/images/home-food-trade-editorial-v1.png"
-          alt="منتجات غذائية ومعلومات منتج جاهزة للمراجعة"
-          data-ar-alt="منتجات غذائية ومعلومات منتج جاهزة للمراجعة"
-          data-en-alt="Food products and product information prepared for review"
-          width="1600"
+          src="https://images.pexels.com/photos/5953751/pexels-photo-5953751.jpeg?auto=compress&cs=tinysrgb&w=1400&h=900&fit=crop"
+          alt="فحص جودة منتج غذائي داخل منشأة إنتاج"
+          data-ar-alt="فحص جودة منتج غذائي داخل منشأة إنتاج"
+          data-en-alt="Food product quality inspection inside a production facility"
+          width="1400"
           height="900"
           loading="lazy"
           decoding="async"
+          referrerpolicy="no-referrer"
         />
         <figcaption>
           <i data-lucide="clipboard-check" aria-hidden="true"></i>
