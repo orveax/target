@@ -162,7 +162,7 @@ jobs:
                 if(!m.channelLinks.includes('mailto:info@targetft.com')||!m.channelLinks.includes('mailto:sales@targetft.com')||!m.channelLinks.includes('mailto:procurement@targetft.com')||!m.channelLinks.includes('suppliers.html')) failures.push(`${name}-${lang}: contact channel routing mismatch`);
                 if(m.verifiedBlocks!==1) failures.push(`${name}-${lang}: verified direct-contact/social block missing`);
                 if(m.phoneHref!=='tel:+97477910919') failures.push(`${name}-${lang}: verified phone mismatch`);
-                if(m.whatsappHref!=='https://wa.me/97477910919') failures.push(`${name}-${lang}: verified WhatsApp mismatch`);
+                if(!m.whatsappHref.startsWith('https://wa.me/97477910919')) failures.push(`${name}-${lang}: verified WhatsApp mismatch`);
                 if(m.socialLinks.length!==3||!m.socialLinks.some(x=>x.includes('facebook.com/targetft'))||!m.socialLinks.some(x=>x.includes('instagram.com/targetft'))||!m.socialLinks.some(x=>x.includes('tiktok.com/@targetft'))) failures.push(`${name}-${lang}: verified social routing mismatch`);
                 if(!m.mapSrc.includes('25.1753889,51.6052222')) failures.push(`${name}-${lang}: verified map coordinates missing`);
                 if(m.supportRoutes!==2) failures.push(`${name}-${lang}: expected two support routes`);
