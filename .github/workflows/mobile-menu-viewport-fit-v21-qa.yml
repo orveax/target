@@ -1,4 +1,4 @@
-name: TARGET Mobile Menu Alignment + Brand Fit V2.3 QA
+name: TARGET Mobile Menu Authoritative V2.4 QA
 on:
   push:
     branches: [main]
@@ -15,18 +15,27 @@ jobs:
         run: npm install
       - name: Build Astro site
         run: npm run build
-      - name: Verify V2.3 mobile alignment and brand-fit contract
+      - name: Verify V2.4 authoritative mobile contract
         run: |
-          test -f public/assets/mobile-menu-viewport-fit-v21.css
-          grep -q 'height:100dvh!important' public/assets/mobile-menu-viewport-fit-v21.css
-          grep -q '.th2-mobile-intro{display:none!important}' public/assets/mobile-menu-viewport-fit-v21.css
-          grep -q 'grid-template-columns:22px 30px minmax(0,1fr) 15px!important' public/assets/mobile-menu-viewport-fit-v21.css
-          grep -q '.th2-mobile-route-icon' public/assets/mobile-menu-viewport-fit-v21.css
-          grep -q 'place-items:center!important' public/assets/mobile-menu-viewport-fit-v21.css
-          grep -q 'stroke-width:1.9!important' public/assets/mobile-menu-viewport-fit-v21.css
-          grep -q 'height:48px!important' public/assets/mobile-menu-viewport-fit-v21.css
-          grep -q 'height:44px!important' public/assets/mobile-menu-viewport-fit-v21.css
-          grep -q 'target-logo-horizontal-light.svg' src/components/SiteHeader.astro
-          test "$(grep -o 'class=\"th2-mobile-route-icon\"' src/components/SiteHeader.astro | wc -l)" -eq 5
-          test "$(grep -o 'class=\"th2-mobile-route-arrow\"' src/components/SiteHeader.astro | wc -l)" -eq 5
-          grep -q 'mobile-menu-viewport-fit-v21.css?v=20260817-03' src/layouts/BaseLayout.astro
+          set -euo pipefail
+          CSS='public/assets/mobile-menu-viewport-fit-v21.css'
+          HEADER='src/components/SiteHeader.astro'
+          LAYOUT='src/layouts/BaseLayout.astro'
+          test -f "$CSS"
+          grep -q 'height:100dvh!important' "$CSS"
+          grep -q '.th2-mobile-intro{display:none!important}' "$CSS"
+          grep -q 'grid-template-columns:24px 34px minmax(0,1fr) 18px!important' "$CSS"
+          grep -q 'grid-template-rows:48px!important' "$CSS"
+          grep -q '.th2-mobile-route-icon' "$CSS"
+          grep -q 'stroke-width:1.85!important' "$CSS"
+          grep -q 'background:transparent!important' "$CSS"
+          grep -q 'border-radius:0!important' "$CSS"
+          grep -q 'target-logo-horizontal-light.svg' "$HEADER"
+          test "$(grep -o 'class=\"th2-mobile-route-icon\"' "$HEADER" | wc -l)" -eq 5
+          test "$(grep -o 'class=\"th2-mobile-route-arrow\"' "$HEADER" | wc -l)" -eq 5
+          ! grep -q 'premium-mobile-head th2-mobile-head' "$HEADER"
+          ! grep -q 'premium-mobile-brand th2-mobile-brand' "$HEADER"
+          ! grep -q 'premium-mobile-links th2-mobile-primary' "$HEADER"
+          ! grep -q 'premium-mobile-secondary th2-mobile-secondary' "$HEADER"
+          grep -q 'mobile-menu-viewport-fit-v21.css?v=20260817-04' "$LAYOUT"
+          echo 'TARGET MOBILE MENU V2.4: PASS'
