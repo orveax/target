@@ -1,0 +1,175 @@
+/* TARGET — How We Work Premium Hero V1 | 2026-08-17
+ * Scope: How We Work hero only. Canonical copy/structure preserved.
+ * Identity: operational route / product-to-market process.
+ * Photography: existing real Pexels manufacturing/packaging image in how-we-work-final-refinement-v1.css.
+ */
+.page-capabilities .work-canonical .work-hero{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  padding-block:0!important;
+  background:#222725!important;
+  color:#F4EDE4!important;
+}
+.page-capabilities .work-canonical .work-hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-2;
+  pointer-events:none;
+  background:
+    linear-gradient(rgba(244,237,228,.035) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(244,237,228,.035) 1px,transparent 1px),
+    radial-gradient(circle at 76% 20%,rgba(192,149,82,.15),transparent 30%);
+  background-size:42px 42px,42px 42px,auto;
+  mask-image:linear-gradient(90deg,#000,rgba(0,0,0,.88) 72%,transparent 100%);
+}
+.page-capabilities .work-canonical .work-hero::after{
+  content:"01  REVIEW   02  AGREE   03  MOVE";
+  position:absolute;
+  inset-inline-start:clamp(18px,4vw,64px);
+  inset-block-end:18px;
+  color:rgba(244,237,228,.18);
+  font:700 .65rem/1 Manrope,sans-serif;
+  letter-spacing:.18em;
+  white-space:pre;
+}
+.page-capabilities .work-canonical .work-hero__grid{
+  min-height:clamp(660px,78vh,840px);
+  display:grid!important;
+  grid-template-columns:minmax(0,.92fr) minmax(440px,1.08fr)!important;
+  gap:clamp(38px,5vw,72px)!important;
+  align-items:center!important;
+  padding-block:clamp(62px,6vw,92px) clamp(82px,7vw,110px)!important;
+}
+.page-capabilities .work-canonical .work-eyebrow{
+  min-height:38px;
+  padding:8px 13px!important;
+  border:1px solid rgba(244,237,228,.18)!important;
+  background:rgba(244,237,228,.055)!important;
+  color:#F4EDE4!important;
+  backdrop-filter:blur(8px);
+}
+.page-capabilities .work-canonical .work-eyebrow svg{color:#C09552!important}
+.page-capabilities .work-canonical .work-hero h1{
+  max-width:12.8ch!important;
+  margin:18px 0 22px!important;
+  color:#F4EDE4!important;
+  font-size:clamp(3.2rem,5vw,5.2rem)!important;
+  line-height:1.04!important;
+  letter-spacing:-.028em!important;
+}
+html[dir="rtl"] .page-capabilities .work-canonical .work-hero h1{letter-spacing:0!important}
+.page-capabilities .work-canonical .work-hero p{
+  max-width:620px!important;
+  color:rgba(244,237,228,.74)!important;
+  font-size:clamp(1.02rem,1.2vw,1.14rem)!important;
+  line-height:1.82!important;
+}
+.page-capabilities .work-canonical .work-hero__actions{gap:12px!important;margin-top:30px!important}
+.page-capabilities .work-canonical .work-hero__actions .btn-light-premium{
+  background:#F4EDE4!important;
+  border-color:#F4EDE4!important;
+  color:#0C4931!important;
+  box-shadow:0 12px 28px rgba(0,0,0,.18)!important;
+}
+.page-capabilities .work-canonical .work-quiet-link{
+  min-height:48px!important;
+  padding-inline:4px!important;
+  color:#F4EDE4!important;
+}
+.page-capabilities .work-canonical .work-quiet-link:hover{color:#C09552!important}
+
+/* Route stage doubles as real-photo process visual. */
+.page-capabilities .work-canonical .work-hero__route{
+  position:relative!important;
+  justify-self:stretch!important;
+  width:100%!important;
+  min-height:560px!important;
+  aspect-ratio:auto!important;
+  display:flex!important;
+  align-items:flex-end!important;
+  justify-content:center!important;
+  gap:8px!important;
+  padding:24px!important;
+  border:1px solid rgba(244,237,228,.14)!important;
+  border-radius:28px!important;
+  overflow:hidden!important;
+  box-shadow:0 30px 72px rgba(0,0,0,.30)!important;
+}
+.page-capabilities .work-canonical .work-hero__route::before{
+  content:"PRODUCT → TARGET → QATAR"!important;
+  position:absolute!important;
+  z-index:2!important;
+  inset-block-start:22px!important;
+  inset-inline-start:22px!important;
+  width:auto!important;
+  max-width:calc(100% - 44px)!important;
+  min-height:30px!important;
+  padding:8px 11px!important;
+  border:1px solid rgba(244,237,228,.28)!important;
+  border-radius:999px!important;
+  background:rgba(24,29,27,.46)!important;
+  color:#F4EDE4!important;
+  font:700 .64rem/1 Manrope,sans-serif!important;
+  letter-spacing:.12em!important;
+  backdrop-filter:blur(9px);
+}
+.page-capabilities .work-canonical .work-hero__route::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  background:linear-gradient(180deg,rgba(24,29,27,.02) 0%,rgba(24,29,27,.08) 46%,rgba(24,29,27,.72) 100%);
+  pointer-events:none;
+}
+.page-capabilities .work-canonical .work-hero__route>*{position:relative;z-index:1}
+.page-capabilities .work-canonical .work-hero__route>span,
+.page-capabilities .work-canonical .work-hero__route>strong{
+  width:74px!important;
+  height:64px!important;
+  min-height:64px!important;
+  border:1px solid rgba(244,237,228,.36)!important;
+  border-radius:16px!important;
+  background:rgba(244,237,228,.92)!important;
+  color:#0C4931!important;
+  box-shadow:0 16px 34px rgba(0,0,0,.22)!important;
+  backdrop-filter:blur(10px);
+}
+.page-capabilities .work-canonical .work-hero__route>strong{
+  width:146px!important;
+  background:#0C4931!important;
+  color:#F4EDE4!important;
+}
+.page-capabilities .work-canonical .work-hero__route>i{width:18px!important;color:#C09552!important}
+
+@media(max-width:991.98px){
+  .page-capabilities .work-canonical .work-hero__grid{
+    min-height:0;
+    grid-template-columns:1fr!important;
+    gap:34px!important;
+    padding-block:58px 72px!important;
+  }
+  .page-capabilities .work-canonical .work-hero h1{max-width:13.5ch!important;font-size:clamp(3rem,7vw,4.6rem)!important}
+  .page-capabilities .work-canonical .work-hero__route{min-height:430px!important;border-radius:24px!important}
+}
+@media(max-width:767.98px){
+  .page-capabilities .work-canonical .work-hero__grid{gap:26px!important;padding-block:44px 54px!important}
+  .page-capabilities .work-canonical .work-hero h1{max-width:12ch!important;font-size:clamp(2.6rem,11vw,3.45rem)!important;line-height:1.1!important}
+  .page-capabilities .work-canonical .work-hero p{font-size:1rem!important;line-height:1.75!important}
+  .page-capabilities .work-canonical .work-hero__actions{display:grid!important;grid-template-columns:1fr!important;margin-top:24px!important}
+  .page-capabilities .work-canonical .work-hero__route{display:flex!important;min-height:330px!important;padding:14px!important;border-radius:20px!important}
+  .page-capabilities .work-canonical .work-hero__route::before{inset-block-start:14px!important;inset-inline-start:14px!important}
+  .page-capabilities .work-canonical .work-hero__route>span,
+  .page-capabilities .work-canonical .work-hero__route>strong{height:52px!important;min-height:52px!important;width:58px!important;border-radius:13px!important}
+  .page-capabilities .work-canonical .work-hero__route>strong{width:108px!important}
+}
+html.handheld-desktop-mode .page-capabilities .work-canonical .work-hero__grid{
+  min-height:0!important;
+  grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)!important;
+  gap:30px!important;
+  padding-block:48px 58px!important;
+}
+html.handheld-desktop-mode .page-capabilities .work-canonical .work-hero h1{font-size:clamp(2.7rem,5vw,3.8rem)!important}
+html.handheld-desktop-mode .page-capabilities .work-canonical .work-hero__route{min-height:390px!important}
+@media(prefers-reduced-motion:reduce){.page-capabilities .work-canonical .work-hero *{transition:none!important}}

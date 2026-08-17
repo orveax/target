@@ -1,0 +1,33 @@
+/* TARGET — Contact Premium Hero V1 | 2026-08-17
+ * Scope: Contact hero only. Canonical copy/structure preserved.
+ * Identity: communication routing / clear channels.
+ * Photography: real Pexels commercial desk/product context 35642370.
+ */
+.page-contact .ct-hero{position:relative;isolation:isolate;overflow:hidden;padding-block:0!important;background:#FFF!important;color:#262626!important;border-bottom:1px solid rgba(12,73,49,.08)}
+.page-contact .ct-hero::before{content:"CONTACT / ROUTING";position:absolute;inset-inline-start:clamp(18px,4vw,64px);inset-block-start:26px;color:rgba(12,73,49,.17);font:700 .62rem/1 Manrope,sans-serif;letter-spacing:.18em;white-space:nowrap}
+.page-contact .ct-hero::after{content:"";position:absolute;inset-inline-end:0;inset-block:0;width:32%;background:linear-gradient(180deg,rgba(244,237,228,.5),rgba(244,237,228,.15));pointer-events:none}
+.page-contact .ct-hero-grid{position:relative;z-index:1;min-height:clamp(620px,72vh,780px);display:grid!important;grid-template-columns:minmax(0,1.04fr) minmax(390px,.96fr)!important;gap:clamp(42px,6vw,88px)!important;align-items:center!important;padding-block:clamp(70px,6vw,94px)!important}
+.page-contact .ct-hero-copy{max-width:720px!important}
+.page-contact .ct-eyebrow{min-height:38px!important;padding:8px 12px!important;border:1px solid rgba(12,73,49,.14)!important;border-radius:999px!important;background:#F4EDE4!important;color:#0C4931!important}
+.page-contact .ct-eyebrow svg{color:#C09552!important}
+.page-contact .ct-hero h1{max-width:14ch!important;margin:18px 0 22px!important;color:#262626!important;font-size:clamp(3rem,4.6vw,4.7rem)!important;line-height:1.07!important;letter-spacing:-.025em!important}
+html[dir="rtl"] .page-contact .ct-hero h1{letter-spacing:0!important}
+.page-contact .ct-hero-copy>p{max-width:650px!important;color:#5F6863!important;font-size:clamp(1.02rem,1.2vw,1.14rem)!important;line-height:1.82!important}
+.page-contact .ct-actions{gap:12px!important;margin-top:30px!important}
+.page-contact .ct-primary{background:#0C4931!important;border-color:#0C4931!important;color:#F4EDE4!important;box-shadow:0 12px 28px rgba(12,73,49,.15)!important}
+.page-contact .ct-secondary{color:#0C4931!important}
+.page-contact .ct-secondary:hover{color:#C09552!important}
+.page-contact .ct-hero-media{position:relative!important;min-height:520px!important;margin:0!important;border:1px solid rgba(12,73,49,.10)!important;border-radius:24px!important;overflow:hidden!important;background:#E9E2D8!important;box-shadow:0 24px 58px rgba(38,38,38,.12)!important}
+.page-contact .ct-hero-media>img{width:100%!important;height:100%!important;position:absolute!important;inset:0!important;object-fit:cover!important;object-position:center 50%!important;filter:saturate(.92) contrast(1.025)!important}
+.page-contact .ct-hero-media::before{content:"RIGHT MESSAGE · RIGHT TEAM";position:absolute;z-index:3;inset-inline-start:16px;inset-block-start:16px;min-height:30px;display:inline-flex;align-items:center;padding:7px 10px;border:1px solid rgba(255,255,255,.36);border-radius:999px;background:rgba(38,38,38,.62);color:#F4EDE4;font:700 .6rem/1 Manrope,sans-serif;letter-spacing:.11em;backdrop-filter:blur(8px)}
+.page-contact .ct-hero-media::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(38,38,38,.01) 0%,rgba(38,38,38,.04) 52%,rgba(38,38,38,.40) 100%);pointer-events:none}
+.page-contact .ct-hero-media figcaption{position:absolute!important;z-index:4!important;inset-inline:16px!important;inset-block-end:16px!important;display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:6px!important;padding:8px!important;border:1px solid rgba(255,255,255,.22)!important;border-radius:15px!important;background:rgba(255,253,249,.94)!important;box-shadow:0 14px 32px rgba(0,0,0,.14)!important;backdrop-filter:blur(10px)}
+.page-contact .ct-hero-media figcaption span{min-height:52px!important;display:grid!important;grid-template-columns:26px minmax(0,1fr)!important;align-items:center!important;gap:7px!important;padding:7px 8px!important;border-radius:10px!important;background:#F4EDE4!important;color:#0C4931!important}
+.page-contact .ct-hero-media figcaption svg{width:16px!important;height:16px!important;color:#C09552!important}
+.page-contact .ct-hero-media figcaption b{font-size:.69rem!important;line-height:1.35!important}
+@media(max-width:991.98px){.page-contact .ct-hero::after{width:100%;height:38%;inset-block:auto 0}.page-contact .ct-hero-grid{min-height:0;grid-template-columns:1fr!important;gap:34px!important;padding-block:58px 68px!important}.page-contact .ct-hero-copy{max-width:820px!important}.page-contact .ct-hero h1{max-width:15ch!important;font-size:clamp(3rem,7vw,4.45rem)!important}.page-contact .ct-hero-media{min-height:420px!important}}
+@media(max-width:575.98px){.page-contact .ct-hero-grid{gap:26px!important;padding-block:44px 52px!important}.page-contact .ct-hero h1{max-width:13ch!important;font-size:clamp(2.5rem,10.5vw,3.25rem)!important;line-height:1.11!important}.page-contact .ct-hero-copy>p{font-size:.98rem!important;line-height:1.72!important}.page-contact .ct-hero-media{min-height:330px!important;border-radius:18px!important}.page-contact .ct-hero-media figcaption{grid-template-columns:1fr!important;inset-inline:12px!important;inset-block-end:12px!important}.page-contact .ct-hero-media figcaption span{min-height:42px!important}}
+html.handheld-desktop-mode .page-contact .ct-hero-grid{min-height:0!important;grid-template-columns:minmax(0,1.02fr) minmax(0,.98fr)!important;gap:30px!important;padding-block:46px 54px!important}
+html.handheld-desktop-mode .page-contact .ct-hero h1{font-size:clamp(2.6rem,4.7vw,3.6rem)!important}
+html.handheld-desktop-mode .page-contact .ct-hero-media{min-height:380px!important}
+@media(prefers-reduced-motion:reduce){.page-contact .ct-hero *{transition:none!important}}
