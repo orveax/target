@@ -44,7 +44,10 @@ jobs:
           grep -q 'mobile-brand-logo.*target-logo-horizontal-light.svg' "$HEADER"
           ! grep -q 'premium-mobile-brand th2-mobile-brand' "$HEADER"
           grep -q 'tf6-logo.*target-logo-primary-official-cream-transparent.svg' "$FOOTER"
-          grep -q 'brand-logo-mapping-v1.css?v=20260817-01' "$LAYOUT"
+          grep -q 'brand-logo-mapping-v1.css?v=20260817-02' "$LAYOUT"
+          grep -q 'premium-mobile-nav .th2-mobile-brand' "$MAP"
+          grep -q 'background:transparent!important' "$MAP"
+          ! grep -q 'premium-mobile-brand{' "$MAP"
           grep -q 'handheld-desktop-mode.*brand-logo' "$MAP"
           grep -q 'target-footer-v6.*tf6-logo' "$MAP"
 
