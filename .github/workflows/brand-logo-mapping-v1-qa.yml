@@ -8,6 +8,7 @@ on:
       - 'src/components/SiteFooter.astro'
       - 'src/layouts/BaseLayout.astro'
       - 'public/assets/brand/target-logo-primary-official-cream-transparent.svg'
+      - 'public/assets/brand/target-logo-horizontal-light.svg'
       - 'public/assets/brand-logo-mapping-v1.css'
       - '.github/workflows/brand-logo-mapping-v1-qa.yml'
   pull_request:
@@ -16,6 +17,7 @@ on:
       - 'src/components/SiteFooter.astro'
       - 'src/layouts/BaseLayout.astro'
       - 'public/assets/brand/target-logo-primary-official-cream-transparent.svg'
+      - 'public/assets/brand/target-logo-horizontal-light.svg'
       - 'public/assets/brand-logo-mapping-v1.css'
 
 jobs:
@@ -35,10 +37,12 @@ jobs:
           FOOTER='src/components/SiteFooter.astro'
           LAYOUT='src/layouts/BaseLayout.astro'
           PRIMARY='public/assets/brand/target-logo-primary-official-cream-transparent.svg'
+          HORIZONTAL='public/assets/brand/target-logo-horizontal-light.svg'
           MAP='public/assets/brand-logo-mapping-v1.css'
 
-          grep -q 'target-logo-horizontal-light.svg' "$HEADER"
-          grep -q 'mobile-brand-logo.*target-logo-primary-official-cream-transparent.svg' "$HEADER"
+          grep -q 'brand-logo.*target-logo-horizontal-light.svg' "$HEADER"
+          grep -q 'mobile-brand-logo.*target-logo-horizontal-light.svg' "$HEADER"
+          ! grep -q 'premium-mobile-brand th2-mobile-brand' "$HEADER"
           grep -q 'tf6-logo.*target-logo-primary-official-cream-transparent.svg' "$FOOTER"
           grep -q 'brand-logo-mapping-v1.css?v=20260817-01' "$LAYOUT"
           grep -q 'handheld-desktop-mode.*brand-logo' "$MAP"
@@ -48,8 +52,12 @@ jobs:
             echo 'FAIL: web primary logo contains a background rect.' >&2
             exit 1
           fi
-          grep -q 'viewBox="0 0 1000 641.36"' "$PRIMARY"
+          if grep -q '<rect' "$HORIZONTAL"; then
+            echo 'FAIL: horizontal light logo contains a background rect.' >&2
+            exit 1
+          fi
           grep -q '#f4ede4' "$PRIMARY"
           grep -q '#c09552' "$PRIMARY"
+          grep -q '#f4ede4' "$HORIZONTAL"
 
           echo 'TARGET OFFICIAL LOGO MAPPING: PASS'
