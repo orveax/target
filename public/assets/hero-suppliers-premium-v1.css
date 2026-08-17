@@ -1,7 +1,6 @@
-/* TARGET — Premium Hero System V1 / Page 06 For Suppliers
- * Archetype: Supplier Conversion Stage
- * Canonical copy/routes unchanged.
- * Photography: real Pexels packaged-food manufacturer context, source ID 4820847.
+/* TARGET — For Suppliers Hero | Canonical 55/45 Correction — 2026-08-18
+ * Authority: TARGET — For Suppliers Final Canonical Spec | APPROVED & LOCKED — 2026-08-15
+ * Warm Cream foundation · 55% copy / 45% media desktop · text/actions/media mobile.
  */
 
 .page-suppliers .fs-hero{
@@ -9,58 +8,61 @@
   isolation:isolate!important;
   overflow:hidden!important;
   padding:0!important;
-  background:linear-gradient(135deg,#0C4931 0%,#073D2A 100%)!important;
+  background:#F4EDE4!important;
   color:#262626!important;
+  border-bottom:1px solid rgba(12,73,49,.09)!important;
 }
 .page-suppliers .fs-hero::before{
-  content:"MANUFACTURER · PRODUCT · QATAR"!important;
+  content:"SUPPLIER · PRODUCT · QATAR"!important;
   position:absolute!important;
   z-index:0!important;
-  inset-inline-start:clamp(24px,4vw,68px)!important;
-  inset-block-start:26px!important;
-  color:rgba(244,237,228,.26)!important;
-  font:800 .61rem/1 var(--target-font-en,"Manrope",sans-serif)!important;
-  letter-spacing:.18em!important;
+  inset-inline-end:clamp(-16px,-1vw,-4px)!important;
+  inset-block-start:clamp(38px,5vw,70px)!important;
+  color:rgba(12,73,49,.036)!important;
+  font:800 clamp(4rem,7.6vw,7.6rem)/.9 var(--target-font-en,"Manrope",sans-serif)!important;
+  letter-spacing:-.04em!important;
   white-space:nowrap!important;
+  pointer-events:none!important;
 }
 .page-suppliers .fs-hero::after{
   content:""!important;
   position:absolute!important;
   z-index:0!important;
-  inset-inline-end:-120px!important;
-  inset-block-end:-180px!important;
-  width:460px!important;
-  height:460px!important;
-  border:1px solid rgba(244,237,228,.10)!important;
-  border-radius:50%!important;
-  box-shadow:0 0 0 54px rgba(244,237,228,.018),0 0 0 108px rgba(192,149,82,.022)!important;
-  pointer-events:none!important;
+  inset-inline-start:clamp(24px,4vw,66px)!important;
+  inset-block-start:72px!important;
+  width:clamp(110px,12vw,180px)!important;
+  height:1px!important;
+  background:linear-gradient(90deg,#0C4931 0 72%,#C09552 72% 100%)!important;
+  opacity:.44!important;
+}
+html[dir="rtl"] .page-suppliers .fs-hero::after{
+  background:linear-gradient(270deg,#0C4931 0 72%,#C09552 72% 100%)!important;
 }
 
 .page-suppliers .fs-hero-grid{
   position:relative!important;
   z-index:1!important;
   display:grid!important;
-  grid-template-columns:minmax(360px,.78fr) minmax(0,1.22fr)!important;
-  gap:0!important;
+  grid-template-columns:minmax(0,55fr) minmax(360px,45fr)!important;
+  gap:clamp(38px,5vw,66px)!important;
   align-items:center!important;
-  min-height:clamp(680px,72vh,760px)!important;
-  padding-block:clamp(84px,7vw,104px)!important;
+  min-height:clamp(620px,68vh,720px)!important;
+  padding-block:clamp(82px,7vw,104px)!important;
 }
-.page-suppliers .fs-hero-copy{
+.page-suppliers .fs-hero-copy,
+html[dir="ltr"] .page-suppliers .fs-hero-copy{
+  order:initial!important;
   position:relative!important;
-  z-index:4!important;
-  max-width:none!important;
-  padding:clamp(34px,3.5vw,48px)!important;
-  margin-inline-end:-46px!important;
-  border:1px solid rgba(12,73,49,.12)!important;
-  border-radius:22px!important;
-  background:rgba(250,247,242,.98)!important;
+  z-index:2!important;
+  max-width:720px!important;
+  padding:0!important;
+  margin:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
   color:#262626!important;
-  box-shadow:0 22px 52px rgba(0,0,0,.18)!important;
+  box-shadow:none!important;
 }
-html[dir="ltr"] .page-suppliers .fs-hero-copy{margin-inline-end:0!important;margin-inline-start:-46px!important;order:2!important}
-html[dir="ltr"] .page-suppliers .fs-hero-media{order:1!important}
 .page-suppliers .fs-eyebrow{
   display:inline-flex!important;
   align-items:center!important;
@@ -71,104 +73,121 @@ html[dir="ltr"] .page-suppliers .fs-hero-media{order:1!important}
   padding:7px 11px!important;
   border:1px solid rgba(12,73,49,.13)!important;
   border-radius:999px!important;
-  background:#FFFFFF!important;
+  background:rgba(255,255,255,.56)!important;
   color:#0C4931!important;
   box-shadow:none!important;
   font-size:.81rem!important;
   font-weight:800!important;
 }
-.page-suppliers .fs-eyebrow svg{width:17px!important;height:17px!important;color:#C09552!important;stroke-width:1.8!important}
+.page-suppliers .fs-eyebrow svg{
+  width:17px!important;
+  height:17px!important;
+  color:#C09552!important;
+  stroke-width:1.8!important;
+}
 .page-suppliers .fs-hero h1{
   max-width:13.5ch!important;
   margin:18px 0 20px!important;
   color:#262626!important;
   font-family:var(--target-font-ar,"Tajawal",system-ui,sans-serif)!important;
-  font-size:clamp(2.75rem,4.5vw,4.15rem)!important;
+  font-size:clamp(2.75rem,4.4vw,4.15rem)!important;
   font-weight:800!important;
   line-height:1.08!important;
   letter-spacing:0!important;
   text-wrap:balance!important;
 }
 html[lang="en"] .page-suppliers .fs-hero h1{
-  max-width:14.5ch!important;
+  max-width:15.5ch!important;
   font-family:var(--target-font-en,"Manrope",system-ui,sans-serif)!important;
-  line-height:1.02!important;
+  line-height:1.03!important;
   letter-spacing:-.027em!important;
 }
 .page-suppliers .fs-hero-copy>p{
-  max-width:580px!important;
+  max-width:650px!important;
   margin:0!important;
-  color:rgba(38,38,38,.72)!important;
-  font-size:clamp(1.02rem,1.2vw,1.13rem)!important;
+  color:rgba(38,38,38,.74)!important;
+  font-size:clamp(1.02rem,1.15vw,1.14rem)!important;
   line-height:1.78!important;
 }
-html[lang="en"] .page-suppliers .fs-hero-copy>p{line-height:1.62!important}
+html[lang="en"] .page-suppliers .fs-hero-copy>p{line-height:1.64!important}
 .page-suppliers .fs-actions{
   display:flex!important;
   flex-wrap:wrap!important;
-  gap:10px!important;
-  margin-top:26px!important;
+  gap:12px!important;
+  margin-top:28px!important;
 }
 .page-suppliers .fs-actions a{min-height:52px!important;border-radius:12px!important}
 .page-suppliers .fs-primary{
-  padding-inline:24px!important;
+  padding-inline:25px!important;
   background:#0C4931!important;
   border:1px solid #0C4931!important;
   color:#F4EDE4!important;
   box-shadow:none!important;
 }
 .page-suppliers .fs-primary:hover,
-.page-suppliers .fs-primary:focus-visible{background:#073D2A!important;border-color:#073D2A!important;color:#F4EDE4!important;transform:translateY(-1px)!important}
+.page-suppliers .fs-primary:focus-visible{
+  background:#073D2A!important;
+  border-color:#073D2A!important;
+  color:#F4EDE4!important;
+  transform:translateY(-1px)!important;
+}
 .page-suppliers .fs-secondary{
   min-height:52px!important;
-  padding-inline:17px!important;
+  padding-inline:18px!important;
   border:1px solid rgba(12,73,49,.18)!important;
   border-radius:12px!important;
-  background:#FFFFFF!important;
+  background:rgba(255,255,255,.42)!important;
   color:#0C4931!important;
 }
 .page-suppliers .fs-secondary:hover,
-.page-suppliers .fs-secondary:focus-visible{border-color:#0C4931!important;color:#073D2A!important;background:#FFFFFF!important}
+.page-suppliers .fs-secondary:focus-visible{
+  border-color:#0C4931!important;
+  color:#073D2A!important;
+  background:#fff!important;
+}
 html[dir="ltr"] .page-suppliers .fs-secondary svg{transform:scaleX(-1)!important}
 
-.page-suppliers .fs-hero-media{
+.page-suppliers .fs-hero-media,
+html[dir="ltr"] .page-suppliers .fs-hero-media{
+  order:initial!important;
   position:relative!important;
-  z-index:2!important;
+  z-index:1!important;
   width:100%!important;
-  min-height:560px!important;
-  aspect-ratio:1.28/1!important;
+  min-height:440px!important;
+  aspect-ratio:5/4!important;
   margin:0!important;
-  border:1px solid rgba(244,237,228,.16)!important;
-  border-radius:26px!important;
+  border:1px solid rgba(12,73,49,.12)!important;
+  border-radius:24px!important;
   overflow:hidden!important;
   background:#D8D7D0!important;
-  box-shadow:0 26px 64px rgba(0,0,0,.24)!important;
+  box-shadow:0 22px 52px rgba(38,38,38,.12)!important;
 }
 .page-suppliers .fs-hero-media>img{
-  content:url('https://images.pexels.com/photos/4820847/pexels-photo-4820847.jpeg?auto=compress&cs=tinysrgb&w=1700')!important;
   position:absolute!important;
   inset:0!important;
   width:100%!important;
   height:100%!important;
   object-fit:cover!important;
   object-position:center 48%!important;
-  filter:saturate(.92) contrast(1.02)!important;
+  border:0!important;
+  border-radius:0!important;
+  filter:saturate(.94) contrast(1.025)!important;
 }
 .page-suppliers .fs-hero-media::before{
-  content:"SUPPLIER CONVERSION STAGE"!important;
+  content:"PRODUCT REVIEW · QATAR"!important;
   position:absolute!important;
   z-index:3!important;
-  inset-inline-end:18px!important;
+  inset-inline-start:18px!important;
   inset-block-start:18px!important;
   min-height:30px!important;
   display:inline-flex!important;
   align-items:center!important;
   padding:7px 10px!important;
-  border:1px solid rgba(255,255,255,.32)!important;
+  border:1px solid rgba(255,255,255,.34)!important;
   border-radius:999px!important;
-  background:rgba(12,73,49,.66)!important;
+  background:rgba(12,73,49,.68)!important;
   color:#F4EDE4!important;
-  font:700 .58rem/1 var(--target-font-en,"Manrope",sans-serif)!important;
+  font:700 .59rem/1 var(--target-font-en,"Manrope",sans-serif)!important;
   letter-spacing:.12em!important;
   backdrop-filter:blur(8px)!important;
 }
@@ -177,83 +196,139 @@ html[dir="ltr"] .page-suppliers .fs-secondary svg{transform:scaleX(-1)!important
   position:absolute!important;
   inset:0!important;
   z-index:1!important;
-  background:linear-gradient(180deg,rgba(7,61,42,.00) 35%,rgba(7,61,42,.12) 60%,rgba(7,61,42,.56) 100%)!important;
+  background:linear-gradient(180deg,rgba(7,61,42,0) 38%,rgba(7,61,42,.08) 62%,rgba(7,61,42,.42) 100%)!important;
   pointer-events:none!important;
 }
-/* What-to-prepare cues: compact, not a second form. */
 .page-suppliers .fs-hero-media figcaption{
   position:absolute!important;
   z-index:4!important;
-  inset-inline:18px!important;
-  inset-block-end:18px!important;
+  inset-inline:16px!important;
+  inset-block-end:16px!important;
   display:grid!important;
   grid-template-columns:repeat(3,minmax(0,1fr))!important;
   gap:7px!important;
   padding:8px!important;
   border:1px solid rgba(255,255,255,.22)!important;
-  border-radius:16px!important;
-  background:rgba(250,247,242,.94)!important;
-  box-shadow:0 12px 28px rgba(0,0,0,.14)!important;
+  border-radius:15px!important;
+  background:rgba(250,247,242,.95)!important;
+  box-shadow:0 12px 28px rgba(0,0,0,.13)!important;
   backdrop-filter:blur(9px)!important;
 }
 .page-suppliers .fs-hero-media figcaption span{
   display:grid!important;
-  grid-template-columns:27px minmax(0,1fr)!important;
+  grid-template-columns:24px minmax(0,1fr)!important;
   align-items:center!important;
-  gap:7px!important;
-  min-height:48px!important;
-  padding:7px 9px!important;
+  gap:6px!important;
+  min-height:46px!important;
+  padding:7px 8px!important;
   border-radius:10px!important;
-  background:#F4EDE4!important;
+  background:rgba(255,255,255,.62)!important;
   color:#0C4931!important;
 }
-.page-suppliers .fs-hero-media figcaption svg{width:16px!important;height:16px!important;color:#C09552!important;stroke-width:1.8!important}
-.page-suppliers .fs-hero-media figcaption b{font-size:.69rem!important;font-weight:800!important;line-height:1.3!important}
-
-@media (min-width:1024px) and (max-width:1279.98px){
-  .page-suppliers .fs-hero-grid{grid-template-columns:minmax(340px,.8fr) minmax(0,1.2fr)!important;min-height:650px!important;padding-block:74px 84px!important}
-  .page-suppliers .fs-hero-copy{padding:34px!important;margin-inline-end:-34px!important}
-  html[dir="ltr"] .page-suppliers .fs-hero-copy{margin-inline-start:-34px!important;margin-inline-end:0!important}
-  .page-suppliers .fs-hero h1{font-size:clamp(2.7rem,4.2vw,3.75rem)!important}
-  .page-suppliers .fs-hero-media{min-height:500px!important}
+.page-suppliers .fs-hero-media figcaption svg{
+  width:16px!important;
+  height:16px!important;
+  color:#C09552!important;
+  stroke-width:1.8!important;
+}
+.page-suppliers .fs-hero-media figcaption b{
+  font-size:.67rem!important;
+  font-weight:800!important;
+  line-height:1.3!important;
 }
 
-@media (min-width:768px) and (max-width:1023.98px){
-  .page-suppliers .fs-hero-grid{grid-template-columns:1fr!important;gap:0!important;min-height:0!important;padding-block:64px 74px!important}
-  .page-suppliers .fs-hero-media{order:1!important;max-width:760px!important;min-height:430px!important;aspect-ratio:16/9!important;margin-inline:auto!important}
+@media (min-width:992px) and (max-width:1199.98px){
+  .page-suppliers .fs-hero-grid{
+    grid-template-columns:minmax(0,52fr) minmax(340px,48fr)!important;
+    gap:34px!important;
+    min-height:600px!important;
+    padding-block:72px!important;
+  }
+  .page-suppliers .fs-hero h1{font-size:clamp(2.55rem,4vw,3.65rem)!important}
+  .page-suppliers .fs-hero-media{min-height:400px!important}
+}
+
+@media (max-width:991.98px){
+  .page-suppliers .fs-hero::after{display:none!important}
+  .page-suppliers .fs-hero-grid{
+    grid-template-columns:1fr!important;
+    gap:30px!important;
+    min-height:0!important;
+    padding-block:64px 72px!important;
+  }
   .page-suppliers .fs-hero-copy,
-  html[dir="ltr"] .page-suppliers .fs-hero-copy{order:2!important;max-width:700px!important;margin:-46px auto 0!important;padding:34px!important}
+  html[dir="ltr"] .page-suppliers .fs-hero-copy{
+    order:1!important;
+    max-width:780px!important;
+    margin:0!important;
+    padding:0!important;
+  }
+  .page-suppliers .fs-hero-media,
+  html[dir="ltr"] .page-suppliers .fs-hero-media{
+    order:2!important;
+    max-width:760px!important;
+    min-height:0!important;
+    aspect-ratio:4/3!important;
+    margin-inline:auto!important;
+  }
 }
 
 @media (max-width:767.98px){
-  .page-suppliers .fs-hero::before{display:none!important}
-  .page-suppliers .fs-hero-grid{grid-template-columns:1fr!important;gap:0!important;min-height:0!important;padding-block:50px 58px!important}
-  .page-suppliers .fs-hero-media{order:1!important;min-height:320px!important;aspect-ratio:4/3!important;border-radius:19px!important}
-  .page-suppliers .fs-hero-media>img{object-position:54% center!important}
-  .page-suppliers .fs-hero-copy,
-  html[dir="ltr"] .page-suppliers .fs-hero-copy{order:2!important;margin:-26px 10px 0!important;padding:25px 20px!important;border-radius:18px!important}
+  .page-suppliers .fs-hero::before{font-size:3.8rem!important;inset-block-start:24px!important}
+  .page-suppliers .fs-hero-grid{gap:25px!important;padding-block:50px 58px!important}
   .page-suppliers .fs-eyebrow{font-size:.75rem!important;white-space:normal!important}
-  .page-suppliers .fs-hero h1{max-width:13ch!important;margin:15px 0 16px!important;font-size:clamp(2.35rem,10.7vw,3.15rem)!important;line-height:1.08!important}
-  html[lang="en"] .page-suppliers .fs-hero h1{max-width:14.5ch!important;line-height:1.02!important}
+  .page-suppliers .fs-hero h1{
+    max-width:13ch!important;
+    margin:15px 0 16px!important;
+    font-size:clamp(2.3rem,10.4vw,3.1rem)!important;
+    line-height:1.08!important;
+  }
+  html[lang="en"] .page-suppliers .fs-hero h1{max-width:15ch!important;line-height:1.03!important}
   .page-suppliers .fs-hero-copy>p{font-size:.98rem!important;line-height:1.7!important}
-  .page-suppliers .fs-actions{display:grid!important;grid-template-columns:1fr!important;gap:9px!important;margin-top:22px!important}
+  .page-suppliers .fs-actions{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    gap:9px!important;
+    margin-top:22px!important;
+  }
   .page-suppliers .fs-actions a{width:100%!important;justify-content:center!important}
-  .page-suppliers .fs-hero-media figcaption{grid-template-columns:1fr!important;inset-inline:12px!important;inset-block-end:12px!important;padding:6px!important;border-radius:13px!important}
+  .page-suppliers .fs-hero-media{aspect-ratio:4/3!important;border-radius:18px!important}
+  .page-suppliers .fs-hero-media>img{object-position:54% center!important}
+  .page-suppliers .fs-hero-media figcaption{
+    grid-template-columns:1fr!important;
+    inset-inline:12px!important;
+    inset-block-end:12px!important;
+    padding:6px!important;
+    border-radius:13px!important;
+  }
   .page-suppliers .fs-hero-media figcaption span{min-height:38px!important;padding:5px 8px!important}
 }
 
 html.handheld-desktop-mode .page-suppliers .fs-hero-grid{
-  grid-template-columns:minmax(320px,.78fr) minmax(0,1.22fr)!important;
-  gap:0!important;
-  min-height:540px!important;
-  padding-block:48px 56px!important;
+  grid-template-columns:1fr!important;
+  min-height:0!important;
+  gap:24px!important;
+  padding-block:48px 54px!important;
 }
-html.handheld-desktop-mode .page-suppliers .fs-hero-copy{padding:28px!important;margin-inline-end:-30px!important}
-html[dir="ltr"].handheld-desktop-mode .page-suppliers .fs-hero-copy{margin-inline-start:-30px!important;margin-inline-end:0!important}
-html.handheld-desktop-mode .page-suppliers .fs-hero h1{font-size:2.8rem!important;max-width:13ch!important}
+html.handheld-desktop-mode .page-suppliers .fs-hero-copy,
+html[dir="ltr"].handheld-desktop-mode .page-suppliers .fs-hero-copy{
+  order:1!important;
+  max-width:780px!important;
+  margin:0!important;
+  padding:0!important;
+}
+html.handheld-desktop-mode .page-suppliers .fs-hero h1{font-size:2.8rem!important;max-width:14ch!important}
 html.handheld-desktop-mode .page-suppliers .fs-hero-copy>p{font-size:.92rem!important;line-height:1.56!important}
 html.handheld-desktop-mode .page-suppliers .fs-actions{margin-top:19px!important;gap:7px!important}
 html.handheld-desktop-mode .page-suppliers .fs-actions a{min-height:46px!important;font-size:.84rem!important}
-html.handheld-desktop-mode .page-suppliers .fs-hero-media{min-height:410px!important}
+html.handheld-desktop-mode .page-suppliers .fs-hero-media,
+html[dir="ltr"].handheld-desktop-mode .page-suppliers .fs-hero-media{
+  order:2!important;
+  max-width:760px!important;
+  aspect-ratio:4/3!important;
+  min-height:0!important;
+}
 
-@media (prefers-reduced-motion:reduce){.page-suppliers .fs-hero *{transition:none!important;transform:none!important}}
+@media (prefers-reduced-motion:reduce){
+  .page-suppliers .fs-hero *{transition:none!important;transform:none!important}
+}
