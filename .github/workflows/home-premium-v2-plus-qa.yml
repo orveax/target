@@ -58,11 +58,11 @@ jobs:
           grep -q 'translateY(-4px)' "$CSS"
 
           # Real imagery mapped to content, not generic decoration.
-          grep -q 'photos/11679687/' "$CSS"
+          grep -q 'photos/11679685/' "$CSS"
           grep -q 'photos/5953751/' "$CSS"
           grep -q 'photos/11678431/' "$CSS"
           grep -q 'photos/8329985/' "$HOME"
-          grep -q '11679687' "$MANIFEST"
+          grep -q '11679685' "$MANIFEST"
           grep -q '5953751' "$MANIFEST"
           grep -q '8329985' "$MANIFEST"
           grep -q '11678431' "$MANIFEST"
