@@ -1,41 +1,215 @@
-name: TARGET Contact Us Polish V3 QA
+name: TARGET Contact Us Premium V2 QA
 
 on:
   push:
     branches: [main]
     paths:
+      - 'public/assets/hero-contact-premium-v1.css'
       - 'public/assets/contact-polish-v3.css'
+      - 'public/assets/contact-refinement-v2.js'
+      - 'public/assets/form-delivery-v1.js'
       - 'src/layouts/BaseLayout.astro'
       - 'src/pages/contact.astro'
       - '.github/workflows/contact-polish-v3-qa.yml'
   workflow_dispatch:
 
+permissions:
+  contents: read
+  statuses: write
+
 jobs:
-  contact-polish-v3:
+  contact-premium-v2:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Verify contact visual contract
+      - name: Publish QA pending status
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          RUN_URL="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          jq -n --arg state pending --arg context 'TARGET Contact Us Premium V2 QA' --arg description 'Contact Us Premium V2 QA is running' --arg target_url "$RUN_URL" '{state:$state,context:$context,description:$description,target_url:$target_url}' > /tmp/status.json
+          curl -fsSL -X POST -H "Authorization: Bearer ${GH_TOKEN}" -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" "https://api.github.com/repos/${GITHUB_REPOSITORY}/statuses/${GITHUB_SHA}" -d @/tmp/status.json >/dev/null
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify canonical contact contract
         shell: bash
         run: |
           set -euo pipefail
-          test -f public/assets/contact-polish-v3.css
-          grep -Fq 'contact-polish-v3.css?v=20260817-01' src/layouts/BaseLayout.astro
-          grep -Fq '35642370' public/assets/contact-polish-v3.css
-          grep -Fq '.page-contact .ct-form-layout' public/assets/contact-polish-v3.css
-          grep -Fq '1.76fr' public/assets/contact-polish-v3.css
-          grep -Fq '.page-contact .ct-route-note' public/assets/contact-polish-v3.css
-          grep -Fq '.page-contact .ct-channel-grid' public/assets/contact-polish-v3.css
-          grep -Fq 'repeat(2,minmax(0,1fr))' public/assets/contact-polish-v3.css
-          grep -Fq '.page-contact .ct-map-context' public/assets/contact-polish-v3.css
-          grep -Fq 'prefers-reduced-motion:reduce' public/assets/contact-polish-v3.css
+          grep -Fq 'hero-contact-premium-v1.css?v=20260818-01' src/layouts/BaseLayout.astro
+          grep -Fq 'grid-template-columns:minmax(0,55fr) minmax(340px,45fr)' public/assets/hero-contact-premium-v1.css
+          grep -Fq '#F4EDE4!important' public/assets/hero-contact-premium-v1.css
+          grep -Fq 'id="quick-enquiry"' src/pages/contact.astro
+          grep -Fq 'name="name"' src/pages/contact.astro
+          grep -Fq 'name="email"' src/pages/contact.astro
+          grep -Fq 'name="phone"' src/pages/contact.astro
+          grep -Fq 'name="intent"' src/pages/contact.astro
+          grep -Fq 'name="subject"' src/pages/contact.astro
+          grep -Fq 'name="message"' src/pages/contact.astro
+          grep -Fq 'privacy.html' src/pages/contact.astro
           grep -Fq 'info@targetft.com' src/pages/contact.astro
           grep -Fq 'sales@targetft.com' src/pages/contact.astro
           grep -Fq 'procurement@targetft.com' src/pages/contact.astro
           grep -Fq 'partners@targetft.com' src/pages/contact.astro
-          grep -Fq 'suppliers.html' src/pages/contact.astro
+          grep -Fq "PHONE_DISPLAY='+974 7791 0919'" public/assets/contact-refinement-v2.js
+          grep -Fq '25.1753889,51.6052222' public/assets/contact-refinement-v2.js
+          grep -Fq "['tiktok','TikTok','https://www.tiktok.com/@targetft']" public/assets/contact-refinement-v2.js
+          grep -Fq "if (intent === 'sales' || intent === 'quote') return 'sales@targetft.com'" public/assets/form-delivery-v1.js
+          grep -Fq "return 'info@targetft.com'" public/assets/form-delivery-v1.js
+          grep -Fq "form.dataset.deliveryMode = 'email-client'" public/assets/form-delivery-v1.js
           ! grep -Fq '+974 XXXX' src/pages/contact.astro
-      - name: Build Astro site
+      - name: Install and build
         run: |
           npm install
           npm run build
+      - name: Install Playwright package and use hosted Chrome
+        shell: bash
+        run: |
+          npm install --no-save playwright@1.55.0
+          CHROME_PATH="$(command -v google-chrome || command -v google-chrome-stable || true)"
+          test -n "$CHROME_PATH"
+          echo "CHROME_PATH=$CHROME_PATH" >> "$GITHUB_ENV"
+      - name: Start static server
+        run: |
+          npx --yes http-server dist -p 4173 -c-1 > /tmp/target-contact-http.log 2>&1 &
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/contact.html >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/target-contact-http.log
+          exit 1
+      - name: Capture and validate AR/EN contact routing contract
+        env:
+          CHROME_PATH: ${{ env.CHROME_PATH }}
+        run: |
+          mkdir -p contact-premium-v2
+          cat > contact-premium-v2/capture.mjs <<'EOF'
+          import { chromium } from 'playwright';
+          import fs from 'node:fs';
+          const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_PATH});
+          const origin='http://127.0.0.1:4173/contact.html';
+          const viewports=[
+            ['1440',{viewport:{width:1440,height:1000},screen:{width:1440,height:1000}}],
+            ['768',{viewport:{width:768,height:1024},screen:{width:768,height:1024}}],
+            ['390',{viewport:{width:390,height:844},screen:{width:390,height:844},isMobile:true,hasTouch:true}]
+          ];
+          const failures=[]; const metrics=[];
+          for(const [name,opts] of viewports){
+            const context=await browser.newContext(opts);
+            try{
+              const page=await context.newPage();
+              await page.goto(origin,{waitUntil:'networkidle'});
+              await page.evaluate(async()=>{if(document.fonts) await document.fonts.ready;});
+              for(const lang of ['ar','en']){
+                const current=await page.locator('html').getAttribute('lang');
+                if(current!==lang){await page.locator('[data-lang-toggle]').first().click();await page.waitForTimeout(250);}
+                const firstFold=`contact-premium-v2/${name}-${lang}-first-fold.png`;
+                await page.screenshot({path:firstFold,fullPage:false});
+                await page.evaluate(async()=>{
+                  const pause=(ms)=>new Promise(r=>setTimeout(r,ms));
+                  const step=Math.max(420,Math.floor(innerHeight*.7));
+                  for(let y=0;y<document.documentElement.scrollHeight;y+=step){scrollTo(0,y);await pause(80)}
+                  scrollTo(0,0);await pause(250);
+                });
+                const m=await page.evaluate(()=>{
+                  const grid=document.querySelector('.ct-hero-grid');
+                  const copy=document.querySelector('.ct-hero-copy');
+                  const media=document.querySelector('.ct-hero-media');
+                  const form=document.querySelector('#quick-enquiry form[data-target-form]');
+                  const hero=document.querySelector('.ct-hero');
+                  const cr=copy.getBoundingClientRect(), mr=media.getBoundingClientRect();
+                  const opts=[...document.querySelectorAll('#contact-intent option')].filter(o=>o.value);
+                  const channelLinks=[...document.querySelectorAll('.ct-channel-card a')].map(a=>a.getAttribute('href'));
+                  const socialLinks=[...document.querySelectorAll('.ct-social-link')].map(a=>a.getAttribute('href'));
+                  const phone=document.querySelector('.ct-phone-link');
+                  const whatsapp=document.querySelector('.ct-whatsapp-link');
+                  const map=document.querySelector('.ct-map-context iframe');
+                  const imgs=[...document.querySelectorAll('.ct-hero-media img')];
+                  return {
+                    lang:document.documentElement.lang,
+                    width:innerWidth,
+                    overflowX:document.documentElement.scrollWidth>document.documentElement.clientWidth,
+                    h1Count:document.querySelectorAll('.page-contact h1').length,
+                    gridCols:getComputedStyle(grid).gridTemplateColumns,
+                    copyTop:cr.top,mediaTop:mr.top,copyWidth:cr.width,mediaWidth:mr.width,
+                    heroBg:getComputedStyle(hero).backgroundColor,
+                    primaryFields:form.querySelectorAll('input:not([type="checkbox"]),select,textarea').length,
+                    requiredControls:form.querySelectorAll('[required]').length,
+                    inquiryOptions:opts.length,
+                    supplierOption:opts.some(o=>/supplier|manufacturer|product submission/i.test(`${o.value} ${o.textContent}`)),
+                    channels:document.querySelectorAll('.ct-channel-card').length,
+                    channelLinks,
+                    verifiedBlocks:document.querySelectorAll('.ct-verified-contact').length,
+                    phoneHref:phone?.getAttribute('href')||'',
+                    whatsappHref:whatsapp?.getAttribute('href')||'',
+                    socialLinks,
+                    mapSrc:map?.getAttribute('src')||'',
+                    supportRoutes:document.querySelectorAll('.ct-support-panel article').length,
+                    deliveryMode:form.dataset.deliveryMode,
+                    deliveryNote:form.querySelectorAll('[data-form-delivery-note]').length,
+                    pendingImages:imgs.filter(img=>!img.complete||img.naturalWidth<20).length
+                  };
+                });
+                metrics.push({viewport:name,...m});
+                if(m.overflowX) failures.push(`${name}-${lang}: horizontal overflow`);
+                if(m.h1Count!==1) failures.push(`${name}-${lang}: expected one H1`);
+                if(m.primaryFields!==6) failures.push(`${name}-${lang}: expected 6 primary contact fields, found ${m.primaryFields}`);
+                if(m.requiredControls!==6) failures.push(`${name}-${lang}: expected 6 required controls including privacy, found ${m.requiredControls}`);
+                if(m.inquiryOptions!==7) failures.push(`${name}-${lang}: expected 7 enquiry types, found ${m.inquiryOptions}`);
+                if(m.supplierOption) failures.push(`${name}-${lang}: supplier/product submission leaked into general enquiry options`);
+                if(m.channels!==4) failures.push(`${name}-${lang}: expected 4 contact-channel cards`);
+                if(!m.channelLinks.includes('mailto:info@targetft.com')||!m.channelLinks.includes('mailto:sales@targetft.com')||!m.channelLinks.includes('mailto:procurement@targetft.com')||!m.channelLinks.includes('suppliers.html')) failures.push(`${name}-${lang}: contact channel routing mismatch`);
+                if(m.verifiedBlocks!==1) failures.push(`${name}-${lang}: verified direct-contact/social block missing`);
+                if(m.phoneHref!=='tel:+97477910919') failures.push(`${name}-${lang}: verified phone mismatch`);
+                if(m.whatsappHref!=='https://wa.me/97477910919') failures.push(`${name}-${lang}: verified WhatsApp mismatch`);
+                if(m.socialLinks.length!==3||!m.socialLinks.some(x=>x.includes('facebook.com/targetft'))||!m.socialLinks.some(x=>x.includes('instagram.com/targetft'))||!m.socialLinks.some(x=>x.includes('tiktok.com/@targetft'))) failures.push(`${name}-${lang}: verified social routing mismatch`);
+                if(!m.mapSrc.includes('25.1753889,51.6052222')) failures.push(`${name}-${lang}: verified map coordinates missing`);
+                if(m.supportRoutes!==2) failures.push(`${name}-${lang}: expected two support routes`);
+                if(m.deliveryMode!=='email-client'||m.deliveryNote!==1) failures.push(`${name}-${lang}: transparent email-client delivery state missing`);
+                if(m.pendingImages>0) failures.push(`${name}-${lang}: hero image failed to load`);
+                if(name==='1440'){
+                  const ratio=m.copyWidth/m.mediaWidth;
+                  if(ratio<1.05||ratio>1.55) failures.push(`${name}-${lang}: desktop hero ratio ${ratio.toFixed(2)} outside 55/45 tolerance`);
+                }else if(!(m.copyTop<m.mediaTop)) failures.push(`${name}-${lang}: text/actions must precede media on tablet/mobile`);
+                await page.screenshot({path:`contact-premium-v2/${name}-${lang}.png`,fullPage:true});
+              }
+              await page.goto(origin,{waitUntil:'networkidle'});
+              await page.locator('#quick-enquiry').scrollIntoViewIfNeeded();
+              await page.locator('.ct-submit').click();
+              await page.waitForTimeout(150);
+              const validation=await page.evaluate(()=>({
+                activeId:document.activeElement?.id||'',
+                summaryVisible:document.querySelector('[data-validation-summary]')?.classList.contains('is-visible')||false,
+                nameInvalid:document.querySelector('#contact-name')?.getAttribute('aria-invalid')
+              }));
+              if(validation.activeId!=='contact-name') failures.push(`${name}: validation did not focus contact-name`);
+              if(!validation.summaryVisible) failures.push(`${name}: validation summary not visible`);
+              if(validation.nameInvalid!=='true') failures.push(`${name}: contact-name not marked aria-invalid`);
+            }catch(e){failures.push(`${name}: ${e.message}`)} finally{await context.close()}
+          }
+          fs.writeFileSync('contact-premium-v2/metrics.json',JSON.stringify(metrics,null,2));
+          fs.writeFileSync('contact-premium-v2/failures.txt',failures.join('\n'));
+          await browser.close();
+          if(failures.length){console.error(failures.join('\n'));process.exit(1)}
+          EOF
+          node contact-premium-v2/capture.mjs
+      - name: Upload contact visual artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: target-contact-premium-v2
+          path: contact-premium-v2
+          if-no-files-found: warn
+          retention-days: 14
+      - name: Publish final QA status
+        if: always()
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          JOB_STATUS: ${{ job.status }}
+        run: |
+          RUN_URL="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          if [[ "$JOB_STATUS" == "success" ]]; then STATE=success; DESC='Contact Us Premium V2 QA passed'; else STATE=failure; DESC='Contact Us Premium V2 QA failed'; fi
+          jq -n --arg state "$STATE" --arg context 'TARGET Contact Us Premium V2 QA' --arg description "$DESC" --arg target_url "$RUN_URL" '{state:$state,context:$context,description:$description,target_url:$target_url}' > /tmp/status.json
+          curl -fsSL -X POST -H "Authorization: Bearer ${GH_TOKEN}" -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" "https://api.github.com/repos/${GITHUB_REPOSITORY}/statuses/${GITHUB_SHA}" -d @/tmp/status.json >/dev/null
