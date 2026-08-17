@@ -33,7 +33,7 @@ jobs:
       - name: Capture 11-page Hero matrix
         run: |
           mkdir -p visual-artifacts
-          cat > /tmp/capture.mjs <<'EOF'
+          cat > hero-capture.mjs <<'EOF'
           import { chromium } from 'playwright';
           import fs from 'node:fs';
 
@@ -64,38 +64,53 @@ jobs:
           ];
 
           const allMetrics = [];
-          for (const [slug, route, selector] of pages) {
-            fs.mkdirSync(`visual-artifacts/${slug}`, {recursive:true});
-            for (const [shotName, options] of shots) {
-              const context = await browser.newContext(options);
-              const page = await context.newPage();
-              await page.goto(`${origin}/${route}`, {waitUntil:'networkidle'});
-              await page.evaluate(async()=>{ if(document.fonts) await document.fonts.ready; });
-              const hero = page.locator(selector);
-              if (await hero.count() !== 1) throw new Error(`${slug}: expected exactly one ${selector}`);
-              await hero.screenshot({path:`visual-artifacts/${slug}/${shotName}-ar.png`});
-              const metrics = await hero.evaluate((el)=>{
-                const r=el.getBoundingClientRect();
-                return {
-                  heroHeight:Math.round(r.height),
-                  heroWidth:Math.round(r.width),
-                  viewport:[window.innerWidth,window.innerHeight],
-                  handheldDesktop:document.documentElement.classList.contains('handheld-desktop-mode'),
-                  dir:document.documentElement.dir,
-                  lang:document.documentElement.lang,
-                  overflowX:document.documentElement.scrollWidth>document.documentElement.clientWidth
-                };
-              });
-              allMetrics.push({slug,shotName,...metrics});
-              if(metrics.overflowX) throw new Error(`${slug}/${shotName}: horizontal overflow detected`);
-              await context.close();
+          const failures = [];
+          try {
+            for (const [slug, route, selector] of pages) {
+              fs.mkdirSync(`visual-artifacts/${slug}`, {recursive:true});
+              for (const [shotName, options] of shots) {
+                const context = await browser.newContext(options);
+                try {
+                  const page = await context.newPage();
+                  await page.goto(`${origin}/${route}`, {waitUntil:'networkidle'});
+                  await page.evaluate(async()=>{ if(document.fonts) await document.fonts.ready; });
+                  const hero = page.locator(selector);
+                  if (await hero.count() !== 1) throw new Error(`${slug}: expected exactly one ${selector}`);
+                  await hero.screenshot({path:`visual-artifacts/${slug}/${shotName}-ar.png`});
+                  const metrics = await hero.evaluate((el)=>{
+                    const r=el.getBoundingClientRect();
+                    return {
+                      heroHeight:Math.round(r.height),
+                      heroWidth:Math.round(r.width),
+                      viewport:[window.innerWidth,window.innerHeight],
+                      handheldDesktop:document.documentElement.classList.contains('handheld-desktop-mode'),
+                      dir:document.documentElement.dir,
+                      lang:document.documentElement.lang,
+                      overflowX:document.documentElement.scrollWidth>document.documentElement.clientWidth
+                    };
+                  });
+                  allMetrics.push({slug,shotName,...metrics});
+                  if(metrics.overflowX) failures.push(`${slug}/${shotName}: horizontal overflow detected`);
+                } catch (err) {
+                  failures.push(`${slug}/${shotName}: ${err.message}`);
+                } finally {
+                  await context.close();
+                }
+              }
             }
+          } finally {
+            fs.writeFileSync('visual-artifacts/metrics.json', JSON.stringify(allMetrics,null,2));
+            fs.writeFileSync('visual-artifacts/failures.txt', failures.join('\n'));
+            await browser.close();
           }
-          fs.writeFileSync('visual-artifacts/metrics.json', JSON.stringify(allMetrics,null,2));
-          await browser.close();
+          if(failures.length){
+            console.error(failures.join('\n'));
+            process.exit(1);
+          }
           EOF
-          node /tmp/capture.mjs
+          node hero-capture.mjs
       - name: Upload visual matrix
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: target-11-page-hero-visual-matrix-v1
