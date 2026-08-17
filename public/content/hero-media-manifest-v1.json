@@ -1,0 +1,36 @@
+{
+  "version": "1.0",
+  "updated": "2026-08-17",
+  "policy": {
+    "realPhotographyOnlyWherePhotographyIsUsed": true,
+    "aiHeroPhotographyAllowed": false,
+    "localOptimizedAssetsPreferred": true,
+    "rightsRecordRequired": true
+  },
+  "pages": {
+    "home": {
+      "route": "index.html",
+      "archetype": "Trade Gateway",
+      "mediaType": "real-photography",
+      "status": "active-remote-approved-free-stock",
+      "subject": "industrial food production facility",
+      "sourceProvider": "Pexels",
+      "sourceId": "36823725",
+      "sourceUrl": "https://images.pexels.com/photos/36823725/pexels-photo-36823725/free-photo-of-modern-industrial-food-production-facility-interior.jpeg",
+      "rightsNote": "Pexels free stock source; retain source record. Replace with verified TARGET/manufacturer-owned production media when available.",
+      "focalPointDesktop": "center 52%",
+      "focalPointMobile": "54% center",
+      "businessReason": "Shows real food manufacturing/production context supporting the manufacturer-to-Qatar trade proposition."
+    },
+    "about": {"route":"about.html","archetype":"Institutional Editorial","mediaType":"real-photography","status":"pending-migration","requiredSubject":"food-trade warehouse, product review, inspection or operational trade context"},
+    "howWeWork": {"route":"capabilities.html","archetype":"Operational Canvas","mediaType":"real-photography","status":"pending-migration","requiredSubject":"manufacturing, packaging or quality-control context"},
+    "products": {"route":"food-portfolio.html","archetype":"Curated Product Mosaic","mediaType":"real-product-photography","status":"pending-migration","requiredSubject":"verified product/category imagery; actual supplier assets preferred"},
+    "qatarMarket": {"route":"qatar-market.html","archetype":"Market Lens","mediaType":"real-photography","status":"pending-migration","requiredSubject":"food product plus professional distribution/retail/commercial Qatar or GCC context"},
+    "suppliers": {"route":"suppliers.html","archetype":"Supplier Conversion Stage","mediaType":"real-photography","status":"pending-migration","requiredSubject":"manufacturer/export-ready packaged food or production-ready goods"},
+    "contact": {"route":"contact.html","archetype":"Contact Routing Hub","mediaType":"real-photography-secondary","status":"pending-migration","requiredSubject":"food-trade communication, product documentation or commercial desk context"},
+    "companyProfile": {"route":"company-profile.html","archetype":"Document Stage","mediaType":"verified-document-preview","status":"pdf-pending","requiredSubject":"approved Company Profile cover or first-page preview only"},
+    "faq": {"route":"faq.html","archetype":"Knowledge Index","mediaType":"brand-information-composition","status":"pending-migration","requiredSubject":"four-topic index; photography generally unnecessary"},
+    "privacy": {"route":"privacy.html","archetype":"Trust & Data Document","mediaType":"brand-information-graphic","status":"pending-migration","requiredSubject":"shield-check, file-lock, user/data handling semantics; no stock photo"},
+    "terms": {"route":"terms.html","archetype":"Legal Reading Prelude","mediaType":"brand-document-composition","status":"pending-migration","requiredSubject":"01–10 clause index and document semantics; no stock photo"}
+  }
+}
