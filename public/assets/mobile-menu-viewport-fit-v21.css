@@ -1,6 +1,6 @@
-/* TARGET — Mobile Menu V2.2 Primary Routes First | 2026-08-17
- * Contract: routes 01–05 must be visible together on normal handset viewports.
- * Secondary commercial/utility content may continue below via internal scroll.
+/* TARGET — Mobile Menu V2.3 Alignment + Brand Fit | 2026-08-17
+ * Contract: routes 01–05 remain visible together while number, icon, label and arrow
+ * share fixed grid columns. Compact horizontal brand lockup fits the short menu head.
  */
 @media (max-width: 767.98px) {
   .th2-mobile-nav{
@@ -17,12 +17,23 @@
     max-height:72px!important;
     padding:8px 12px!important;
   }
+  .th2-mobile-brand{
+    display:flex!important;
+    align-items:center!important;
+    min-width:0!important;
+    height:100%!important;
+  }
   .th2-mobile-brand .mobile-brand-logo{
-    width:100px!important;
-    max-width:100px!important;
-    max-height:54px!important;
+    display:block!important;
+    width:154px!important;
+    max-width:154px!important;
+    height:auto!important;
+    max-height:42px!important;
+    object-fit:contain!important;
+    object-position:center!important;
   }
   .th2-mobile-close{
+    flex:0 0 36px!important;
     width:36px!important;
     height:36px!important;
     border-radius:11px!important;
@@ -47,25 +58,87 @@
     margin:0!important;
   }
   .th2-mobile-primary .nav-link{
+    display:grid!important;
+    grid-template-columns:22px 30px minmax(0,1fr) 15px!important;
+    align-items:center!important;
+    column-gap:8px!important;
     min-height:48px!important;
     height:48px!important;
     padding:5px 10px!important;
-    gap:7px!important;
-    grid-template-columns:22px minmax(0,1fr) 15px!important;
   }
-  .th2-mobile-primary .nav-link>span{gap:7px!important}
-  .th2-mobile-primary .nav-link>span>svg{
-    width:27px!important;
-    height:27px!important;
-    padding:6px!important;
-    border-radius:8px!important;
+  .th2-mobile-primary .nav-link>small{
+    grid-column:1!important;
+    justify-self:center!important;
+    align-self:center!important;
+    width:22px!important;
+    margin:0!important;
+    text-align:center!important;
+    font-size:.52rem!important;
+    line-height:1!important;
   }
-  .th2-mobile-primary .nav-link b{
+  .th2-mobile-route-icon{
+    grid-column:2!important;
+    display:grid!important;
+    place-items:center!important;
+    justify-self:center!important;
+    align-self:center!important;
+    width:30px!important;
+    height:30px!important;
+    min-width:30px!important;
+    margin:0!important;
+    padding:0!important;
+    border-radius:9px!important;
+    background:#EEF2EF!important;
+  }
+  .th2-mobile-route-icon>svg{
+    display:block!important;
+    width:16px!important;
+    height:16px!important;
+    margin:0!important;
+    padding:0!important;
+    border:0!important;
+    border-radius:0!important;
+    background:transparent!important;
+    color:var(--th2-forest)!important;
+    stroke-width:1.9!important;
+  }
+  .th2-mobile-primary .nav-link>b{
+    grid-column:3!important;
+    min-width:0!important;
+    margin:0!important;
+    color:var(--th2-charcoal)!important;
     font-size:.86rem!important;
     line-height:1.15!important;
+    font-weight:760!important;
+    text-align:start!important;
+    white-space:nowrap!important;
+    overflow:hidden!important;
+    text-overflow:ellipsis!important;
   }
-  .th2-mobile-primary .nav-link>small{font-size:.52rem!important}
-  .th2-mobile-primary .nav-link>svg:last-child{width:14px!important;height:14px!important}
+  .th2-mobile-route-arrow{
+    grid-column:4!important;
+    justify-self:center!important;
+    align-self:center!important;
+    width:14px!important;
+    height:14px!important;
+    margin:0!important;
+    padding:0!important;
+    color:#8E938F!important;
+  }
+  html[dir="ltr"] .th2-mobile-route-arrow{transform:scaleX(-1)}
+
+  .th2-mobile-primary .nav-link.active .th2-mobile-route-icon,
+  .th2-mobile-primary .nav-link[aria-current="page"] .th2-mobile-route-icon{
+    background:rgba(255,255,255,.10)!important;
+  }
+  .th2-mobile-primary .nav-link.active .th2-mobile-route-icon>svg,
+  .th2-mobile-primary .nav-link[aria-current="page"] .th2-mobile-route-icon>svg{
+    color:var(--th2-cream)!important;
+  }
+  .th2-mobile-primary .nav-link.active>b,
+  .th2-mobile-primary .nav-link[aria-current="page"]>b{color:#fff!important}
+  .th2-mobile-primary .nav-link.active .th2-mobile-route-arrow,
+  .th2-mobile-primary .nav-link[aria-current="page"] .th2-mobile-route-arrow{color:var(--th2-sand)!important}
 
   /* Everything below 01–05 is secondary and may scroll. */
   .th2-mobile-commercial{
@@ -82,7 +155,21 @@
   .th2-mobile-utility-head{margin:12px 2px 5px!important}
   .th2-mobile-secondary{gap:6px!important}
   .th2-mobile-secondary>a{min-height:72px!important;padding:8px!important;border-radius:12px!important}
-  .th2-mobile-secondary>a b{font-size:.67rem!important}
+  .th2-mobile-secondary>a>span{
+    display:grid!important;
+    grid-template-rows:20px auto!important;
+    align-content:start!important;
+    gap:6px!important;
+  }
+  .th2-mobile-secondary>a>span>svg{
+    display:block!important;
+    width:18px!important;
+    height:18px!important;
+    margin:0!important;
+    padding:0!important;
+    align-self:center!important;
+  }
+  .th2-mobile-secondary>a b{font-size:.67rem!important;line-height:1.25!important}
   .premium-mobile-scroll-cue{height:30px!important}
 }
 
@@ -95,9 +182,9 @@
     padding:6px 10px!important;
   }
   .th2-mobile-brand .mobile-brand-logo{
-    width:88px!important;
-    max-width:88px!important;
-    max-height:48px!important;
+    width:142px!important;
+    max-width:142px!important;
+    max-height:38px!important;
   }
   .th2-mobile-close{width:34px!important;height:34px!important}
   .th2-mobile-body{padding:6px 10px max(20px,env(safe-area-inset-bottom))!important}
@@ -105,9 +192,12 @@
     min-height:44px!important;
     height:44px!important;
     padding:4px 9px!important;
+    grid-template-columns:21px 28px minmax(0,1fr) 14px!important;
+    column-gap:7px!important;
   }
-  .th2-mobile-primary .nav-link>span>svg{width:25px!important;height:25px!important;padding:5px!important}
-  .th2-mobile-primary .nav-link b{font-size:.82rem!important}
+  .th2-mobile-route-icon{width:28px!important;height:28px!important;min-width:28px!important}
+  .th2-mobile-route-icon>svg{width:15px!important;height:15px!important}
+  .th2-mobile-primary .nav-link>b{font-size:.82rem!important}
   .th2-mobile-commercial{margin-top:8px!important;padding:10px 11px!important}
   .th2-mobile-commercial p{display:none!important}
 }
@@ -119,6 +209,10 @@
     min-height:58px!important;
     max-height:58px!important;
   }
-  .th2-mobile-brand .mobile-brand-logo{width:80px!important;max-width:80px!important;max-height:43px!important}
+  .th2-mobile-brand .mobile-brand-logo{
+    width:132px!important;
+    max-width:132px!important;
+    max-height:34px!important;
+  }
   .th2-mobile-primary .nav-link{min-height:44px!important;height:44px!important}
 }
