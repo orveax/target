@@ -1,0 +1,38 @@
+/* TARGET — Products & Companies Canonical Guard — 2026-08-18
+ * Narrow conflict guard for Current Focus principle cards.
+ * Keeps explanatory cards readable across inherited global hover/focus layers.
+ */
+.page-food-portfolio .portfolio-principles article,
+.page-food-portfolio .portfolio-principles article:hover,
+.page-food-portfolio .portfolio-principles article:focus-within{
+  background:#fff!important;
+  color:#262626!important;
+}
+.page-food-portfolio .portfolio-principles article h3,
+.page-food-portfolio .portfolio-principles article:hover h3,
+.page-food-portfolio .portfolio-principles article:focus-within h3{
+  color:#262626!important;
+  -webkit-text-fill-color:#262626!important;
+  opacity:1!important;
+}
+.page-food-portfolio .portfolio-principles article p,
+.page-food-portfolio .portfolio-principles article:hover p,
+.page-food-portfolio .portfolio-principles article:focus-within p{
+  color:rgba(38,38,38,.72)!important;
+  -webkit-text-fill-color:rgba(38,38,38,.72)!important;
+  opacity:1!important;
+}
+.page-food-portfolio .portfolio-principles article .portfolio-principle-index,
+.page-food-portfolio .portfolio-principles article:hover .portfolio-principle-index,
+.page-food-portfolio .portfolio-principles article:focus-within .portfolio-principle-index{
+  color:#C09552!important;
+  -webkit-text-fill-color:#C09552!important;
+  opacity:1!important;
+}
+.page-food-portfolio .portfolio-principles article .portfolio-icon,
+.page-food-portfolio .portfolio-principles article:hover .portfolio-icon,
+.page-food-portfolio .portfolio-principles article:focus-within .portfolio-icon{
+  background:rgba(244,237,228,.72)!important;
+  border-color:rgba(12,73,49,.12)!important;
+  color:#0C4931!important;
+}
