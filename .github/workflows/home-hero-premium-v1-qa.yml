@@ -17,7 +17,7 @@ jobs:
         run: npm install
       - name: Build Astro site
         run: npm run build
-      - name: Verify strategy and Home H01-H14 contract
+      - name: Verify strategy and Home H01-H13 contract
         run: |
           set -euo pipefail
           DOC='docs/TARGET-PREMIUM-HERO-SYSTEM-V1.md'
@@ -69,7 +69,7 @@ jobs:
           grep -q 'var(--target-font-ar' "$HERO"
           grep -q 'var(--target-font-en' "$HERO"
 
-          # H09 responsive matrix includes tablet/mobile handling.
+          # H09 responsive matrix.
           grep -q '@media (min-width:1024px) and (max-width:1279.98px)' "$HERO"
           grep -q '@media (min-width:768px) and (max-width:1023.98px)' "$HERO"
           grep -q '@media (max-width:767.98px)' "$HERO"
@@ -85,12 +85,10 @@ jobs:
           grep -q 'focus-visible' "$HERO"
           grep -q '@media (prefers-reduced-motion:reduce)' "$HERO"
 
-          # H13 performance/CLS: explicit media aspect ratio and no Hero JS introduced.
+          # H13 architecture/performance: one authoritative file loaded last; old Home file is passive.
+          grep -q 'premium-hero-system-v1.css?v=20260817-01' "$LAYOUT"
+          ! grep -q '@import' "$SHIM"
           grep -q 'aspect-ratio:5/4!important' "$HERO"
-
-          # Migration architecture: old BaseLayout reference is a shim to one authoritative system file.
-          grep -q 'hero-home-premium-v2.css?v=20260817-01' "$LAYOUT"
-          grep -q "@import url('/assets/premium-hero-system-v1.css?v=20260817-01')" "$SHIM"
 
           echo 'H01-H13 SOURCE CONTRACT: PASS'
       - name: H14 site-wide regression audit
