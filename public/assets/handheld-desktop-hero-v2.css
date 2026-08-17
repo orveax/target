@@ -1,0 +1,336 @@
+/* TARGET — Handheld Desktop Hero Contract V2 | 2026-08-17
+ * Global exception for phones using browser "Desktop site" mode.
+ * The browser exposes a ~760–1180px layout viewport on a physically small touch
+ * screen. Keep a deliberate compact-desktop composition without affecting real
+ * desktop, tablet, or normal mobile layouts.
+ */
+
+html.handheld-desktop-mode{
+  --hd-hero-shell:920px;
+  --hd-hero-gap:28px;
+  --hd-hero-pad-top:54px;
+  --hd-hero-pad-bottom:58px;
+  --hd-hero-title:clamp(2.75rem,4.65vw,3.35rem);
+  --hd-hero-copy:1.02rem;
+  --hd-hero-radius:22px;
+}
+
+/* Hero shell: one consistent compact-desktop geometry site-wide. */
+html.handheld-desktop-mode :is(
+  .hc-hero,
+  .about-hero,
+  .work-hero,
+  .portfolio-hero-final,
+  .qm-hero,
+  .fs-hero,
+  .ct-hero,
+  .cp-hero,
+  .faq-hero,
+  .privacy-hero,
+  .terms-hero
+){
+  min-height:0!important;
+  height:auto!important;
+  padding-block:var(--hd-hero-pad-top) var(--hd-hero-pad-bottom)!important;
+  overflow:hidden!important;
+}
+
+html.handheld-desktop-mode :is(
+  .hc-hero>.container,
+  .about-hero>.container,
+  .work-hero>.container,
+  .portfolio-hero-final>.container,
+  .qm-hero>.container,
+  .fs-hero>.container,
+  .ct-hero>.container,
+  .cp-hero>.container,
+  .faq-hero>.container,
+  .privacy-hero>.container,
+  .terms-hero>.container
+){
+  width:min(92%,var(--hd-hero-shell))!important;
+  max-width:var(--hd-hero-shell)!important;
+  margin-inline:auto!important;
+  padding-inline:0!important;
+}
+
+/* All canonical hero grids stay recognisably desktop, but compact enough to
+   survive browser down-scaling onto a phone screen. */
+html.handheld-desktop-mode :is(
+  .hc-hero-grid,
+  .about-hero__grid,
+  .work-hero__grid,
+  .portfolio-hero-grid,
+  .qm-hero-grid,
+  .fs-hero-grid,
+  .ct-hero-grid,
+  .cp-hero-grid,
+  .faq-hero-grid,
+  .privacy-hero-grid,
+  .terms-hero-grid
+){
+  display:grid!important;
+  grid-template-columns:minmax(0,1.06fr) minmax(0,.94fr)!important;
+  align-items:center!important;
+  gap:var(--hd-hero-gap)!important;
+  min-height:0!important;
+  padding:0!important;
+}
+
+/* Copy width and rhythm. */
+html.handheld-desktop-mode :is(
+  .hc-hero-copy,
+  .about-hero__copy,
+  .work-hero__grid>div:first-child,
+  .portfolio-hero-copy,
+  .qm-hero-copy,
+  .fs-hero-copy,
+  .ct-hero-copy,
+  .cp-hero-copy,
+  .faq-hero-copy,
+  .privacy-hero-copy,
+  .terms-hero-copy
+){
+  min-width:0!important;
+  max-width:none!important;
+  padding:0!important;
+}
+
+html.handheld-desktop-mode :is(
+  .hc-hero h1,
+  .about-hero h1,
+  .work-hero h1,
+  .portfolio-hero-final h1,
+  .qm-hero h1,
+  .fs-hero h1,
+  .ct-hero h1,
+  .cp-hero h1,
+  .faq-hero h1,
+  .privacy-hero h1,
+  .terms-hero h1
+){
+  max-width:12ch!important;
+  margin-block:12px 14px!important;
+  font-size:var(--hd-hero-title)!important;
+  line-height:1.08!important;
+  letter-spacing:-.025em!important;
+  text-wrap:balance!important;
+}
+
+html.handheld-desktop-mode :is(
+  .hc-hero-copy>p,
+  .about-hero__copy>p,
+  .work-hero__grid>div:first-child>p,
+  .portfolio-hero-copy>p,
+  .qm-hero-copy>p,
+  .fs-hero-copy>p,
+  .ct-hero-copy>p,
+  .cp-hero-copy>p,
+  .faq-hero-copy>p,
+  .privacy-hero-copy>p,
+  .terms-hero-copy>p
+){
+  max-width:54ch!important;
+  margin-bottom:0!important;
+  font-size:var(--hd-hero-copy)!important;
+  line-height:1.72!important;
+}
+
+/* Eyebrows must remain readable after the browser scales the 980px canvas. */
+html.handheld-desktop-mode :is(
+  .about-eyebrow,.work-eyebrow,.portfolio-eyebrow,.qm-eyebrow,.fs-eyebrow,
+  .ct-eyebrow,.cp-eyebrow,.faq-eyebrow,.privacy-eyebrow,.terms-eyebrow
+){
+  min-height:34px!important;
+  padding:7px 11px!important;
+  font-size:.79rem!important;
+  line-height:1.35!important;
+}
+
+/* Action groups: compact horizontal desktop treatment; never overflow. */
+html.handheld-desktop-mode :is(
+  .hc-actions,
+  .work-hero__actions,
+  .portfolio-hero-actions,
+  .qm-actions,
+  .fs-actions,
+  .ct-actions,
+  .cp-actions,
+  .faq-actions,
+  .privacy-hero-utility,
+  .terms-hero-utility
+){
+  display:flex!important;
+  flex-wrap:wrap!important;
+  align-items:center!important;
+  gap:9px 12px!important;
+  margin-top:22px!important;
+}
+
+html.handheld-desktop-mode :is(
+  .hc-actions a,
+  .work-hero__actions a,
+  .portfolio-hero-actions a,
+  .qm-actions a,
+  .fs-actions a,
+  .ct-actions a,
+  .cp-actions a,
+  .faq-actions a,
+  .privacy-hero-utility a,
+  .terms-hero-utility a
+){
+  min-height:46px!important;
+  max-width:100%!important;
+  padding:10px 15px!important;
+  font-size:.84rem!important;
+  line-height:1.3!important;
+  white-space:normal!important;
+}
+
+/* Photo/media heroes: fixed compact stage prevents the right side from becoming
+   taller than the text and keeps crop behaviour predictable. */
+html.handheld-desktop-mode :is(
+  .about-hero__media,
+  .portfolio-hero-media,
+  .qm-hero-media,
+  .fs-hero-media,
+  .ct-hero-media
+){
+  position:relative!important;
+  width:100%!important;
+  min-width:0!important;
+  height:330px!important;
+  min-height:330px!important;
+  max-height:330px!important;
+  margin:0!important;
+  border-radius:var(--hd-hero-radius)!important;
+  overflow:hidden!important;
+}
+
+html.handheld-desktop-mode :is(
+  .about-hero__media>img,
+  .portfolio-hero-media>img,
+  .qm-hero-media>img,
+  .fs-hero-media>img,
+  .ct-hero-media>img
+){
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  max-height:none!important;
+  object-fit:cover!important;
+  transform:none!important;
+}
+
+html.handheld-desktop-mode :is(
+  .about-hero__media-card,
+  .portfolio-hero-media figcaption,
+  .qm-hero-media figcaption,
+  .fs-hero-media figcaption,
+  .ct-hero-media figcaption
+){
+  max-width:calc(100% - 24px)!important;
+  padding:10px 12px!important;
+  gap:7px 10px!important;
+  font-size:.68rem!important;
+  line-height:1.3!important;
+}
+
+/* Non-photo hero visuals follow the same physical stage height. */
+html.handheld-desktop-mode :is(
+  .work-hero__route,
+  .cp-document-stage,
+  .faq-visual,
+  .privacy-visual,
+  .terms-visual
+){
+  width:100%!important;
+  min-width:0!important;
+  min-height:300px!important;
+  height:300px!important;
+  max-height:300px!important;
+  margin:0!important;
+  align-self:center!important;
+  overflow:hidden!important;
+}
+
+html.handheld-desktop-mode .work-hero__route{
+  padding:24px!important;
+  border-radius:var(--hd-hero-radius)!important;
+}
+html.handheld-desktop-mode .work-hero__route>span{width:68px!important;height:68px!important}
+html.handheld-desktop-mode .work-hero__route>strong{font-size:1.35rem!important}
+
+html.handheld-desktop-mode .cp-document-stack{
+  width:min(100%,360px)!important;
+  max-height:286px!important;
+  transform:scale(.9)!important;
+  transform-origin:center!important;
+}
+html.handheld-desktop-mode .faq-visual-card,
+html.handheld-desktop-mode .privacy-document,
+html.handheld-desktop-mode .terms-document{
+  width:100%!important;
+  max-width:none!important;
+  min-height:0!important;
+  height:100%!important;
+  padding:24px!important;
+  border-radius:var(--hd-hero-radius)!important;
+}
+html.handheld-desktop-mode .faq-visual-card strong,
+html.handheld-desktop-mode .privacy-document-copy strong,
+html.handheld-desktop-mode .terms-document-copy strong{
+  font-size:1.2rem!important;
+  line-height:1.35!important;
+}
+html.handheld-desktop-mode .faq-visual-card p,
+html.handheld-desktop-mode .privacy-document-copy p,
+html.handheld-desktop-mode .terms-document-copy p{
+  font-size:.8rem!important;
+  line-height:1.55!important;
+}
+
+/* Home was the first pilot. V2 normalises it with the same contract and removes
+   any tall inherited minimums left by page-specific layers. */
+html.handheld-desktop-mode body.page-home .home-canonical>.hc-hero .hc-hero-grid{
+  padding-block:0!important;
+  gap:var(--hd-hero-gap)!important;
+}
+html.handheld-desktop-mode body.page-home .hc-hero h1{
+  font-size:var(--hd-hero-title)!important;
+  max-width:11ch!important;
+}
+
+/* Physical 360–430px phones are represented by the same desktop viewport; keep
+   the composition conservative enough to avoid horizontal clipping. */
+html.handheld-desktop-mode :is(
+  .hc-hero-grid,
+  .about-hero__grid,
+  .work-hero__grid,
+  .portfolio-hero-grid,
+  .qm-hero-grid,
+  .fs-hero-grid,
+  .ct-hero-grid,
+  .cp-hero-grid,
+  .faq-hero-grid,
+  .privacy-hero-grid,
+  .terms-hero-grid
+)>*{min-width:0!important}
+
+html.handheld-desktop-mode :is(
+  .portfolio-hero-final,
+  .qm-hero,
+  .fs-hero,
+  .ct-hero,
+  .about-hero
+) figcaption span{
+  min-width:0!important;
+  white-space:normal!important;
+}
+
+@media(prefers-reduced-motion:reduce){
+  html.handheld-desktop-mode :is(
+    .about-hero__media>img,.portfolio-hero-media>img,.qm-hero-media>img,
+    .fs-hero-media>img,.ct-hero-media>img
+  ){transition:none!important;animation:none!important}
+}
