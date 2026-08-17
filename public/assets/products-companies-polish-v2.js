@@ -4,14 +4,28 @@
   const commons = (file) => `https://commons.wikimedia.org/wiki/Special:Redirect/file/${encodeURIComponent(file)}`;
   const atlasUrl = '/assets/products/illustrative-product-atlas.webp';
 
-  const atlasIndex = {
-    'ينسون':0,'Anise':0,'كمومايل':1,'Chamomile':1,'قرفة':2,'Cinnamon':2,'شاي أخضر':3,'Green Tea':3,'زعتر':4,'Thyme':4,
-    'نعناع':5,'Mint':5,'شاي':7,'Tea':7,'كركديه':8,'Hibiscus':8,'شاي أبيض':9,'White Tea':9,
-    'حمام':10,'Pigeon':10,'كفتة':11,'Kofta':11,'محشي':12,'Mahshi / Stuffed Vegetables':12,'جبنة رومي':14,'Roumy Cheese':14,
-    'عسل نحل':15,'Bee Honey':15,'حلويات شامية':16,'Levantine Sweets':16,'عسل أسود':17,'Sugarcane Molasses':17,
-    'تمر هندي':18,'Tamarind':18,'جوافة':19,'Guava':19,'خروب':20,'Carob':20,'مانجو':21,'Mango':21,'برتقال':22,'Orange':22,'رمان':23,'Pomegranate':23,
-    'تليا':24,'Linden / Tilia':24
-  };
+  const atlasSets = [
+    {
+      ar:['شاي','ينسون','كمومايل','قرفة','شاي أخضر','نعناع','تليا','شاي أبيض','زعتر','كركديه'],
+      en:['Tea','Anise','Chamomile','Cinnamon','Green Tea','Mint','Linden / Tilia','White Tea','Thyme','Hibiscus'],
+      indices:[7,0,1,2,3,6,5,9,8,4]
+    },
+    {
+      ar:['جبنة رومي','حمام','كفتة','محشي','ممبار'],
+      en:['Roumy Cheese','Pigeon','Kofta','Mahshi / Stuffed Vegetables','Mombar'],
+      indices:[14,13,10,11,12]
+    },
+    {
+      ar:['عسل نحل','عسل أسود','حلويات شامية'],
+      en:['Bee Honey','Sugarcane Molasses','Levantine Sweets'],
+      indices:[15,17,16]
+    },
+    {
+      ar:['برتقال','كركديه','خروب','تمر هندي','جوافة','مانجو','رمان'],
+      en:['Orange','Hibiscus','Carob','Tamarind','Guava','Mango','Pomegranate'],
+      indices:[22,20,18,24,19,21,23]
+    }
+  ];
 
   const library = {
     'شاي': { src: pexels('6448540') },
@@ -99,8 +113,13 @@
 
   let queued = false;
 
-  function applyAtlasFallback(card, figure, img, name) {
-    const index = atlasIndex[name];
+  function resolveAtlasIndices(names) {
+    const signature = names.join('|');
+    const set = atlasSets.find((item) => item.ar.join('|') === signature || item.en.join('|') === signature);
+    return set?.indices || [];
+  }
+
+  function applyAtlasFallback(card, figure, img, index) {
     if (!Number.isInteger(index)) {
       card.classList.add('is-fallback');
       return;
@@ -132,8 +151,9 @@
     gallery.replaceChildren();
 
     const isAr = document.documentElement.lang !== 'en';
+    const fallbackIndices = resolveAtlasIndices(names);
 
-    names.forEach((name) => {
+    names.forEach((name, position) => {
       const media = library[name];
       const card = document.createElement('article');
       card.className = 'product-photo-card';
@@ -147,7 +167,7 @@
       img.decoding = 'async';
       img.alt = name;
       img.src = media?.src || '/images/home-food-trade-editorial-v1.png';
-      img.addEventListener('error', () => applyAtlasFallback(card, figure, img, name), { once: true });
+      img.addEventListener('error', () => applyAtlasFallback(card, figure, img, fallbackIndices[position]), { once: true });
       figure.appendChild(img);
 
       const copy = document.createElement('div');
