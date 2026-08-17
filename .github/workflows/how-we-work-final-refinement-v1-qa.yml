@@ -113,7 +113,7 @@ jobs:
                 const hero=document.querySelector('.work-hero');
                 const heroH1=document.querySelector('.work-hero h1');
                 const heroP=document.querySelector('.work-hero p');
-                const final=document.querySelector('.work-final');
+                const finalSurface=document.querySelector('.work-final > .container');
                 const finalH2=document.querySelector('.work-final h2');
                 const finalP=document.querySelector('.work-final p');
                 const mediaImg=document.querySelector('.work-info-media img');
@@ -131,7 +131,7 @@ jobs:
                   heroBg:style(hero)?.backgroundColor,
                   heroH1Color:style(heroH1)?.color,
                   heroPColor:style(heroP)?.color,
-                  finalBg:style(final)?.backgroundColor,
+                  finalBg:style(finalSurface)?.backgroundColor,
                   finalH2Color:style(finalH2)?.color,
                   finalPColor:style(finalP)?.color,
                   mediaLoaded:!!mediaImg && mediaImg.complete && mediaImg.naturalWidth>100 && mediaImg.naturalHeight>100,
