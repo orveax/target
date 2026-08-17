@@ -9,11 +9,11 @@
   isolation:isolate!important;
   overflow:hidden!important;
   padding:0!important;
-  background:linear-gradient(90deg,#F4EDE4 0 55%,#0C4931 55% 100%)!important;
+  background:linear-gradient(90deg,#0C4931 0 45%,#F4EDE4 45% 100%)!important;
   color:#262626!important;
   border-bottom:1px solid rgba(12,73,49,.10)!important;
 }
-html[dir="ltr"] .page-company-profile .cp-hero{background:linear-gradient(270deg,#F4EDE4 0 55%,#0C4931 55% 100%)!important}
+html[dir="ltr"] .page-company-profile .cp-hero{background:linear-gradient(90deg,#F4EDE4 0 55%,#0C4931 55% 100%)!important}
 .page-company-profile .cp-hero::before{
   content:"DOCUMENT RESOURCE"!important;
   position:absolute!important;
@@ -199,6 +199,12 @@ html[dir="ltr"] .page-company-profile .cp-document-stack{transform:rotate(1.5deg
   .page-company-profile .cp-document-stack{width:min(88%,310px)!important}
 }
 
+html.handheld-desktop-mode .page-company-profile .cp-hero{
+  background:linear-gradient(90deg,#0C4931 0 45%,#F4EDE4 45% 100%)!important;
+}
+html[dir="ltr"].handheld-desktop-mode .page-company-profile .cp-hero{
+  background:linear-gradient(90deg,#F4EDE4 0 55%,#0C4931 55% 100%)!important;
+}
 html.handheld-desktop-mode .page-company-profile .cp-hero-grid{
   grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)!important;
   gap:28px!important;
