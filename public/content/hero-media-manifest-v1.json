@@ -17,11 +17,11 @@
         {
           "role": "hero",
           "provider": "Pexels",
-          "sourceId": "11679687",
-          "subject": "food manufacturing and date packaging operation",
-          "sourceUrl": "https://images.pexels.com/photos/11679687/pexels-photo-11679687.jpeg",
-          "focalPointDesktop": "center 52%",
-          "focalPointMobile": "54% center"
+          "sourceId": "11679685",
+          "subject": "dates visibly moving through a real food processing and sorting line",
+          "sourceUrl": "https://images.pexels.com/photos/11679685/pexels-photo-11679685.jpeg",
+          "focalPointDesktop": "center 50%",
+          "focalPointMobile": "center center"
         },
         {
           "role": "how-we-work",
@@ -49,7 +49,7 @@
         }
       ],
       "rightsNote": "Pexels free stock sources; retain source records. Replace with verified TARGET/manufacturer-owned photography when approved assets become available.",
-      "businessReason": "The Home media set maps directly to TARGET's proposition: real food production and packing in the Hero, quality review in How We Work, real tea/herb products in Categories, and shipment/warehouse handling in Why TARGET."
+      "businessReason": "The Home media set maps directly to TARGET's proposition: a visible food product moving through production in the Hero, quality review in How We Work, real tea/herb products in Categories, and shipment/warehouse handling in Why TARGET."
     },
     "about": {
       "route": "about.html",
