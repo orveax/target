@@ -1,4 +1,4 @@
-name: TARGET Mobile Navigation Polish V1 QA
+name: TARGET Mobile Navigation Baseline + V2 QA
 on:
   pull_request:
   push:
@@ -11,18 +11,25 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Verify mobile navigation polish V1
+      - name: Verify mobile navigation baseline and Header V2
         run: |
+          set -euo pipefail
           test -f public/assets/mobile-nav-polish-v1.css
           test -f public/assets/mobile-nav-polish-v1.js
+          test -f public/assets/header-premium-v2.css
           node --check public/assets/mobile-nav-polish-v1.js
+          node --check public/assets/header-premium-v2.js
           grep -q 'html\[dir="rtl"\] .premium-mobile-nav' public/assets/mobile-nav-polish-v1.css
           grep -q 'html\[dir="ltr"\] .premium-mobile-nav' public/assets/mobile-nav-polish-v1.css
-          grep -q 'min-height:58px' public/assets/mobile-nav-polish-v1.css
-          grep -q 'premium-mobile-secondary' public/assets/mobile-nav-polish-v1.css
           grep -q 'premium-mobile-scroll-cue' public/assets/mobile-nav-polish-v1.css
           grep -q 'data-mobile-nav-scroll' src/components/SiteHeader.astro
-          grep -q 'class="premium-mobile-secondary"' src/components/SiteHeader.astro
+          grep -q 'premium-mobile-secondary th2-mobile-secondary' src/components/SiteHeader.astro
+          grep -q 'th2-mobile-primary' src/components/SiteHeader.astro
+          grep -q 'th2-mobile-commercial' src/components/SiteHeader.astro
           grep -q 'mobile-nav-polish-v1.css?v=20260816-01' src/layouts/BaseLayout.astro
           grep -q 'mobile-nav-polish-v1.js?v=20260816-01' src/layouts/BaseLayout.astro
+          grep -q 'header-premium-v2.css?v=20260817-01' src/layouts/BaseLayout.astro
+          grep -q -- '--th2-charcoal:#262626' public/assets/header-premium-v2.css
+          grep -q 'background:linear-gradient(145deg,#2A2A2A,#1F1F1F)' public/assets/header-premium-v2.css
           ! grep -q 'premium-mobile-eyebrow.*التنقل' src/components/SiteHeader.astro
+          echo 'TARGET MOBILE NAVIGATION V2: PASS'
