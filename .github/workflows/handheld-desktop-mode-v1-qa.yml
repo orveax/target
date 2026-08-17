@@ -15,10 +15,13 @@ jobs:
       - run: npm run build
       - name: Verify handheld desktop-mode contract
         run: |
+          set -euo pipefail
           test -f dist/assets/handheld-desktop-mode-v1.js
           test -f dist/assets/handheld-desktop-mode-v1.css
+          test -f dist/assets/footer-premium-v6.css
           grep -q 'handheld-desktop-mode-v1.js?v=20260817-01' dist/index.html
           grep -q 'handheld-desktop-mode-v1.css?v=20260817-01' dist/index.html
+          grep -q 'footer-premium-v6.css?v=20260817-01' dist/index.html
           grep -q "shortSide<=620" dist/assets/handheld-desktop-mode-v1.js
           grep -q "window.innerWidth>=760" dist/assets/handheld-desktop-mode-v1.js
           grep -q "window.innerWidth<=1180" dist/assets/handheld-desktop-mode-v1.js
@@ -26,7 +29,6 @@ jobs:
           grep -q "hc-hero-grid" dist/assets/handheld-desktop-mode-v1.css
           grep -q "hc-category-grid" dist/assets/handheld-desktop-mode-v1.css
           grep -q "grid-template-columns:repeat(4,minmax(0,1fr))" dist/assets/handheld-desktop-mode-v1.css
-          grep -q "target-footer-v5 .tf5-main" dist/assets/handheld-desktop-mode-v1.css
-          grep -q "target-footer-v5 .tf5-contact" dist/assets/handheld-desktop-mode-v1.css
-          grep -q "grid-template-columns:minmax(250px,.82fr) minmax(0,1.18fr)" dist/assets/handheld-desktop-mode-v1.css
-          grep -q "footer-premium-v5.css?v=20260817-01.*handheld-desktop-mode-v1.css?v=20260817-01" dist/index.html
+          grep -q "html.handheld-desktop-mode .target-footer-v6 .tf6-main" dist/assets/footer-premium-v6.css
+          grep -q "html.handheld-desktop-mode .target-footer-v6 .tf6-contact-band" dist/assets/footer-premium-v6.css
+          grep -q "grid-template-columns:minmax(250px,.78fr) minmax(0,1.22fr)" dist/assets/footer-premium-v6.css
