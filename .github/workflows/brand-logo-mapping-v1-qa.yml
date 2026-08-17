@@ -39,10 +39,10 @@ jobs:
 
           grep -q 'target-logo-horizontal-light.svg' "$HEADER"
           grep -q 'mobile-brand-logo.*target-logo-primary-official-cream-transparent.svg' "$HEADER"
-          grep -q 'tf5-logo.*target-logo-primary-official-cream-transparent.svg' "$FOOTER"
+          grep -q 'tf6-logo.*target-logo-primary-official-cream-transparent.svg' "$FOOTER"
           grep -q 'brand-logo-mapping-v1.css?v=20260817-01' "$LAYOUT"
           grep -q 'handheld-desktop-mode.*brand-logo' "$MAP"
-          grep -q 'target-footer-v5.*tf5-logo' "$MAP"
+          grep -q 'target-footer-v6.*tf6-logo' "$MAP"
 
           if grep -q '<rect' "$PRIMARY"; then
             echo 'FAIL: web primary logo contains a background rect.' >&2
