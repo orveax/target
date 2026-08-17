@@ -26,5 +26,5 @@ jobs:
           grep -q 'height:44px!important' public/assets/mobile-menu-viewport-fit-v21.css
           grep -q 'max-height: 680px' public/assets/mobile-menu-viewport-fit-v21.css
           grep -q 'max-height: 520px' public/assets/mobile-menu-viewport-fit-v21.css
-          grep -q 'mobile-menu-viewport-fit-v21.css?v=20260817-01' src/layouts/BaseLayout.astro
+          grep -q 'mobile-menu-viewport-fit-v21.css?v=20260817-02' src/layouts/BaseLayout.astro
           test "$(grep -o '<a class:list={[[]'\''nav-link' src/components/SiteHeader.astro | wc -l)" -ge 5
