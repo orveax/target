@@ -1,0 +1,71 @@
+name: TARGET Premium Hero Suite V1 QA
+on:
+  push:
+    branches:
+      - feature/premium-hero-redesign
+  workflow_dispatch:
+jobs:
+  premium-heroes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install dependencies
+        run: npm install
+      - name: Build Astro site
+        run: npm run build
+      - name: Verify 11-page Premium Hero contract
+        run: |
+          set -euo pipefail
+          LAYOUT='src/layouts/BaseLayout.astro'
+          HEROES=(
+            hero-home-premium-v1.css
+            hero-about-premium-v1.css
+            hero-how-we-work-premium-v1.css
+            hero-products-premium-v1.css
+            hero-qatar-market-premium-v1.css
+            hero-suppliers-premium-v1.css
+            hero-contact-premium-v1.css
+            hero-company-profile-premium-v1.css
+            hero-faq-premium-v1.css
+            hero-privacy-premium-v1.css
+            hero-terms-premium-v1.css
+          )
+          for hero in "${HEROES[@]}"; do
+            test -f "public/assets/$hero"
+            grep -q "/assets/$hero" "$LAYOUT"
+          done
+          test "$(grep -o 'hero-[a-z-]*premium-v1.css' "$LAYOUT" | sort -u | wc -l)" -eq 11
+
+          # Real, page-relevant photography for marketing/trade heroes.
+          grep -q 'pexels-photo-36823725' public/assets/home-real-photography-v2.css
+          grep -q 'pexels-photo-4481260' public/assets/about-real-photography-v2.css
+          grep -q 'pexels-photo-11679687' public/assets/how-we-work-final-refinement-v1.css
+          grep -q 'pexels-photo-10907746' public/assets/products-companies-polish-v1.css
+          grep -q 'photos/17546505/' public/assets/hero-qatar-market-premium-v1.css
+          grep -q 'pexels-photo-4820847' public/assets/suppliers-polish-v3.css
+          grep -q 'pexels-photo-35642370' public/assets/contact-polish-v3.css
+
+          # Distinct page identities, not one repeated hero template.
+          grep -q 'background:#F4EDE4!important' public/assets/hero-about-premium-v1.css
+          grep -q 'background:#222725!important' public/assets/hero-how-we-work-premium-v1.css
+          grep -q 'SELECTED · REVIEWED · QATAR' public/assets/hero-products-premium-v1.css
+          grep -q 'MARKET CONTEXT' public/assets/hero-qatar-market-premium-v1.css
+          grep -q 'MANUFACTURER · PRODUCT · QATAR' public/assets/hero-suppliers-premium-v1.css
+          grep -q 'RIGHT MESSAGE · RIGHT TEAM' public/assets/hero-contact-premium-v1.css
+          grep -q 'DOCUMENT / RESOURCE' public/assets/hero-company-profile-premium-v1.css
+          grep -q '15 ANSWERS · 4 TOPICS' public/assets/hero-faq-premium-v1.css
+          grep -q 'PRIVACY / DATA' public/assets/hero-privacy-premium-v1.css
+          grep -q 'WEBSITE TERMS / COMMERCIAL BOUNDARY' public/assets/hero-terms-premium-v1.css
+
+          # Handheld Desktop Mode must be explicitly handled on every page hero.
+          for hero in "${HEROES[@]}"; do
+            grep -q 'html.handheld-desktop-mode' "public/assets/$hero"
+          done
+
+          # Governance: no fabricated Company Profile PDF action introduced.
+          grep -q 'PDF.*PENDING' src/pages/company-profile.astro
+          ! grep -Eq 'href="[^"]+\.pdf"' src/pages/company-profile.astro
+          echo 'TARGET PREMIUM HERO SUITE V1: PASS'
