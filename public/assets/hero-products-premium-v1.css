@@ -1,0 +1,33 @@
+/* TARGET — Products & Companies Premium Hero V1 | 2026-08-17
+ * Scope: Products & Companies hero only. Canonical copy/structure preserved.
+ * Identity: curated food portfolio / product focus.
+ * Photography: existing real Pexels packaged-food assortment in products-companies-polish-v1.css.
+ */
+.page-food-portfolio .portfolio-hero-final{position:relative;isolation:isolate;overflow:hidden;padding-block:0!important;background:linear-gradient(180deg,#FFF 0%,#F8F5F0 100%)!important;color:#262626!important}
+.page-food-portfolio .portfolio-hero-final::before{content:"SELECTED · REVIEWED · QATAR";position:absolute;inset-inline-start:clamp(18px,4vw,64px);inset-block-start:28px;color:rgba(12,73,49,.18);font:700 .62rem/1 Manrope,sans-serif;letter-spacing:.19em;white-space:nowrap}
+.page-food-portfolio .portfolio-hero-final::after{content:"";position:absolute;inset-inline-end:-120px;inset-block-start:-140px;width:420px;height:420px;border:1px solid rgba(12,73,49,.10);border-radius:50%;box-shadow:0 0 0 54px rgba(12,73,49,.018),0 0 0 108px rgba(192,149,82,.018);pointer-events:none}
+.page-food-portfolio .portfolio-hero-grid{min-height:clamp(650px,76vh,820px);display:grid!important;grid-template-columns:minmax(0,.88fr) minmax(460px,1.12fr)!important;gap:clamp(40px,5vw,76px)!important;align-items:center!important;padding-block:clamp(72px,7vw,102px) clamp(78px,7vw,108px)!important}
+.page-food-portfolio .portfolio-hero-copy{max-width:680px!important}
+.page-food-portfolio .portfolio-eyebrow{min-height:38px!important;padding:8px 12px!important;border:1px solid rgba(12,73,49,.15)!important;border-radius:999px!important;background:#F4EDE4!important;color:#0C4931!important}
+.page-food-portfolio .portfolio-eyebrow svg{color:#C09552!important}
+.page-food-portfolio .portfolio-hero-copy h1{max-width:13.2ch!important;margin:18px 0 22px!important;color:#262626!important;font-size:clamp(3.2rem,5vw,5rem)!important;line-height:1.04!important;letter-spacing:-.025em!important}
+html[dir="rtl"] .page-food-portfolio .portfolio-hero-copy h1{letter-spacing:0!important}
+.page-food-portfolio .portfolio-hero-copy>p{max-width:620px!important;color:#616A64!important;font-size:clamp(1.02rem,1.2vw,1.15rem)!important;line-height:1.82!important}
+.page-food-portfolio .portfolio-hero-actions{gap:12px!important;margin-top:30px!important}
+.page-food-portfolio .portfolio-hero-actions .portfolio-primary{background:#0C4931!important;border-color:#0C4931!important;color:#F4EDE4!important;box-shadow:0 12px 28px rgba(12,73,49,.16)!important}
+.page-food-portfolio .portfolio-secondary{color:#0C4931!important}
+.page-food-portfolio .portfolio-secondary:hover{color:#C09552!important}
+.page-food-portfolio .portfolio-hero-media{position:relative!important;min-height:560px!important;margin:0!important;border-radius:30px 30px 30px 8px!important;overflow:visible!important;box-shadow:0 30px 70px rgba(38,38,38,.14)!important}
+html[dir="ltr"] .page-food-portfolio .portfolio-hero-media{border-radius:30px 30px 8px 30px!important}
+.page-food-portfolio .portfolio-hero-media::before{content:"FOOD PORTFOLIO"!important;position:absolute!important;z-index:3!important;inset-inline-start:18px!important;inset-block-start:18px!important;width:auto!important;height:auto!important;min-height:30px!important;display:inline-flex!important;align-items:center!important;padding:7px 10px!important;border:1px solid rgba(255,255,255,.36)!important;border-radius:999px!important;background:rgba(12,73,49,.70)!important;color:#F4EDE4!important;font:700 .64rem/1 Manrope,sans-serif!important;letter-spacing:.12em!important;backdrop-filter:blur(8px)}
+.page-food-portfolio .portfolio-hero-media::after{content:"";position:absolute;inset:0;z-index:1;border-radius:inherit;background:linear-gradient(180deg,rgba(12,73,49,.02) 0%,rgba(12,73,49,.06) 54%,rgba(12,73,49,.26) 100%);pointer-events:none}
+.page-food-portfolio .portfolio-hero-media figcaption{z-index:4!important;inset-inline:clamp(14px,3vw,34px)!important;inset-block-end:-34px!important;display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px!important;padding:10px!important;border:1px solid rgba(12,73,49,.10)!important;border-radius:18px!important;background:rgba(255,253,249,.96)!important;box-shadow:0 18px 40px rgba(38,38,38,.14)!important}
+.page-food-portfolio .portfolio-hero-media figcaption span{min-height:58px!important;justify-content:flex-start!important;gap:10px!important;padding:10px 12px!important;border-radius:12px!important;background:#F4EDE4!important;color:#0C4931!important}
+.page-food-portfolio .portfolio-hero-media figcaption svg{color:#C09552!important}
+.page-food-portfolio .portfolio-hero-media figcaption b{font-size:.78rem!important;line-height:1.35!important}
+@media(max-width:991.98px){.page-food-portfolio .portfolio-hero-grid{min-height:0;grid-template-columns:1fr!important;gap:36px!important;padding-block:64px 78px!important}.page-food-portfolio .portfolio-hero-copy{max-width:800px!important}.page-food-portfolio .portfolio-hero-copy h1{max-width:14ch!important;font-size:clamp(3rem,7vw,4.6rem)!important}.page-food-portfolio .portfolio-hero-media{min-height:440px!important;border-radius:26px!important}}
+@media(max-width:575.98px){.page-food-portfolio .portfolio-hero-grid{gap:28px!important;padding-block:46px 70px!important}.page-food-portfolio .portfolio-hero-copy h1{max-width:12.5ch!important;font-size:clamp(2.55rem,11vw,3.35rem)!important;line-height:1.1!important}.page-food-portfolio .portfolio-hero-copy>p{font-size:1rem!important;line-height:1.75!important}.page-food-portfolio .portfolio-hero-media{min-height:340px!important;border-radius:20px!important}.page-food-portfolio .portfolio-hero-media figcaption{inset-inline:12px!important;inset-block-end:-48px!important;grid-template-columns:1fr!important}.page-food-portfolio .portfolio-hero-media figcaption span{min-height:46px!important}}
+html.handheld-desktop-mode .page-food-portfolio .portfolio-hero-grid{min-height:0!important;grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr)!important;gap:30px!important;padding-block:48px 62px!important}
+html.handheld-desktop-mode .page-food-portfolio .portfolio-hero-copy h1{font-size:clamp(2.7rem,5vw,3.8rem)!important}
+html.handheld-desktop-mode .page-food-portfolio .portfolio-hero-media{min-height:390px!important}
+@media(prefers-reduced-motion:reduce){.page-food-portfolio .portfolio-hero-final *{transition:none!important}}
