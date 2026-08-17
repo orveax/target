@@ -2,6 +2,16 @@
 (() => {
   const pexels = (id) => `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=900`;
   const commons = (file) => `https://commons.wikimedia.org/wiki/Special:Redirect/file/${encodeURIComponent(file)}`;
+  const atlasUrl = '/assets/products/illustrative-product-atlas.webp';
+
+  const atlasIndex = {
+    'ينسون':0,'Anise':0,'كمومايل':1,'Chamomile':1,'قرفة':2,'Cinnamon':2,'شاي أخضر':3,'Green Tea':3,'زعتر':4,'Thyme':4,
+    'نعناع':5,'Mint':5,'شاي':7,'Tea':7,'كركديه':8,'Hibiscus':8,'شاي أبيض':9,'White Tea':9,
+    'حمام':10,'Pigeon':10,'كفتة':11,'Kofta':11,'محشي':12,'Mahshi / Stuffed Vegetables':12,'جبنة رومي':14,'Roumy Cheese':14,
+    'عسل نحل':15,'Bee Honey':15,'حلويات شامية':16,'Levantine Sweets':16,'عسل أسود':17,'Sugarcane Molasses':17,
+    'تمر هندي':18,'Tamarind':18,'جوافة':19,'Guava':19,'خروب':20,'Carob':20,'مانجو':21,'Mango':21,'برتقال':22,'Orange':22,'رمان':23,'Pomegranate':23,
+    'تليا':24,'Linden / Tilia':24
+  };
 
   const library = {
     'شاي': { src: pexels('6448540') },
@@ -89,6 +99,22 @@
 
   let queued = false;
 
+  function applyAtlasFallback(card, figure, img, name) {
+    const index = atlasIndex[name];
+    if (!Number.isInteger(index)) {
+      card.classList.add('is-fallback');
+      return;
+    }
+    const col = index % 5;
+    const row = Math.floor(index / 5);
+    card.classList.add('is-atlas-fallback');
+    figure.style.backgroundImage = `url("${atlasUrl}")`;
+    figure.style.backgroundSize = '500% 500%';
+    figure.style.backgroundPosition = `${col * 25}% ${row * 25}%`;
+    figure.style.backgroundRepeat = 'no-repeat';
+    img.remove();
+  }
+
   function upgradeAlbum() {
     const app = document.querySelector('.page-food-portfolio .portfolio-app');
     if (!app) return;
@@ -121,7 +147,7 @@
       img.decoding = 'async';
       img.alt = name;
       img.src = media?.src || '/images/home-food-trade-editorial-v1.png';
-      img.addEventListener('error', () => card.classList.add('is-fallback'), { once: true });
+      img.addEventListener('error', () => applyAtlasFallback(card, figure, img, name), { once: true });
       figure.appendChild(img);
 
       const copy = document.createElement('div');
