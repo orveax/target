@@ -1,0 +1,37 @@
+name: TARGET Home Premium Hero V1 QA
+on:
+  push:
+    branches:
+      - feature/premium-hero-redesign
+  workflow_dispatch:
+jobs:
+  home-hero:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install dependencies
+        run: npm install
+      - name: Build Astro site
+        run: npm run build
+      - name: Verify Home Premium Hero V1 contract
+        run: |
+          set -euo pipefail
+          HERO='public/assets/hero-home-premium-v1.css'
+          PHOTO='public/assets/home-real-photography-v2.css'
+          HOME='src/components/HomePremium.astro'
+          test -f "$HERO"
+          test -f "$PHOTO"
+          grep -q "hero-home-premium-v1.css?v=20260817-01" "$PHOTO"
+          grep -q "pexels-photo-36823725" "$PHOTO"
+          grep -q "linear-gradient(135deg,#0C4931" "$HERO"
+          grep -q "min-height:590px!important" "$HERO"
+          grep -q "position:absolute!important" "$HERO"
+          grep -q "@media(max-width:575.98px)" "$HERO"
+          grep -q "html.handheld-desktop-mode .page-home" "$HERO"
+          grep -q 'data-ar="من المصنع إلى السوق القطري."' "$HOME"
+          grep -q 'href="suppliers.html"' "$HOME"
+          grep -q 'class="hc-route"' "$HOME"
+          echo 'TARGET HOME PREMIUM HERO V1: PASS'
