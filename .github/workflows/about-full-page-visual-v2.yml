@@ -1,0 +1,87 @@
+name: TARGET About Full Page Visual V2
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'public/assets/about-canonical.css'
+      - 'src/components/AboutCanonical.astro'
+      - 'src/layouts/BaseLayout.astro'
+      - '.github/workflows/about-full-page-visual-v2.yml'
+  workflow_dispatch:
+
+jobs:
+  about-full-page:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install project
+        run: npm install
+      - name: Install Playwright
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Build
+        run: npm run build
+      - name: Start static server
+        run: |
+          npx --yes http-server dist -p 4173 -c-1 > /tmp/target-about-http.log 2>&1 &
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/about.html >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/target-about-http.log
+          exit 1
+      - name: Capture About full-page desktop and mobile
+        run: |
+          mkdir -p about-full-page-v2
+          cat > about-full-page-capture.mjs <<'EOF'
+          import { chromium } from 'playwright';
+          import fs from 'node:fs';
+          const browser=await chromium.launch({headless:true});
+          const origin='http://127.0.0.1:4173/about.html';
+          const shots=[
+            ['1440',{viewport:{width:1440,height:1000},screen:{width:1440,height:1000}}],
+            ['390',{viewport:{width:390,height:844},screen:{width:390,height:844},isMobile:true,hasTouch:true}],
+            ['390-desktop-site',{viewport:{width:980,height:1200},screen:{width:390,height:844},isMobile:true,hasTouch:true}]
+          ];
+          const metrics=[]; const failures=[];
+          for(const [name,opts] of shots){
+            const context=await browser.newContext(opts);
+            try{
+              const page=await context.newPage();
+              await page.goto(origin,{waitUntil:'networkidle'});
+              await page.evaluate(async()=>{if(document.fonts) await document.fonts.ready;});
+              await page.screenshot({path:`about-full-page-v2/${name}-ar.png`,fullPage:true});
+              const m=await page.evaluate(()=>({
+                width:window.innerWidth,
+                height:document.documentElement.scrollHeight,
+                overflowX:document.documentElement.scrollWidth>document.documentElement.clientWidth,
+                handheldDesktop:document.documentElement.classList.contains('handheld-desktop-mode'),
+                h1:document.querySelectorAll('h1').length,
+                sections:document.querySelectorAll('.about-canonical > section').length
+              }));
+              metrics.push({name,...m});
+              if(m.overflowX) failures.push(`${name}: horizontal overflow`);
+              if(m.h1!==1) failures.push(`${name}: expected 1 H1; found ${m.h1}`);
+              if(m.sections!==6) failures.push(`${name}: expected 6 About sections; found ${m.sections}`);
+              if(name==='390-desktop-site' && !m.handheldDesktop) failures.push(`${name}: handheld desktop mode did not activate`);
+            }catch(e){failures.push(`${name}: ${e.message}`)}
+            finally{await context.close();}
+          }
+          fs.writeFileSync('about-full-page-v2/metrics.json',JSON.stringify(metrics,null,2));
+          fs.writeFileSync('about-full-page-v2/failures.txt',failures.join('\n'));
+          await browser.close();
+          if(failures.length){console.error(failures.join('\n'));process.exit(1);}
+          EOF
+          node about-full-page-capture.mjs
+      - name: Upload About full-page visual artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: target-about-full-page-v2
+          path: about-full-page-v2
+          if-no-files-found: error
+          retention-days: 14
