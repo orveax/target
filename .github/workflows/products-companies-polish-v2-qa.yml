@@ -59,10 +59,13 @@ jobs:
           grep -Fq 'product-gallery--photo' public/assets/products-companies-canonical.css
       - name: Build
         run: npm run build
-      - name: Install Playwright
+      - name: Install Playwright package and use hosted Chrome
+        shell: bash
         run: |
           npm install --no-save playwright@1.55.0
-          npx playwright install --with-deps chromium
+          CHROME_PATH="$(command -v google-chrome || command -v google-chrome-stable || true)"
+          test -n "$CHROME_PATH"
+          echo "CHROME_PATH=$CHROME_PATH" >> "$GITHUB_ENV"
       - name: Start static server
         run: |
           npx --yes http-server dist -p 4173 -c-1 > /tmp/target-products-http.log 2>&1 &
@@ -73,12 +76,14 @@ jobs:
           cat /tmp/target-products-http.log
           exit 1
       - name: Capture and validate Page 04 visual contract
+        env:
+          CHROME_PATH: ${{ env.CHROME_PATH }}
         run: |
           mkdir -p products-companies-premium-v2
           cat > products-companies-premium-v2-capture.mjs <<'EOF'
           import { chromium } from 'playwright';
           import fs from 'node:fs';
-          const browser=await chromium.launch({headless:true});
+          const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_PATH});
           const origin='http://127.0.0.1:4173/food-portfolio.html';
           const shots=[
             ['1440',{viewport:{width:1440,height:1000},screen:{width:1440,height:1000}}],
