@@ -1,0 +1,118 @@
+/* TARGET — Official Logo Application Mapping V1 | 2026-08-17
+ * Brand master is unchanged. This layer only maps the correct approved lockup
+ * to each surface and protects logo legibility at real mobile and handheld
+ * browser Desktop Site viewports.
+ */
+
+/* Desktop/main header: horizontal lockup belongs in the long navigation rail. */
+.site-header .navbar-brand{
+  display:flex!important;
+  align-items:center!important;
+  min-width:0!important;
+  padding-block:6px!important;
+}
+.site-header .navbar-brand .brand-logo{
+  display:block!important;
+  width:clamp(184px,15vw,218px)!important;
+  max-width:218px!important;
+  height:auto!important;
+  max-height:66px!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  filter:none!important;
+  object-fit:contain!important;
+}
+
+/* Mobile drawer: the primary stacked lockup gives the Arabic wordmark enough scale. */
+@media(max-width:1199.98px){
+  .premium-mobile-nav .premium-mobile-head{
+    min-height:112px!important;
+    padding:10px 14px!important;
+  }
+  .premium-mobile-nav .premium-mobile-brand{
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    flex:0 0 auto!important;
+    min-width:176px!important;
+    min-height:92px!important;
+    padding:7px 13px!important;
+    border:1px solid rgba(192,149,82,.24)!important;
+    border-radius:14px!important;
+    background:#0C4931!important;
+    box-shadow:0 8px 22px rgba(12,73,49,.11)!important;
+  }
+  .premium-mobile-nav .premium-mobile-brand .mobile-brand-logo{
+    display:block!important;
+    width:148px!important;
+    max-width:148px!important;
+    height:auto!important;
+    max-height:88px!important;
+    min-height:0!important;
+    margin:0!important;
+    padding:0!important;
+    border:0!important;
+    border-radius:0!important;
+    background:transparent!important;
+    box-shadow:none!important;
+    filter:none!important;
+    object-fit:contain!important;
+  }
+}
+@media(max-width:575.98px){
+  .site-header .navbar-brand .brand-logo{
+    width:168px!important;
+    max-width:168px!important;
+    max-height:58px!important;
+  }
+  .premium-mobile-nav .premium-mobile-head{min-height:106px!important;padding-inline:12px!important}
+  .premium-mobile-nav .premium-mobile-brand{min-width:164px!important;min-height:86px!important;padding:6px 11px!important}
+  .premium-mobile-nav .premium-mobile-brand .mobile-brand-logo{width:136px!important;max-width:136px!important;max-height:82px!important}
+}
+
+/* Footer: primary stacked lockup is the correct use-case here; it makes تارقت
+ * materially larger than the horizontal lockup while preserving the approved art. */
+.target-footer-v5 .tf5-logo-link{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  margin-bottom:24px!important;
+}
+.target-footer-v5 .tf5-logo{
+  display:block!important;
+  width:228px!important;
+  max-width:min(100%,228px)!important;
+  height:auto!important;
+  max-height:none!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  filter:none!important;
+  object-fit:contain!important;
+}
+@media(max-width:767.98px){
+  .target-footer-v5 .tf5-logo{width:198px!important;max-width:198px!important}
+}
+
+/* Chrome/Android “Desktop site” on a handset: increase logo scale before the
+ * browser physically shrinks the ~980px CSS viewport down to the phone screen. */
+html.handheld-desktop-mode .site-header .navbar-brand .brand-logo{
+  width:252px!important;
+  max-width:252px!important;
+  max-height:76px!important;
+}
+html.handheld-desktop-mode .target-footer-v5 .tf5-logo{
+  width:232px!important;
+  max-width:232px!important;
+}
+
+@media(prefers-reduced-motion:reduce){
+  .site-header .navbar-brand .brand-logo,
+  .premium-mobile-nav .mobile-brand-logo,
+  .target-footer-v5 .tf5-logo{transition:none!important}
+}
