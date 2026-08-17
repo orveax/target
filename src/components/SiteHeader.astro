@@ -1,55 +1,134 @@
 ---
 const { active = '' } = Astro.props;
-const primaryNav = [
+const mainNav = [
   ['index.html','home','الرئيسية','Home'],
-  ['about.html','about','عن تارقت','About Target'],
+  ['about.html','about','عن تارقت','About TARGET'],
   ['capabilities.html','capabilities','كيف نعمل','How We Work'],
   ['food-portfolio.html','portfolio','المنتجات والشركات','Products & Companies'],
-  ['qatar-market.html','market','السوق القطري','Qatar Market'],
 ];
+const megaActive = ['market','suppliers','contact','profile','faq','privacy','terms'].includes(active);
 ---
-<header class="site-header premium-header">
-  <nav class="navbar navbar-expand-xl" aria-label="Main navigation">
-    <div class="container premium-header-grid">
-      <a class="navbar-brand" href="index.html" aria-label="TARGET home"><img class="brand-logo" src="/assets/brand/target-logo-horizontal-light.svg" alt="TARGET — تارقت لتجارة الأغذية"></a>
-      <div class="collapse navbar-collapse premium-desktop-nav">
-        <ul class="navbar-nav mx-auto">
-          {primaryNav.map(([href,key,ar,en]) => (<li><a class:list={['nav-link', active===key && 'active']} href={href} data-ar={ar} data-en={en}>{ar}</a></li>))}
-        </ul>
+<header class="site-header target-header-v2">
+  <nav class="navbar navbar-expand-xl th2-navbar" aria-label="Main navigation">
+    <div class="container th2-shell">
+      <a class="navbar-brand th2-brand" href="index.html" aria-label="TARGET home">
+        <img class="brand-logo" src="/assets/brand/target-logo-horizontal-light.svg" alt="TARGET — تارقت لتجارة الأغذية">
+      </a>
+
+      <div class="th2-desktop-nav d-none d-xl-flex" aria-label="Desktop navigation">
+        <div class="th2-nav-rail">
+          {mainNav.map(([href,key,ar,en]) => (
+            <a class:list={['th2-nav-link', active===key && 'active']} aria-current={active===key ? 'page' : undefined} href={href} data-ar={ar} data-en={en}>{ar}</a>
+          ))}
+          <div class:list={['th2-mega', megaActive && 'has-active']} data-th2-mega>
+            <button class="th2-mega-toggle" type="button" data-th2-mega-toggle aria-expanded="false" aria-controls="th2MegaPanel">
+              <span data-ar="استكشف" data-en="Explore">استكشف</span>
+              <i data-lucide="chevron-down"></i>
+            </button>
+            <div class="th2-mega-panel" id="th2MegaPanel" data-th2-mega-panel>
+              <section class="th2-mega-feature" aria-labelledby="th2MegaFeatureTitle">
+                <small data-ar="من المنتج إلى السوق" data-en="From Product to Market">من المنتج إلى السوق</small>
+                <h2 id="th2MegaFeatureTitle" data-ar="ابدأ من المسار المناسب" data-en="Start through the right route">ابدأ من المسار المناسب</h2>
+                <p data-ar="مسارات واضحة للمصنعين والموردين والمهتمين بالسوق القطري." data-en="Clear routes for manufacturers, suppliers and Qatar-market enquiries.">مسارات واضحة للمصنعين والموردين والمهتمين بالسوق القطري.</p>
+                <a href="suppliers.html">
+                  <span data-ar="ناقش منتجك معنا" data-en="Discuss Your Product">ناقش منتجك معنا</span>
+                  <i data-lucide="arrow-up-left"></i>
+                </a>
+              </section>
+
+              <div class="th2-mega-groups">
+                <section>
+                  <span class="th2-mega-kicker" data-ar="السوق والتوريد" data-en="Market & Supply">السوق والتوريد</span>
+                  <a class:list={[active==='market' && 'active']} href="qatar-market.html" aria-current={active==='market' ? 'page' : undefined}>
+                    <i data-lucide="map-pinned"></i>
+                    <span><b data-ar="السوق القطري" data-en="Qatar Market">السوق القطري</b><small data-ar="فهم السوق ومسار الوصول" data-en="Market context and route-to-market">فهم السوق ومسار الوصول</small></span>
+                  </a>
+                  <a class:list={[active==='suppliers' && 'active']} href="suppliers.html" aria-current={active==='suppliers' ? 'page' : undefined}>
+                    <i data-lucide="factory"></i>
+                    <span><b data-ar="للمصنعين والموردين" data-en="For Suppliers">للمصنعين والموردين</b><small data-ar="شارك بيانات منتجك" data-en="Share your product information">شارك بيانات منتجك</small></span>
+                  </a>
+                </section>
+
+                <section>
+                  <span class="th2-mega-kicker" data-ar="الشركة والموارد" data-en="Company & Resources">الشركة والموارد</span>
+                  <a class:list={[active==='profile' && 'active']} href="company-profile.html" aria-current={active==='profile' ? 'page' : undefined}>
+                    <i data-lucide="book-open-text"></i>
+                    <span><b data-ar="الملف التعريفي" data-en="Company Profile">الملف التعريفي</b><small data-ar="مرجع مختصر عن تارقت" data-en="A concise TARGET reference">مرجع مختصر عن تارقت</small></span>
+                  </a>
+                  <a class:list={[active==='faq' && 'active']} href="faq.html" aria-current={active==='faq' ? 'page' : undefined}>
+                    <i data-lucide="circle-help"></i>
+                    <span><b data-ar="الأسئلة الشائعة" data-en="FAQ">الأسئلة الشائعة</b><small data-ar="إجابات سريعة وواضحة" data-en="Quick, clear answers">إجابات سريعة وواضحة</small></span>
+                  </a>
+                </section>
+
+                <section>
+                  <span class="th2-mega-kicker" data-ar="التواصل" data-en="Contact">التواصل</span>
+                  <a class:list={[active==='contact' && 'active']} href="contact.html" aria-current={active==='contact' ? 'page' : undefined}>
+                    <i data-lucide="mail"></i>
+                    <span><b data-ar="الاتصال بنا" data-en="Contact Us">الاتصال بنا</b><small data-ar="اختر القسم المناسب" data-en="Reach the right team">اختر القسم المناسب</small></span>
+                  </a>
+                  <div class="th2-mega-direct">
+                    <a href="mailto:sales@targetft.com">sales@targetft.com</a>
+                    <a href="mailto:partners@targetft.com">partners@targetft.com</a>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="nav-actions premium-nav-actions">
-        <a class="nav-contact-utility d-none d-xl-inline-flex" href="contact.html"><i data-lucide="mail"></i><span data-ar="الاتصال بنا" data-en="Contact Us">الاتصال بنا</span></a>
-        <button class="lang-button" type="button" data-lang-toggle>EN</button>
-        <a class="btn-premium btn-primary-premium premium-header-cta" href="suppliers.html"><i data-lucide="send"></i><span data-ar="ناقش منتجك معنا" data-en="Discuss Your Product">ناقش منتجك معنا</span></a>
-        <button class="icon-button d-xl-none premium-menu-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileNav" aria-controls="mobileNav" aria-label="Menu"><i data-lucide="menu"></i></button>
+
+      <div class="th2-actions">
+        <button class="lang-button th2-lang" type="button" data-lang-toggle aria-label="Switch language">EN</button>
+        <a class="btn-premium btn-primary-premium th2-cta d-none d-xl-inline-flex" href="suppliers.html">
+          <span data-ar="ناقش منتجك معنا" data-en="Discuss Your Product">ناقش منتجك معنا</span>
+          <i data-lucide="arrow-up-left"></i>
+        </a>
+        <button class="icon-button d-xl-none th2-menu-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileNav" aria-controls="mobileNav" aria-label="Menu">
+          <i data-lucide="menu"></i>
+        </button>
       </div>
     </div>
   </nav>
 </header>
-<div class="offcanvas offcanvas-start premium-mobile-nav" tabindex="-1" id="mobileNav" aria-labelledby="mobileNavLabel">
+
+<div class="offcanvas offcanvas-start premium-mobile-nav th2-mobile-nav" tabindex="-1" id="mobileNav" aria-labelledby="mobileNavLabel">
   <span id="mobileNavLabel" class="visually-hidden" data-ar="قائمة تارقت" data-en="TARGET navigation">قائمة تارقت</span>
-  <div class="offcanvas-header premium-mobile-head">
-    <div class="premium-mobile-brand">
+  <div class="offcanvas-header premium-mobile-head th2-mobile-head">
+    <a class="premium-mobile-brand th2-mobile-brand" href="index.html" aria-label="TARGET home">
       <img class="mobile-brand-logo" src="/assets/brand/target-logo-primary-official-cream-transparent.svg" alt="TARGET — تارقت لتجارة الأغذية">
-    </div>
-    <button type="button" class="premium-mobile-close" data-bs-dismiss="offcanvas" aria-label="إغلاق القائمة" data-ar-aria="إغلاق القائمة" data-en-aria="Close menu"><i data-lucide="x"></i></button>
+    </a>
+    <button type="button" class="premium-mobile-close th2-mobile-close" data-bs-dismiss="offcanvas" aria-label="إغلاق القائمة" data-ar-aria="إغلاق القائمة" data-en-aria="Close menu"><i data-lucide="x"></i></button>
   </div>
-  <div class="offcanvas-body" data-mobile-nav-scroll>
-    <p class="premium-mobile-intro" data-ar="روابط واضحة للوصول السريع إلى ما تحتاجه." data-en="A clear route to the information you need.">روابط واضحة للوصول السريع إلى ما تحتاجه.</p>
-    <nav class="premium-mobile-links" aria-label="Mobile navigation">
-      <a class:list={['nav-link', active==='home' && 'active']} href="index.html"><span><i data-lucide="house"></i><b data-ar="الرئيسية" data-en="Home">الرئيسية</b></span><i data-lucide="arrow-up-left"></i></a>
-      <a class:list={['nav-link', active==='about' && 'active']} href="about.html"><span><i data-lucide="building-2"></i><b data-ar="عن تارقت" data-en="About Target">عن تارقت</b></span><i data-lucide="arrow-up-left"></i></a>
-      <a class:list={['nav-link', active==='capabilities' && 'active']} href="capabilities.html"><span><i data-lucide="route"></i><b data-ar="كيف نعمل" data-en="How We Work">كيف نعمل</b></span><i data-lucide="arrow-up-left"></i></a>
-      <a class:list={['nav-link', active==='portfolio' && 'active']} href="food-portfolio.html"><span><i data-lucide="package"></i><b data-ar="المنتجات والشركات" data-en="Products & Companies">المنتجات والشركات</b></span><i data-lucide="arrow-up-left"></i></a>
-      <a class:list={['nav-link', active==='market' && 'active']} href="qatar-market.html"><span><i data-lucide="map-pinned"></i><b data-ar="السوق القطري" data-en="Qatar Market">السوق القطري</b></span><i data-lucide="arrow-up-left"></i></a>
-    </nav>
-    <div class="premium-mobile-cta">
-      <a class="btn-premium btn-primary-premium w-100" href="suppliers.html"><i data-lucide="send"></i><span data-ar="ناقش منتجك معنا" data-en="Discuss Your Product">ناقش منتجك معنا</span></a>
+
+  <div class="offcanvas-body th2-mobile-body" data-mobile-nav-scroll>
+    <div class="th2-mobile-intro">
+      <small data-ar="TARGET NAVIGATION" data-en="TARGET NAVIGATION">TARGET NAVIGATION</small>
+      <p data-ar="انتقل مباشرة إلى المسار الذي تحتاجه." data-en="Go directly to the route you need.">انتقل مباشرة إلى المسار الذي تحتاجه.</p>
     </div>
-    <nav class="premium-mobile-secondary" aria-label="Secondary mobile navigation">
+
+    <nav class="premium-mobile-links th2-mobile-primary" aria-label="Mobile navigation">
+      <a class:list={['nav-link', active==='home' && 'active']} aria-current={active==='home' ? 'page' : undefined} href="index.html"><small>01</small><span><i data-lucide="house"></i><b data-ar="الرئيسية" data-en="Home">الرئيسية</b></span><i data-lucide="arrow-up-left"></i></a>
+      <a class:list={['nav-link', active==='about' && 'active']} aria-current={active==='about' ? 'page' : undefined} href="about.html"><small>02</small><span><i data-lucide="building-2"></i><b data-ar="عن تارقت" data-en="About TARGET">عن تارقت</b></span><i data-lucide="arrow-up-left"></i></a>
+      <a class:list={['nav-link', active==='capabilities' && 'active']} aria-current={active==='capabilities' ? 'page' : undefined} href="capabilities.html"><small>03</small><span><i data-lucide="route"></i><b data-ar="كيف نعمل" data-en="How We Work">كيف نعمل</b></span><i data-lucide="arrow-up-left"></i></a>
+      <a class:list={['nav-link', active==='portfolio' && 'active']} aria-current={active==='portfolio' ? 'page' : undefined} href="food-portfolio.html"><small>04</small><span><i data-lucide="package"></i><b data-ar="المنتجات والشركات" data-en="Products & Companies">المنتجات والشركات</b></span><i data-lucide="arrow-up-left"></i></a>
+      <a class:list={['nav-link', active==='market' && 'active']} aria-current={active==='market' ? 'page' : undefined} href="qatar-market.html"><small>05</small><span><i data-lucide="map-pinned"></i><b data-ar="السوق القطري" data-en="Qatar Market">السوق القطري</b></span><i data-lucide="arrow-up-left"></i></a>
+    </nav>
+
+    <section class="th2-mobile-commercial" aria-labelledby="th2MobileCommercialTitle">
+      <div>
+        <small data-ar="للمصنعين والموردين" data-en="For Manufacturers & Suppliers">للمصنعين والموردين</small>
+        <h2 id="th2MobileCommercialTitle" data-ar="لديك منتج غذائي؟" data-en="Have a food product?">لديك منتج غذائي؟</h2>
+        <p data-ar="ابدأ النقاش التجاري من المسار المخصص للمنتجات." data-en="Start the commercial discussion through the dedicated product route.">ابدأ النقاش التجاري من المسار المخصص للمنتجات.</p>
+      </div>
+      <a href="suppliers.html"><span data-ar="ناقش منتجك معنا" data-en="Discuss Your Product">ناقش منتجك معنا</span><i data-lucide="arrow-up-left"></i></a>
+    </section>
+
+    <div class="th2-mobile-utility-head"><span data-ar="المزيد" data-en="More">المزيد</span></div>
+    <nav class="premium-mobile-secondary th2-mobile-secondary" aria-label="Secondary mobile navigation">
       <a href="company-profile.html"><span><i data-lucide="book-open-text"></i><b data-ar="الملف التعريفي" data-en="Company Profile">الملف التعريفي</b></span><i data-lucide="arrow-up-left"></i></a>
       <a href="contact.html"><span><i data-lucide="mail"></i><b data-ar="الاتصال بنا" data-en="Contact Us">الاتصال بنا</b></span><i data-lucide="arrow-up-left"></i></a>
-      <a href="faq.html"><span><i data-lucide="circle-help"></i><b data-ar="الأسئلة الشائعة والدعم" data-en="FAQ & Support">الأسئلة الشائعة والدعم</b></span><i data-lucide="arrow-up-left"></i></a>
+      <a href="faq.html"><span><i data-lucide="circle-help"></i><b data-ar="الأسئلة الشائعة" data-en="FAQ">الأسئلة الشائعة</b></span><i data-lucide="arrow-up-left"></i></a>
     </nav>
   </div>
   <div class="premium-mobile-scroll-cue" aria-hidden="true"></div>
