@@ -1,0 +1,55 @@
+name: TARGET Official Logo Mapping V1 QA
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/components/SiteHeader.astro'
+      - 'src/components/SiteFooter.astro'
+      - 'src/layouts/BaseLayout.astro'
+      - 'public/assets/brand/target-logo-primary-official-cream-transparent.svg'
+      - 'public/assets/brand-logo-mapping-v1.css'
+      - '.github/workflows/brand-logo-mapping-v1-qa.yml'
+  pull_request:
+    paths:
+      - 'src/components/SiteHeader.astro'
+      - 'src/components/SiteFooter.astro'
+      - 'src/layouts/BaseLayout.astro'
+      - 'public/assets/brand/target-logo-primary-official-cream-transparent.svg'
+      - 'public/assets/brand-logo-mapping-v1.css'
+
+jobs:
+  brand-logo-mapping:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install
+      - run: npm run build
+      - name: Verify official logo application contract
+        run: |
+          set -euo pipefail
+          HEADER='src/components/SiteHeader.astro'
+          FOOTER='src/components/SiteFooter.astro'
+          LAYOUT='src/layouts/BaseLayout.astro'
+          PRIMARY='public/assets/brand/target-logo-primary-official-cream-transparent.svg'
+          MAP='public/assets/brand-logo-mapping-v1.css'
+
+          grep -q 'target-logo-horizontal-light.svg' "$HEADER"
+          grep -q 'mobile-brand-logo.*target-logo-primary-official-cream-transparent.svg' "$HEADER"
+          grep -q 'tf5-logo.*target-logo-primary-official-cream-transparent.svg' "$FOOTER"
+          grep -q 'brand-logo-mapping-v1.css?v=20260817-01' "$LAYOUT"
+          grep -q 'handheld-desktop-mode.*brand-logo' "$MAP"
+          grep -q 'target-footer-v5.*tf5-logo' "$MAP"
+
+          if grep -q '<rect' "$PRIMARY"; then
+            echo 'FAIL: web primary logo contains a background rect.' >&2
+            exit 1
+          fi
+          grep -q 'viewBox="0 0 1000 641.36"' "$PRIMARY"
+          grep -q '#f4ede4' "$PRIMARY"
+          grep -q '#c09552' "$PRIMARY"
+
+          echo 'TARGET OFFICIAL LOGO MAPPING: PASS'
