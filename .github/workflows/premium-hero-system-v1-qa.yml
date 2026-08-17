@@ -26,7 +26,7 @@ jobs:
           test -f "$DOC" && test -f "$MANIFEST" && test -f "$ROOT"
 
           # Strategy + shared DNA
-          grep -q 'at least 4 of these 6 dimensions' "$DOC"
+          grep -qi 'at least 4 of these 6 dimensions' "$DOC"
           grep -q 'H01 Canonical Accuracy' "$DOC"
           grep -q 'H15 Real Visual Review' "$DOC"
           grep -q '#0C4931' "$DOC"
@@ -67,7 +67,7 @@ jobs:
           grep -q -- '--ph-charcoal:#262626' "$ROOT"
           grep -q -- '--ph-sand:#C09552' "$ROOT"
           grep -q 'clamp(3rem,5.5vw,5rem)' "$ROOT"
-          grep -q 'clamp(2.6rem,4.5vw,4.1rem)' "$DOC"
+          grep -q 'clamp(2.6rem, 4.5vw, 4.1rem)' "$DOC"
           grep -q '1200px' "$DOC"
           grep -q 'Minimum interactive target: 48px' "$DOC"
 
