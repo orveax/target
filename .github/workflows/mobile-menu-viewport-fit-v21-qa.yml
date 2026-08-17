@@ -1,4 +1,4 @@
-name: TARGET Mobile Menu Five Routes First V2.2 QA
+name: TARGET Mobile Menu Alignment + Brand Fit V2.3 QA
 on:
   push:
     branches: [main]
@@ -15,16 +15,18 @@ jobs:
         run: npm install
       - name: Build Astro site
         run: npm run build
-      - name: Verify five-routes-first mobile contract
+      - name: Verify V2.3 mobile alignment and brand-fit contract
         run: |
           test -f public/assets/mobile-menu-viewport-fit-v21.css
           grep -q 'height:100dvh!important' public/assets/mobile-menu-viewport-fit-v21.css
-          grep -q 'min-height:0!important' public/assets/mobile-menu-viewport-fit-v21.css
-          grep -q 'overflow-y:auto!important' public/assets/mobile-menu-viewport-fit-v21.css
           grep -q '.th2-mobile-intro{display:none!important}' public/assets/mobile-menu-viewport-fit-v21.css
+          grep -q 'grid-template-columns:22px 30px minmax(0,1fr) 15px!important' public/assets/mobile-menu-viewport-fit-v21.css
+          grep -q '.th2-mobile-route-icon' public/assets/mobile-menu-viewport-fit-v21.css
+          grep -q 'place-items:center!important' public/assets/mobile-menu-viewport-fit-v21.css
+          grep -q 'stroke-width:1.9!important' public/assets/mobile-menu-viewport-fit-v21.css
           grep -q 'height:48px!important' public/assets/mobile-menu-viewport-fit-v21.css
           grep -q 'height:44px!important' public/assets/mobile-menu-viewport-fit-v21.css
-          grep -q 'max-height: 680px' public/assets/mobile-menu-viewport-fit-v21.css
-          grep -q 'max-height: 520px' public/assets/mobile-menu-viewport-fit-v21.css
-          grep -q 'mobile-menu-viewport-fit-v21.css?v=20260817-02' src/layouts/BaseLayout.astro
-          test "$(grep -o '<a class:list={[[]'\''nav-link' src/components/SiteHeader.astro | wc -l)" -ge 5
+          grep -q 'target-logo-horizontal-light.svg' src/components/SiteHeader.astro
+          test "$(grep -o 'class=\"th2-mobile-route-icon\"' src/components/SiteHeader.astro | wc -l)" -eq 5
+          test "$(grep -o 'class=\"th2-mobile-route-arrow\"' src/components/SiteHeader.astro | wc -l)" -eq 5
+          grep -q 'mobile-menu-viewport-fit-v21.css?v=20260817-03' src/layouts/BaseLayout.astro
