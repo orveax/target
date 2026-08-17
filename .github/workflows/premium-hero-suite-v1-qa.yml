@@ -69,3 +69,9 @@ jobs:
           grep -q 'PDF.*PENDING' src/pages/company-profile.astro
           ! grep -Eq 'href="[^"]+\.pdf"' src/pages/company-profile.astro
           echo 'TARGET PREMIUM HERO SUITE V1: PASS'
+      - name: Check delivery and final-audit scripts
+        run: |
+          node --check public/assets/form-delivery-v1.js
+          node --check scripts/final-audit.mjs
+      - name: Run site-wide regression audit
+        run: node scripts/final-audit.mjs
