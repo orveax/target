@@ -63,12 +63,83 @@
       "rightsNote": "Pexels free stock sources; retain source records. Replace with verified supplier packshots/category photography as approvals become available.",
       "businessReason": "A three-tile real food mosaic communicates curated category breadth without consumer-retail or supermarket-promotion styling."
     },
-    "qatarMarket": {"route":"qatar-market.html","archetype":"Market Lens","mediaType":"real-photography","status":"pending-migration","requiredSubject":"food product plus professional distribution/retail/commercial Qatar or GCC context"},
-    "suppliers": {"route":"suppliers.html","archetype":"Supplier Conversion Stage","mediaType":"real-photography","status":"pending-migration","requiredSubject":"manufacturer/export-ready packaged food or production-ready goods"},
-    "contact": {"route":"contact.html","archetype":"Contact Routing Hub","mediaType":"real-photography-secondary","status":"pending-migration","requiredSubject":"food-trade communication, product documentation or commercial desk context"},
-    "companyProfile": {"route":"company-profile.html","archetype":"Document Stage","mediaType":"verified-document-preview","status":"pdf-pending","requiredSubject":"approved Company Profile cover or first-page preview only"},
-    "faq": {"route":"faq.html","archetype":"Knowledge Index","mediaType":"brand-information-composition","status":"pending-migration","requiredSubject":"four-topic index; photography generally unnecessary"},
-    "privacy": {"route":"privacy.html","archetype":"Trust & Data Document","mediaType":"brand-information-graphic","status":"pending-migration","requiredSubject":"shield-check, file-lock, user/data handling semantics; no stock photo"},
-    "terms": {"route":"terms.html","archetype":"Legal Reading Prelude","mediaType":"brand-document-composition","status":"pending-migration","requiredSubject":"01–10 clause index and document semantics; no stock photo"}
+    "qatarMarket": {
+      "route": "qatar-market.html",
+      "archetype": "Market Lens",
+      "mediaType": "real-photography",
+      "status": "active-remote-approved-free-stock",
+      "subject": "professional retail/channel environment",
+      "sourceProvider": "Pexels",
+      "sourceId": "17546505",
+      "sourceUrl": "https://images.pexels.com/photos/17546505/pexels-photo-17546505.jpeg",
+      "rightsNote": "Pexels free stock source; used as a controlled market/channel context, not as a claim about TARGET coverage or outlets.",
+      "focalPointDesktop": "center 53%",
+      "focalPointMobile": "56% center",
+      "businessReason": "Provides a real market/channel context while the page copy carries Qatar-specific meaning; avoids skyline, tourism and invented outlet claims."
+    },
+    "suppliers": {
+      "route": "suppliers.html",
+      "archetype": "Supplier Conversion Stage",
+      "mediaType": "real-photography",
+      "status": "active-remote-approved-free-stock",
+      "subject": "packaged food/manufacturer product context",
+      "sourceProvider": "Pexels",
+      "sourceId": "4820847",
+      "sourceUrl": "https://images.pexels.com/photos/4820847/pexels-photo-4820847.jpeg",
+      "rightsNote": "Pexels free stock source; retain source record. Replace with verified manufacturer/export-ready product photography when available.",
+      "focalPointDesktop": "center 48%",
+      "focalPointMobile": "54% center",
+      "businessReason": "Keeps the manufacturer/product opportunity visually primary on the site's main supplier conversion page."
+    },
+    "contact": {
+      "route": "contact.html",
+      "archetype": "Contact Routing Hub",
+      "mediaType": "real-photography-secondary",
+      "status": "active-remote-approved-free-stock",
+      "subject": "commercial desk and product communication context",
+      "sourceProvider": "Pexels",
+      "sourceId": "35642370",
+      "sourceUrl": "https://images.pexels.com/photos/35642370/pexels-photo-35642370.jpeg",
+      "rightsNote": "Pexels free stock source; retain source record. Photography is intentionally secondary to contact routing and the enquiry CTA.",
+      "focalPointDesktop": "center 50%",
+      "focalPointMobile": "center 50%",
+      "businessReason": "Supports food-trade communication without call-centre, handshake or generic customer-service imagery."
+    },
+    "companyProfile": {
+      "route": "company-profile.html",
+      "archetype": "Document Stage",
+      "mediaType": "controlled-branded-document-state",
+      "status": "active-pdf-pending",
+      "sourceProvider": "TARGET brand assets",
+      "rightsNote": "No stock photography and no fabricated PDF cover. Current Hero explicitly shows a branded pending state until the approved PDF/preview exists.",
+      "businessReason": "The page is a document resource destination, so the real document state is the visual subject."
+    },
+    "faq": {
+      "route": "faq.html",
+      "archetype": "Knowledge Index",
+      "mediaType": "controlled-brand-information-composition",
+      "status": "active-no-photography",
+      "sourceProvider": "TARGET design system + Lucide",
+      "rightsNote": "No stock photography. Uses controlled brand surfaces and semantic icons only.",
+      "businessReason": "Four topic cues are more useful than decorative photography on a support/clarification page."
+    },
+    "privacy": {
+      "route": "privacy.html",
+      "archetype": "Trust & Data Document",
+      "mediaType": "controlled-brand-information-graphic",
+      "status": "active-no-photography",
+      "sourceProvider": "TARGET brand assets + Lucide",
+      "rightsNote": "No stock photography. Uses brand assets and shield/file/user semantic icons; no biometric or cybersecurity claims are implied.",
+      "businessReason": "The Hero explains data handling/trust without legal or cyber-security stock clichés."
+    },
+    "terms": {
+      "route": "terms.html",
+      "archetype": "Legal Reading Prelude",
+      "mediaType": "controlled-brand-document-composition",
+      "status": "active-no-photography",
+      "sourceProvider": "TARGET brand assets + Lucide",
+      "rightsNote": "No stock photography. Uses a controlled 01–10 clause index and document semantics only.",
+      "businessReason": "Prepares the user for structured legal reading without courtroom, gavel or contract-signing imagery."
+    }
   }
 }
