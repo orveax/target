@@ -49,15 +49,16 @@ const faqs = [
         </div>
       </div>
       <div class="hc-hero-visual">
-        <div class="hc-hero-media" aria-hidden="true"></div>
+        <span class="hc-media-tag" data-ar="منتج حقيقي · تصنيع وتعبئة · وصول للسوق" data-en="Real Product · Production & Packing · Market Reach">منتج حقيقي · تصنيع وتعبئة · وصول للسوق</span>
+        <figure class="hc-hero-media" role="img" aria-label="تعبئة منتجات غذائية داخل منشأة تصنيع" data-ar-aria="تعبئة منتجات غذائية داخل منشأة تصنيع" data-en-aria="Food products being packed inside a manufacturing facility"></figure>
         <aside class="hc-route" aria-label="المسار التجاري" data-ar-aria="المسار التجاري" data-en-aria="Commercial route">
-          <span class="hc-route-label" data-ar="مسار تجاري واضح" data-en="A Clear Commercial Route">مسار تجاري واضح</span>
+          <span class="hc-route-label" data-ar="المسار التجاري" data-en="Commercial Route">المسار التجاري</span>
           <div class="hc-route-nodes">
-            <article><span class="hc-route-icon"><i data-lucide="factory" aria-hidden="true"></i></span><div><strong data-ar="المصنع / العلامة / المورد" data-en="Manufacturer / Brand / Supplier">المصنع / العلامة / المورد</strong><small data-ar="المنتج والفرصة" data-en="Product & Opportunity">المنتج والفرصة</small></div></article>
+            <article><span class="hc-route-icon"><i data-lucide="factory" aria-hidden="true"></i></span><div><strong data-ar="المصنع / المورد" data-en="Manufacturer / Supplier">المصنع / المورد</strong><small data-ar="المنتج والفرصة" data-en="Product & Opportunity">المنتج والفرصة</small></div></article>
             <i class="hc-route-link" data-lucide="arrow-left" aria-hidden="true"></i>
-            <article class="is-target"><span class="hc-route-icon"><i data-lucide="target" aria-hidden="true"></i></span><div><strong>TARGET</strong><small data-ar="نراجع الملاءمة وطريقة العمل" data-en="Review Fit & Commercial Arrangement">نراجع الملاءمة وطريقة العمل</small></div></article>
+            <article class="is-target"><span class="hc-route-icon"><i data-lucide="target" aria-hidden="true"></i></span><div><strong>TARGET</strong><small data-ar="مراجعة الملاءمة" data-en="Fit Review">مراجعة الملاءمة</small></div></article>
             <i class="hc-route-link" data-lucide="arrow-left" aria-hidden="true"></i>
-            <article><span class="hc-route-icon"><i data-lucide="map-pinned" aria-hidden="true"></i></span><div><strong data-ar="السوق القطري" data-en="Qatar Market">السوق القطري</strong><small data-ar="الاستيراد · البيع · التوزيع" data-en="Import · Sales · Distribution">الاستيراد · البيع · التوزيع</small></div></article>
+            <article><span class="hc-route-icon"><i data-lucide="map-pinned" aria-hidden="true"></i></span><div><strong data-ar="قطر" data-en="Qatar">قطر</strong><small data-ar="استيراد · بيع · توزيع" data-en="Import · Sales · Distribution">استيراد · بيع · توزيع</small></div></article>
           </div>
         </aside>
       </div>
@@ -74,7 +75,7 @@ const faqs = [
 
   <section class="hc-section hc-categories"><div class="container">
     <header class="hc-heading"><span class="hc-kicker" data-ar="نطاق اهتمامنا" data-en="Our Focus">نطاق اهتمامنا</span><h2 data-ar="فئات ومنتجات نركز عليها" data-en="Products & Categories We Focus On">فئات ومنتجات نركز عليها</h2><p data-ar="نعمل ضمن فئات غذائية مختارة، مع مرونة لتقييم المنتجات التي تتناسب مع توجه تارقت وفرص السوق القطري." data-en="We focus on selected food categories while remaining open to evaluating products that fit TARGET's commercial direction and Qatar-market opportunities.">نعمل ضمن فئات غذائية مختارة، مع مرونة لتقييم المنتجات التي تتناسب مع توجه تارقت وفرص السوق القطري.</p></header>
-    <figure class="hc-category-editorial" aria-hidden="true"><img src="https://images.pexels.com/photos/6978215/pexels-photo-6978215.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="" loading="lazy" decoding="async" width="1400" height="933" /></figure>
+    <figure class="hc-category-editorial" aria-hidden="true"><img src="https://images.pexels.com/photos/8329985/pexels-photo-8329985.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="" loading="lazy" decoding="async" width="1600" height="1067" /></figure>
     <div class="hc-category-grid">{categories.map(([icon,ar,en]) => <a href="food-portfolio.html"><span class="hc-category-media"><span class="hc-icon-tile"><i data-lucide={icon} aria-hidden="true"></i></span></span><strong data-ar={ar} data-en={en}>{ar}</strong><i class="hc-category-arrow" data-lucide="arrow-up-left" aria-hidden="true"></i></a>)}</div>
     <a class="hc-explore-link" href="food-portfolio.html"><span data-ar="استعرض المنتجات والشركات" data-en="Explore Products & Companies">استعرض المنتجات والشركات</span><i data-lucide="arrow-up-left" aria-hidden="true"></i></a>
   </div></section>
