@@ -1,11 +1,12 @@
 {
-  "schemaVersion": 2,
-  "updatedAt": "2026-08-17",
+  "schemaVersion": 3,
+  "updatedAt": "2026-08-18",
   "governance": {
     "sourceOfTruth": "TARGET Business Foundation in Notion",
     "publicLabelAr": "شركات ومنتجات محل اهتمامنا",
     "publicLabelEn": "Companies & Products in Focus",
-    "visualPolicy": "Controlled internal editorial imagery may be used until verified supplier originals replace it without redesign.",
+    "productOwnershipRule": "Each active company renders only the products listed inside its own products array.",
+    "visualPolicy": "Reference product imagery may be used until verified supplier packshots replace it without redesign.",
     "forbiddenRelationshipLabels": [
       "Our Brands",
       "Our Agencies",
@@ -26,9 +27,18 @@
       "categoryEn": "Tea & Herbal Infusions",
       "summaryAr": "مجموعة مختارة من الشاي والأعشاب والمشروبات العشبية ضمن نطاق الاهتمام التجاري الحالي للسوق القطري.",
       "summaryEn": "A selected tea and herbal infusion range within the current commercial focus for Qatar.",
-      "productsAr": ["شاي", "ينسون", "كمومايل", "قرفة", "شاي أخضر", "نعناع", "تليا", "شاي أبيض", "زعتر", "كركديه"],
-      "productsEn": ["Tea", "Anise", "Chamomile", "Cinnamon", "Green Tea", "Mint", "Linden / Tilia", "White Tea", "Thyme", "Hibiscus"],
-      "productVisualIndices": [7, 0, 1, 2, 3, 6, 5, 9, 8, 4],
+      "products": [
+        {"nameAr":"شاي","nameEn":"Tea","image":"https://images.pexels.com/photos/6448540/pexels-photo-6448540.jpeg?auto=compress&cs=tinysrgb&w=900","visualIndex":7},
+        {"nameAr":"ينسون","nameEn":"Anise","image":"https://commons.wikimedia.org/wiki/Special:Redirect/file/AniseSeeds.jpg","visualIndex":0,"credit":{"href":"https://commons.wikimedia.org/wiki/File:AniseSeeds.jpg","ar":"Wikimedia Commons · Public Domain","en":"Wikimedia Commons · Public Domain"}},
+        {"nameAr":"كمومايل","nameEn":"Chamomile","image":"https://images.pexels.com/photos/16221903/pexels-photo-16221903.jpeg?auto=compress&cs=tinysrgb&w=900","visualIndex":1},
+        {"nameAr":"قرفة","nameEn":"Cinnamon","image":"https://images.pexels.com/photos/71128/pexels-photo-71128.jpeg?auto=compress&cs=tinysrgb&w=900","visualIndex":2},
+        {"nameAr":"شاي أخضر","nameEn":"Green Tea","image":"https://images.pexels.com/photos/463445/pexels-photo-463445.jpeg?auto=compress&cs=tinysrgb&w=900","visualIndex":3},
+        {"nameAr":"نعناع","nameEn":"Mint","image":"https://images.pexels.com/photos/5498007/pexels-photo-5498007.jpeg?auto=compress&cs=tinysrgb&w=900","visualIndex":6},
+        {"nameAr":"تليا","nameEn":"Linden / Tilia","image":"https://images.pexels.com/photos/30640777/pexels-photo-30640777.jpeg?auto=compress&cs=tinysrgb&w=900","visualIndex":5},
+        {"nameAr":"شاي أبيض","nameEn":"White Tea","image":"https://images.pexels.com/photos/7136271/pexels-photo-7136271.jpeg?auto=compress&cs=tinysrgb&w=900","visualIndex":9},
+        {"nameAr":"زعتر","nameEn":"Thyme","image":"https://images.pexels.com/photos/5501053/pexels-photo-5501053.jpeg?auto=compress&cs=tinysrgb&w=900","visualIndex":8},
+        {"nameAr":"كركديه","nameEn":"Hibiscus","image":"https://images.pexels.com/photos/8678927/pexels-photo-8678927.jpeg?auto=compress&cs=tinysrgb&w=900","visualIndex":4}
+      ],
       "logo": null,
       "visual": {
         "coverImage": "https://images.pexels.com/photos/6978215/pexels-photo-6978215.jpeg?auto=compress&cs=tinysrgb&w=1200",
@@ -54,9 +64,13 @@
       "categoryEn": "Dairy, Frozen & Prepared Foods",
       "summaryAr": "منتجات ألبان وأغذية مجمدة ومجهزة ضمن نطاق المراجعة التجارية الحالية، مع عرض البيانات الغذائية فقط في المحفظة العامة.",
       "summaryEn": "Dairy, frozen and prepared foods within the current commercial review, with only food-related items shown in the public portfolio.",
-      "productsAr": ["جبنة رومي", "حمام", "كفتة", "محشي", "ممبار"],
-      "productsEn": ["Roumy Cheese", "Pigeon", "Kofta", "Mahshi / Stuffed Vegetables", "Mombar"],
-      "productVisualIndices": [14, 13, 10, 11, 12],
+      "products": [
+        {"nameAr":"جبنة رومي","nameEn":"Roumy Cheese","image":"https://images.pexels.com/photos/8287396/pexels-photo-8287396.jpeg?auto=compress&cs=tinysrgb&w=900","visualIndex":14},
+        {"nameAr":"حمام","nameEn":"Pigeon","image":"https://commons.wikimedia.org/wiki/Special:Redirect/file/Hamam%20mahshi.jpg","visualIndex":13,"credit":{"href":"https://commons.wikimedia.org/wiki/File:Hamam_mahshi.jpg","ar":"medea_material · CC BY 2.0","en":"medea_material · CC BY 2.0"}},
+        {"nameAr":"كفتة","nameEn":"Kofta","image":"https://images.pexels.com/photos/37206690/pexels-photo-37206690.jpeg?auto=compress&cs=tinysrgb&w=900","visualIndex":10},
+        {"nameAr":"محشي","nameEn":"Mahshi / Stuffed Vegetables","image":"https://images.pexels.com/photos/31953512/pexels-photo-31953512.jpeg?auto=compress&cs=tinysrgb&w=900","visualIndex":11},
+        {"nameAr":"ممبار","nameEn":"Mombar","image":"https://commons.wikimedia.org/wiki/Special:Redirect/file/Egyptian%20food%20%28mombar%29.jpg","visualIndex":12,"credit":{"href":"https://commons.wikimedia.org/wiki/File:Egyptian_food_(mombar).jpg","ar":"Ahmed Elsayed45 · CC BY-SA 4.0","en":"Ahmed Elsayed45 · CC BY-SA 4.0"}}
+      ],
       "adjacentProducts": [
         {
           "nameAr": "فحم شيشة",
@@ -90,9 +104,11 @@
       "categoryEn": "Honey, Molasses & Traditional Sweets",
       "summaryAr": "عسل ودبس وحلويات تقليدية مختارة ضمن نطاق الاهتمام التجاري الحالي ومراجعة فرص المنتجات في قطر.",
       "summaryEn": "Selected honey, molasses and traditional sweets within the current commercial focus and Qatar product-opportunity review.",
-      "productsAr": ["عسل نحل", "عسل أسود", "حلويات شامية"],
-      "productsEn": ["Bee Honey", "Sugarcane Molasses", "Levantine Sweets"],
-      "productVisualIndices": [15, 17, 16],
+      "products": [
+        {"nameAr":"عسل نحل","nameEn":"Bee Honey","image":"https://images.pexels.com/photos/5634207/pexels-photo-5634207.jpeg?auto=compress&cs=tinysrgb&w=900","visualIndex":15},
+        {"nameAr":"عسل أسود","nameEn":"Sugarcane Molasses","image":"https://commons.wikimedia.org/wiki/Special:Redirect/file/Blackstrapmolasses.JPG","visualIndex":17,"credit":{"href":"https://commons.wikimedia.org/wiki/File:Blackstrapmolasses.JPG","ar":"Badagnani · CC BY 3.0","en":"Badagnani · CC BY 3.0"}},
+        {"nameAr":"حلويات شامية","nameEn":"Levantine Sweets","image":"https://images.pexels.com/photos/20183042/pexels-photo-20183042.jpeg?auto=compress&cs=tinysrgb&w=900","visualIndex":16}
+      ],
       "logo": null,
       "visual": {
         "coverImage": "https://images.pexels.com/photos/5634207/pexels-photo-5634207.jpeg?auto=compress&cs=tinysrgb&w=1200",
@@ -118,9 +134,15 @@
       "categoryEn": "Juices & Traditional Beverages",
       "summaryAr": "عصائر ومشروبات تقليدية بنكهات مختارة ضمن نطاق الاهتمام الحالي وفرص المراجعة للسوق القطري.",
       "summaryEn": "Selected juices and traditional beverages within the current focus and Qatar market review scope.",
-      "productsAr": ["برتقال", "كركديه", "خروب", "تمر هندي", "جوافة", "مانجو", "رمان"],
-      "productsEn": ["Orange", "Hibiscus", "Carob", "Tamarind", "Guava", "Mango", "Pomegranate"],
-      "productVisualIndices": [22, 20, 18, 24, 19, 21, 23],
+      "products": [
+        {"nameAr":"برتقال","nameEn":"Orange","image":"https://images.pexels.com/photos/11009212/pexels-photo-11009212.jpeg?auto=compress&cs=tinysrgb&w=900","visualIndex":22},
+        {"nameAr":"كركديه","nameEn":"Hibiscus","image":"https://images.pexels.com/photos/8678927/pexels-photo-8678927.jpeg?auto=compress&cs=tinysrgb&w=900","visualIndex":20},
+        {"nameAr":"خروب","nameEn":"Carob","image":"https://commons.wikimedia.org/wiki/Special:Redirect/file/Carob%20pods%20and%20leaves%20in%20majorca%20arp.jpg","visualIndex":18,"credit":{"href":"https://commons.wikimedia.org/wiki/File:Carob_pods_and_leaves_in_majorca_arp.jpg","ar":"Arpingstone · Public Domain","en":"Arpingstone · Public Domain"}},
+        {"nameAr":"تمر هندي","nameEn":"Tamarind","image":"https://images.pexels.com/photos/18495829/pexels-photo-18495829.jpeg?auto=compress&cs=tinysrgb&w=900","visualIndex":24},
+        {"nameAr":"جوافة","nameEn":"Guava","image":"https://images.pexels.com/photos/5945791/pexels-photo-5945791.jpeg?auto=compress&cs=tinysrgb&w=900","visualIndex":19},
+        {"nameAr":"مانجو","nameEn":"Mango","image":"https://images.pexels.com/photos/7156058/pexels-photo-7156058.jpeg?auto=compress&cs=tinysrgb&w=900","visualIndex":21},
+        {"nameAr":"رمان","nameEn":"Pomegranate","image":"https://images.pexels.com/photos/7033816/pexels-photo-7033816.jpeg?auto=compress&cs=tinysrgb&w=900","visualIndex":23}
+      ],
       "logo": null,
       "visual": {
         "coverImage": "https://images.pexels.com/photos/5156695/pexels-photo-5156695.jpeg?auto=compress&cs=tinysrgb&w=1200",
