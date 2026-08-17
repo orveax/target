@@ -27,7 +27,7 @@ jobs:
           grep -q 'grid-template-columns:24px 36px minmax(0,1fr) 18px!important' "$CSS"
           grep -q 'grid-template-rows:52px!important' "$CSS"
           grep -q 'width:36px!important' "$CSS"
-          grep -q 'max-height:680px' "$CSS"
+          grep -q 'max-height: 680px' "$CSS"
           grep -q 'grid-template-rows:44px!important' "$CSS"
           grep -q '.th2-mobile-social' "$CSS"
           grep -q '.th2-mobile-social-links' "$CSS"
