@@ -1,10 +1,10 @@
-name: TARGET Products & Companies Polish V2 QA
+name: TARGET Products & Companies Premium V2 QA
 
 on:
   push:
     branches: [main]
     paths:
-      - 'public/assets/products-companies-polish-v2.css'
+      - 'public/assets/products-companies-canonical.css'
       - 'public/assets/products-companies-polish-v2.js'
       - 'src/layouts/BaseLayout.astro'
       - 'src/pages/food-portfolio.astro'
@@ -14,38 +14,116 @@ on:
   workflow_dispatch:
 
 jobs:
-  products-companies-polish-v2:
+  products-companies-premium-v2:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Verify V2 visual contract and product album mapping
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install project
+        run: npm install
+      - name: Verify Page 04 architecture and governance
         shell: bash
         run: |
           set -euo pipefail
-          test -f public/assets/products-companies-polish-v2.css
-          test -f public/assets/products-companies-polish-v2.js
-          grep -Fq 'products-companies-polish-v2.css?v=20260817-01' src/layouts/BaseLayout.astro
-          grep -Fq 'products-companies-polish-v2.js?v=20260817-01' src/layouts/BaseLayout.astro
-          grep -Fq '.portfolio-principles article{' public/assets/products-companies-polish-v2.css
-          grep -Fq 'background:var(--target-charcoal,#262626)!important' public/assets/products-companies-polish-v2.css
-          grep -Fq '.company-tile-copy strong' public/assets/products-companies-polish-v2.css
-          grep -Fq 'color:var(--target-charcoal,#262626)!important' public/assets/products-companies-polish-v2.css
-          grep -Fq 'product-gallery--photo' public/assets/products-companies-polish-v2.css
-          grep -Fq "'شاي'" public/assets/products-companies-polish-v2.js
-          grep -Fq "'ينسون'" public/assets/products-companies-polish-v2.js
-          grep -Fq "'ممبار'" public/assets/products-companies-polish-v2.js
-          grep -Fq "'عسل أسود'" public/assets/products-companies-polish-v2.js
-          grep -Fq "'خروب'" public/assets/products-companies-polish-v2.js
-          grep -Fq "'رمان'" public/assets/products-companies-polish-v2.js
-          grep -Fq 'AniseSeeds.jpg' public/assets/products-companies-polish-v2.js
-          grep -Fq 'Hamam mahshi.jpg' public/assets/products-companies-polish-v2.js
-          grep -Fq 'Egyptian food (mombar).jpg' public/assets/products-companies-polish-v2.js
-          grep -Fq 'Blackstrapmolasses.JPG' public/assets/products-companies-polish-v2.js
-          grep -Fq 'Carob pods and leaves in majorca arp.jpg' public/assets/products-companies-polish-v2.js
-          ! grep -Fq "'فحم شيشة'" public/assets/products-companies-polish-v2.js
+          test -f public/assets/products-companies-canonical.css
+          test ! -f public/assets/products-companies-polish-v1.css
+          test ! -f public/assets/products-companies-polish-v2.css
+          test ! -f public/assets/hero-products-premium-v1.css
+          grep -Fq 'products-companies-canonical.css?v=20260818-01' src/layouts/BaseLayout.astro
+          ! grep -Fq 'products-companies-polish-v1.css' src/layouts/BaseLayout.astro
+          ! grep -Fq 'products-companies-polish-v2.css' src/layouts/BaseLayout.astro
+          ! grep -Fq 'hero-products-premium-v1.css' src/layouts/BaseLayout.astro
+          grep -Fq 'portfolio-canonical' src/pages/food-portfolio.astro
+          grep -Fq 'منتجات غذائية مختارة وفرص نراجعها للسوق القطري.' src/pages/food-portfolio.astro
+          grep -Fq 'عرض الشركة أو المنتج هنا لا يعني تلقائيًا وكالة' src/pages/food-portfolio.astro
           grep -Fq '/content/companies.json' src/components/CompanyPortfolio.vue
           grep -Fq "status === 'active'" src/components/CompanyPortfolio.vue
-      - name: Build Astro site
+          grep -Fq '"company-05"' public/content/companies.json
+          grep -Fq '"status": "pending"' public/content/companies.json
+          grep -Fq '"فحم شيشة"' public/content/companies.json
+          ! grep -Fq 'فحم شيشة' src/pages/food-portfolio.astro
+          grep -Fq 'product-gallery--photo' public/assets/products-companies-canonical.css
+      - name: Build
+        run: npm run build
+      - name: Install Playwright
         run: |
-          npm install
-          npm run build
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start static server
+        run: |
+          npx --yes http-server dist -p 4173 -c-1 > /tmp/target-products-http.log 2>&1 &
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/food-portfolio.html >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/target-products-http.log
+          exit 1
+      - name: Capture and validate Page 04 visual contract
+        run: |
+          mkdir -p products-companies-premium-v2
+          cat > products-companies-premium-v2-capture.mjs <<'EOF'
+          import { chromium } from 'playwright';
+          import fs from 'node:fs';
+          const browser=await chromium.launch({headless:true});
+          const origin='http://127.0.0.1:4173/food-portfolio.html';
+          const shots=[
+            ['1440',{viewport:{width:1440,height:1000},screen:{width:1440,height:1000}}],
+            ['768',{viewport:{width:768,height:1024},screen:{width:768,height:1024}}],
+            ['390',{viewport:{width:390,height:844},screen:{width:390,height:844},isMobile:true,hasTouch:true}]
+          ];
+          const failures=[]; const metrics=[];
+          for(const [name,opts] of shots){
+            const context=await browser.newContext(opts);
+            try{
+              const page=await context.newPage();
+              await page.goto(origin,{waitUntil:'networkidle'});
+              await page.evaluate(async()=>{if(document.fonts) await document.fonts.ready;});
+              await page.waitForSelector('.portfolio-company-grid .company-tile',{timeout:12000});
+              await page.waitForTimeout(800);
+              const m=await page.evaluate(()=>{
+                const hero=getComputedStyle(document.querySelector('.portfolio-hero-final'));
+                const h1=getComputedStyle(document.querySelector('.portfolio-hero-copy h1'));
+                return {
+                  width:innerWidth,
+                  overflowX:document.documentElement.scrollWidth>document.documentElement.clientWidth,
+                  h1:document.querySelectorAll('.portfolio-canonical h1').length,
+                  sections:document.querySelectorAll('.portfolio-canonical > section').length,
+                  principles:document.querySelectorAll('.portfolio-principles > article').length,
+                  categories:document.querySelectorAll('.portfolio-category-grid > article').length,
+                  companies:document.querySelectorAll('.portfolio-company-grid .company-tile').length,
+                  pendingVisible:[...document.querySelectorAll('.company-tile')].some(x=>/company 05|company 06/i.test(x.textContent||'')),
+                  charcoalVisible:(document.body.innerText||'').includes('فحم شيشة'),
+                  heroBg:hero.backgroundColor,
+                  heroH1:h1.color,
+                  productPhotoCards:document.querySelectorAll('.product-gallery--photo .product-photo-card').length
+                };
+              });
+              metrics.push({name,...m});
+              if(m.overflowX) failures.push(`${name}: horizontal overflow`);
+              if(m.h1!==1) failures.push(`${name}: expected 1 H1; found ${m.h1}`);
+              if(m.sections!==7) failures.push(`${name}: expected 7 canonical sections; found ${m.sections}`);
+              if(m.principles!==3) failures.push(`${name}: expected 3 portfolio principles; found ${m.principles}`);
+              if(m.categories!==5) failures.push(`${name}: expected 5 categories; found ${m.categories}`);
+              if(m.companies!==4) failures.push(`${name}: expected 4 active companies; found ${m.companies}`);
+              if(m.pendingVisible) failures.push(`${name}: pending company rendered publicly`);
+              if(m.charcoalVisible) failures.push(`${name}: controlled adjacent non-food item surfaced publicly`);
+              if(m.productPhotoCards<3) failures.push(`${name}: product photo album did not upgrade`);
+              await page.screenshot({path:`products-companies-premium-v2/${name}-ar.png`,fullPage:true});
+            }catch(e){failures.push(`${name}: ${e.message}`)} finally{await context.close();}
+          }
+          fs.writeFileSync('products-companies-premium-v2/metrics.json',JSON.stringify(metrics,null,2));
+          fs.writeFileSync('products-companies-premium-v2/failures.txt',failures.join('\n'));
+          await browser.close();
+          if(failures.length){console.error(failures.join('\n'));process.exit(1);}
+          EOF
+          node products-companies-premium-v2-capture.mjs
+      - name: Upload Page 04 visual artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: target-products-companies-premium-v2
+          path: products-companies-premium-v2
+          if-no-files-found: error
+          retention-days: 14
