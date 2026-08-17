@@ -73,18 +73,17 @@
   .premium-mobile-nav .premium-mobile-brand .mobile-brand-logo{width:136px!important;max-width:136px!important;max-height:82px!important}
 }
 
-/* Footer: primary stacked lockup is the correct use-case here; it makes تارقت
- * materially larger than the horizontal lockup while preserving the approved art. */
-.target-footer-v5 .tf5-logo-link{
+/* Footer V6: primary stacked lockup is the correct use-case on the dark brand surface. */
+.target-footer-v6 .tf6-logo-link{
   display:inline-flex!important;
   align-items:center!important;
   justify-content:flex-start!important;
-  margin-bottom:24px!important;
+  margin-bottom:26px!important;
 }
-.target-footer-v5 .tf5-logo{
+.target-footer-v6 .tf6-logo{
   display:block!important;
-  width:228px!important;
-  max-width:min(100%,228px)!important;
+  width:220px!important;
+  max-width:min(100%,220px)!important;
   height:auto!important;
   max-height:none!important;
   margin:0!important;
@@ -96,23 +95,23 @@
   object-fit:contain!important;
 }
 @media(max-width:767.98px){
-  .target-footer-v5 .tf5-logo{width:198px!important;max-width:198px!important}
+  .target-footer-v6 .tf6-logo{width:190px!important;max-width:190px!important}
 }
 
-/* Chrome/Android “Desktop site” on a handset: increase logo scale before the
- * browser physically shrinks the ~980px CSS viewport down to the phone screen. */
+/* Chrome/Android “Desktop site” on a handset: preserve logo presence before the
+ * browser physically shrinks the wide CSS viewport down to the phone screen. */
 html.handheld-desktop-mode .site-header .navbar-brand .brand-logo{
   width:252px!important;
   max-width:252px!important;
   max-height:76px!important;
 }
-html.handheld-desktop-mode .target-footer-v5 .tf5-logo{
-  width:232px!important;
-  max-width:232px!important;
+html.handheld-desktop-mode .target-footer-v6 .tf6-logo{
+  width:196px!important;
+  max-width:196px!important;
 }
 
 @media(prefers-reduced-motion:reduce){
   .site-header .navbar-brand .brand-logo,
   .premium-mobile-nav .mobile-brand-logo,
-  .target-footer-v5 .tf5-logo{transition:none!important}
+  .target-footer-v6 .tf6-logo{transition:none!important}
 }
