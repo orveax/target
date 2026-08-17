@@ -1,5 +1,5 @@
 {
-  "version": "1.0",
+  "version": "1.1",
   "updated": "2026-08-17",
   "policy": {
     "realPhotographyOnlyWherePhotographyIsUsed": true,
@@ -10,17 +10,46 @@
   "pages": {
     "home": {
       "route": "index.html",
-      "archetype": "Trade Gateway",
+      "archetype": "Trade Gateway — Premium V2+",
       "mediaType": "real-photography",
       "status": "active-remote-approved-free-stock",
-      "subject": "industrial food production facility",
-      "sourceProvider": "Pexels",
-      "sourceId": "36823725",
-      "sourceUrl": "https://images.pexels.com/photos/36823725/pexels-photo-36823725/free-photo-of-modern-industrial-food-production-facility-interior.jpeg",
-      "rightsNote": "Pexels free stock source; retain source record. Replace with verified TARGET/manufacturer-owned production media when available.",
-      "focalPointDesktop": "center 52%",
-      "focalPointMobile": "54% center",
-      "businessReason": "Shows real food manufacturing/production context supporting the manufacturer-to-Qatar trade proposition."
+      "sources": [
+        {
+          "role": "hero",
+          "provider": "Pexels",
+          "sourceId": "11679687",
+          "subject": "food manufacturing and date packaging operation",
+          "sourceUrl": "https://images.pexels.com/photos/11679687/pexels-photo-11679687.jpeg",
+          "focalPointDesktop": "center 52%",
+          "focalPointMobile": "54% center"
+        },
+        {
+          "role": "how-we-work",
+          "provider": "Pexels",
+          "sourceId": "5953751",
+          "subject": "food quality inspection inside a production facility",
+          "sourceUrl": "https://images.pexels.com/photos/5953751/pexels-photo-5953751.jpeg",
+          "focalPoint": "center 48%"
+        },
+        {
+          "role": "products-categories",
+          "provider": "Pexels",
+          "sourceId": "8329985",
+          "subject": "tea and herbs in jars as real product-category context",
+          "sourceUrl": "https://images.pexels.com/photos/8329985/pexels-photo-8329985.jpeg",
+          "focalPoint": "center 49%"
+        },
+        {
+          "role": "why-target",
+          "provider": "Pexels",
+          "sourceId": "11678431",
+          "subject": "food shipment and warehouse handling with packaged produce",
+          "sourceUrl": "https://images.pexels.com/photos/11678431/pexels-photo-11678431.jpeg",
+          "focalPoint": "center 50%"
+        }
+      ],
+      "rightsNote": "Pexels free stock sources; retain source records. Replace with verified TARGET/manufacturer-owned photography when approved assets become available.",
+      "businessReason": "The Home media set maps directly to TARGET's proposition: real food production and packing in the Hero, quality review in How We Work, real tea/herb products in Categories, and shipment/warehouse handling in Why TARGET."
     },
     "about": {
       "route": "about.html",
