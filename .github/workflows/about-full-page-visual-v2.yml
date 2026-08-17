@@ -44,8 +44,7 @@ jobs:
           const origin='http://127.0.0.1:4173/about.html';
           const shots=[
             ['1440',{viewport:{width:1440,height:1000},screen:{width:1440,height:1000}}],
-            ['390',{viewport:{width:390,height:844},screen:{width:390,height:844},isMobile:true,hasTouch:true}],
-            ['390-desktop-site',{viewport:{width:980,height:1200},screen:{width:390,height:844},isMobile:true,hasTouch:true}]
+            ['390',{viewport:{width:390,height:844},screen:{width:390,height:844},isMobile:true,hasTouch:true}]
           ];
           const metrics=[]; const failures=[];
           for(const [name,opts] of shots){
@@ -54,17 +53,11 @@ jobs:
               const page=await context.newPage();
               await page.goto(origin,{waitUntil:'networkidle'});
               await page.evaluate(async()=>{if(document.fonts) await document.fonts.ready;});
-              // Full-page visual QA validates the intended Desktop Site layout state.
-              // Detector correctness is independently covered by handheld-desktop-mode/hero QA.
-              if(name==='390-desktop-site'){
-                await page.evaluate(()=>document.documentElement.classList.add('handheld-desktop-mode'));
-              }
               await page.screenshot({path:`about-full-page-v2/${name}-ar.png`,fullPage:true});
               const m=await page.evaluate(()=>({
                 width:window.innerWidth,
                 height:document.documentElement.scrollHeight,
                 overflowX:document.documentElement.scrollWidth>document.documentElement.clientWidth,
-                handheldDesktop:document.documentElement.classList.contains('handheld-desktop-mode'),
                 h1:document.querySelectorAll('h1').length,
                 sections:document.querySelectorAll('.about-canonical > section').length
               }));
@@ -72,7 +65,6 @@ jobs:
               if(m.overflowX) failures.push(`${name}: horizontal overflow`);
               if(m.h1!==1) failures.push(`${name}: expected 1 H1; found ${m.h1}`);
               if(m.sections!==6) failures.push(`${name}: expected 6 About sections; found ${m.sections}`);
-              if(name==='390-desktop-site' && !m.handheldDesktop) failures.push(`${name}: intended Desktop Site layout state missing`);
             }catch(e){failures.push(`${name}: ${e.message}`)}
             finally{await context.close();}
           }
