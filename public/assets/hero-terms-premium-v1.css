@@ -1,0 +1,36 @@
+/* TARGET — Terms Premium Hero V1 | 2026-08-17
+ * Scope: Terms hero only. Legal wording/structure preserved.
+ * Identity: commercial boundary / website-use document. No stock legal imagery.
+ */
+.page-terms .terms-hero{position:relative;isolation:isolate;overflow:hidden;padding-block:0!important;background:#262626!important;color:#F4EDE4!important}
+.page-terms .terms-hero::before{content:"WEBSITE TERMS / COMMERCIAL BOUNDARY";position:absolute;inset-inline-start:clamp(18px,4vw,64px);inset-block-start:26px;color:rgba(244,237,228,.25);font:700 .6rem/1 Manrope,sans-serif;letter-spacing:.16em;white-space:nowrap}
+.page-terms .terms-hero::after{content:"TERMS";position:absolute;z-index:-1;inset-inline-end:-.02em;inset-block-end:-.1em;color:rgba(244,237,228,.035);font:800 clamp(7rem,15vw,15rem)/.8 Manrope,sans-serif;letter-spacing:-.06em;white-space:nowrap}
+.page-terms .terms-hero-grid{min-height:clamp(590px,69vh,740px);display:grid!important;grid-template-columns:minmax(0,1.12fr) minmax(360px,.88fr)!important;gap:clamp(44px,6vw,88px)!important;align-items:center!important;padding-block:clamp(70px,6vw,94px)!important}
+.page-terms .terms-hero-copy{max-width:720px!important}
+.page-terms .terms-eyebrow{min-height:38px!important;padding:8px 12px!important;border:1px solid rgba(244,237,228,.18)!important;border-radius:999px!important;background:rgba(244,237,228,.06)!important;color:#F4EDE4!important}
+.page-terms .terms-eyebrow svg{color:#C09552!important}
+.page-terms .terms-hero h1{max-width:10ch!important;margin:18px 0 22px!important;color:#F4EDE4!important;font-size:clamp(3.5rem,5.7vw,5.7rem)!important;line-height:1!important;letter-spacing:-.035em!important}
+html[dir="rtl"] .page-terms .terms-hero h1{letter-spacing:0!important}
+.page-terms .terms-hero-copy>p{max-width:650px!important;color:rgba(244,237,228,.72)!important;font-size:clamp(1.02rem,1.2vw,1.13rem)!important;line-height:1.84!important}
+.page-terms .terms-hero-utility{gap:10px!important;margin-top:26px!important}
+.page-terms .terms-hero-utility a{min-height:46px!important;border:1px solid rgba(244,237,228,.16)!important;background:rgba(244,237,228,.055)!important;color:#F4EDE4!important}
+.page-terms .terms-hero-utility a:hover{border-color:rgba(192,149,82,.5)!important;color:#C09552!important}
+.page-terms .terms-visual{position:relative!important;min-height:410px!important;display:grid!important;place-items:center!important}
+.page-terms .terms-visual::before{content:"10 SECTIONS";position:absolute;inset-inline-end:0;inset-block-start:14px;color:rgba(244,237,228,.20);font:800 1.8rem/1 Manrope,sans-serif;letter-spacing:.03em}
+.page-terms .terms-document{position:relative!important;width:min(100%,420px)!important;min-height:390px!important;padding:30px!important;border:1px solid rgba(192,149,82,.28)!important;border-radius:24px!important;background:#F7F2EA!important;color:#262626!important;box-shadow:0 30px 70px rgba(0,0,0,.28)!important;transform:rotate(-1.1deg)}
+.page-terms .terms-document::before{height:6px!important;background:linear-gradient(90deg,#0C4931 0 72%,#C09552 72% 100%)!important}
+.page-terms .terms-document::after{content:"NON-BINDING WEBSITE INFORMATION";position:absolute;inset-inline-end:22px;inset-block-end:18px;color:rgba(12,73,49,.42);font:700 .5rem/1 Manrope,sans-serif;letter-spacing:.13em}
+.page-terms .terms-document-brand{padding-bottom:18px!important;border-bottom:1px solid rgba(12,73,49,.09)!important}
+.page-terms .terms-document-brand img{width:164px!important}
+.page-terms .terms-document-badge{width:52px!important;height:52px!important;border-radius:14px!important;background:#0C4931!important;color:#F4EDE4!important}
+.page-terms .terms-document-copy{padding-top:24px!important}
+.page-terms .terms-document-copy>span{color:#C09552!important;letter-spacing:.13em!important}
+.page-terms .terms-document-copy strong{max-width:12ch!important;color:#262626!important;font-size:clamp(1.7rem,2.3vw,2.2rem)!important;line-height:1.2!important}
+.page-terms .terms-document-copy p{color:#68706B!important}
+.page-terms .terms-document-lines span{background:rgba(12,73,49,.08)!important}
+@media(max-width:991.98px){.page-terms .terms-hero-grid{min-height:0;grid-template-columns:1fr!important;gap:34px!important;padding-block:58px 68px!important}.page-terms .terms-hero-copy{max-width:820px!important}.page-terms .terms-hero h1{max-width:11ch!important;font-size:clamp(3.2rem,8vw,5rem)!important}.page-terms .terms-visual{min-height:370px!important;justify-items:start!important}}
+@media(max-width:575.98px){.page-terms .terms-hero-grid{gap:24px!important;padding-block:44px 54px!important}.page-terms .terms-hero h1{font-size:clamp(2.75rem,12vw,3.8rem)!important}.page-terms .terms-hero-copy>p{font-size:.98rem!important;line-height:1.72!important}.page-terms .terms-visual{min-height:330px!important}.page-terms .terms-document{min-height:320px!important;padding:24px 20px!important;border-radius:20px!important;transform:none}.page-terms .terms-document::after{display:none}}
+html.handheld-desktop-mode .page-terms .terms-hero-grid{min-height:0!important;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)!important;gap:30px!important;padding-block:46px 54px!important}
+html.handheld-desktop-mode .page-terms .terms-hero h1{font-size:clamp(2.9rem,5vw,4rem)!important}
+html.handheld-desktop-mode .page-terms .terms-visual{min-height:340px!important}
+@media(prefers-reduced-motion:reduce){.page-terms .terms-hero *{transition:none!important}}
