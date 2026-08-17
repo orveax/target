@@ -22,7 +22,20 @@
       "focalPointMobile": "54% center",
       "businessReason": "Shows real food manufacturing/production context supporting the manufacturer-to-Qatar trade proposition."
     },
-    "about": {"route":"about.html","archetype":"Institutional Editorial","mediaType":"real-photography","status":"pending-migration","requiredSubject":"food-trade warehouse, product review, inspection or operational trade context"},
+    "about": {
+      "route": "about.html",
+      "archetype": "Institutional Editorial",
+      "mediaType": "real-photography",
+      "status": "active-remote-approved-free-stock",
+      "subject": "warehouse and shipment preparation",
+      "sourceProvider": "Pexels",
+      "sourceId": "4481260",
+      "sourceUrl": "https://images.pexels.com/photos/4481260/pexels-photo-4481260.jpeg",
+      "rightsNote": "Pexels free stock source; retain source record. Replace with verified TARGET operational photography when available.",
+      "focalPointDesktop": "center 48%",
+      "focalPointMobile": "52% center",
+      "businessReason": "Supports TARGET's institutional food-trade identity through a real warehouse/shipment context without generic boardroom imagery."
+    },
     "howWeWork": {"route":"capabilities.html","archetype":"Operational Canvas","mediaType":"real-photography","status":"pending-migration","requiredSubject":"manufacturing, packaging or quality-control context"},
     "products": {"route":"food-portfolio.html","archetype":"Curated Product Mosaic","mediaType":"real-product-photography","status":"pending-migration","requiredSubject":"verified product/category imagery; actual supplier assets preferred"},
     "qatarMarket": {"route":"qatar-market.html","archetype":"Market Lens","mediaType":"real-photography","status":"pending-migration","requiredSubject":"food product plus professional distribution/retail/commercial Qatar or GCC context"},
