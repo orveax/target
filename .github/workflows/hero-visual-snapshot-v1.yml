@@ -1,0 +1,76 @@
+name: TARGET Hero Visual Snapshot V1
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  home-visual-snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install project
+        run: npm install
+      - name: Install Playwright
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Build
+        run: npm run build
+      - name: Start static server
+        run: |
+          npx --yes http-server dist -p 4173 -c-1 > /tmp/target-http.log 2>&1 &
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/index.html >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/target-http.log
+          exit 1
+      - name: Capture Home Hero matrix
+        run: |
+          mkdir -p visual-artifacts/home
+          cat > /tmp/capture.mjs <<'EOF'
+          import { chromium } from 'playwright';
+          const browser = await chromium.launch({headless:true});
+          const base = 'http://127.0.0.1:4173/index.html';
+          const shots = [
+            ['1440-ar', {viewport:{width:1440,height:1000}, screen:{width:1440,height:1000}}],
+            ['1280-ar', {viewport:{width:1280,height:900}, screen:{width:1280,height:900}}],
+            ['1024-ar', {viewport:{width:1024,height:900}, screen:{width:1024,height:900}}],
+            ['768-ar', {viewport:{width:768,height:1024}, screen:{width:768,height:1024}}],
+            ['430-ar', {viewport:{width:430,height:932}, screen:{width:430,height:932}, isMobile:true, hasTouch:true}],
+            ['390-ar', {viewport:{width:390,height:844}, screen:{width:390,height:844}, isMobile:true, hasTouch:true}],
+            ['360-ar', {viewport:{width:360,height:800}, screen:{width:360,height:800}, isMobile:true, hasTouch:true}],
+            ['390-desktop-site', {viewport:{width:980,height:1200}, screen:{width:390,height:844}, isMobile:true, hasTouch:true}]
+          ];
+          for (const [name, options] of shots) {
+            const context = await browser.newContext(options);
+            const page = await context.newPage();
+            await page.goto(base,{waitUntil:'networkidle'});
+            await page.evaluate(async()=>{document.fonts && await document.fonts.ready});
+            const hero = page.locator('.hc-hero');
+            await hero.screenshot({path:`visual-artifacts/home/${name}.png`});
+            const metrics = await page.locator('.hc-hero').evaluate((el)=>({
+              heroHeight:Math.round(el.getBoundingClientRect().height),
+              viewport:[window.innerWidth,window.innerHeight],
+              handheldDesktop:document.documentElement.classList.contains('handheld-desktop-mode'),
+              dir:document.documentElement.dir,
+              lang:document.documentElement.lang
+            }));
+            console.log(name, JSON.stringify(metrics));
+            await context.close();
+          }
+          await browser.close();
+          EOF
+          node /tmp/capture.mjs | tee visual-artifacts/home/metrics.txt
+      - name: Upload visual matrix
+        uses: actions/upload-artifact@v4
+        with:
+          name: home-hero-visual-matrix-v1
+          path: visual-artifacts/home
+          if-no-files-found: error
+          retention-days: 14
