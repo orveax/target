@@ -1,0 +1,4 @@
+/* TARGET Header V2 — Bootstrap display guard */
+@media (min-width:1200px){
+  .target-header-v2 .th2-menu-button{display:none!important}
+}
