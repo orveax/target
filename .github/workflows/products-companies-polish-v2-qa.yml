@@ -95,7 +95,14 @@ jobs:
               const app=page.locator('.portfolio-app');
               await app.scrollIntoViewIfNeeded();
               await page.waitForSelector('.portfolio-company-grid .company-tile',{state:'visible',timeout:12000});
-              await page.waitForTimeout(1000);
+              await page.waitForTimeout(700);
+              await page.evaluate(async()=>{
+                const pause=(ms)=>new Promise(resolve=>setTimeout(resolve,ms));
+                const step=Math.max(420,Math.floor(innerHeight*.68));
+                const max=document.documentElement.scrollHeight;
+                for(let y=0;y<max;y+=step){window.scrollTo(0,y);await pause(110);}
+                window.scrollTo(0,max);await pause(450);window.scrollTo(0,0);await pause(450);
+              });
               const m=await page.evaluate(()=>({
                 width:innerWidth,
                 overflowX:document.documentElement.scrollWidth>document.documentElement.clientWidth,
@@ -108,7 +115,9 @@ jobs:
                 charcoalVisible:(document.body.innerText||'').includes('فحم شيشة'),
                 heroBg:getComputedStyle(document.querySelector('.portfolio-hero-final')).backgroundColor,
                 heroH1:getComputedStyle(document.querySelector('.portfolio-hero-copy h1')).color,
-                productPhotoCards:document.querySelectorAll('.product-gallery--photo .product-photo-card').length
+                productPhotoCards:document.querySelectorAll('.product-gallery--photo .product-photo-card').length,
+                productFallbacks:document.querySelectorAll('.product-photo-card.is-fallback').length,
+                pendingMedia:[...document.querySelectorAll('.portfolio-mosaic img,.portfolio-category-media img,.product-photo-card:not(.is-fallback) img')].filter(img=>!img.complete||img.naturalWidth<10).length
               }));
               metrics.push({name,...m});
               if(m.overflowX) failures.push(`${name}: horizontal overflow`);
@@ -120,6 +129,7 @@ jobs:
               if(m.pendingVisible) failures.push(`${name}: pending company rendered publicly`);
               if(m.charcoalVisible) failures.push(`${name}: controlled adjacent non-food item surfaced publicly`);
               if(m.productPhotoCards<3) failures.push(`${name}: product photo album did not upgrade`);
+              if(m.pendingMedia>0) failures.push(`${name}: ${m.pendingMedia} required visual media items did not load`);
               await page.screenshot({path:`products-companies-premium-v2/${name}-ar.png`,fullPage:true});
             }catch(e){failures.push(`${name}: ${e.message}`)} finally{await context.close();}
           }
