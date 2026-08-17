@@ -50,7 +50,19 @@
       "focalPointMobile": "center 52%",
       "businessReason": "The operational production/packaging context supports the page's review-agree-move workflow without using dashboard or consulting imagery."
     },
-    "products": {"route":"food-portfolio.html","archetype":"Curated Product Mosaic","mediaType":"real-product-photography","status":"pending-migration","requiredSubject":"verified product/category imagery; actual supplier assets preferred"},
+    "products": {
+      "route": "food-portfolio.html",
+      "archetype": "Curated Product Mosaic",
+      "mediaType": "real-product-photography",
+      "status": "active-remote-approved-free-stock",
+      "sources": [
+        {"provider":"Pexels","sourceId":"10907746","subject":"packaged food assortment","sourceUrl":"https://images.pexels.com/photos/10907746/pexels-photo-10907746.jpeg","focalPoint":"center 52%"},
+        {"provider":"Pexels","sourceId":"8329985","subject":"tea and herbs in jars","sourceUrl":"https://images.pexels.com/photos/8329985/pexels-photo-8329985.jpeg","focalPoint":"center 50%"},
+        {"provider":"Pexels","sourceId":"5156695","subject":"fruit juice bottles","sourceUrl":"https://images.pexels.com/photos/5156695/pexels-photo-5156695.jpeg","focalPoint":"center 52%"}
+      ],
+      "rightsNote": "Pexels free stock sources; retain source records. Replace with verified supplier packshots/category photography as approvals become available.",
+      "businessReason": "A three-tile real food mosaic communicates curated category breadth without consumer-retail or supermarket-promotion styling."
+    },
     "qatarMarket": {"route":"qatar-market.html","archetype":"Market Lens","mediaType":"real-photography","status":"pending-migration","requiredSubject":"food product plus professional distribution/retail/commercial Qatar or GCC context"},
     "suppliers": {"route":"suppliers.html","archetype":"Supplier Conversion Stage","mediaType":"real-photography","status":"pending-migration","requiredSubject":"manufacturer/export-ready packaged food or production-ready goods"},
     "contact": {"route":"contact.html","archetype":"Contact Routing Hub","mediaType":"real-photography-secondary","status":"pending-migration","requiredSubject":"food-trade communication, product documentation or commercial desk context"},
