@@ -1,0 +1,32 @@
+{
+  "version": "2.0",
+  "updated": "2026-08-17",
+  "page": "about.html",
+  "archetype": "Institutional Editorial",
+  "policy": {
+    "realPhotography": true,
+    "aiPhotography": false,
+    "rightsRecordRequired": true
+  },
+  "sources": [
+    {
+      "role": "hero",
+      "provider": "Pexels",
+      "sourceId": "4481260",
+      "subject": "warehouse workers and shipment preparation",
+      "sourceUrl": "https://www.pexels.com/photo/4481260/",
+      "imageUrl": "https://images.pexels.com/photos/4481260/pexels-photo-4481260.jpeg",
+      "businessReason": "Operational trade and logistics context supports TARGET's Qatar-based food trading role without boardroom or skyline imagery."
+    },
+    {
+      "role": "who-we-are",
+      "provider": "Pexels",
+      "sourceId": "9710824",
+      "subject": "worker packing food parcels for distribution in a warehouse",
+      "sourceUrl": "https://www.pexels.com/photo/9710824/",
+      "imageUrl": "https://images.pexels.com/photos/9710824/pexels-photo-9710824.jpeg",
+      "businessReason": "Adds a visible food-distribution context to the company narrative rather than relying on generic corporate imagery."
+    }
+  ],
+  "rightsNote": "Pexels free stock sources. Retain source records and replace with verified TARGET/manufacturer-owned operational photography when available."
+}
