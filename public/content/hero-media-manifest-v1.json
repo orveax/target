@@ -56,12 +56,12 @@
       "mediaType": "real-product-photography",
       "status": "active-remote-approved-free-stock",
       "sources": [
-        {"provider":"Pexels","sourceId":"10907746","subject":"packaged food assortment","sourceUrl":"https://images.pexels.com/photos/10907746/pexels-photo-10907746.jpeg","focalPoint":"center 52%"},
+        {"provider":"Pexels","sourceId":"10819660","subject":"packaged honey jars product photography","sourceUrl":"https://images.pexels.com/photos/10819660/pexels-photo-10819660.jpeg","focalPoint":"center 50%"},
         {"provider":"Pexels","sourceId":"8329985","subject":"tea and herbs in jars","sourceUrl":"https://images.pexels.com/photos/8329985/pexels-photo-8329985.jpeg","focalPoint":"center 50%"},
         {"provider":"Pexels","sourceId":"5156695","subject":"fruit juice bottles","sourceUrl":"https://images.pexels.com/photos/5156695/pexels-photo-5156695.jpeg","focalPoint":"center 52%"}
       ],
       "rightsNote": "Pexels free stock sources; retain source records. Replace with verified supplier packshots/category photography as approvals become available.",
-      "businessReason": "A three-tile real food mosaic communicates curated category breadth without consumer-retail or supermarket-promotion styling."
+      "businessReason": "A three-tile real food mosaic communicates curated category breadth using product-led honey, tea/herbs and juice imagery rather than supermarket or promotion-led imagery."
     },
     "qatarMarket": {
       "route": "qatar-market.html",
