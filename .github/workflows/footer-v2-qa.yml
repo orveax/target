@@ -1,10 +1,10 @@
-name: TARGET Global Footer V5 QA
+name: TARGET Global Footer V6 QA
 on:
   pull_request:
   push:
     branches: [main]
 jobs:
-  footer-v5:
+  footer-v6:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -13,27 +13,29 @@ jobs:
           node-version: 22
       - run: npm install
       - run: npm run build
-      - name: Verify Footer V5 contract
+      - name: Verify Footer V6 contract
         run: |
-          test -f dist/assets/footer-premium-v5.css
-          test -f dist/assets/brand/target-logo-horizontal-light.svg
-          grep -q 'footer-premium-v5.css?v=20260817-01' dist/index.html
-          ! grep -q 'footer-premium-v2.css' dist/index.html
-          ! grep -q 'footer-premium-v3.css' dist/index.html
-          grep -q 'target-footer-v5' dist/index.html
-          grep -q 'target-logo-horizontal-light.svg' dist/index.html
-          ! grep -q 'target-logo-horizontal-cream.png' dist/index.html
-          ! grep -q '<rect' dist/assets/brand/target-logo-horizontal-light.svg
-          grep -q 'tf5-entry' dist/index.html
-          grep -q 'tf5-directory' dist/about.html
-          grep -q 'tf5-contact' dist/contact.html
-          grep -q 'tf5-bottom' dist/index.html
+          set -euo pipefail
+          test -f dist/assets/footer-premium-v6.css
+          test -f dist/assets/brand/target-logo-primary-official-cream-transparent.svg
+          grep -q 'footer-premium-v6.css?v=20260817-01' dist/index.html
+          ! grep -q 'footer-premium-v5.css' dist/index.html
+          grep -q 'target-footer-v6' dist/index.html
+          ! grep -q 'target-footer-v5' dist/index.html
+          grep -q 'target-logo-primary-official-cream-transparent.svg' dist/index.html
+          ! grep -q '<rect' dist/assets/brand/target-logo-primary-official-cream-transparent.svg
+          grep -q 'tf6-brand' dist/index.html
+          grep -q 'tf6-navigation-list' dist/about.html
+          grep -q 'tf6-contact-band' dist/contact.html
+          grep -q 'tf6-bottom' dist/index.html
           grep -q 'Digital experience & implementation by' dist/index.html
           grep -q 'https://orveax.com' dist/index.html
-          grep -q 'partners@targetft.com' dist/index.html
+          grep -q 'info@targetft.com' dist/index.html
           grep -q 'sales@targetft.com' dist/index.html
-          grep -q '97477910919' dist/index.html
-          grep -q 'grid-template-columns:minmax(270px,.92fr) minmax(400px,1.28fr) minmax(260px,.82fr)' dist/assets/footer-premium-v5.css
-          grep -q 'grid-template-columns:repeat(2,minmax(0,1fr))' dist/assets/footer-premium-v5.css
-          grep -q 'background:transparent!important' dist/assets/footer-premium-v5.css
+          grep -q 'procurement@targetft.com' dist/index.html
+          grep -q 'partners@targetft.com' dist/index.html
+          grep -q 'grid-template-columns:minmax(300px,.9fr) minmax(420px,1.1fr)' dist/assets/footer-premium-v6.css
+          grep -q 'grid-template-columns:repeat(4,minmax(0,1fr))' dist/assets/footer-premium-v6.css
+          grep -q 'html.handheld-desktop-mode .target-footer-v6 .tf6-main' dist/assets/footer-premium-v6.css
+          grep -q 'background:transparent!important' dist/assets/footer-premium-v6.css
           ! grep -R -q 'RFX' dist
