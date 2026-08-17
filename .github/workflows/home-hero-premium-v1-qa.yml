@@ -1,11 +1,11 @@
-name: TARGET Home Premium Hero V1 QA
+name: TARGET Home Premium Hero V2 QA
 on:
   push:
     branches:
-      - feature/premium-hero-redesign
+      - main
   workflow_dispatch:
 jobs:
-  home-hero:
+  home-hero-v2:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -16,22 +16,40 @@ jobs:
         run: npm install
       - name: Build Astro site
         run: npm run build
-      - name: Verify Home Premium Hero V1 contract
+      - name: Verify Home Premium Hero V2 contract
         run: |
           set -euo pipefail
-          HERO='public/assets/hero-home-premium-v1.css'
+          HERO='public/assets/hero-home-premium-v2.css'
           PHOTO='public/assets/home-real-photography-v2.css'
           HOME='src/components/HomePremium.astro'
+          LAYOUT='src/layouts/BaseLayout.astro'
+
           test -f "$HERO"
           test -f "$PHOTO"
-          grep -q "hero-home-premium-v1.css?v=20260817-01" "$PHOTO"
-          grep -q "pexels-photo-36823725" "$PHOTO"
-          grep -q "linear-gradient(135deg,#0C4931" "$HERO"
-          grep -q "min-height:590px!important" "$HERO"
-          grep -q "position:absolute!important" "$HERO"
-          grep -q "@media(max-width:575.98px)" "$HERO"
-          grep -q "html.handheld-desktop-mode .page-home" "$HERO"
+          grep -q 'hero-home-premium-v2.css?v=20260817-01' "$LAYOUT"
+          ! grep -q 'hero-home-premium-v1.css' "$LAYOUT"
+          ! grep -q '^@import.*hero-home-premium-v1' "$PHOTO"
+
+          # Canonical 55/45 composition + real manufacturer photography.
+          grep -q 'grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)!important' "$HERO"
+          grep -q 'background:#F4EDE4!important' "$HERO"
+          grep -q 'pexels-photo-36823725' "$PHOTO"
+          grep -q 'min-height:560px!important' "$HERO"
+
+          # Route remains supporting information inside the Hero.
+          grep -q 'background:rgba(35,39,37,.94)!important' "$HERO"
+          grep -q 'grid-template-columns:minmax(0,1fr) 16px minmax(0,1fr) 16px minmax(0,1fr)!important' "$HERO"
+
+          # Mobile + browser Desktop Site are explicit contracts.
+          grep -q '@media(max-width:575.98px)' "$HERO"
+          grep -q 'html.handheld-desktop-mode .page-home' "$HERO"
+
+          # Canonical content/routes stay untouched.
           grep -q 'data-ar="من المصنع إلى السوق القطري."' "$HOME"
           grep -q 'href="suppliers.html"' "$HOME"
+          grep -q 'href="capabilities.html"' "$HOME"
           grep -q 'class="hc-route"' "$HOME"
-          echo 'TARGET HOME PREMIUM HERO V1: PASS'
+
+          echo 'TARGET HOME PREMIUM HERO V2: PASS'
+      - name: Run site-wide regression audit
+        run: node scripts/final-audit.mjs
