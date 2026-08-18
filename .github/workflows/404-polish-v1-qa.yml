@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'src/pages/404.astro'
+      - 'src/components/SiteFooter.astro'
       - 'public/assets/404-recovery-v2.css'
       - 'src/layouts/BaseLayout.astro'
       - '.github/workflows/404-polish-v1-qa.yml'
@@ -36,21 +37,38 @@ jobs:
           set -euo pipefail
           test -f public/assets/404-recovery-v2.css
           test ! -f public/assets/404-polish-v1.css
-          grep -Fq '404-recovery-v2.css?v=20260818-01' src/layouts/BaseLayout.astro
+          grep -Fq '404-recovery-v2.css?v=20260818-02' src/layouts/BaseLayout.astro
           ! grep -Fq '404-polish-v1.css' src/layouts/BaseLayout.astro
+          grep -Fq 'footerVariant=' src/layouts/BaseLayout.astro
+          grep -Fq '<SiteFooter variant={footerVariant} />' src/layouts/BaseLayout.astro
+          grep -Fq 'footerVariant="compact"' src/pages/404.astro
+          grep -Fq "variant = 'default'" src/components/SiteFooter.astro
+          grep -Fq 'target-footer-v6--compact' src/components/SiteFooter.astro
+          grep -Fq 'tf6-compact-nav' src/components/SiteFooter.astro
           grep -Fq 'robots="noindex,follow"' src/pages/404.astro
           grep -Fq 'href="index.html"' src/pages/404.astro
           grep -Fq 'href="products-companies.html"' src/pages/404.astro
           grep -Fq 'href="contact.html"' src/pages/404.astro
           grep -Fq 'href="faq.html"' src/pages/404.astro
+          grep -Fq 'هذه الصفحة لا تعني وجود مشكلة في الموقع أو في إرسال أي نموذج' src/pages/404.astro
+          ! grep -Fq 'مشكلة في حسابك' src/pages/404.astro
           ! grep -Fq 'food-portfolio.html' src/pages/404.astro
           ! grep -Fq 'legacy/404.html' src/pages/404.astro
+          grep -Fq 'Compact utility footer' public/assets/404-recovery-v2.css
           grep -Fq '@media(max-width:991.98px)' public/assets/404-recovery-v2.css
           grep -Fq 'prefers-reduced-motion:reduce' public/assets/404-recovery-v2.css
       - name: Install and build
         run: |
           npm install
           npm run build
+      - name: Verify default footer remains full on public routes
+        shell: bash
+        run: |
+          grep -Fq 'tf6-navigation' dist/index.html
+          ! grep -Fq 'target-footer-v6--compact' dist/index.html
+          grep -Fq 'target-footer-v6--compact' dist/404.html
+          grep -Fq 'tf6-compact-nav' dist/404.html
+          ! grep -Fq 'tf6-contact-band' dist/404.html
       - name: Prepare hosted Chrome
         shell: bash
         run: |
@@ -91,9 +109,11 @@ jobs:
                 const m=await page.evaluate(()=>{
                   const copy=document.querySelector('.not-found-copy').getBoundingClientRect();
                   const recovery=document.querySelector('.not-found-recovery').getBoundingClientRect();
+                  const footer=document.querySelector('.target-footer-v6--compact')?.getBoundingClientRect();
                   const robots=document.querySelector('meta[name="robots"]')?.getAttribute('content');
                   const hrefs=[...document.querySelectorAll('.recovery-route a')].map(a=>a.getAttribute('href'));
                   const actions=[...document.querySelectorAll('.not-found-actions a')].map(a=>a.getAttribute('href'));
+                  const compactHrefs=[...document.querySelectorAll('.tf6-compact-nav a')].map(a=>a.getAttribute('href'));
                   return {
                     lang:document.documentElement.lang,
                     dir:document.documentElement.dir,
@@ -106,8 +126,14 @@ jobs:
                     productLinks:document.querySelectorAll('a[href="products-companies.html"]').length,
                     legacyProductLinks:document.querySelectorAll('a[href="food-portfolio.html"]').length,
                     globalNav:document.querySelectorAll('.target-section-nav').length,
-                    hrefs,actions,
+                    compactFooter:document.querySelectorAll('.target-footer-v6--compact').length,
+                    compactLinks:document.querySelectorAll('.tf6-compact-nav a').length,
+                    fullFooterNav:document.querySelectorAll('.tf6-navigation').length,
+                    contactBand:document.querySelectorAll('.tf6-contact-band').length,
+                    note:document.querySelector('.recovery-note')?.textContent.trim(),
+                    hrefs,actions,compactHrefs,
                     copyTop:copy.top,recoveryTop:recovery.top,copyWidth:copy.width,recoveryWidth:recovery.width,
+                    footerHeight:footer?.height||0,
                     actionWidths:[...document.querySelectorAll('.not-found-actions a')].map(a=>a.getBoundingClientRect().width)
                   };
                 });
@@ -119,12 +145,20 @@ jobs:
                 if(!m.hrefs.includes('index.html')||!m.hrefs.includes('products-companies.html')||!m.hrefs.includes('contact.html')) failures.push(`${name}-${lang}: primary recovery routes mismatch`);
                 if(m.actions.length!==2||m.actions[0]!=='index.html'||m.actions[1]!=='contact.html') failures.push(`${name}-${lang}: primary action hierarchy mismatch`);
                 if(m.globalNav!==0) failures.push(`${name}-${lang}: utility page must not show section navigation`);
+                if(m.compactFooter!==1||m.compactLinks!==5||m.fullFooterNav!==0||m.contactBand!==0) failures.push(`${name}-${lang}: compact footer contract mismatch`);
+                for(const href of ['index.html','contact.html','faq.html','privacy.html','terms.html']) if(!m.compactHrefs.includes(href)) failures.push(`${name}-${lang}: compact footer missing ${href}`);
+                if(lang==='ar'&&m.note.includes('حسابك')) failures.push(`${name}-${lang}: stale account wording remains`);
                 if(name==='1440'){
                   if(Math.abs(m.copyTop-m.recoveryTop)>160) failures.push(`${name}-${lang}: desktop recovery panel alignment drift`);
                   if(m.copyWidth<=m.recoveryWidth) failures.push(`${name}-${lang}: recovery panel must remain secondary to message`);
+                  if(m.footerHeight>220) failures.push(`${name}-${lang}: compact footer is too tall (${m.footerHeight}px)`);
                 }else if(!(m.copyTop<m.recoveryTop)) failures.push(`${name}-${lang}: recovery panel must follow message on tablet/mobile`);
-                if(name==='390'&&m.actionWidths.some(w=>w<300)) failures.push(`${name}-${lang}: mobile primary actions are not full-width`);
+                if(name==='390'){
+                  if(m.actionWidths.some(w=>w<300)) failures.push(`${name}-${lang}: mobile primary actions are not full-width`);
+                  if(m.footerHeight>320) failures.push(`${name}-${lang}: mobile compact footer is too tall (${m.footerHeight}px)`);
+                }
                 await page.screenshot({path:`recovery-v2/${name}-${lang}-first-fold.png`,fullPage:false});
+                await page.screenshot({path:`recovery-v2/${name}-${lang}-full.png`,fullPage:true});
               }
             }catch(e){failures.push(`${name}: ${e.message}`)}finally{await ctx.close()}
           }
