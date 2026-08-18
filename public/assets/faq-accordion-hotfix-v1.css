@@ -1,10 +1,12 @@
 /* TARGET — FAQ Accordion Hotfix V1 — 2026-08-18
  * Fixes summary control wrapping/alignment across RTL/LTR and viewport widths.
+ * Pass 2 removes a legacy summary pseudo-control and normalizes answer width.
  * Loaded after FAQ canonical + owner review layers.
  */
 
 /* Use flex instead of grid auto-placement so the question and control can never split into unintended tracks/lines. */
 .page-faq .faq-item > summary{
+  position:relative!important;
   display:flex!important;
   flex-direction:row!important;
   align-items:center!important;
@@ -18,12 +20,28 @@
   cursor:pointer!important;
   overflow:visible!important;
 }
+
+/* Kill every legacy/native summary indicator. The only visible control is .faq-chevron. */
 .page-faq .faq-item > summary::-webkit-details-marker{
   display:none!important;
 }
 .page-faq .faq-item > summary::marker{
   content:""!important;
+  display:none!important;
   font-size:0!important;
+}
+.page-faq .faq-item > summary::before,
+.page-faq .faq-item > summary::after{
+  content:none!important;
+  display:none!important;
+  visibility:hidden!important;
+  width:0!important;
+  height:0!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  background:none!important;
+  box-shadow:none!important;
 }
 
 /* Question always owns the flexible line; the control is a fixed non-wrapping square. */
@@ -69,6 +87,8 @@
   position:absolute!important;
   top:50%!important;
   left:50%!important;
+  display:block!important;
+  visibility:visible!important;
   margin:0!important;
   padding:0!important;
   border:0!important;
@@ -113,9 +133,47 @@ html[dir="rtl"] .page-faq .faq-item[open] > summary{
   opacity:0!important;
 }
 
-/* Keep the answer visually attached to the opened header. */
+/* Answer is one full-width content region; no old grid/column constraints. */
+.page-faq .faq-item > .faq-answer,
 .page-faq .faq-item[open] > .faq-answer{
+  display:block!important;
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  margin:0!important;
+  padding:18px 20px 21px!important;
   border-top:1px solid rgba(12,73,49,.10)!important;
+  background:linear-gradient(180deg,rgba(255,255,255,.34),rgba(244,237,228,.18))!important;
+}
+.page-faq .faq-item > .faq-answer > p{
+  display:block!important;
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  margin:0!important;
+  padding:0!important;
+  color:rgba(38,38,38,.74)!important;
+  line-height:1.88!important;
+}
+
+/* First company answer keeps the editorial treatment but uses the full available width. */
+.page-faq #faq-q01 > .faq-answer{
+  padding:18px 20px 21px!important;
+}
+.page-faq #faq-q01 > .faq-answer > p{
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  padding:18px 20px!important;
+  border:1px solid rgba(12,73,49,.10)!important;
+  border-inline-start:3px solid #C09552!important;
+  border-radius:13px!important;
+  background:#F8F3EC!important;
+  color:#262626!important;
+  font-size:clamp(1rem,1.08vw,1.06rem)!important;
+  font-weight:500!important;
+  line-height:1.92!important;
+  box-shadow:0 8px 20px rgba(38,38,38,.025)!important;
 }
 
 @media(max-width:575.98px){
@@ -132,6 +190,18 @@ html[dir="rtl"] .page-faq .faq-item[open] > summary{
     height:34px!important;
     min-height:34px!important;
     max-height:34px!important;
+  }
+  .page-faq .faq-item > .faq-answer,
+  .page-faq .faq-item[open] > .faq-answer{
+    padding:15px 14px 17px!important;
+  }
+  .page-faq #faq-q01 > .faq-answer{
+    padding:14px!important;
+  }
+  .page-faq #faq-q01 > .faq-answer > p{
+    padding:16px!important;
+    font-size:.96rem!important;
+    line-height:1.86!important;
   }
 }
 
