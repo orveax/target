@@ -38,7 +38,7 @@ jobs:
           test -f dist/assets/company-profile-canonical.css
           test -f dist/assets/faq-canonical.css
           test -f dist/assets/privacy-canonical.css
-          test -f dist/assets/terms-v1.css
+          test -f dist/assets/terms-canonical.css
           test -f dist/assets/visual-hard-audit-v1.css
           test -f dist/assets/visual-hard-audit-v1.js
           test -f dist/content/target-design-tokens-v1.json
@@ -110,6 +110,10 @@ jobs:
           grep -q 'info@targetft.com' dist/terms.html
           grep -q 'privacy.html' dist/terms.html
           grep -q 'contact.html' dist/terms.html
+          grep -q 'terms-canonical.css?v=20260818-01' dist/terms.html
+          ! grep -q 'terms-v1.css' dist/terms.html
+          ! grep -q 'terms-polish-v2.css' dist/terms.html
+          ! grep -q 'hero-terms-premium-v1.css' dist/terms.html
           ! grep -q 'Legal Review Required' dist/terms.html
           ! grep -q 'Set at publication' dist/terms.html
           ! grep -q 'noindex,nofollow' dist/terms.html
