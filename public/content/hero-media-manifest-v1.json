@@ -56,14 +56,14 @@
       "archetype": "Institutional Editorial",
       "mediaType": "real-photography",
       "status": "active-remote-approved-free-stock",
-      "subject": "organized shelves of canned and packaged food products",
+      "subject": "warehouse and shipment preparation",
       "sourceProvider": "Pexels",
-      "sourceId": "10907746",
-      "sourceUrl": "https://images.pexels.com/photos/10907746/pexels-photo-10907746.jpeg",
-      "rightsNote": "Pexels free stock source; retain source record. Replace with verified TARGET operational or supplier photography when available.",
-      "focalPointDesktop": "center 50%",
-      "focalPointMobile": "center 50%",
-      "businessReason": "Makes the About hero visibly food-product-led while retaining a commercial market context; avoids generic office, handshake or tourism imagery."
+      "sourceId": "4481260",
+      "sourceUrl": "https://images.pexels.com/photos/4481260/pexels-photo-4481260.jpeg",
+      "rightsNote": "Pexels free stock source; retain source record. Replace with verified TARGET operational photography when available.",
+      "focalPointDesktop": "center 48%",
+      "focalPointMobile": "52% center",
+      "businessReason": "Supports TARGET's institutional food-trade identity through a real warehouse/shipment context without generic boardroom or retail-shelf imagery."
     },
     "howWeWork": {
       "route": "capabilities.html",
