@@ -1,0 +1,144 @@
+/* TARGET — FAQ Accordion Hotfix V1 — 2026-08-18
+ * Fixes summary control wrapping/alignment across RTL/LTR and viewport widths.
+ * Loaded after FAQ canonical + owner review layers.
+ */
+
+/* Use flex instead of grid auto-placement so the question and control can never split into unintended tracks/lines. */
+.page-faq .faq-item > summary{
+  display:flex!important;
+  flex-direction:row!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:16px!important;
+  width:100%!important;
+  min-width:0!important;
+  min-height:66px!important;
+  padding:16px 18px!important;
+  list-style:none!important;
+  cursor:pointer!important;
+  overflow:visible!important;
+}
+.page-faq .faq-item > summary::-webkit-details-marker{
+  display:none!important;
+}
+.page-faq .faq-item > summary::marker{
+  content:""!important;
+  font-size:0!important;
+}
+
+/* Question always owns the flexible line; the control is a fixed non-wrapping square. */
+.page-faq .faq-item > summary > span:first-child{
+  display:block!important;
+  flex:1 1 auto!important;
+  min-width:0!important;
+  margin:0!important;
+  color:#262626!important;
+  font-weight:700!important;
+  line-height:1.55!important;
+  overflow-wrap:break-word!important;
+}
+.page-faq .faq-item > summary > .faq-chevron{
+  position:relative!important;
+  display:block!important;
+  flex:0 0 36px!important;
+  width:36px!important;
+  min-width:36px!important;
+  max-width:36px!important;
+  height:36px!important;
+  min-height:36px!important;
+  max-height:36px!important;
+  margin:0!important;
+  padding:0!important;
+  align-self:center!important;
+  border:1px solid rgba(12,73,49,.16)!important;
+  border-radius:10px!important;
+  background:#F4EDE4!important;
+  color:#0C4931!important;
+  line-height:0!important;
+  overflow:hidden!important;
+  transform:none!important;
+}
+.page-faq .faq-item > summary > .faq-chevron svg{
+  display:none!important;
+}
+
+/* Draw one geometrically centered plus. */
+.page-faq .faq-item > summary > .faq-chevron::before,
+.page-faq .faq-item > summary > .faq-chevron::after{
+  content:""!important;
+  position:absolute!important;
+  top:50%!important;
+  left:50%!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:999px!important;
+  background:currentColor!important;
+  transform:translate(-50%,-50%)!important;
+  transform-origin:center!important;
+}
+.page-faq .faq-item > summary > .faq-chevron::before{
+  width:14px!important;
+  height:2px!important;
+}
+.page-faq .faq-item > summary > .faq-chevron::after{
+  width:2px!important;
+  height:14px!important;
+}
+
+/* Open state: question title, curve and control all resolve to the same green state. */
+.page-faq .faq-item[open]{
+  border:1px solid rgba(12,73,49,.48)!important;
+  border-radius:17px!important;
+  box-shadow:0 12px 28px rgba(12,73,49,.07)!important;
+}
+.page-faq .faq-item[open] > summary{
+  color:#0C4931!important;
+  background:linear-gradient(90deg,rgba(12,73,49,.065),rgba(255,255,255,.40))!important;
+}
+html[dir="rtl"] .page-faq .faq-item[open] > summary{
+  background:linear-gradient(270deg,rgba(12,73,49,.065),rgba(255,255,255,.40))!important;
+}
+.page-faq .faq-item[open] > summary > span:first-child{
+  color:#0C4931!important;
+  font-weight:800!important;
+}
+.page-faq .faq-item[open] > summary > .faq-chevron{
+  border-color:#0C4931!important;
+  background:#0C4931!important;
+  color:#F4EDE4!important;
+  transform:none!important;
+}
+.page-faq .faq-item[open] > summary > .faq-chevron::after{
+  opacity:0!important;
+}
+
+/* Keep the answer visually attached to the opened header. */
+.page-faq .faq-item[open] > .faq-answer{
+  border-top:1px solid rgba(12,73,49,.10)!important;
+}
+
+@media(max-width:575.98px){
+  .page-faq .faq-item > summary{
+    gap:12px!important;
+    min-height:60px!important;
+    padding:14px!important;
+  }
+  .page-faq .faq-item > summary > .faq-chevron{
+    flex-basis:34px!important;
+    width:34px!important;
+    min-width:34px!important;
+    max-width:34px!important;
+    height:34px!important;
+    min-height:34px!important;
+    max-height:34px!important;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .page-faq .faq-item > summary > .faq-chevron,
+  .page-faq .faq-item > summary > .faq-chevron::before,
+  .page-faq .faq-item > summary > .faq-chevron::after{
+    transition:none!important;
+  }
+}
