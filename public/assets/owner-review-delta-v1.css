@@ -1,0 +1,65 @@
+/* TARGET — Owner Review Delta V1 | 2026-08-18
+ * Temporary controlled review layer.
+ * Merge approved deltas into canonical page layers before Final Site Freeze.
+ */
+
+/* HOME — How We Work: replace the rejected inspection image with the
+   approved manufacturing / packaging operation source already tracked
+   in the site media manifest (Pexels source 11679687). */
+.page-home .home-canonical .hc-work-grid::before{
+  background:
+    linear-gradient(90deg,rgba(12,73,49,.025),rgba(12,73,49,.13)),
+    url('https://images.pexels.com/photos/11679687/pexels-photo-11679687.jpeg?auto=compress&cs=tinysrgb&w=1800') center 52%/cover no-repeat;
+  filter:saturate(.96) contrast(1.015);
+}
+
+/* HOME — How to Start: make number, icon and title read as one header row.
+   The copy remains below the icon/title group and the existing connector
+   line / card treatment is preserved. */
+.page-home .home-canonical .hc-steps li{
+  display:grid;
+  grid-template-columns:42px minmax(0,1fr);
+  column-gap:14px;
+  align-items:start;
+}
+.page-home .home-canonical .hc-steps li>div{
+  display:grid;
+  grid-template-columns:46px minmax(0,1fr);
+  column-gap:12px;
+  align-items:center;
+  min-width:0;
+}
+.page-home .home-canonical .hc-step-number{
+  align-self:start;
+  margin:0;
+}
+.page-home .home-canonical .hc-step-icon{
+  margin-top:0;
+}
+.page-home .home-canonical .hc-steps h3{
+  min-width:0;
+  margin:0!important;
+  align-self:center;
+}
+.page-home .home-canonical .hc-steps p{
+  grid-column:1/-1;
+  margin-top:12px!important;
+}
+
+@media (max-width:767.98px){
+  .page-home .home-canonical .hc-steps li{
+    grid-template-columns:40px minmax(0,1fr);
+    column-gap:16px;
+  }
+  .page-home .home-canonical .hc-steps li>div{
+    grid-template-columns:42px minmax(0,1fr);
+    column-gap:11px;
+  }
+  .page-home .home-canonical .hc-step-icon{
+    width:42px;
+    height:42px;
+  }
+  .page-home .home-canonical .hc-steps p{
+    margin-top:9px!important;
+  }
+}
