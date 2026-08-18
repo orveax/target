@@ -1,0 +1,154 @@
+name: TARGET Design System Finishing QA
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'public/assets/design-system-finishing-v1.css'
+      - 'public/assets/design-system-finishing-v1.js'
+      - 'src/layouts/BaseLayout.astro'
+      - 'public/assets/target-experience-v1.js'
+      - '.github/workflows/design-system-finishing-v1-qa.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  statuses: write
+
+jobs:
+  design-system-finishing:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install and build
+        run: |
+          npm install
+          npm run build
+
+      - name: Verify authored system contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          CSS='public/assets/design-system-finishing-v1.css'
+          JS='public/assets/design-system-finishing-v1.js'
+          LAYOUT='src/layouts/BaseLayout.astro'
+          test -f "$CSS"
+          test -f "$JS"
+          grep -Fq 'data-compact-label' "$JS" || grep -Fq 'compactLabel' "$JS"
+          grep -Fq 'target-numbered-card' "$CSS"
+          grep -Fq 'target-card-number-bg' "$CSS"
+          grep -Fq 'design-system-finishing-v1.css?v=20260819-01' "$LAYOUT"
+          grep -Fq 'design-system-finishing-v1.js?v=20260819-01' "$LAYOUT"
+          grep -Fq 'navigation-close-control-final-v1.css?v=20260819-01' "$LAYOUT"
+
+      - name: Prepare browser
+        run: |
+          npm install --no-save playwright@1.55.0
+          CHROME_PATH="$(command -v google-chrome || command -v google-chrome-stable || true)"
+          test -n "$CHROME_PATH"
+          echo "CHROME_PATH=$CHROME_PATH" >> "$GITHUB_ENV"
+
+      - name: Start static server
+        run: |
+          npx --yes http-server dist -p 4173 -c-1 >/tmp/target-ds-http.log 2>&1 &
+          for i in {1..30}; do curl -fsS http://127.0.0.1:4173/contact.html >/dev/null && exit 0; sleep 1; done
+          cat /tmp/target-ds-http.log
+          exit 1
+
+      - name: Validate compact navigation and numbered cards
+        env:
+          CHROME_PATH: ${{ env.CHROME_PATH }}
+        run: |
+          cat > /tmp/validate-design-system.mjs <<'EOF'
+          import { chromium } from 'playwright';
+
+          const browser = await chromium.launch({headless:true, executablePath:process.env.CHROME_PATH});
+          const origin='http://127.0.0.1:4173';
+          const pages=['/about.html','/capabilities.html','/products-companies.html','/qatar-market.html','/suppliers.html','/contact.html','/company-profile.html'];
+          const numberedRequired=['/capabilities.html','/qatar-market.html','/suppliers.html'];
+          const viewports=[[1440,1000],[390,844]];
+          const failures=[];
+
+          const waitForRuntime=async(page)=>{
+            await page.waitForTimeout(700);
+            await page.evaluate(async()=>{ if(document.fonts) await document.fonts.ready; });
+          };
+
+          for(const [width,height] of viewports){
+            for(const path of pages){
+              const context=await browser.newContext({viewport:{width,height}});
+              const page=await context.newPage();
+              try{
+                await page.goto(origin+path,{waitUntil:'networkidle'});
+                await waitForRuntime(page);
+
+                const metrics=await page.evaluate(()=>{
+                  const labels=[...document.querySelectorAll('.target-section-nav .target-section-nav-label')].map(el=>({
+                    text:(el.textContent||'').trim(),
+                    words:(el.textContent||'').trim().split(/\s+/).filter(Boolean).length,
+                    compact:el.dataset.compactLabel||'',
+                    after:getComputedStyle(el,'::after').content
+                  }));
+                  const numbered=[...document.querySelectorAll('.target-numbered-card .target-card-number-bg')].map(el=>{
+                    const s=getComputedStyle(el); return {text:(el.textContent||'').trim(),position:s.position,font:parseFloat(s.fontSize)||0};
+                  });
+                  return {
+                    labels,
+                    numbered,
+                    overflow:document.documentElement.scrollWidth>document.documentElement.clientWidth
+                  };
+                });
+
+                if(metrics.overflow) failures.push(`${path} ${width}: horizontal overflow`);
+                if(!metrics.labels.length) failures.push(`${path} ${width}: no smart section nav labels`);
+                for(const item of metrics.labels){
+                  if(!item.text) failures.push(`${path} ${width}: empty section-nav label`);
+                  if(item.words>4) failures.push(`${path} ${width}: long label '${item.text}' (${item.words} words)`);
+                  if(item.compact!=='true') failures.push(`${path} ${width}: compact registry not applied to '${item.text}'`);
+                  if(!['none','normal','""'].includes(item.after)) failures.push(`${path} ${width}: legacy pseudo label remains on '${item.text}' => ${item.after}`);
+                }
+                if(numberedRequired.includes(path)){
+                  if(!metrics.numbered.length) failures.push(`${path} ${width}: no numbered cards upgraded`);
+                  for(const item of metrics.numbered){
+                    if(item.position!=='absolute') failures.push(`${path} ${width}: number '${item.text}' is not background-positioned`);
+                    if(item.font<40) failures.push(`${path} ${width}: number '${item.text}' is not visually oversized (${item.font}px)`);
+                  }
+                }
+
+                await page.locator('[data-lang-toggle]').first().click();
+                await page.waitForTimeout(250);
+                const en=await page.evaluate(()=>[...document.querySelectorAll('.target-section-nav .target-section-nav-label')].map(el=>({text:(el.textContent||'').trim(),words:(el.textContent||'').trim().split(/\s+/).filter(Boolean).length})));
+                for(const item of en){ if(!item.text||item.words>4) failures.push(`${path} ${width}: EN label invalid '${item.text}'`); }
+              }catch(error){ failures.push(`${path} ${width}: ${error.message}`); }
+              finally{ await context.close(); }
+            }
+          }
+
+          const faq=await browser.newPage({viewport:{width:1024,height:900}});
+          await faq.goto(origin+'/faq.html',{waitUntil:'networkidle'});
+          await waitForRuntime(faq);
+          const faqAr=await faq.locator('.faq-topic-band [data-ar="تارقت وقطر"]').count();
+          if(!faqAr) failures.push('FAQ: compact TARGET & Qatar label not applied');
+          await faq.close();
+
+          await browser.close();
+          if(failures.length){ console.error(failures.join('\n')); process.exit(1); }
+          console.log('TARGET DESIGN SYSTEM FINISHING: PASS');
+          EOF
+          node /tmp/validate-design-system.mjs
+
+      - name: Publish commit status
+        if: always()
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          JOB_STATUS: ${{ job.status }}
+        run: |
+          RUN_URL="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          if [[ "$JOB_STATUS" == success ]]; then STATE=success; DESC='Design system finishing QA passed'; else STATE=failure; DESC='Design system finishing QA failed'; fi
+          jq -n --arg state "$STATE" --arg context 'TARGET Design System Finishing QA' --arg description "$DESC" --arg target_url "$RUN_URL" '{state:$state,context:$context,description:$description,target_url:$target_url}' >/tmp/status.json
+          curl -fsSL -X POST -H "Authorization: Bearer ${GH_TOKEN}" -H "Accept: application/vnd.github+json" "https://api.github.com/repos/${GITHUB_REPOSITORY}/statuses/${GITHUB_SHA}" -d @/tmp/status.json >/dev/null
