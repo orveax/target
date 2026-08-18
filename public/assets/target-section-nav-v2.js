@@ -207,7 +207,16 @@
     window.requestAnimationFrame(() => centerActiveButton(nav));
   }
 
+  function suppressFAQSectionNavigation() {
+    if (!doc.body?.classList.contains('page-faq')) return false;
+    const remove = () => doc.querySelectorAll('.target-section-nav').forEach((nav) => nav.remove());
+    remove();
+    new MutationObserver(remove).observe(doc.body, { childList: true, subtree: true });
+    return true;
+  }
+
   function init() {
+    if (suppressFAQSectionNavigation()) return;
     injectStyles();
     const existing = doc.querySelector('.target-section-nav');
     if (existing) return upgrade(existing);
