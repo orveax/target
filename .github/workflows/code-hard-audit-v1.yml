@@ -29,18 +29,26 @@ jobs:
           node-version: 22
 
       - name: Install project dependencies
+        id: install
         run: npm install
 
       - name: Build compiler gate
+        id: build
+        continue-on-error: true
         run: npm run build
 
       - name: Install static-analysis tools
+        id: tools
         run: npm install --no-save @astrojs/check typescript stylelint stylelint-config-recommended eslint @eslint/js typescript-eslint eslint-plugin-vue vue-eslint-parser eslint-plugin-astro globals knip
 
       - name: Astro and TypeScript check
+        id: astro
+        continue-on-error: true
         run: npx astro check
 
       - name: JavaScript syntax check
+        id: javascript
+        continue-on-error: true
         shell: bash
         run: |
           set -euo pipefail
@@ -49,6 +57,8 @@ jobs:
           done < <(find public/assets scripts -type f \( -name '*.js' -o -name '*.mjs' -o -name '*.cjs' \) | sort)
 
       - name: CSS syntax and possible-error check
+        id: css
+        continue-on-error: true
         shell: bash
         run: |
           cat > /tmp/stylelint-target.json <<'EOF'
@@ -57,6 +67,8 @@ jobs:
           npx stylelint 'public/assets/**/*.css' --config /tmp/stylelint-target.json
 
       - name: ESLint source check
+        id: eslint
+        continue-on-error: true
         shell: bash
         run: |
           cat > eslint.audit.config.mjs <<'EOF'
@@ -79,7 +91,7 @@ jobs:
             {
               files: ['src/**/*.ts', 'src/**/*.vue', 'src/**/*.astro'],
               rules: {
-                '@typescript-eslint/no-explicit-any': 'off',
+                '@typescript-eslint/no-explicit-any': 'error',
                 'vue/multi-word-component-names': 'off'
               }
             }
@@ -88,13 +100,40 @@ jobs:
           npx eslint src public/assets scripts --config eslint.audit.config.mjs
 
       - name: Unused dependency and source-file check
+        id: knip
+        continue-on-error: true
         run: npx knip --no-progress
 
       - name: Repository structure and reference scan
+        id: structure
+        continue-on-error: true
         run: node scripts/code-hard-audit.mjs
 
       - name: Production dependency audit
+        id: security
+        continue-on-error: true
         run: npm audit --omit=dev --audit-level=high
+
+      - name: Aggregate hard-audit result
+        id: aggregate
+        if: always()
+        shell: bash
+        run: |
+          failures=()
+          [[ '${{ steps.build.outcome }}' == 'success' ]] || failures+=('build')
+          [[ '${{ steps.astro.outcome }}' == 'success' ]] || failures+=('astro/typecheck')
+          [[ '${{ steps.javascript.outcome }}' == 'success' ]] || failures+=('javascript syntax')
+          [[ '${{ steps.css.outcome }}' == 'success' ]] || failures+=('css')
+          [[ '${{ steps.eslint.outcome }}' == 'success' ]] || failures+=('eslint')
+          [[ '${{ steps.knip.outcome }}' == 'success' ]] || failures+=('unused code/dependencies')
+          [[ '${{ steps.structure.outcome }}' == 'success' ]] || failures+=('repository structure')
+          [[ '${{ steps.security.outcome }}' == 'success' ]] || failures+=('production security audit')
+          if ((${#failures[@]})); then
+            printf 'Blocking hard-audit stages:\n'
+            printf ' - %s\n' "${failures[@]}"
+            exit 1
+          fi
+          echo 'TARGET CODE HARD AUDIT: PASS'
 
       - name: Publish final status
         if: always()
