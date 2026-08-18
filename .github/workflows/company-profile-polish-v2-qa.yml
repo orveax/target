@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'public/assets/company-profile-canonical.css'
+      - 'public/assets/header-profile-resource-v1.css'
       - 'src/data/companyProfile.ts'
       - 'src/components/SiteHeader.astro'
       - 'src/layouts/BaseLayout.astro'
@@ -32,16 +33,15 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Verify canonical document and download hierarchy
+      - name: Verify canonical document and navigation hierarchy
         shell: bash
         run: |
           set -euo pipefail
           test -f public/assets/company-profile-canonical.css
+          test -f public/assets/header-profile-resource-v1.css
           test -f src/data/companyProfile.ts
           grep -Fq 'company-profile-canonical.css?v=20260818-03' src/layouts/BaseLayout.astro
-          ! grep -Fq 'company-profile-v1.css' src/layouts/BaseLayout.astro
-          ! grep -Fq 'company-profile-polish-v2.css' src/layouts/BaseLayout.astro
-          ! grep -Fq 'hero-company-profile-premium-v1.css' src/layouts/BaseLayout.astro
+          grep -Fq 'header-profile-resource-v1.css?v=20260818-01' src/layouts/BaseLayout.astro
           grep -Fq 'grid-template-columns:minmax(0,55fr) minmax(340px,45fr)' public/assets/company-profile-canonical.css
           grep -Fq '.cp-hero-pattern' public/assets/company-profile-canonical.css
           grep -Fq 'repeating-linear-gradient' public/assets/company-profile-canonical.css
@@ -56,9 +56,12 @@ jobs:
           grep -Fq 'cp-hero-pattern' src/pages/company-profile.astro
           grep -Fq 'تحميل الملف التعريفي' src/pages/company-profile.astro
           grep -Fq 'Download Company Profile' src/pages/company-profile.astro
-          grep -Fq 'data-profile-header-download' src/components/SiteHeader.astro
+          ! grep -Fq 'data-profile-header-download' src/components/SiteHeader.astro
+          grep -Fq 'th2-mega-profile-card' src/components/SiteHeader.astro
           grep -Fq 'data-profile-mega-download' src/components/SiteHeader.astro
+          grep -Fq 'th2-mobile-profile-card' src/components/SiteHeader.astro
           grep -Fq 'data-profile-mobile-download' src/components/SiteHeader.astro
+          grep -Fq 'th2-mobile-secondary--compact' src/components/SiteHeader.astro
           grep -Fq 'products-companies.html' src/pages/company-profile.astro
           ! grep -Fq 'food-portfolio.html' src/pages/company-profile.astro
           ! grep -Fq 'PDF PENDING' src/pages/company-profile.astro
@@ -110,12 +113,6 @@ jobs:
                 const current=await page.locator('html').getAttribute('lang');
                 if(current!==lang){await page.locator('[data-lang-toggle]').first().click();await page.waitForTimeout(250);}
                 await page.screenshot({path:`company-profile-premium-v2/${name}-${lang}-first-fold.png`,fullPage:false});
-                await page.evaluate(async()=>{
-                  const pause=(ms)=>new Promise(r=>setTimeout(r,ms));
-                  const step=Math.max(420,Math.floor(innerHeight*.7));
-                  for(let y=0;y<document.documentElement.scrollHeight;y+=step){scrollTo(0,y);await pause(80)}
-                  scrollTo(0,0);await pause(220);
-                });
                 const m=await page.evaluate(()=>{
                   const hero=document.querySelector('.cp-hero');
                   const grid=document.querySelector('.cp-hero-grid');
@@ -127,9 +124,6 @@ jobs:
                   const routes=[...document.querySelectorAll('.cp-route')].map(a=>a.getAttribute('href'));
                   const downloads=[...document.querySelectorAll('[data-profile-download]')];
                   const views=[...document.querySelectorAll('[data-profile-view]')];
-                  const headerDownload=document.querySelector('[data-profile-header-download]');
-                  const megaDownload=document.querySelector('[data-profile-mega-download]');
-                  const mobileDownload=document.querySelector('[data-profile-mobile-download]');
                   return {
                     lang:document.documentElement.lang,
                     width:innerWidth,
@@ -146,17 +140,17 @@ jobs:
                     downloadCount:downloads.length,
                     viewCount:views.length,
                     downloadHrefs:downloads.map(a=>a.getAttribute('href')),
-                    headerDownload:!!headerDownload,
-                    headerDownloadVisible:headerDownload?getComputedStyle(headerDownload).display!=='none':false,
-                    megaDownload:!!megaDownload,
-                    mobileDownload:!!mobileDownload,
+                    desktopHeaderDownload:!!document.querySelector('[data-profile-header-download]'),
+                    megaCard:!!document.querySelector('.th2-mega-profile-card'),
+                    megaDownload:!!document.querySelector('[data-profile-mega-download]'),
+                    mobileCard:!!document.querySelector('.th2-mobile-profile-card'),
+                    mobileDownload:!!document.querySelector('[data-profile-mobile-download]'),
+                    mobileSecondaryLinks:document.querySelectorAll('.th2-mobile-secondary--compact>a').length,
                     patternBg:getComputedStyle(pattern).backgroundImage,
                     patternOpacity:getComputedStyle(pattern).opacity,
                     previewCount:previewImgs.length,
                     previewLoaded:previewImgs.every(img=>img.complete&&img.naturalWidth>100&&img.naturalHeight>50),
-                    gridCols:getComputedStyle(grid).gridTemplateColumns,
-                    copyTop:cr.top,mediaTop:mr.top,copyWidth:cr.width,mediaWidth:mr.width,
-                    heroBg:getComputedStyle(hero).backgroundColor
+                    copyTop:cr.top,mediaTop:mr.top,copyWidth:cr.width,mediaWidth:mr.width
                   };
                 });
                 metrics.push({viewport:name,...m});
@@ -172,15 +166,34 @@ jobs:
                 if(m.resourceActions!==2) failures.push(`${name}-${lang}: expected Download/View resource actions`);
                 if(m.downloadCount!==2||m.viewCount!==2) failures.push(`${name}-${lang}: page download/view controls incomplete`);
                 if(!m.downloadHrefs.every(h=>h&&h.includes('drive.google.com/uc?export=download&id=1sLGRCC5re16gRsXZVpXm5oSzxA5TRjqm'))) failures.push(`${name}-${lang}: download href is not the verified profile asset`);
-                if(!m.headerDownload||!m.megaDownload||!m.mobileDownload) failures.push(`${name}-${lang}: sitewide profile download entry missing`);
-                if(name==='1440'&&!m.headerDownloadVisible) failures.push(`${name}-${lang}: desktop header profile button is not visible at 1440`);
+                if(m.desktopHeaderDownload) failures.push(`${name}-${lang}: desktop header must not contain Company Profile download button`);
+                if(!m.megaCard||!m.megaDownload) failures.push(`${name}-${lang}: refined mega-menu Company Profile resource is missing`);
+                if(!m.mobileCard||!m.mobileDownload||m.mobileSecondaryLinks!==2) failures.push(`${name}-${lang}: refined mobile Company Profile resource hierarchy is incomplete`);
                 if(!m.patternBg||m.patternBg==='none'||Number(m.patternOpacity)<=0) failures.push(`${name}-${lang}: hero pattern is not rendered`);
                 if(m.previewCount!==2||!m.previewLoaded) failures.push(`${name}-${lang}: verified final-file preview failed to load`);
                 if(name==='1440'){
                   const ratio=m.copyWidth/m.mediaWidth;
                   if(ratio<1.05||ratio>1.50) failures.push(`${name}-${lang}: desktop hero ratio ${ratio.toFixed(2)} outside 55/45 tolerance`);
                 }else if(!(m.copyTop<m.mediaTop)) failures.push(`${name}-${lang}: text/actions must precede document preview on tablet/mobile`);
-                await page.screenshot({path:`company-profile-premium-v2/${name}-${lang}.png`,fullPage:true});
+                if(name==='1440'){
+                  await page.locator('[data-th2-mega-toggle]').click();
+                  await page.waitForTimeout(180);
+                  const cardVisible=await page.locator('.th2-mega-profile-card').isVisible();
+                  if(!cardVisible) failures.push(`${name}-${lang}: mega-menu profile resource card is not visible when menu opens`);
+                  await page.screenshot({path:`company-profile-premium-v2/${name}-${lang}-mega.png`,fullPage:false});
+                  await page.keyboard.press('Escape');
+                }
+                if(name==='390'){
+                  await page.locator('.th2-menu-button').click();
+                  await page.waitForTimeout(240);
+                  const card=page.locator('.th2-mobile-profile-card');
+                  await card.scrollIntoViewIfNeeded();
+                  if(!(await card.isVisible())) failures.push(`${name}-${lang}: mobile profile resource card is not visible`);
+                  if(await card.locator('a').count()!==2) failures.push(`${name}-${lang}: mobile profile card must expose exactly View and Download actions`);
+                  await page.screenshot({path:`company-profile-premium-v2/${name}-${lang}-mobile-menu.png`,fullPage:false});
+                  await page.locator('.th2-mobile-close').click();
+                  await page.waitForTimeout(120);
+                }
               }
             }catch(e){failures.push(`${name}: ${e.message}`)} finally{await context.close()}
           }
