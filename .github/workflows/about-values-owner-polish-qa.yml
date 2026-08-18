@@ -76,7 +76,7 @@ jobs:
             for(const lang of ['ar','en']){
               if(await page.locator('html').getAttribute('lang')!==lang){await page.locator('[data-lang-toggle]').first().click();await page.waitForTimeout(180)}
               await page.mouse.move(2,2);
-              await page.waitForTimeout(90);
+              await page.waitForTimeout(360);
               const m=await page.evaluate(()=>{
                 const values=document.querySelector('.about-values');
                 const cards=[...document.querySelectorAll('.about-value-card')];
