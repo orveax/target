@@ -147,16 +147,35 @@ const megaActive = ['market','suppliers','contact','profile','faq','privacy','te
       <p data-ar="انتقل مباشرة إلى المسار الذي تحتاجه." data-en="Go directly to the route you need.">انتقل مباشرة إلى المسار الذي تحتاجه.</p>
     </div>
 
-    <nav class="th2-mobile-primary" aria-label="Mobile navigation">
-      {mobilePrimary.map(([num,href,key,icon,ar,en]) => (
-        <a class:list={['nav-link', active===key && 'active']} aria-current={active===key ? 'page' : undefined} href={href}>
-          <small>{num}</small>
-          <span class="th2-mobile-route-icon"><i data-lucide={icon}></i></span>
-          <b data-ar={ar} data-en={en}>{ar}</b>
-          <i class="th2-mobile-route-arrow" data-lucide="arrow-up-left"></i>
-        </a>
-      ))}
-    </nav>
+    <!-- Handset contract: 4 explicit tracks (number / icon / label / arrow). -->
+    <div class="d-md-none">
+      <nav class="th2-mobile-primary" aria-label="Mobile navigation">
+        {mobilePrimary.map(([num,href,key,icon,ar,en]) => (
+          <a class:list={['nav-link', active===key && 'active']} aria-current={active===key ? 'page' : undefined} href={href}>
+            <small>{num}</small>
+            <span class="th2-mobile-route-icon"><i data-lucide={icon}></i></span>
+            <b data-ar={ar} data-en={en}>{ar}</b>
+            <i class="th2-mobile-route-arrow" data-lucide="arrow-up-left"></i>
+          </a>
+        ))}
+      </nav>
+    </div>
+
+    <!-- Tablet/iPad contract: 3 tracks expected by header-premium-v2.css (number / icon+label / arrow). -->
+    <div class="d-none d-md-block d-xl-none">
+      <nav class="th2-mobile-primary" aria-label="Tablet navigation">
+        {mobilePrimary.map(([num,href,key,icon,ar,en]) => (
+          <a class:list={['nav-link', active===key && 'active']} aria-current={active===key ? 'page' : undefined} href={href}>
+            <small>{num}</small>
+            <span>
+              <i data-lucide={icon}></i>
+              <b data-ar={ar} data-en={en}>{ar}</b>
+            </span>
+            <i class="th2-mobile-route-arrow" data-lucide="arrow-up-left"></i>
+          </a>
+        ))}
+      </nav>
+    </div>
 
     <section class="th2-mobile-commercial" aria-labelledby="th2MobileCommercialTitle">
       <div>
