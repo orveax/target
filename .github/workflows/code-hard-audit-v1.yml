@@ -37,7 +37,7 @@ jobs:
         run: npm run build
 
       - name: Install static-analysis tools
-        run: npm install --no-save @astrojs/check typescript stylelint stylelint-config-recommended eslint @eslint/js typescript-eslint eslint-plugin-vue vue-eslint-parser eslint-plugin-astro globals knip playwright@1.55.0
+        run: npm install --no-save @astrojs/check typescript stylelint stylelint-config-recommended eslint @eslint/js typescript-eslint eslint-plugin-vue vue-eslint-parser eslint-plugin-astro globals knip
 
       - name: Astro and TypeScript check
         id: astro
@@ -92,6 +92,7 @@ jobs:
               files: ['src/**/*.vue'],
               languageOptions: {
                 parser: vueParser,
+                globals: { ...globals.browser },
                 parserOptions: {
                   parser: tseslint.parser,
                   sourceType: 'module',
@@ -125,8 +126,7 @@ jobs:
           cat > knip.audit.json <<'EOF'
           {
             "entry": ["src/pages/**/*.astro", "src/pages/_app.ts"],
-            "project": ["src/**/*.{astro,vue,ts}"],
-            "ignore": ["public/assets/**"]
+            "project": ["src/**/*.{astro,vue,ts}"]
           }
           EOF
           status=0
@@ -141,6 +141,7 @@ jobs:
 
       - name: Start local release server
         id: server
+        if: steps.build.outcome == 'success'
         continue-on-error: true
         shell: bash
         run: |
@@ -157,6 +158,7 @@ jobs:
 
       - name: CSS and JavaScript runtime coverage inventory
         id: coverage
+        if: steps.build.outcome == 'success' && steps.server.outcome == 'success'
         continue-on-error: true
         env:
           CHROME_PATH: ${{ env.CHROME_PATH }}
@@ -180,8 +182,10 @@ jobs:
           [[ '${{ steps.eslint.outcome }}' == 'success' ]] || failures+=('eslint')
           [[ '${{ steps.knip.outcome }}' == 'success' ]] || failures+=('unused source/dependencies')
           [[ '${{ steps.structure.outcome }}' == 'success' ]] || failures+=('repository structure')
-          [[ '${{ steps.server.outcome }}' == 'success' ]] || failures+=('release server')
-          [[ '${{ steps.coverage.outcome }}' == 'success' ]] || failures+=('runtime coverage execution')
+          if [[ '${{ steps.build.outcome }}' == 'success' ]]; then
+            [[ '${{ steps.server.outcome }}' == 'success' ]] || failures+=('release server')
+            [[ '${{ steps.coverage.outcome }}' == 'success' ]] || failures+=('runtime coverage execution')
+          fi
           [[ '${{ steps.security.outcome }}' == 'success' ]] || failures+=('production security audit')
           if ((${#failures[@]})); then
             printf 'Blocking hard-audit stages:\n'
