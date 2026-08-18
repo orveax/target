@@ -1,12 +1,28 @@
 ---
 import { companyProfileAsset } from '../data/companyProfile';
+
 const { active = '' } = Astro.props;
+
 const mainNav = [
   ['index.html','home','الرئيسية','Home'],
   ['about.html','about','عن تارقت','About TARGET'],
   ['capabilities.html','capabilities','كيف نعمل','How We Work'],
   ['products-companies.html','portfolio','المنتجات والشركات','Products & Companies'],
 ];
+
+const marketRoutes = [
+  ['qatar-market.html','market','map-pinned','السوق القطري','Qatar Market','فهم السوق ومسار الوصول','Market context and route-to-market'],
+  ['suppliers.html','suppliers','factory','للمصنعين والموردين','For Suppliers','شارك بيانات منتجك','Share your product information'],
+];
+
+const mobilePrimary = [
+  ['01','index.html','home','house','الرئيسية','Home'],
+  ['02','about.html','about','building-2','عن تارقت','About TARGET'],
+  ['03','capabilities.html','capabilities','route','كيف نعمل','How We Work'],
+  ['04','products-companies.html','portfolio','package','المنتجات والشركات','Products & Companies'],
+  ['05','qatar-market.html','market','map-pinned','السوق القطري','Qatar Market'],
+];
+
 const megaActive = ['market','suppliers','contact','profile','faq','privacy','terms'].includes(active);
 ---
 <header class="site-header target-header-v2">
@@ -21,11 +37,13 @@ const megaActive = ['market','suppliers','contact','profile','faq','privacy','te
           {mainNav.map(([href,key,ar,en]) => (
             <a class:list={['th2-nav-link', active===key && 'active']} aria-current={active===key ? 'page' : undefined} href={href} data-ar={ar} data-en={en}>{ar}</a>
           ))}
+
           <div class:list={['th2-mega', megaActive && 'has-active']} data-th2-mega>
             <button class="th2-mega-toggle" type="button" data-th2-mega-toggle aria-expanded="false" aria-controls="th2MegaPanel">
               <span data-ar="استكشف" data-en="Explore">استكشف</span>
               <i data-lucide="chevron-down"></i>
             </button>
+
             <div class="th2-mega-panel" id="th2MegaPanel" data-th2-mega-panel>
               <section class="th2-mega-feature" aria-labelledby="th2MegaFeatureTitle">
                 <small data-ar="من المنتج إلى السوق" data-en="From Product to Market">من المنتج إلى السوق</small>
@@ -40,44 +58,51 @@ const megaActive = ['market','suppliers','contact','profile','faq','privacy','te
               <div class="th2-mega-groups">
                 <section>
                   <span class="th2-mega-kicker" data-ar="السوق والتوريد" data-en="Market & Supply">السوق والتوريد</span>
-                  <a class:list={[active==='market' && 'active']} href="qatar-market.html" aria-current={active==='market' ? 'page' : undefined}>
-                    <i data-lucide="map-pinned"></i>
-                    <span><b data-ar="السوق القطري" data-en="Qatar Market">السوق القطري</b><small data-ar="فهم السوق ومسار الوصول" data-en="Market context and route-to-market">فهم السوق ومسار الوصول</small></span>
-                  </a>
-                  <a class:list={[active==='suppliers' && 'active']} href="suppliers.html" aria-current={active==='suppliers' ? 'page' : undefined}>
-                    <i data-lucide="factory"></i>
-                    <span><b data-ar="للمصنعين والموردين" data-en="For Suppliers">للمصنعين والموردين</b><small data-ar="شارك بيانات منتجك" data-en="Share your product information">شارك بيانات منتجك</small></span>
-                  </a>
+                  {marketRoutes.map(([href,key,icon,ar,en,arSub,enSub]) => (
+                    <a class:list={[active===key && 'active']} href={href} aria-current={active===key ? 'page' : undefined}>
+                      <i data-lucide={icon}></i>
+                      <span>
+                        <b data-ar={ar} data-en={en}>{ar}</b>
+                        <small data-ar={arSub} data-en={enSub}>{arSub}</small>
+                      </span>
+                    </a>
+                  ))}
                 </section>
 
                 <section class="th2-mega-resource-group">
                   <span class="th2-mega-kicker" data-ar="الشركة والموارد" data-en="Company & Resources">الشركة والموارد</span>
-                  <div class:list={['th2-mega-profile-card', active==='profile' && 'active']}>
-                    <a class="th2-mega-profile-main" href="company-profile.html" aria-current={active==='profile' ? 'page' : undefined}>
-                      <span class="th2-mega-profile-icon"><i data-lucide="book-open-text"></i></span>
-                      <span class="th2-mega-profile-copy">
-                        <b data-ar="الملف التعريفي" data-en="Company Profile">الملف التعريفي</b>
-                        <small data-ar="مرجع الشركة الرسمي" data-en="Official company reference">مرجع الشركة الرسمي</small>
-                      </span>
-                      <i class="th2-mega-profile-arrow" data-lucide="arrow-up-left"></i>
-                    </a>
-                    <a class="th2-mega-profile-download" href={companyProfileAsset.downloadUrl} target="_blank" rel="noopener noreferrer" data-profile-mega-download>
-                      <i data-lucide="download"></i>
-                      <span data-ar="تحميل PDF" data-en="Download PDF">تحميل PDF</span>
-                      <small data-ar="10 صفحات" data-en="10 pages">10 صفحات</small>
-                    </a>
-                  </div>
+
+                  <a class:list={[active==='profile' && 'active']} href="company-profile.html" aria-current={active==='profile' ? 'page' : undefined}>
+                    <i data-lucide="book-open-text"></i>
+                    <span>
+                      <b data-ar="الملف التعريفي" data-en="Company Profile">الملف التعريفي</b>
+                      <small data-ar="مرجع الشركة الرسمي" data-en="Official company reference">مرجع الشركة الرسمي</small>
+                    </span>
+                  </a>
+
                   <a class:list={[active==='faq' && 'active']} href="faq.html" aria-current={active==='faq' ? 'page' : undefined}>
                     <i data-lucide="circle-help"></i>
-                    <span><b data-ar="الأسئلة الشائعة" data-en="FAQ">الأسئلة الشائعة</b><small data-ar="إجابات سريعة وواضحة" data-en="Quick, clear answers">إجابات سريعة وواضحة</small></span>
+                    <span>
+                      <b data-ar="الأسئلة الشائعة" data-en="FAQ">الأسئلة الشائعة</b>
+                      <small data-ar="إجابات سريعة وواضحة" data-en="Quick, clear answers">إجابات سريعة وواضحة</small>
+                    </span>
                   </a>
+
+                  <div class="th2-mega-direct">
+                    <a href={companyProfileAsset.downloadUrl} target="_blank" rel="noopener noreferrer" data-profile-mega-download>
+                      <span data-ar="تحميل الملف التعريفي PDF" data-en="Download Company Profile PDF">تحميل الملف التعريفي PDF</span>
+                    </a>
+                  </div>
                 </section>
 
                 <section>
                   <span class="th2-mega-kicker" data-ar="التواصل" data-en="Contact">التواصل</span>
                   <a class:list={[active==='contact' && 'active']} href="contact.html" aria-current={active==='contact' ? 'page' : undefined}>
                     <i data-lucide="mail"></i>
-                    <span><b data-ar="الاتصال بنا" data-en="Contact Us">الاتصال بنا</b><small data-ar="اختر القسم المناسب" data-en="Reach the right team">اختر القسم المناسب</small></span>
+                    <span>
+                      <b data-ar="الاتصال بنا" data-en="Contact Us">الاتصال بنا</b>
+                      <small data-ar="اختر القسم المناسب" data-en="Reach the right team">اختر القسم المناسب</small>
+                    </span>
                   </a>
                   <div class="th2-mega-direct">
                     <a href="mailto:sales@targetft.com">sales@targetft.com</a>
@@ -106,11 +131,14 @@ const megaActive = ['market','suppliers','contact','profile','faq','privacy','te
 
 <div class="offcanvas offcanvas-start premium-mobile-nav th2-mobile-nav" tabindex="-1" id="mobileNav" aria-labelledby="mobileNavLabel">
   <span id="mobileNavLabel" class="visually-hidden" data-ar="قائمة تارقت" data-en="TARGET navigation">قائمة تارقت</span>
+
   <div class="offcanvas-header th2-mobile-head">
     <a class="th2-mobile-brand" href="index.html" aria-label="TARGET home">
       <img class="mobile-brand-logo" src="/assets/brand/target-logo-horizontal-light.svg" alt="TARGET — تارقت لتجارة الأغذية">
     </a>
-    <button type="button" class="th2-mobile-close" data-bs-dismiss="offcanvas" aria-label="إغلاق القائمة" data-ar-aria="إغلاق القائمة" data-en-aria="Close menu"><i data-lucide="x"></i></button>
+    <button type="button" class="th2-mobile-close" data-bs-dismiss="offcanvas" aria-label="إغلاق القائمة" data-ar-aria="إغلاق القائمة" data-en-aria="Close menu">
+      <i data-lucide="x"></i>
+    </button>
   </div>
 
   <div class="offcanvas-body th2-mobile-body" data-mobile-nav-scroll>
@@ -120,11 +148,14 @@ const megaActive = ['market','suppliers','contact','profile','faq','privacy','te
     </div>
 
     <nav class="th2-mobile-primary" aria-label="Mobile navigation">
-      <a class:list={['nav-link', active==='home' && 'active']} aria-current={active==='home' ? 'page' : undefined} href="index.html"><small>01</small><span class="th2-mobile-route-icon"><i data-lucide="house"></i></span><b data-ar="الرئيسية" data-en="Home">الرئيسية</b><i class="th2-mobile-route-arrow" data-lucide="arrow-up-left"></i></a>
-      <a class:list={['nav-link', active==='about' && 'active']} aria-current={active==='about' ? 'page' : undefined} href="about.html"><small>02</small><span class="th2-mobile-route-icon"><i data-lucide="building-2"></i></span><b data-ar="عن تارقت" data-en="About TARGET">عن تارقت</b><i class="th2-mobile-route-arrow" data-lucide="arrow-up-left"></i></a>
-      <a class:list={['nav-link', active==='capabilities' && 'active']} aria-current={active==='capabilities' ? 'page' : undefined} href="capabilities.html"><small>03</small><span class="th2-mobile-route-icon"><i data-lucide="route"></i></span><b data-ar="كيف نعمل" data-en="How We Work">كيف نعمل</b><i class="th2-mobile-route-arrow" data-lucide="arrow-up-left"></i></a>
-      <a class:list={['nav-link', active==='portfolio' && 'active']} aria-current={active==='portfolio' ? 'page' : undefined} href="products-companies.html"><small>04</small><span class="th2-mobile-route-icon"><i data-lucide="package"></i></span><b data-ar="المنتجات والشركات" data-en="Products & Companies">المنتجات والشركات</b><i class="th2-mobile-route-arrow" data-lucide="arrow-up-left"></i></a>
-      <a class:list={['nav-link', active==='market' && 'active']} aria-current={active==='market' ? 'page' : undefined} href="qatar-market.html"><small>05</small><span class="th2-mobile-route-icon"><i data-lucide="map-pinned"></i></span><b data-ar="السوق القطري" data-en="Qatar Market">السوق القطري</b><i class="th2-mobile-route-arrow" data-lucide="arrow-up-left"></i></a>
+      {mobilePrimary.map(([num,href,key,icon,ar,en]) => (
+        <a class:list={['nav-link', active===key && 'active']} aria-current={active===key ? 'page' : undefined} href={href}>
+          <small>{num}</small>
+          <span class="th2-mobile-route-icon"><i data-lucide={icon}></i></span>
+          <b data-ar={ar} data-en={en}>{ar}</b>
+          <i class="th2-mobile-route-arrow" data-lucide="arrow-up-left"></i>
+        </a>
+      ))}
     </nav>
 
     <section class="th2-mobile-commercial" aria-labelledby="th2MobileCommercialTitle">
@@ -133,33 +164,58 @@ const megaActive = ['market','suppliers','contact','profile','faq','privacy','te
         <h2 id="th2MobileCommercialTitle" data-ar="لديك منتج غذائي؟" data-en="Have a food product?">لديك منتج غذائي؟</h2>
         <p data-ar="ابدأ النقاش التجاري من المسار المخصص للمنتجات." data-en="Start the commercial discussion through the dedicated product route.">ابدأ النقاش التجاري من المسار المخصص للمنتجات.</p>
       </div>
-      <a href="suppliers.html"><span data-ar="ناقش منتجك معنا" data-en="Discuss Your Product">ناقش منتجك معنا</span><i data-lucide="arrow-up-left"></i></a>
+      <a href="suppliers.html">
+        <span data-ar="ناقش منتجك معنا" data-en="Discuss Your Product">ناقش منتجك معنا</span>
+        <i data-lucide="arrow-up-left"></i>
+      </a>
     </section>
 
-    <section class:list={['th2-mobile-profile-card', active==='profile' && 'active']} aria-labelledby="th2MobileProfileTitle">
-      <div class="th2-mobile-profile-card-head">
-        <span class="th2-mobile-profile-icon"><i data-lucide="book-open-text"></i></span>
-        <div>
-          <small data-ar="مورد الشركة" data-en="Company Resource">مورد الشركة</small>
-          <h2 id="th2MobileProfileTitle" data-ar="الملف التعريفي" data-en="Company Profile">الملف التعريفي</h2>
-          <p data-ar="النسخة الرسمية · PDF · 10 صفحات · 20.66 MB" data-en="Official profile · PDF · 10 pages · 20.66 MB">النسخة الرسمية · PDF · 10 صفحات · 20.66 MB</p>
+    <!-- Handset keeps the established Company Profile resource card. -->
+    <div class="d-md-none">
+      <section class:list={['th2-mobile-profile-card', active==='profile' && 'active']} aria-labelledby="th2MobileProfileTitle">
+        <div class="th2-mobile-profile-card-head">
+          <span class="th2-mobile-profile-icon"><i data-lucide="book-open-text"></i></span>
+          <div>
+            <small data-ar="مورد الشركة" data-en="Company Resource">مورد الشركة</small>
+            <h2 id="th2MobileProfileTitle" data-ar="الملف التعريفي" data-en="Company Profile">الملف التعريفي</h2>
+            <p data-ar="النسخة الرسمية · PDF · 10 صفحات · 20.66 MB" data-en="Official profile · PDF · 10 pages · 20.66 MB">النسخة الرسمية · PDF · 10 صفحات · 20.66 MB</p>
+          </div>
         </div>
-      </div>
-      <div class="th2-mobile-profile-actions">
-        <a class="th2-mobile-profile-view" href="company-profile.html">
-          <i data-lucide="eye"></i><span data-ar="عرض الصفحة" data-en="View Page">عرض الصفحة</span>
-        </a>
-        <a class="th2-mobile-profile-download" href={companyProfileAsset.downloadUrl} target="_blank" rel="noopener noreferrer" data-profile-mobile-download>
-          <i data-lucide="download"></i><span data-ar="تحميل PDF" data-en="Download PDF">تحميل PDF</span>
-        </a>
-      </div>
-    </section>
+        <div class="th2-mobile-profile-actions">
+          <a class="th2-mobile-profile-view" href="company-profile.html">
+            <i data-lucide="eye"></i><span data-ar="عرض الصفحة" data-en="View Page">عرض الصفحة</span>
+          </a>
+          <a class="th2-mobile-profile-download" href={companyProfileAsset.downloadUrl} target="_blank" rel="noopener noreferrer" data-profile-mobile-download>
+            <i data-lucide="download"></i><span data-ar="تحميل PDF" data-en="Download PDF">تحميل PDF</span>
+          </a>
+        </div>
+      </section>
 
-    <div class="th2-mobile-utility-head"><span data-ar="المزيد" data-en="More">المزيد</span></div>
-    <nav class="th2-mobile-secondary th2-mobile-secondary--compact" aria-label="Secondary mobile navigation">
-      <a href="contact.html"><span><i data-lucide="mail"></i><b data-ar="الاتصال بنا" data-en="Contact Us">الاتصال بنا</b></span><i data-lucide="arrow-up-left"></i></a>
-      <a href="faq.html"><span><i data-lucide="circle-help"></i><b data-ar="الأسئلة الشائعة" data-en="FAQ">الأسئلة الشائعة</b></span><i data-lucide="arrow-up-left"></i></a>
-    </nav>
+      <div class="th2-mobile-utility-head"><span data-ar="المزيد" data-en="More">المزيد</span></div>
+      <nav class="th2-mobile-secondary th2-mobile-secondary--compact" aria-label="Secondary mobile navigation">
+        <a href="contact.html"><span><i data-lucide="mail"></i><b data-ar="الاتصال بنا" data-en="Contact Us">الاتصال بنا</b></span><i data-lucide="arrow-up-left"></i></a>
+        <a href="faq.html"><span><i data-lucide="circle-help"></i><b data-ar="الأسئلة الشائعة" data-en="FAQ">الأسئلة الشائعة</b></span><i data-lucide="arrow-up-left"></i></a>
+      </nav>
+    </div>
+
+    <!-- Tablet/iPad uses one balanced three-card resource row. -->
+    <div class="d-none d-md-block d-xl-none">
+      <div class="th2-mobile-utility-head"><span data-ar="الموارد والتواصل" data-en="Resources & Contact">الموارد والتواصل</span></div>
+      <nav class="th2-mobile-secondary" aria-label="Tablet resource navigation">
+        <a href="company-profile.html" aria-current={active==='profile' ? 'page' : undefined}>
+          <span><i data-lucide="book-open-text"></i><b data-ar="الملف التعريفي" data-en="Company Profile">الملف التعريفي</b></span>
+          <i data-lucide="arrow-up-left"></i>
+        </a>
+        <a href="contact.html" aria-current={active==='contact' ? 'page' : undefined}>
+          <span><i data-lucide="mail"></i><b data-ar="الاتصال بنا" data-en="Contact Us">الاتصال بنا</b></span>
+          <i data-lucide="arrow-up-left"></i>
+        </a>
+        <a href="faq.html" aria-current={active==='faq' ? 'page' : undefined}>
+          <span><i data-lucide="circle-help"></i><b data-ar="الأسئلة الشائعة" data-en="FAQ">الأسئلة الشائعة</b></span>
+          <i data-lucide="arrow-up-left"></i>
+        </a>
+      </nav>
+    </div>
 
     <section class="th2-mobile-social" aria-label="TARGET social media" data-ar-aria="حسابات تارقت على وسائل التواصل" data-en-aria="TARGET social media">
       <div class="th2-mobile-social-copy">
@@ -173,5 +229,6 @@ const megaActive = ['market','suppliers','contact','profile','faq','privacy','te
       </div>
     </section>
   </div>
+
   <div class="premium-mobile-scroll-cue" aria-hidden="true"></div>
 </div>
