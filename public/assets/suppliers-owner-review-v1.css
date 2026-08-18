@@ -1,0 +1,198 @@
+/* TARGET — Suppliers Owner Review V1 — 2026-08-18
+ * Scope: imagery, hero pattern, quick section labels, numbered-card system,
+ * after-submit responsive geometry and privacy-consent interaction.
+ */
+
+/* 1) Photography — use the already curated real trade sources so runtime alt text and visible media stay aligned. */
+.page-suppliers .fs-hero-media>img{
+  content:url('https://images.pexels.com/photos/36823725/pexels-photo-36823725.jpeg?auto=compress&cs=tinysrgb&w=1800&h=1200&fit=crop')!important;
+  object-position:center 52%!important;
+  filter:saturate(.92) contrast(1.03)!important;
+}
+.page-suppliers .fs-prepare-media img{
+  content:url('https://images.pexels.com/photos/5953751/pexels-photo-5953751.jpeg?auto=compress&cs=tinysrgb&w=1600&h=1100&fit=crop')!important;
+  object-position:center 48%!important;
+  filter:saturate(.92) contrast(1.03)!important;
+}
+
+/* 2) Hero pattern — replace the oversized wordmark pattern with a restrained supply-chain grid. */
+.page-suppliers .fs-hero::before{
+  content:""!important;
+  position:absolute!important;
+  z-index:0!important;
+  inset:0!important;
+  width:auto!important;
+  height:auto!important;
+  background:
+    radial-gradient(circle at 16% 24%,rgba(192,149,82,.19) 0 2px,transparent 2.5px),
+    radial-gradient(circle at 84% 70%,rgba(12,73,49,.11) 0 2px,transparent 2.5px),
+    linear-gradient(rgba(12,73,49,.035) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(12,73,49,.035) 1px,transparent 1px)!important;
+  background-size:190px 190px,230px 230px,46px 46px,46px 46px!important;
+  color:transparent!important;
+  font-size:0!important;
+  letter-spacing:0!important;
+  white-space:normal!important;
+  opacity:1!important;
+  pointer-events:none!important;
+  -webkit-mask-image:linear-gradient(90deg,rgba(0,0,0,.72),rgba(0,0,0,.28) 62%,transparent 100%);
+  mask-image:linear-gradient(90deg,rgba(0,0,0,.72),rgba(0,0,0,.28) 62%,transparent 100%);
+}
+html[dir="rtl"] .page-suppliers .fs-hero::before{
+  -webkit-mask-image:linear-gradient(270deg,rgba(0,0,0,.72),rgba(0,0,0,.28) 62%,transparent 100%);
+  mask-image:linear-gradient(270deg,rgba(0,0,0,.72),rgba(0,0,0,.28) 62%,transparent 100%);
+}
+
+/* 3) Quick-access strip — supplier page uses short operational labels instead of full H2 copy. */
+.page-suppliers .target-section-nav .target-section-nav-label{
+  font-size:0!important;
+  max-width:none!important;
+  text-overflow:clip!important;
+}
+.page-suppliers .target-section-nav-track button:nth-child(1) .target-section-nav-label::after{content:"لمن هذه الصفحة";font-size:.78rem}
+.page-suppliers .target-section-nav-track button:nth-child(2) .target-section-nav-label::after{content:"قبل الإرسال";font-size:.78rem}
+.page-suppliers .target-section-nav-track button:nth-child(3) .target-section-nav-label::after{content:"طلب المراجعة";font-size:.78rem}
+.page-suppliers .target-section-nav-track button:nth-child(4) .target-section-nav-label::after{content:"وضوح الالتزام";font-size:.78rem}
+html[lang="en"] .page-suppliers .target-section-nav-track button:nth-child(1) .target-section-nav-label::after{content:"Supplier Fit"}
+html[lang="en"] .page-suppliers .target-section-nav-track button:nth-child(2) .target-section-nav-label::after{content:"Before Submission"}
+html[lang="en"] .page-suppliers .target-section-nav-track button:nth-child(3) .target-section-nav-label::after{content:"Review Request"}
+html[lang="en"] .page-suppliers .target-section-nav-track button:nth-child(4) .target-section-nav-label::after{content:"Commitment Clarity"}
+
+/* 4) Number system — every numbered supplier card uses a quiet oversized background number. */
+.page-suppliers .fs-audience-grid article,
+.page-suppliers .fs-checklist article,
+.page-suppliers .fs-after-steps article{
+  position:relative!important;
+  isolation:isolate;
+  overflow:hidden;
+}
+.page-suppliers .fs-index,
+.page-suppliers .fs-step-number{
+  position:absolute!important;
+  z-index:0!important;
+  inset-inline-end:12px!important;
+  inset-block-start:10px!important;
+  width:auto!important;
+  min-width:0!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  background:transparent!important;
+  color:rgba(12,73,49,.065)!important;
+  font:800 clamp(3.2rem,4.7vw,4.8rem)/.86 var(--target-font-en,"Manrope",sans-serif)!important;
+  letter-spacing:-.06em!important;
+  pointer-events:none;
+  user-select:none;
+}
+.page-suppliers .fs-after .fs-step-number{
+  color:rgba(244,237,228,.08)!important;
+}
+.page-suppliers .fs-audience-grid article>*:not(.fs-index),
+.page-suppliers .fs-checklist article>*:not(.fs-index),
+.page-suppliers .fs-after-steps article>*:not(.fs-step-number){
+  position:relative;
+  z-index:1;
+}
+.page-suppliers .fs-checklist article{
+  grid-template-columns:44px minmax(0,1fr)!important;
+  gap:13px!important;
+  padding-inline:18px!important;
+}
+.page-suppliers .fs-after-steps article{
+  grid-template-columns:40px minmax(0,1fr)!important;
+  gap:10px!important;
+}
+
+/* 5) After-submit rail — more presence on desktop, controlled width on tablet/mobile. */
+.page-suppliers .fs-form-layout{
+  grid-template-columns:minmax(0,1.42fr) minmax(360px,.82fr)!important;
+  gap:26px!important;
+}
+.page-suppliers .fs-after{
+  width:100%!important;
+  min-width:0!important;
+  padding:28px 25px!important;
+}
+.page-suppliers .fs-after h2{
+  font-size:clamp(1.58rem,2.15vw,1.98rem)!important;
+}
+
+/* 6) Consent — two-line copy and a clear checked-state message without layout jump. */
+.page-suppliers .privacy-check{
+  align-items:flex-start!important;
+  gap:11px!important;
+  padding:15px 16px!important;
+  border:1px solid rgba(12,73,49,.10)!important;
+  border-radius:13px!important;
+}
+.page-suppliers .privacy-check .form-check-input{
+  margin-top:.28rem!important;
+  accent-color:var(--target-forest,#0C4931);
+}
+.page-suppliers .privacy-check label{
+  display:block!important;
+  flex:1 1 auto;
+  min-width:0;
+  margin:0!important;
+  line-height:1.55!important;
+  cursor:pointer;
+}
+.page-suppliers .privacy-check label>span{display:none!important}
+.page-suppliers .privacy-check label::before{
+  content:"أوافق على استخدام هذه المعلومات لمراجعة الطلب";
+  display:block;
+  color:var(--target-charcoal,#262626);
+  font-weight:700;
+}
+.page-suppliers .privacy-check .form-check-input:checked+label::before{
+  content:"تمت الموافقة على استخدام المعلومات للمراجعة";
+  color:var(--target-forest,#0C4931);
+}
+html[lang="en"] .page-suppliers .privacy-check label::before{content:"I agree to use this information for request review"}
+html[lang="en"] .page-suppliers .privacy-check .form-check-input:checked+label::before{content:"Information-use consent confirmed for review"}
+.page-suppliers .privacy-check label>a{
+  display:inline-block!important;
+  margin-top:3px!important;
+  font-size:.9rem!important;
+}
+
+@media (min-width:992px) and (max-width:1199.98px){
+  .page-suppliers .fs-form-layout{
+    grid-template-columns:minmax(0,1.25fr) minmax(330px,.75fr)!important;
+    gap:20px!important;
+  }
+  .page-suppliers .fs-after{padding:24px 21px!important}
+}
+
+@media (max-width:991.98px){
+  .page-suppliers .fs-form-layout{grid-template-columns:1fr!important;gap:24px!important}
+  .page-suppliers .fs-after{
+    position:relative!important;
+    top:auto!important;
+    width:100%!important;
+    max-width:760px!important;
+    justify-self:stretch!important;
+  }
+}
+
+@media (max-width:767.98px){
+  .page-suppliers .target-section-nav-track button:nth-child(n) .target-section-nav-label::after{font-size:.74rem}
+  .page-suppliers .fs-after{max-width:none!important;padding:22px 18px!important}
+  .page-suppliers .fs-index,
+  .page-suppliers .fs-step-number{
+    inset-inline-end:9px!important;
+    inset-block-start:9px!important;
+    font-size:3.35rem!important;
+  }
+  .page-suppliers .privacy-check{padding:14px!important}
+}
+
+@media (max-width:575.98px){
+  .page-suppliers .fs-hero::before{
+    background-size:150px 150px,190px 190px,38px 38px,38px 38px!important;
+    opacity:.82!important;
+  }
+  .page-suppliers .fs-checklist article{grid-template-columns:40px minmax(0,1fr)!important;gap:10px!important;padding-inline:14px!important}
+  .page-suppliers .fs-after-steps article{grid-template-columns:38px minmax(0,1fr)!important}
+  .page-suppliers .privacy-check label::before{max-width:28ch}
+}
