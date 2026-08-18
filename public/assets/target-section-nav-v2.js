@@ -208,7 +208,8 @@
   }
 
   function suppressFAQSectionNavigation() {
-    if (!doc.body?.classList.contains('page-faq')) return false;
+    const ownsPageNavigation = doc.body?.classList.contains('page-faq') || doc.body?.classList.contains('page-privacy');
+    if (!ownsPageNavigation) return false;
     const remove = () => doc.querySelectorAll('.target-section-nav').forEach((nav) => nav.remove());
     remove();
     new MutationObserver(remove).observe(doc.body, { childList: true, subtree: true });
