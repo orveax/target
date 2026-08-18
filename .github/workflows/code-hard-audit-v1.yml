@@ -177,22 +177,26 @@ jobs:
         run: |
           failures=()
           [[ '${{ steps.build.outcome }}' == 'success' ]] || failures+=('build')
-          [[ '${{ steps.astro.outcome }}' == 'success' ]] || failures+=('astro/typecheck')
-          [[ '${{ steps.javascript.outcome }}' == 'success' ]] || failures+=('javascript syntax')
-          [[ '${{ steps.css.outcome }}' == 'success' ]] || failures+=('css structure')
+          [[ '${{ steps.astro.outcome }}' == 'success' ]] || failures+=('typecheck')
+          [[ '${{ steps.javascript.outcome }}' == 'success' ]] || failures+=('js-syntax')
+          [[ '${{ steps.css.outcome }}' == 'success' ]] || failures+=('css-structure')
           [[ '${{ steps.eslint.outcome }}' == 'success' ]] || failures+=('eslint')
-          [[ '${{ steps.knip.outcome }}' == 'success' ]] || failures+=('unused source/dependencies')
-          [[ '${{ steps.structure.outcome }}' == 'success' ]] || failures+=('repository structure')
+          [[ '${{ steps.knip.outcome }}' == 'success' ]] || failures+=('unused-code')
+          [[ '${{ steps.structure.outcome }}' == 'success' ]] || failures+=('repo-structure')
           if [[ '${{ steps.build.outcome }}' == 'success' ]]; then
-            [[ '${{ steps.server.outcome }}' == 'success' ]] || failures+=('release server')
-            [[ '${{ steps.coverage.outcome }}' == 'success' ]] || failures+=('runtime coverage execution')
+            [[ '${{ steps.server.outcome }}' == 'success' ]] || failures+=('release-server')
+            [[ '${{ steps.coverage.outcome }}' == 'success' ]] || failures+=('runtime-coverage')
           fi
-          [[ '${{ steps.security.outcome }}' == 'success' ]] || failures+=('production security audit')
+          [[ '${{ steps.security.outcome }}' == 'success' ]] || failures+=('security')
+
           if ((${#failures[@]})); then
-            printf 'Blocking hard-audit stages:\n'
-            printf ' - %s\n' "${failures[@]}"
+            joined="$(IFS=,; echo "${failures[*]}")"
+            echo "HARD_AUDIT_FAILURES=$joined" >> "$GITHUB_ENV"
+            echo "Blocking hard-audit stages: $joined"
             exit 1
           fi
+
+          echo 'HARD_AUDIT_FAILURES=' >> "$GITHUB_ENV"
           echo 'TARGET CODE HARD AUDIT: PASS'
 
       - name: Publish final status
@@ -201,8 +205,15 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           JOB_STATUS: ${{ job.status }}
+          FAILURES: ${{ env.HARD_AUDIT_FAILURES }}
         run: |
           RUN_URL="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
-          if [[ "$JOB_STATUS" == success ]]; then STATE=success; DESC='Code hard audit passed'; else STATE=failure; DESC='Code hard audit found blocking issues'; fi
+          if [[ "$JOB_STATUS" == success ]]; then
+            STATE=success
+            DESC='Code hard audit passed'
+          else
+            STATE=failure
+            if [[ -n "$FAILURES" ]]; then DESC="Hard audit failed: ${FAILURES}"; else DESC='Code hard audit found blocking issues'; fi
+          fi
           jq -n --arg state "$STATE" --arg context 'TARGET Code Hard Audit V1' --arg description "$DESC" --arg target_url "$RUN_URL" '{state:$state,context:$context,description:$description,target_url:$target_url}' >/tmp/status.json
           curl -fsSL -X POST -H "Authorization: Bearer ${GH_TOKEN}" -H "Accept: application/vnd.github+json" "https://api.github.com/repos/${GITHUB_REPOSITORY}/statuses/${GITHUB_SHA}" -d @/tmp/status.json >/dev/null
