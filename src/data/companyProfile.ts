@@ -9,5 +9,5 @@ export const companyProfileAsset = {
   size: '20.66 MB',
   version: 'Rev2 · 17 Aug 2026',
   source: 'Verified final Google Drive asset',
-  build: '20260818-05'
+  build: '20260818-06'
 } as const;
