@@ -1,4 +1,4 @@
-/* TARGET — Page 12 · 404 Recovery V2 | 2026-08-18
+/* TARGET — Page 12 · 404 Recovery V2 | 2026-08-18 · build 02
  * Controlled utility route. Recovery-first, bilingual, no commercial promises.
  */
 .page-404{background:var(--target-cream,#F4EDE4);color:var(--target-charcoal,#262626)}
@@ -45,11 +45,25 @@ html[dir="ltr"] .page-404 .recovery-route>a>svg{transform:rotate(180deg)}
 .page-404 :where(a,button):focus-visible{outline:3px solid rgba(192,149,82,.72);outline-offset:3px}
 html[dir="ltr"] .page-404 .not-found-code{letter-spacing:-.055em}
 
+/* Compact utility footer: Page 12 must recover the user, not restart the full site narrative. */
+.page-404 .target-footer-v6--compact{padding:0!important;background:linear-gradient(135deg,#063f2d 0%,#003828 100%)!important;min-height:0!important}
+.page-404 .target-footer-v6--compact::before,.page-404 .target-footer-v6--compact::after{display:none!important}
+.page-404 .target-footer-v6--compact .tf6-shell--compact{padding-top:0!important;padding-bottom:0!important}
+.page-404 .tf6-compact-main{min-height:116px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:36px;align-items:center;padding:24px 0 20px;border-bottom:1px solid rgba(244,237,228,.12)}
+.page-404 .tf6-compact-logo-link{display:inline-flex;align-items:center;width:max-content}
+.page-404 .tf6-compact-logo{display:block;width:clamp(132px,12vw,166px);height:auto}
+.page-404 .tf6-compact-nav{display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:8px 22px}
+.page-404 .tf6-compact-nav a{color:rgba(244,237,228,.82);font-size:.84rem;font-weight:700;text-decoration:none;transition:color 150ms ease}
+.page-404 .tf6-compact-nav a:hover,.page-404 .tf6-compact-nav a:focus-visible{color:#fff}
+.page-404 .tf6-compact-bottom{min-height:44px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:11px 0 14px;color:rgba(244,237,228,.55);font-size:.72rem;font-weight:600}
+
 @media(max-width:991.98px){
   .page-404 .not-found-shell{min-height:auto;padding:62px 0 72px}
   .page-404 .not-found-grid{grid-template-columns:minmax(0,1fr);gap:38px}
   .page-404 .not-found-copy{max-width:760px}
   .page-404 .not-found-recovery{max-width:620px;width:100%}
+  .page-404 .tf6-compact-main{grid-template-columns:1fr;gap:17px;justify-items:center;text-align:center;padding:22px 0 18px}
+  .page-404 .tf6-compact-nav{justify-content:center}
 }
 @media(max-width:575.98px){
   .page-404 .not-found-shell{padding:46px 0 56px}
@@ -64,7 +78,12 @@ html[dir="ltr"] .page-404 .not-found-code{letter-spacing:-.055em}
   .page-404 .recovery-head{margin-bottom:17px}
   .page-404 .recovery-route a{grid-template-columns:40px minmax(0,1fr) 18px;gap:10px;min-height:64px;padding:9px 10px}
   .page-404 .recovery-icon{width:40px;height:40px}
+  .page-404 .tf6-compact-main{min-height:0;padding:20px 0 16px}
+  .page-404 .tf6-compact-logo{width:132px}
+  .page-404 .tf6-compact-nav{gap:8px 15px}
+  .page-404 .tf6-compact-nav a{font-size:.8rem}
+  .page-404 .tf6-compact-bottom{min-height:0;justify-content:center;flex-wrap:wrap;padding:10px 0 13px;text-align:center}
 }
 @media(prefers-reduced-motion:reduce){
-  .page-404 .not-found-actions a,.page-404 .recovery-route a,.page-404 .recovery-route>a>svg{transition:none;transform:none!important}
+  .page-404 .not-found-actions a,.page-404 .recovery-route a,.page-404 .recovery-route>a>svg,.page-404 .tf6-compact-nav a{transition:none;transform:none!important}
 }
