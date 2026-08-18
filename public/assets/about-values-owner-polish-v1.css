@@ -44,6 +44,13 @@
   transition:transform .30s ease,background-color .30s ease,border-color .30s ease,box-shadow .30s ease,color .30s ease;
 }
 
+/* Kill the canonical Sand/Forest top bars and decorative corner circle. */
+.page-about .about-values-section .about-value-card::before,
+.page-about .about-values-section .about-value-card::after{
+  content:none!important;
+  display:none!important;
+}
+
 /* Vision / Mission becomes the card title sitting on the upper border. */
 .page-about .about-values-section .about-value-card .about-card-label{
   position:absolute!important;
@@ -112,6 +119,8 @@ html[lang='en'] .page-about .about-values-section .about-value-card .about-card-
   position:relative;
   z-index:2;
   width:100%;
+  opacity:1!important;
+  transform:none!important;
   transition:color .30s ease,opacity .30s ease,transform .30s ease;
 }
 .page-about .about-values-section .about-value-card h3{
