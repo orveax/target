@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'public/assets/owner-review-delta-v1.css'
+      - 'public/content/hero-media-manifest-v1.json'
       - 'src/layouts/BaseLayout.astro'
       - '.github/workflows/about-owner-review-delta-qa.yml'
   workflow_dispatch:
@@ -24,7 +25,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           RUN_URL="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
-          jq -n --arg state pending --arg context 'TARGET About Owner Review QA' --arg description 'About hero pattern QA is running' --arg target_url "$RUN_URL" '{state:$state,context:$context,description:$description,target_url:$target_url}' >/tmp/status.json
+          jq -n --arg state pending --arg context 'TARGET About Owner Review QA' --arg description 'About owner-review QA is running' --arg target_url "$RUN_URL" '{state:$state,context:$context,description:$description,target_url:$target_url}' >/tmp/status.json
           curl -fsSL -X POST -H "Authorization: Bearer ${GH_TOKEN}" -H "Accept: application/vnd.github+json" "https://api.github.com/repos/${GITHUB_REPOSITORY}/statuses/${GITHUB_SHA}" -d @/tmp/status.json >/dev/null
       - uses: actions/setup-node@v4
         with:
@@ -34,11 +35,14 @@ jobs:
         run: |
           set -euo pipefail
           test -f public/assets/owner-review-delta-v1.css
-          grep -Fq 'owner-review-delta-v1.css?v=20260818-01' src/layouts/BaseLayout.astro
-          grep -Fq 'ABOUT TARGET — Hero pattern' public/assets/owner-review-delta-v1.css
-          grep -Fq 'radial-gradient(circle,rgba(12,73,49,.075)' public/assets/owner-review-delta-v1.css
-          grep -Fq 'repeating-linear-gradient(135deg' public/assets/owner-review-delta-v1.css
-          grep -Fq '.page-about .about-hero' public/assets/owner-review-delta-v1.css
+          test -f public/content/hero-media-manifest-v1.json
+          grep -Fq 'owner-review-delta-v1.css?v=20260818-02' src/layouts/BaseLayout.astro
+          grep -Fq 'ABOUT TARGET — Hero V2 owner review' public/assets/owner-review-delta-v1.css
+          grep -Fq 'grid-template-columns:minmax(0,1.22fr) minmax(340px,.78fr)' public/assets/owner-review-delta-v1.css
+          grep -Fq 'photos/10907746/' public/assets/owner-review-delta-v1.css
+          grep -Fq 'sourceId": "10907746"' public/content/hero-media-manifest-v1.json
+          grep -Fq '.about-value-card h3::after' public/assets/owner-review-delta-v1.css
+          ! grep -Fq '0 31%' public/assets/owner-review-delta-v1.css
       - name: Install and build
         run: |
           npm install
@@ -55,7 +59,7 @@ jobs:
           npx --yes http-server dist -p 4173 -c-1 >/tmp/about-owner-review-http.log 2>&1 &
           for i in {1..30}; do curl -fsS http://127.0.0.1:4173/about.html >/dev/null && exit 0; sleep 1; done
           cat /tmp/about-owner-review-http.log; exit 1
-      - name: Browser and visual pattern QA
+      - name: Browser and visual QA
         env:
           CHROME_PATH: ${{ env.CHROME_PATH }}
         run: |
@@ -67,6 +71,7 @@ jobs:
           const origin='http://127.0.0.1:4173/about.html';
           const viewports=[
             ['1440',{viewport:{width:1440,height:1000}}],
+            ['768',{viewport:{width:768,height:1024}}],
             ['390',{viewport:{width:390,height:844},isMobile:true,hasTouch:true}]
           ];
           const failures=[]; const metrics=[];
@@ -76,39 +81,57 @@ jobs:
             try{
               await page.goto(origin,{waitUntil:'networkidle'});
               await page.evaluate(async()=>{if(document.fonts) await document.fonts.ready;});
-              await page.waitForTimeout(250);
+              await page.waitForTimeout(300);
               for(const lang of ['ar','en']){
                 if(await page.locator('html').getAttribute('lang')!==lang){await page.locator('[data-lang-toggle]').first().click();await page.waitForTimeout(220);}
                 const m=await page.evaluate(()=>{
                   const hero=document.querySelector('.about-hero');
+                  const grid=document.querySelector('.about-hero__grid');
                   const copy=document.querySelector('.about-hero__copy');
                   const media=document.querySelector('.about-hero__media');
                   const h1=document.querySelector('.about-hero h1');
-                  const hs=getComputedStyle(hero);
-                  const hb=hero.getBoundingClientRect();
-                  const cb=copy.getBoundingClientRect();
-                  const mb=media.getBoundingClientRect();
-                  const h1s=getComputedStyle(h1);
+                  const titles=[...document.querySelectorAll('.about-value-card h3')].map(h=>{
+                    const s=getComputedStyle(h); const a=getComputedStyle(h,'::after');
+                    return {fontSize:parseFloat(s.fontSize),weight:Number(s.fontWeight)||0,lineHeight:s.lineHeight,accentWidth:parseFloat(a.width),accentHeight:parseFloat(a.height)};
+                  });
+                  const hs=getComputedStyle(hero), gs=getComputedStyle(grid), ms=getComputedStyle(media), h1s=getComputedStyle(h1);
+                  const hb=hero.getBoundingClientRect(), cb=copy.getBoundingClientRect(), mb=media.getBoundingClientRect();
+                  const imageResource=[...performance.getEntriesByType('resource')].find(e=>e.name.includes('10907746'));
                   return {
                     lang:document.documentElement.lang,
                     dir:document.documentElement.dir,
                     overflowX:document.documentElement.scrollWidth>document.documentElement.clientWidth,
                     backgroundImage:hs.backgroundImage,
+                    gridColumns:gs.gridTemplateColumns,
+                    mediaBackground:ms.backgroundImage,
+                    imageLoaded:Boolean(imageResource),
+                    imageBytes:imageResource ? Math.max(imageResource.transferSize||0,imageResource.decodedBodySize||0) : 0,
                     heroHeight:hb.height,
                     copyWidth:cb.width,
                     mediaWidth:mb.width,
-                    h1Color:h1s.color,
                     h1Visibility:h1s.visibility,
-                    h1Opacity:Number(h1s.opacity)
+                    h1Opacity:Number(h1s.opacity),
+                    titles
                   };
                 });
                 metrics.push({viewport:name,...m});
                 if(m.overflowX) failures.push(`${name}-${lang}: horizontal overflow`);
-                if(!m.backgroundImage.includes('radial-gradient')||!m.backgroundImage.includes('repeating-linear-gradient')) failures.push(`${name}-${lang}: About hero pattern is not active`);
+                if(!m.backgroundImage.includes('radial-gradient')||!m.backgroundImage.includes('linear-gradient')) failures.push(`${name}-${lang}: unified hero pattern is not active`);
+                if(m.backgroundImage.includes('31%')) failures.push(`${name}-${lang}: old hard split background remains active`);
+                if(!m.mediaBackground.includes('10907746')) failures.push(`${name}-${lang}: refreshed About hero image is not active`);
+                if(!m.imageLoaded) failures.push(`${name}-${lang}: refreshed hero image resource did not load`);
                 if(m.heroHeight<500) failures.push(`${name}-${lang}: hero collapsed`);
-                if(m.copyWidth<250||m.mediaWidth<240) failures.push(`${name}-${lang}: hero columns collapsed`);
+                if(m.copyWidth<250||m.mediaWidth<240) failures.push(`${name}-${lang}: hero composition collapsed`);
+                if(name==='1440' && m.copyWidth/m.mediaWidth<1.18) failures.push(`${name}-${lang}: hero still reads too close to a 50/50 split`);
                 if(m.h1Visibility!=='visible'||m.h1Opacity<0.95) failures.push(`${name}-${lang}: hero title visibility regression`);
+                if(m.titles.length!==2) failures.push(`${name}-${lang}: expected two Vision/Mission titles`);
+                for(const [i,t] of m.titles.entries()){
+                  if(t.fontSize<23) failures.push(`${name}-${lang}: Vision/Mission title ${i+1} is too weak`);
+                  if(t.weight<700) failures.push(`${name}-${lang}: Vision/Mission title ${i+1} weight regression`);
+                  if(t.accentWidth<28||t.accentHeight<1.5) failures.push(`${name}-${lang}: Vision/Mission title ${i+1} accent missing`);
+                }
                 await page.locator('.about-hero').screenshot({path:`about-owner-review/${name}-${lang}-hero.png`});
+                await page.locator('.about-values-section').screenshot({path:`about-owner-review/${name}-${lang}-vision-mission.png`});
               }
             }catch(e){failures.push(`${name}: ${e.message}`)}finally{await ctx.close()}
           }
@@ -133,6 +156,6 @@ jobs:
           JOB_STATUS: ${{ job.status }}
         run: |
           RUN_URL="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
-          if [[ "$JOB_STATUS" == success ]]; then STATE=success; DESC='About hero pattern QA passed'; else STATE=failure; DESC='About hero pattern QA failed'; fi
+          if [[ "$JOB_STATUS" == success ]]; then STATE=success; DESC='About owner-review QA passed'; else STATE=failure; DESC='About owner-review QA failed'; fi
           jq -n --arg state "$STATE" --arg context 'TARGET About Owner Review QA' --arg description "$DESC" --arg target_url "$RUN_URL" '{state:$state,context:$context,description:$description,target_url:$target_url}' >/tmp/status.json
           curl -fsSL -X POST -H "Authorization: Bearer ${GH_TOKEN}" -H "Accept: application/vnd.github+json" "https://api.github.com/repos/${GITHUB_REPOSITORY}/statuses/${GITHUB_SHA}" -d @/tmp/status.json >/dev/null
