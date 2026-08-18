@@ -36,11 +36,13 @@ jobs:
           set -euo pipefail
           test -f public/assets/owner-review-delta-v1.css
           test -f public/content/hero-media-manifest-v1.json
-          grep -Fq 'owner-review-delta-v1.css?v=20260818-03' src/layouts/BaseLayout.astro
-          grep -Fq 'ABOUT TARGET — Hero V2 owner review' public/assets/owner-review-delta-v1.css
+          grep -Fq 'owner-review-delta-v1.css?v=20260818-04' src/layouts/BaseLayout.astro
+          grep -Fq 'ABOUT TARGET — Hero V3 owner polish' public/assets/owner-review-delta-v1.css
           grep -Fq 'grid-template-columns:minmax(0,1.22fr) minmax(340px,.78fr)' public/assets/owner-review-delta-v1.css
-          grep -Fq 'photos/10907746/' public/assets/owner-review-delta-v1.css
-          grep -Fq 'sourceId": "10907746"' public/content/hero-media-manifest-v1.json
+          grep -Fq 'photos/4481260/' public/assets/owner-review-delta-v1.css
+          grep -Fq 'sourceId": "4481260"' public/content/hero-media-manifest-v1.json
+          grep -Fq '.about-hero__media::before{display:none!important}' public/assets/owner-review-delta-v1.css
+          grep -Fq 'font-size:clamp(2.55rem,4.15vw,3.95rem)!important' public/assets/owner-review-delta-v1.css
           grep -Fq '.about-value-card h3::after' public/assets/owner-review-delta-v1.css
           grep -Fq 'content:"الرؤية والرسالة"' public/assets/owner-review-delta-v1.css
           grep -Fq 'content:"VISION & MISSION"' public/assets/owner-review-delta-v1.css
@@ -96,13 +98,14 @@ jobs:
                   const h1=document.querySelector('.about-hero h1');
                   const values=document.querySelector('.about-values');
                   const floating=getComputedStyle(values,'::before');
+                  const mediaPlate=getComputedStyle(media,'::before');
                   const titles=[...document.querySelectorAll('.about-value-card h3')].map(h=>{
                     const s=getComputedStyle(h); const a=getComputedStyle(h,'::after');
                     return {fontSize:parseFloat(s.fontSize),weight:Number(s.fontWeight)||0,lineHeight:s.lineHeight,accentWidth:parseFloat(a.width),accentHeight:parseFloat(a.height)};
                   });
                   const hs=getComputedStyle(hero), gs=getComputedStyle(grid), ms=getComputedStyle(media), h1s=getComputedStyle(h1);
                   const hb=hero.getBoundingClientRect(), cb=copy.getBoundingClientRect(), mb=media.getBoundingClientRect();
-                  const imageResource=[...performance.getEntriesByType('resource')].find(e=>e.name.includes('10907746'));
+                  const imageResource=[...performance.getEntriesByType('resource')].find(e=>e.name.includes('4481260'));
                   return {
                     lang:document.documentElement.lang,
                     dir:document.documentElement.dir,
@@ -110,6 +113,7 @@ jobs:
                     backgroundImage:hs.backgroundImage,
                     gridColumns:gs.gridTemplateColumns,
                     mediaBackground:ms.backgroundImage,
+                    mediaPlateDisplay:mediaPlate.display,
                     imageLoaded:Boolean(imageResource),
                     imageBytes:imageResource ? Math.max(imageResource.transferSize||0,imageResource.decodedBodySize||0) : 0,
                     heroHeight:hb.height,
@@ -117,6 +121,8 @@ jobs:
                     mediaWidth:mb.width,
                     h1Visibility:h1s.visibility,
                     h1Opacity:Number(h1s.opacity),
+                    h1FontSize:parseFloat(h1s.fontSize),
+                    h1LineHeight:parseFloat(h1s.lineHeight),
                     floatingContent:floating.content,
                     floatingOpacity:Number(floating.opacity),
                     floatingBackground:floating.backgroundColor,
@@ -127,11 +133,13 @@ jobs:
                 if(m.overflowX) failures.push(`${name}-${lang}: horizontal overflow`);
                 if(!m.backgroundImage.includes('radial-gradient')||!m.backgroundImage.includes('linear-gradient')) failures.push(`${name}-${lang}: unified hero pattern is not active`);
                 if(m.backgroundImage.includes('31%')) failures.push(`${name}-${lang}: old hard split background remains active`);
-                if(!m.mediaBackground.includes('10907746')) failures.push(`${name}-${lang}: refreshed About hero image is not active`);
-                if(!m.imageLoaded) failures.push(`${name}-${lang}: refreshed hero image resource did not load`);
+                if(!m.mediaBackground.includes('4481260')) failures.push(`${name}-${lang}: warehouse/shipment About hero image is not active`);
+                if(!m.imageLoaded) failures.push(`${name}-${lang}: warehouse/shipment hero image resource did not load`);
+                if(m.mediaPlateDisplay!=='none') failures.push(`${name}-${lang}: decorative media plate is still visible`);
                 if(m.heroHeight<500) failures.push(`${name}-${lang}: hero collapsed`);
                 if(m.copyWidth<250||m.mediaWidth<240) failures.push(`${name}-${lang}: hero composition collapsed`);
                 if(name==='1440' && m.copyWidth/m.mediaWidth<1.18) failures.push(`${name}-${lang}: hero still reads too close to a 50/50 split`);
+                if(name==='1440' && (m.h1FontSize>65||m.h1FontSize<48)) failures.push(`${name}-${lang}: hero headline scale outside refined range`);
                 if(m.h1Visibility!=='visible'||m.h1Opacity<0.95) failures.push(`${name}-${lang}: hero title visibility regression`);
                 if(lang==='ar'&&!m.floatingContent.includes('الرؤية والرسالة')) failures.push(`${name}-${lang}: Arabic floating Vision/Mission title missing`);
                 if(lang==='en'&&!m.floatingContent.includes('VISION & MISSION')) failures.push(`${name}-${lang}: English floating Vision/Mission title missing`);
