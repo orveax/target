@@ -34,7 +34,7 @@ jobs:
         run: |
           set -euo pipefail
           test -f public/assets/owner-review-delta-v1.css
-          grep -Fq 'owner-review-delta-v1.css?v=20260818-02' src/layouts/BaseLayout.astro
+          grep -Fq 'owner-review-delta-v1.css?v=20260818-04' src/layouts/BaseLayout.astro
           grep -Fq 'photos/11679687/' public/assets/owner-review-delta-v1.css
           grep -Fq 'grid-template-columns:42px minmax(0,1fr)' public/assets/owner-review-delta-v1.css
           grep -Fq '.hc-steps li>div' public/assets/owner-review-delta-v1.css
