@@ -50,16 +50,23 @@ const megaActive = ['market','suppliers','contact','profile','faq','privacy','te
                   </a>
                 </section>
 
-                <section>
+                <section class="th2-mega-resource-group">
                   <span class="th2-mega-kicker" data-ar="الشركة والموارد" data-en="Company & Resources">الشركة والموارد</span>
-                  <a class:list={[active==='profile' && 'active']} href="company-profile.html" aria-current={active==='profile' ? 'page' : undefined}>
-                    <i data-lucide="book-open-text"></i>
-                    <span><b data-ar="الملف التعريفي" data-en="Company Profile">الملف التعريفي</b><small data-ar="مرجع مختصر عن تارقت" data-en="A concise TARGET reference">مرجع مختصر عن تارقت</small></span>
-                  </a>
-                  <a href={companyProfileAsset.downloadUrl} target="_blank" rel="noopener noreferrer" data-profile-mega-download>
-                    <i data-lucide="file-down"></i>
-                    <span><b data-ar="تحميل ملف الشركة" data-en="Download Profile">تحميل ملف الشركة</b><small data-ar="PDF · 10 صفحات" data-en="PDF · 10 pages">PDF · 10 صفحات</small></span>
-                  </a>
+                  <div class:list={['th2-mega-profile-card', active==='profile' && 'active']}>
+                    <a class="th2-mega-profile-main" href="company-profile.html" aria-current={active==='profile' ? 'page' : undefined}>
+                      <span class="th2-mega-profile-icon"><i data-lucide="book-open-text"></i></span>
+                      <span class="th2-mega-profile-copy">
+                        <b data-ar="الملف التعريفي" data-en="Company Profile">الملف التعريفي</b>
+                        <small data-ar="مرجع الشركة الرسمي" data-en="Official company reference">مرجع الشركة الرسمي</small>
+                      </span>
+                      <i class="th2-mega-profile-arrow" data-lucide="arrow-up-left"></i>
+                    </a>
+                    <a class="th2-mega-profile-download" href={companyProfileAsset.downloadUrl} target="_blank" rel="noopener noreferrer" data-profile-mega-download>
+                      <i data-lucide="download"></i>
+                      <span data-ar="تحميل PDF" data-en="Download PDF">تحميل PDF</span>
+                      <small data-ar="10 صفحات" data-en="10 pages">10 صفحات</small>
+                    </a>
+                  </div>
                   <a class:list={[active==='faq' && 'active']} href="faq.html" aria-current={active==='faq' ? 'page' : undefined}>
                     <i data-lucide="circle-help"></i>
                     <span><b data-ar="الأسئلة الشائعة" data-en="FAQ">الأسئلة الشائعة</b><small data-ar="إجابات سريعة وواضحة" data-en="Quick, clear answers">إجابات سريعة وواضحة</small></span>
@@ -85,10 +92,6 @@ const megaActive = ['market','suppliers','contact','profile','faq','privacy','te
 
       <div class="th2-actions">
         <button class="lang-button th2-lang" type="button" data-lang-toggle aria-label="Switch language">EN</button>
-        <a class="btn btn-outline-light th2-cta d-none d-xxl-inline-flex" href={companyProfileAsset.downloadUrl} target="_blank" rel="noopener noreferrer" data-profile-header-download>
-          <i data-lucide="file-down"></i>
-          <span data-ar="ملف الشركة" data-en="Company Profile">ملف الشركة</span>
-        </a>
         <a class="btn-premium btn-primary-premium th2-cta d-none d-xl-inline-flex" href="suppliers.html">
           <span data-ar="ناقش منتجك معنا" data-en="Discuss Your Product">ناقش منتجك معنا</span>
           <i data-lucide="arrow-up-left"></i>
@@ -133,10 +136,27 @@ const megaActive = ['market','suppliers','contact','profile','faq','privacy','te
       <a href="suppliers.html"><span data-ar="ناقش منتجك معنا" data-en="Discuss Your Product">ناقش منتجك معنا</span><i data-lucide="arrow-up-left"></i></a>
     </section>
 
+    <section class:list={['th2-mobile-profile-card', active==='profile' && 'active']} aria-labelledby="th2MobileProfileTitle">
+      <div class="th2-mobile-profile-card-head">
+        <span class="th2-mobile-profile-icon"><i data-lucide="book-open-text"></i></span>
+        <div>
+          <small data-ar="مورد الشركة" data-en="Company Resource">مورد الشركة</small>
+          <h2 id="th2MobileProfileTitle" data-ar="الملف التعريفي" data-en="Company Profile">الملف التعريفي</h2>
+          <p data-ar="النسخة الرسمية · PDF · 10 صفحات · 20.66 MB" data-en="Official profile · PDF · 10 pages · 20.66 MB">النسخة الرسمية · PDF · 10 صفحات · 20.66 MB</p>
+        </div>
+      </div>
+      <div class="th2-mobile-profile-actions">
+        <a class="th2-mobile-profile-view" href="company-profile.html">
+          <i data-lucide="eye"></i><span data-ar="عرض الصفحة" data-en="View Page">عرض الصفحة</span>
+        </a>
+        <a class="th2-mobile-profile-download" href={companyProfileAsset.downloadUrl} target="_blank" rel="noopener noreferrer" data-profile-mobile-download>
+          <i data-lucide="download"></i><span data-ar="تحميل PDF" data-en="Download PDF">تحميل PDF</span>
+        </a>
+      </div>
+    </section>
+
     <div class="th2-mobile-utility-head"><span data-ar="المزيد" data-en="More">المزيد</span></div>
-    <nav class="th2-mobile-secondary" aria-label="Secondary mobile navigation">
-      <a class="th2-mobile-profile-resource" href="company-profile.html"><span><i data-lucide="book-open-text"></i><b data-ar="الملف التعريفي" data-en="Company Profile">الملف التعريفي</b><small data-ar="عرض صفحة الملف" data-en="View profile page">عرض صفحة الملف</small></span><i data-lucide="arrow-up-left"></i></a>
-      <a href={companyProfileAsset.downloadUrl} target="_blank" rel="noopener noreferrer" data-profile-mobile-download><span><i data-lucide="file-down"></i><b data-ar="تحميل ملف الشركة" data-en="Download Profile">تحميل ملف الشركة</b><small data-ar="PDF · 10 صفحات · 20.66 MB" data-en="PDF · 10 pages · 20.66 MB">PDF · 10 صفحات · 20.66 MB</small></span><i data-lucide="download"></i></a>
+    <nav class="th2-mobile-secondary th2-mobile-secondary--compact" aria-label="Secondary mobile navigation">
       <a href="contact.html"><span><i data-lucide="mail"></i><b data-ar="الاتصال بنا" data-en="Contact Us">الاتصال بنا</b></span><i data-lucide="arrow-up-left"></i></a>
       <a href="faq.html"><span><i data-lucide="circle-help"></i><b data-ar="الأسئلة الشائعة" data-en="FAQ">الأسئلة الشائعة</b></span><i data-lucide="arrow-up-left"></i></a>
     </nav>
