@@ -1,0 +1,138 @@
+name: TARGET About Owner Review Delta QA
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'public/assets/owner-review-delta-v1.css'
+      - 'src/layouts/BaseLayout.astro'
+      - '.github/workflows/about-owner-review-delta-qa.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  statuses: write
+
+jobs:
+  owner-review-about:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Publish pending status
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          RUN_URL="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          jq -n --arg state pending --arg context 'TARGET About Owner Review QA' --arg description 'About hero pattern QA is running' --arg target_url "$RUN_URL" '{state:$state,context:$context,description:$description,target_url:$target_url}' >/tmp/status.json
+          curl -fsSL -X POST -H "Authorization: Bearer ${GH_TOKEN}" -H "Accept: application/vnd.github+json" "https://api.github.com/repos/${GITHUB_REPOSITORY}/statuses/${GITHUB_SHA}" -d @/tmp/status.json >/dev/null
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify owner review source contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f public/assets/owner-review-delta-v1.css
+          grep -Fq 'owner-review-delta-v1.css?v=20260818-01' src/layouts/BaseLayout.astro
+          grep -Fq 'ABOUT TARGET — Hero pattern' public/assets/owner-review-delta-v1.css
+          grep -Fq 'radial-gradient(circle,rgba(12,73,49,.075)' public/assets/owner-review-delta-v1.css
+          grep -Fq 'repeating-linear-gradient(135deg' public/assets/owner-review-delta-v1.css
+          grep -Fq '.page-about .about-hero' public/assets/owner-review-delta-v1.css
+      - name: Install and build
+        run: |
+          npm install
+          npm run build
+      - name: Prepare hosted Chrome
+        shell: bash
+        run: |
+          npm install --no-save playwright@1.55.0
+          CHROME_PATH="$(command -v google-chrome || command -v google-chrome-stable || true)"
+          test -n "$CHROME_PATH"
+          echo "CHROME_PATH=$CHROME_PATH" >> "$GITHUB_ENV"
+      - name: Start static server
+        run: |
+          npx --yes http-server dist -p 4173 -c-1 >/tmp/about-owner-review-http.log 2>&1 &
+          for i in {1..30}; do curl -fsS http://127.0.0.1:4173/about.html >/dev/null && exit 0; sleep 1; done
+          cat /tmp/about-owner-review-http.log; exit 1
+      - name: Browser and visual pattern QA
+        env:
+          CHROME_PATH: ${{ env.CHROME_PATH }}
+        run: |
+          mkdir -p about-owner-review
+          cat > about-owner-review/capture.mjs <<'EOF'
+          import { chromium } from 'playwright';
+          import fs from 'node:fs';
+          const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_PATH});
+          const origin='http://127.0.0.1:4173/about.html';
+          const viewports=[
+            ['1440',{viewport:{width:1440,height:1000}}],
+            ['390',{viewport:{width:390,height:844},isMobile:true,hasTouch:true}]
+          ];
+          const failures=[]; const metrics=[];
+          for(const [name,opts] of viewports){
+            const ctx=await browser.newContext(opts);
+            const page=await ctx.newPage();
+            try{
+              await page.goto(origin,{waitUntil:'networkidle'});
+              await page.evaluate(async()=>{if(document.fonts) await document.fonts.ready;});
+              await page.waitForTimeout(250);
+              for(const lang of ['ar','en']){
+                if(await page.locator('html').getAttribute('lang')!==lang){await page.locator('[data-lang-toggle]').first().click();await page.waitForTimeout(220);}
+                const m=await page.evaluate(()=>{
+                  const hero=document.querySelector('.about-hero');
+                  const copy=document.querySelector('.about-hero__copy');
+                  const media=document.querySelector('.about-hero__media');
+                  const h1=document.querySelector('.about-hero h1');
+                  const hs=getComputedStyle(hero);
+                  const hb=hero.getBoundingClientRect();
+                  const cb=copy.getBoundingClientRect();
+                  const mb=media.getBoundingClientRect();
+                  const h1s=getComputedStyle(h1);
+                  return {
+                    lang:document.documentElement.lang,
+                    dir:document.documentElement.dir,
+                    overflowX:document.documentElement.scrollWidth>document.documentElement.clientWidth,
+                    backgroundImage:hs.backgroundImage,
+                    heroHeight:hb.height,
+                    copyWidth:cb.width,
+                    mediaWidth:mb.width,
+                    h1Color:h1s.color,
+                    h1Visibility:h1s.visibility,
+                    h1Opacity:Number(h1s.opacity)
+                  };
+                });
+                metrics.push({viewport:name,...m});
+                if(m.overflowX) failures.push(`${name}-${lang}: horizontal overflow`);
+                if(!m.backgroundImage.includes('radial-gradient')||!m.backgroundImage.includes('repeating-linear-gradient')) failures.push(`${name}-${lang}: About hero pattern is not active`);
+                if(m.heroHeight<500) failures.push(`${name}-${lang}: hero collapsed`);
+                if(m.copyWidth<250||m.mediaWidth<240) failures.push(`${name}-${lang}: hero columns collapsed`);
+                if(m.h1Visibility!=='visible'||m.h1Opacity<0.95) failures.push(`${name}-${lang}: hero title visibility regression`);
+                await page.locator('.about-hero').screenshot({path:`about-owner-review/${name}-${lang}-hero.png`});
+              }
+            }catch(e){failures.push(`${name}: ${e.message}`)}finally{await ctx.close()}
+          }
+          fs.writeFileSync('about-owner-review/metrics.json',JSON.stringify(metrics,null,2));
+          fs.writeFileSync('about-owner-review/failures.txt',failures.join('\n'));
+          await browser.close();
+          if(failures.length){console.error(failures.join('\n'));process.exit(1)}
+          EOF
+          node about-owner-review/capture.mjs
+      - name: Upload About screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: target-about-owner-review-delta
+          path: about-owner-review
+          retention-days: 14
+      - name: Publish final status
+        if: always()
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          JOB_STATUS: ${{ job.status }}
+        run: |
+          RUN_URL="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          if [[ "$JOB_STATUS" == success ]]; then STATE=success; DESC='About hero pattern QA passed'; else STATE=failure; DESC='About hero pattern QA failed'; fi
+          jq -n --arg state "$STATE" --arg context 'TARGET About Owner Review QA' --arg description "$DESC" --arg target_url "$RUN_URL" '{state:$state,context:$context,description:$description,target_url:$target_url}' >/tmp/status.json
+          curl -fsSL -X POST -H "Authorization: Bearer ${GH_TOKEN}" -H "Accept: application/vnd.github+json" "https://api.github.com/repos/${GITHUB_REPOSITORY}/statuses/${GITHUB_SHA}" -d @/tmp/status.json >/dev/null
