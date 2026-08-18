@@ -104,6 +104,17 @@ body .target-section-nav.target-section-nav--under-header button{
   color:rgba(244,237,228,.085)!important;
 }
 
+/* Home step cards previously reserved a dedicated number column.
+ * Once the number becomes background art, the content owns the full row.
+ */
+.page-home .home-canonical .hc-steps li.target-numbered-card{
+  grid-template-columns:minmax(0,1fr)!important;
+}
+.page-home .home-canonical .hc-steps li.target-numbered-card>div{
+  grid-column:1/-1!important;
+  width:100%!important;
+}
+
 @media(max-width:767.98px){
   .target-numbered-card .target-card-number-bg{
     inset-inline-end:9px!important;
