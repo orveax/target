@@ -43,7 +43,7 @@ jobs:
           ! grep -Fq 'hero-faq-premium-v1.css' src/layouts/BaseLayout.astro
           grep -Fq 'grid-template-columns:minmax(0,55fr) minmax(340px,45fr)' public/assets/faq-canonical.css
           grep -Fq 'scroll-margin-top:112px' public/assets/faq-canonical.css
-          grep -Fq 'suppressFAQSectionNavigation' public/assets/target-section-nav-v2.js
+          grep -Fq 'suppressPageOwnedSectionNavigation' public/assets/target-section-nav-v2.js
           grep -Fq "classList.contains('page-faq')" public/assets/target-section-nav-v2.js
           grep -Fq 'faq-q01' src/pages/faq.astro
           grep -Fq 'faq-q15' src/pages/faq.astro
