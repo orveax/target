@@ -24,7 +24,8 @@
 
   toggle.addEventListener('click', (event) => {
     event.preventDefault();
-    root.classList.contains('is-open') ? close() : open();
+    if (root.classList.contains('is-open')) close();
+    else open();
   });
 
   document.addEventListener('pointerdown', (event) => {
