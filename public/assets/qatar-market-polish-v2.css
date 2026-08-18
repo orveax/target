@@ -1,4 +1,4 @@
-/* TARGET — Qatar Market Polish V3 — photography density + checkpoint state refinement */
+/* TARGET — Qatar Market Polish V4 — photography density + numbered-card hierarchy */
 .page-qatar-market .qm-hero-media>img{
   content:url('https://images.pexels.com/photos/10907746/pexels-photo-10907746.jpeg?auto=compress&cs=tinysrgb&w=1600');
   object-fit:cover;
@@ -177,6 +177,131 @@
   border-color:rgba(192,149,82,.76);
 }
 
+/* Owner review — numbered cards use the number as a background layer. */
+.page-qatar-market .qm-context-points article,
+.page-qatar-market .qm-checklist article,
+.page-qatar-market .qm-checkpoint-track article{
+  position:relative;
+  isolation:isolate;
+}
+.page-qatar-market .qm-point-index,
+.page-qatar-market .qm-check-number,
+.page-qatar-market .qm-track-number{
+  position:absolute!important;
+  z-index:0;
+  inset-inline-end:14px;
+  inset-block-start:10px;
+  display:block!important;
+  width:auto!important;
+  min-width:0!important;
+  min-height:0!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  color:rgba(12,73,49,.075)!important;
+  font:800 clamp(3.4rem,5vw,5.25rem)/.86 var(--target-font-en,"Manrope",sans-serif)!important;
+  letter-spacing:-.06em;
+  pointer-events:none;
+  user-select:none;
+}
+.page-qatar-market .qm-context-points article>*:not(.qm-point-index),
+.page-qatar-market .qm-checklist article>*:not(.qm-check-number),
+.page-qatar-market .qm-checkpoint-track article>*:not(.qm-track-number){
+  position:relative;
+  z-index:1;
+}
+.page-qatar-market .qm-checkpoint-track article.is-focus .qm-track-number{
+  color:rgba(244,237,228,.09)!important;
+  background:transparent!important;
+}
+
+/* Remove number columns now that numbers are decorative background elements. */
+.page-qatar-market .qm-context-points article{
+  grid-template-columns:52px minmax(0,1fr)!important;
+  gap:13px!important;
+  padding-inline:18px!important;
+}
+.page-qatar-market .qm-checklist article{
+  grid-template-columns:52px minmax(0,1fr)!important;
+  gap:14px!important;
+  padding-inline:22px!important;
+}
+
+/* From Product to Market — icon + title share one row; number remains behind the content. */
+.page-qatar-market .qm-checkpoint-track article{
+  display:grid!important;
+  grid-template-columns:54px minmax(0,1fr)!important;
+  grid-template-rows:auto 1fr!important;
+  column-gap:14px!important;
+  row-gap:18px!important;
+  align-content:start!important;
+  padding:25px 22px 26px!important;
+}
+.page-qatar-market .qm-checkpoint-track .qm-icon{
+  grid-column:1!important;
+  grid-row:1!important;
+  align-self:center!important;
+  margin:0!important;
+  width:52px!important;
+  height:52px!important;
+}
+.page-qatar-market .qm-checkpoint-track h3{
+  grid-column:2!important;
+  grid-row:1!important;
+  align-self:center!important;
+  margin:0!important;
+  padding-inline-end:32px;
+  line-height:1.42!important;
+}
+.page-qatar-market .qm-checkpoint-track p{
+  grid-column:1/-1!important;
+  grid-row:2!important;
+  margin:0!important;
+  padding-inline-end:10px;
+}
+
+/* Clear Expectations — organize the message, spacing and CTA as one deliberate block. */
+.page-qatar-market .qm-clarity{
+  padding-block:clamp(76px,7vw,104px)!important;
+}
+.page-qatar-market .qm-clarity-panel{
+  grid-template-columns:72px minmax(0,1fr)!important;
+  gap:26px!important;
+  align-items:start!important;
+  padding:clamp(32px,4vw,48px)!important;
+  border-color:rgba(12,73,49,.14)!important;
+  background:linear-gradient(135deg,#F4EDE4 0%,#FBF8F3 100%)!important;
+  box-shadow:0 18px 42px rgba(38,38,38,.055)!important;
+}
+.page-qatar-market .qm-clarity-panel>div{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  column-gap:32px;
+  align-items:start;
+}
+.page-qatar-market .qm-clarity-panel .qm-kicker,
+.page-qatar-market .qm-clarity-panel h2,
+.page-qatar-market .qm-clarity-panel p{
+  grid-column:1;
+}
+.page-qatar-market .qm-clarity-panel h2{
+  max-width:760px;
+  margin-bottom:14px!important;
+}
+.page-qatar-market .qm-clarity-panel p{
+  max-width:820px;
+  margin-bottom:0!important;
+}
+.page-qatar-market .qm-clarity-contact{
+  grid-column:2;
+  grid-row:1/4;
+  align-self:center;
+  min-width:148px;
+  margin-top:0!important;
+}
+
 @media(max-width:991.98px){
   .page-qatar-market .qm-hero-media>img{object-position:center center}
   .page-qatar-market .qm-context-media img{object-position:center 48%}
@@ -185,6 +310,15 @@
   .page-qatar-market .qm-channel-copy::after{
     aspect-ratio:16/9;
     margin-top:22px;
+  }
+  .page-qatar-market .qm-clarity-panel>div{
+    grid-template-columns:1fr;
+  }
+  .page-qatar-market .qm-clarity-contact{
+    grid-column:1;
+    grid-row:auto;
+    justify-self:start;
+    margin-top:22px!important;
   }
 }
 @media(max-width:575.98px){
@@ -196,14 +330,49 @@
     inset-block-end:10px;
   }
   .page-qatar-market .qm-checklist article{min-height:auto}
+  .page-qatar-market .qm-context-points article,
+  .page-qatar-market .qm-checklist article{
+    grid-template-columns:48px minmax(0,1fr)!important;
+    padding-inline:16px!important;
+  }
+  .page-qatar-market .qm-point-index,
+  .page-qatar-market .qm-check-number,
+  .page-qatar-market .qm-track-number{
+    inset-inline-end:10px;
+    inset-block-start:10px;
+    font-size:3.45rem!important;
+  }
   .page-qatar-market .qm-checkpoint-track article{
     min-height:auto;
-    padding:20px 18px 22px;
+    grid-template-columns:48px minmax(0,1fr)!important;
+    column-gap:12px!important;
+    row-gap:15px!important;
+    padding:20px 18px 22px!important;
+  }
+  .page-qatar-market .qm-checkpoint-track .qm-icon{
+    width:48px!important;
+    height:48px!important;
+  }
+  .page-qatar-market .qm-checkpoint-track h3{
+    padding-inline-end:24px;
   }
   .page-qatar-market .qm-review .qm-section-head::after,
   .page-qatar-market .qm-channel-copy::after{
     border-radius:16px;
     aspect-ratio:4/3;
+  }
+  .page-qatar-market .qm-clarity-panel{
+    grid-template-columns:1fr!important;
+    gap:18px!important;
+    padding:28px 22px!important;
+  }
+  .page-qatar-market .qm-clarity-panel .qm-icon-large{
+    width:58px;
+    height:58px;
+  }
+  .page-qatar-market .qm-clarity-contact{
+    width:100%;
+    justify-self:stretch;
   }
 }
 @media(prefers-reduced-motion:reduce){
