@@ -18,6 +18,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Publish pending status
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          RUN_URL="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          jq -n --arg state pending --arg context 'TARGET About Vision Mission QA' --arg description 'Vision & Mission owner polish QA is running' --arg target_url "$RUN_URL" '{state:$state,context:$context,description:$description,target_url:$target_url}' >/tmp/status.json
+          curl -fsSL -X POST -H "Authorization: Bearer ${GH_TOKEN}" -H "Accept: application/vnd.github+json" "https://api.github.com/repos/${GITHUB_REPOSITORY}/statuses/${GITHUB_SHA}" -d @/tmp/status.json >/dev/null
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -73,12 +81,10 @@ jobs:
                   floatingHeight:parseFloat(floating.height),
                   floatingFont:parseFloat(floating.fontSize),
                   floatingOpacity:Number(floating.opacity),
-                  floatingBg:floating.backgroundColor,
                   lineHeight:parseFloat(line.height),
                   cardHeights:cards.map(c=>c.getBoundingClientRect().height),
                   cardPaddingTop:cards.map(c=>parseFloat(getComputedStyle(c).paddingTop)),
-                  titleWidths:cards.map(c=>c.querySelector('h3').getBoundingClientRect().width),
-                  titleMax:cards.map(c=>getComputedStyle(c.querySelector('h3')).maxWidth)
+                  titleWidths:cards.map(c=>c.querySelector('h3').getBoundingClientRect().width)
                 };
               });
               metrics.push({viewport:name,lang,...m});
@@ -111,3 +117,14 @@ jobs:
           name: target-about-values-owner-polish
           path: about-values-qa
           retention-days: 14
+      - name: Publish final status
+        if: always()
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          JOB_STATUS: ${{ job.status }}
+        run: |
+          RUN_URL="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          if [[ "$JOB_STATUS" == success ]]; then STATE=success; DESC='Vision & Mission owner polish QA passed'; else STATE=failure; DESC='Vision & Mission owner polish QA failed'; fi
+          jq -n --arg state "$STATE" --arg context 'TARGET About Vision Mission QA' --arg description "$DESC" --arg target_url "$RUN_URL" '{state:$state,context:$context,description:$description,target_url:$target_url}' >/tmp/status.json
+          curl -fsSL -X POST -H "Authorization: Bearer ${GH_TOKEN}" -H "Accept: application/vnd.github+json" "https://api.github.com/repos/${GITHUB_REPOSITORY}/statuses/${GITHUB_SHA}" -d @/tmp/status.json >/dev/null
