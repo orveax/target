@@ -2,11 +2,14 @@
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 const { title='TARGET | تارقت لتجارة الأغذية', description='Target For Food Trading — Qatar-based food trading and import company working with manufacturers, brands and suppliers.', active='', bodyClass='', robots='index,follow', footerVariant='default' } = Astro.props;
+const isLegacyPortfolioRoute = Astro.url.pathname.endsWith('/food-portfolio.html');
+const effectiveRobots = isLegacyPortfolioRoute ? 'noindex,follow' : robots;
+const canonicalUrl = isLegacyPortfolioRoute ? 'https://targetft.com/products-companies.html' : undefined;
 ---
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{title}</title><meta name="description" content={description}><meta name="robots" content={robots}>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{title}</title><meta name="description" content={description}><meta name="robots" content={effectiveRobots}>{canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
   <link rel="icon" type="image/svg+xml" href="/assets/brand/target-site-icon-v1.svg"><meta name="theme-color" content="#0C4931"><script is:inline src="/assets/handheld-desktop-mode-v1.js?v=20260817-01"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Tajawal:wght@400;500;600;700;800&display=swap" rel="stylesheet">
