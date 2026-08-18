@@ -41,6 +41,7 @@ jobs:
           grep -Fq 'data-compact-label' "$JS" || grep -Fq 'compactLabel' "$JS"
           grep -Fq 'target-numbered-card' "$CSS"
           grep -Fq 'target-card-number-bg' "$CSS"
+          grep -Fq 'hc-steps li.target-numbered-card' "$CSS"
           grep -Fq 'design-system-finishing-v1.css?v=20260819-01' "$LAYOUT"
           grep -Fq 'design-system-finishing-v1.js?v=20260819-01' "$LAYOUT"
           grep -Fq 'navigation-close-control-final-v1.css?v=20260819-01' "$LAYOUT"
@@ -69,8 +70,8 @@ jobs:
 
           const browser = await chromium.launch({headless:true, executablePath:process.env.CHROME_PATH});
           const origin='http://127.0.0.1:4173';
-          const pages=['/about.html','/capabilities.html','/products-companies.html','/qatar-market.html','/suppliers.html','/contact.html','/company-profile.html'];
-          const numberedRequired=['/capabilities.html','/qatar-market.html','/suppliers.html'];
+          const pages=['/index.html','/about.html','/capabilities.html','/products-companies.html','/qatar-market.html','/suppliers.html','/contact.html','/company-profile.html'];
+          const numberedRequired=['/index.html','/capabilities.html','/qatar-market.html','/suppliers.html'];
           const viewports=[[1440,1000],[390,844]];
           const failures=[];
 
