@@ -1,4 +1,4 @@
-/* TARGET — Owner Review Delta V1 | 2026-08-18 · build 07
+/* TARGET — Owner Review Delta V1 | 2026-08-18 · build 08
  * Temporary controlled review layer.
  * Merge approved deltas into canonical page layers before Final Site Freeze.
  */
@@ -292,4 +292,50 @@ html.handheld-desktop-mode .page-about .about-hero__media{
   background:
     linear-gradient(180deg,rgba(7,59,41,.00),rgba(7,59,41,.17)),
     url('https://images.pexels.com/photos/10907746/pexels-photo-10907746.jpeg?auto=compress&dpr=1&h=900&w=720') center 50%/cover no-repeat!important;
+}
+
+/* ABOUT TARGET — Hero V3 owner polish.
+   Make the visual read as food-trade operations rather than retail merchandising,
+   reduce headline dominance, and remove the decorative media plate behind the image. */
+.page-about .about-hero h1{
+  max-width:16.5ch;
+  font-size:clamp(2.55rem,4.15vw,3.95rem)!important;
+  line-height:1.11!important;
+}
+html[lang='en'] .page-about .about-hero h1{
+  max-width:19ch;
+  line-height:1.06!important;
+}
+.page-about .about-hero__media{
+  background:
+    linear-gradient(180deg,rgba(7,59,41,.00),rgba(7,59,41,.15)),
+    url('https://images.pexels.com/photos/4481260/pexels-photo-4481260.jpeg?auto=compress&cs=tinysrgb&w=1200') center 48%/cover no-repeat;
+  filter:saturate(.92) contrast(1.02);
+}
+.page-about .about-hero__media::before{display:none!important}
+
+@media (max-width:1023.98px){
+  .page-about .about-hero h1{
+    max-width:16ch;
+    font-size:clamp(2.4rem,6.1vw,3.35rem)!important;
+    line-height:1.10!important;
+  }
+  html[lang='en'] .page-about .about-hero h1{max-width:19ch;line-height:1.05!important}
+  .page-about .about-hero__media{background-position:center 48%}
+}
+
+@media (max-width:767.98px){
+  .page-about .about-hero h1{
+    max-width:15ch;
+    font-size:clamp(2.05rem,9vw,2.72rem)!important;
+    line-height:1.12!important;
+  }
+  html[lang='en'] .page-about .about-hero h1{max-width:18ch;line-height:1.07!important}
+  .page-about .about-hero__media{background-position:52% center}
+}
+
+html.handheld-desktop-mode .page-about .about-hero__media{
+  background:
+    linear-gradient(180deg,rgba(7,59,41,.00),rgba(7,59,41,.15)),
+    url('https://images.pexels.com/photos/4481260/pexels-photo-4481260.jpeg?auto=compress&cs=tinysrgb&w=1000') center 48%/cover no-repeat!important;
 }
