@@ -1,4 +1,4 @@
-/* TARGET — Owner Review Delta V1 | 2026-08-18 · build 02
+/* TARGET — Owner Review Delta V1 | 2026-08-18 · build 03
  * Temporary controlled review layer.
  * Merge approved deltas into canonical page layers before Final Site Freeze.
  */
@@ -46,6 +46,19 @@
   margin-top:12px!important;
 }
 
+/* ABOUT TARGET — Hero pattern.
+   Institutional, tone-on-tone and deliberately quieter than the Home hero.
+   The existing editorial cream split remains intact underneath the pattern. */
+.page-about .about-hero{
+  background:
+    radial-gradient(circle at 82% 18%,rgba(192,149,82,.11),transparent 23%),
+    radial-gradient(circle,rgba(12,73,49,.075) 0 1px,transparent 1.35px) 0 0/30px 30px,
+    repeating-linear-gradient(135deg,transparent 0 42px,rgba(12,73,49,.024) 42px 43px),
+    linear-gradient(90deg,rgba(244,237,228,.80) 0 31%,transparent 31% 100%),
+    linear-gradient(180deg,#fff 0%,#FFFCF8 100%);
+  background-attachment:scroll;
+}
+
 @media (max-width:767.98px){
   .page-home .home-canonical .hc-steps li{
     grid-template-columns:40px minmax(0,1fr);
@@ -61,5 +74,15 @@
   }
   .page-home .home-canonical .hc-steps p{
     margin-top:9px!important;
+  }
+
+  /* About: reduce pattern density/contrast on narrow screens so the title
+     remains the dominant visual signal. */
+  .page-about .about-hero{
+    background:
+      radial-gradient(circle at 82% 14%,rgba(192,149,82,.075),transparent 24%),
+      radial-gradient(circle,rgba(12,73,49,.05) 0 .9px,transparent 1.2px) 0 0/26px 26px,
+      repeating-linear-gradient(135deg,transparent 0 38px,rgba(12,73,49,.016) 38px 39px),
+      linear-gradient(180deg,#fff 0%,#FFFCF8 100%);
   }
 }
