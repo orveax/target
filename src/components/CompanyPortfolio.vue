@@ -16,60 +16,83 @@ type ProductRecord = {
   credit?: ProductCredit | null;
 };
 
+type CompanyVisual = {
+  coverImage?: string | null;
+  coverPosition?: string | null;
+};
+
+type CompanyBrochure = {
+  enabled?: boolean;
+  path?: string;
+};
+
+type CompanyRecord = {
+  id: string;
+  slug: string;
+  status: string;
+  nameAr: string | null;
+  nameEn: string | null;
+  categoryAr?: string | null;
+  categoryEn?: string | null;
+  summaryAr?: string | null;
+  summaryEn?: string | null;
+  products?: ProductRecord[];
+  logo?: string | null;
+  visual?: CompanyVisual | null;
+  brochure?: CompanyBrochure | null;
+};
+
+type ActiveCompanyRecord = CompanyRecord & {
+  status: 'active';
+  nameAr: string;
+  nameEn: string;
+};
+
+type LucideWindow = Window & {
+  lucide?: { createIcons?: () => void };
+};
+
 const store = usePortfolioStore();
-const records = ref<any[]>([]);
+const records = ref<CompanyRecord[]>([]);
 const isAr = computed(() => store.language === 'ar');
-const companies = computed(() => records.value.filter(c => c?.status === 'active' && c?.nameAr && c?.nameEn));
-const company = computed(() => companies.value[store.companyIndex] || companies.value[0] || null);
+const companies = computed<ActiveCompanyRecord[]>(() => records.value.filter(
+  (company): company is ActiveCompanyRecord =>
+    company.status === 'active' && Boolean(company.nameAr && company.nameEn),
+));
+const company = computed(() => companies.value[store.companyIndex] ?? companies.value[0] ?? null);
 const atlas = '/assets/products/illustrative-product-atlas.webp';
 let observer: MutationObserver | undefined;
 
-function legacyProducts(c:any): ProductRecord[] {
-  const ar = Array.isArray(c?.productsAr) ? c.productsAr : [];
-  const en = Array.isArray(c?.productsEn) ? c.productsEn : [];
-  const visuals = Array.isArray(c?.productVisualIndices) ? c.productVisualIndices : [];
-  return ar.map((nameAr:string, index:number) => ({
-    nameAr,
-    nameEn: en[index] || nameAr,
-    visualIndex: Number.isFinite(visuals[index]) ? visuals[index] : index,
-  }));
+function productsFor(record: CompanyRecord): ProductRecord[] {
+  if (!Array.isArray(record.products)) return [];
+  return record.products.filter((product) => Boolean(product?.nameAr && product?.nameEn));
 }
 
-function normalizedProducts(c:any): ProductRecord[] {
-  if (Array.isArray(c?.products) && c.products.length) {
-    return c.products
-      .filter((p:any) => p?.nameAr && p?.nameEn)
-      .map((p:any, index:number) => ({
-        nameAr: p.nameAr,
-        nameEn: p.nameEn,
-        image: p.image || null,
-        visualIndex: Number.isFinite(p.visualIndex) ? p.visualIndex : index,
-        credit: p.credit || null,
-      }));
-  }
-  return legacyProducts(c);
+const products = computed<ProductRecord[]>(() => company.value ? productsFor(company.value) : []);
+
+function productCount(record: CompanyRecord) {
+  return productsFor(record).length;
 }
 
-const products = computed<ProductRecord[]>(() => company.value ? normalizedProducts(company.value) : []);
-
-function productCount(c:any){
-  return normalizedProducts(c).length;
+function logoMark(record: CompanyRecord) {
+  const value = String(record.nameEn || 'T').trim();
+  return value
+    .split(/\s+/)
+    .map((part) => part[0])
+    .join('')
+    .slice(0, 2)
+    .toUpperCase();
 }
 
-function logoMark(c:any){
-  const value = String(c?.nameEn || 'T').trim();
-  return value.split(/\s+/).map((part:string) => part[0]).join('').slice(0,2).toUpperCase();
-}
-
-function coverStyle(c:any){
-  const image = c?.visual?.coverImage || '/images/home-food-trade-editorial-v1.png';
+function coverStyle(record: CompanyRecord) {
+  const image = record.visual?.coverImage || '/images/home-food-trade-editorial-v1.png';
   return {
     backgroundImage: `linear-gradient(180deg,rgba(12,73,49,.03),rgba(12,73,49,.42)),url("${image}")`,
-    backgroundPosition: c?.visual?.coverPosition || 'center',
+    backgroundPosition: record.visual?.coverPosition || 'center',
   };
 }
 
-function atlasStyle(index:number | undefined){
+function atlasStyle(index: number | undefined) {
   const safe = Number.isFinite(index) ? Math.max(0, Math.min(24, Number(index))) : 0;
   const col = safe % 5;
   const row = Math.floor(safe / 5);
@@ -81,44 +104,47 @@ function atlasStyle(index:number | undefined){
   };
 }
 
-function handleProductImageError(event: Event){
+function handleProductImageError(event: Event) {
   const img = event.currentTarget as HTMLImageElement | null;
   if (!img) return;
   img.style.display = 'none';
   img.closest('.product-photo-card')?.classList.add('is-atlas-fallback');
 }
 
-async function refreshIcons(){
+async function refreshIcons() {
   await nextTick();
-  (window as any).lucide?.createIcons?.();
+  (window as LucideWindow).lucide?.createIcons?.();
 }
 
-async function selectCompany(index:number){
+async function selectCompany(index: number) {
   store.selectCompany(index);
   await refreshIcons();
 }
 
-async function loadCompanies(){
-  try{
+async function loadCompanies() {
+  try {
     const response = await fetch('/content/companies.json', { cache: 'no-store' });
-    const payload = await response.json();
-    records.value = Array.isArray(payload?.companies) ? payload.companies : [];
+    if (!response.ok) throw new Error(`Company records request failed with ${response.status}`);
+    const payload = await response.json() as { companies?: CompanyRecord[] };
+    records.value = Array.isArray(payload.companies) ? payload.companies : [];
     if (store.companyIndex >= companies.value.length) store.selectCompany(0);
     await refreshIcons();
-  }catch(error){
+  } catch (error) {
     console.error('Unable to load TARGET company records', error);
     records.value = [];
   }
 }
 
 onMounted(() => {
-  const sync = async () => {
+  const syncLanguage = async () => {
     store.setLanguage(document.documentElement.lang === 'en' ? 'en' : 'ar');
     await refreshIcons();
   };
-  sync();
-  loadCompanies();
-  observer = new MutationObserver(sync);
+
+  void syncLanguage();
+  void loadCompanies();
+
+  observer = new MutationObserver(() => { void syncLanguage(); });
   observer.observe(document.documentElement, { attributes: true, attributeFilter: ['lang', 'dir'] });
 });
 
@@ -225,7 +251,12 @@ onBeforeUnmount(() => observer?.disconnect());
         </div>
 
         <div class="company-resource-row">
-          <a v-if="company.brochure?.enabled" class="portfolio-brochure" :href="`/${company.brochure.path}`" :download="`${company.slug}-product-brochure.pdf`">
+          <a
+            v-if="company.brochure?.enabled && company.brochure.path"
+            class="portfolio-brochure"
+            :href="`/${company.brochure.path}`"
+            :download="`${company.slug}-product-brochure.pdf`"
+          >
             <i data-lucide="file-down"></i>
             <span>{{ isAr ? 'تحميل بروشور المنتجات PDF' : 'Download Product Brochure PDF' }}</span>
           </a>
