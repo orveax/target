@@ -37,7 +37,7 @@ jobs:
           set -euo pipefail
           test -f public/assets/404-recovery-v2.css
           test ! -f public/assets/404-polish-v1.css
-          grep -Fq '404-recovery-v2.css?v=20260818-02' src/layouts/BaseLayout.astro
+          grep -Fq '404-recovery-v2.css?v=20260818-03' src/layouts/BaseLayout.astro
           ! grep -Fq '404-polish-v1.css' src/layouts/BaseLayout.astro
           grep -Fq 'footerVariant=' src/layouts/BaseLayout.astro
           grep -Fq '<SiteFooter variant={footerVariant} />' src/layouts/BaseLayout.astro
@@ -54,6 +54,8 @@ jobs:
           ! grep -Fq 'مشكلة في حسابك' src/pages/404.astro
           ! grep -Fq 'food-portfolio.html' src/pages/404.astro
           ! grep -Fq 'legacy/404.html' src/pages/404.astro
+          grep -Fq '.recovery-route .recovery-icon' public/assets/404-recovery-v2.css
+          grep -Fq '>span:not(.recovery-icon)>span' public/assets/404-recovery-v2.css
           grep -Fq 'Compact utility footer' public/assets/404-recovery-v2.css
           grep -Fq '@media(max-width:991.98px)' public/assets/404-recovery-v2.css
           grep -Fq 'prefers-reduced-motion:reduce' public/assets/404-recovery-v2.css
@@ -114,6 +116,22 @@ jobs:
                   const hrefs=[...document.querySelectorAll('.recovery-route a')].map(a=>a.getAttribute('href'));
                   const actions=[...document.querySelectorAll('.not-found-actions a')].map(a=>a.getAttribute('href'));
                   const compactHrefs=[...document.querySelectorAll('.tf6-compact-nav a')].map(a=>a.getAttribute('href'));
+                  const icons=[...document.querySelectorAll('.recovery-icon')].map(icon=>{
+                    const svg=icon.querySelector('svg');
+                    const iconStyle=getComputedStyle(icon);
+                    const svgStyle=svg?getComputedStyle(svg):null;
+                    const box=svg?.getBoundingClientRect();
+                    return {
+                      iconColor:iconStyle.color,
+                      svgColor:svgStyle?.color||'',
+                      svgStroke:svgStyle?.stroke||'',
+                      opacity:Number(svgStyle?.opacity||0),
+                      visibility:svgStyle?.visibility||'',
+                      display:svgStyle?.display||'',
+                      width:box?.width||0,
+                      height:box?.height||0
+                    };
+                  });
                   return {
                     lang:document.documentElement.lang,
                     dir:document.documentElement.dir,
@@ -131,7 +149,7 @@ jobs:
                     fullFooterNav:document.querySelectorAll('.tf6-navigation').length,
                     contactBand:document.querySelectorAll('.tf6-contact-band').length,
                     note:document.querySelector('.recovery-note')?.textContent.trim(),
-                    hrefs,actions,compactHrefs,
+                    hrefs,actions,compactHrefs,icons,
                     copyTop:copy.top,recoveryTop:recovery.top,copyWidth:copy.width,recoveryWidth:recovery.width,
                     footerHeight:footer?.height||0,
                     actionWidths:[...document.querySelectorAll('.not-found-actions a')].map(a=>a.getBoundingClientRect().width)
@@ -148,6 +166,11 @@ jobs:
                 if(m.compactFooter!==1||m.compactLinks!==5||m.fullFooterNav!==0||m.contactBand!==0) failures.push(`${name}-${lang}: compact footer contract mismatch`);
                 for(const href of ['index.html','contact.html','faq.html','privacy.html','terms.html']) if(!m.compactHrefs.includes(href)) failures.push(`${name}-${lang}: compact footer missing ${href}`);
                 if(lang==='ar'&&m.note.includes('حسابك')) failures.push(`${name}-${lang}: stale account wording remains`);
+                if(m.icons.length!==3) failures.push(`${name}-${lang}: expected 3 recovery icons`);
+                for(const [i,icon] of m.icons.entries()){
+                  if(icon.iconColor!=='rgb(255, 255, 255)'||icon.svgColor!=='rgb(255, 255, 255)') failures.push(`${name}-${lang}: recovery icon ${i+1} is not white`);
+                  if(icon.opacity<0.95||icon.visibility!=='visible'||icon.display==='none'||icon.width<16||icon.height<16) failures.push(`${name}-${lang}: recovery icon ${i+1} is not visibly rendered`);
+                }
                 if(name==='1440'){
                   if(Math.abs(m.copyTop-m.recoveryTop)>160) failures.push(`${name}-${lang}: desktop recovery panel alignment drift`);
                   if(m.copyWidth<=m.recoveryWidth) failures.push(`${name}-${lang}: recovery panel must remain secondary to message`);
