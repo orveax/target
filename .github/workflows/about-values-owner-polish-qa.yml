@@ -1,0 +1,113 @@
+name: TARGET About Vision Mission Owner Polish QA
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'public/assets/about-values-owner-polish-v1.css'
+      - 'src/layouts/BaseLayout.astro'
+      - '.github/workflows/about-values-owner-polish-qa.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  statuses: write
+
+jobs:
+  vision-mission-polish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify source contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f public/assets/about-values-owner-polish-v1.css
+          grep -Fq 'about-values-owner-polish-v1.css?v=20260818-01' src/layouts/BaseLayout.astro
+          grep -Fq 'min-height:50px!important' public/assets/about-values-owner-polish-v1.css
+          grep -Fq 'max-width:23ch!important' public/assets/about-values-owner-polish-v1.css
+          grep -Fq 'height:2px' public/assets/about-values-owner-polish-v1.css
+      - name: Install and build
+        run: |
+          npm install
+          npm run build
+      - name: Prepare Chrome
+        shell: bash
+        run: |
+          npm install --no-save playwright@1.55.0
+          CHROME_PATH="$(command -v google-chrome || command -v google-chrome-stable || true)"
+          test -n "$CHROME_PATH"
+          echo "CHROME_PATH=$CHROME_PATH" >> "$GITHUB_ENV"
+      - name: Start server
+        run: |
+          npx --yes http-server dist -p 4173 -c-1 >/tmp/about-values-http.log 2>&1 &
+          for i in {1..30}; do curl -fsS http://127.0.0.1:4173/about.html >/dev/null && exit 0; sleep 1; done
+          cat /tmp/about-values-http.log; exit 1
+      - name: Browser QA
+        env:
+          CHROME_PATH: ${{ env.CHROME_PATH }}
+        run: |
+          mkdir -p about-values-qa
+          cat > about-values-qa/check.mjs <<'EOF'
+          import { chromium } from 'playwright';
+          import fs from 'node:fs';
+          const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_PATH});
+          const failures=[]; const metrics=[];
+          for(const [name,width,height] of [['1440',1440,1000],['768',768,1024],['390',390,844]]){
+            const ctx=await browser.newContext({viewport:{width,height},isMobile:width===390,hasTouch:width===390});
+            const page=await ctx.newPage();
+            await page.goto('http://127.0.0.1:4173/about.html',{waitUntil:'networkidle'});
+            await page.evaluate(async()=>{if(document.fonts)await document.fonts.ready});
+            for(const lang of ['ar','en']){
+              if(await page.locator('html').getAttribute('lang')!==lang){await page.locator('[data-lang-toggle]').first().click();await page.waitForTimeout(180)}
+              const m=await page.evaluate(()=>{
+                const values=document.querySelector('.about-values');
+                const cards=[...document.querySelectorAll('.about-value-card')];
+                const floating=getComputedStyle(values,'::before');
+                const line=getComputedStyle(values,'::after');
+                return {
+                  overflowX:document.documentElement.scrollWidth>document.documentElement.clientWidth,
+                  floatingHeight:parseFloat(floating.height),
+                  floatingFont:parseFloat(floating.fontSize),
+                  floatingOpacity:Number(floating.opacity),
+                  floatingBg:floating.backgroundColor,
+                  lineHeight:parseFloat(line.height),
+                  cardHeights:cards.map(c=>c.getBoundingClientRect().height),
+                  cardPaddingTop:cards.map(c=>parseFloat(getComputedStyle(c).paddingTop)),
+                  titleWidths:cards.map(c=>c.querySelector('h3').getBoundingClientRect().width),
+                  titleMax:cards.map(c=>getComputedStyle(c.querySelector('h3')).maxWidth)
+                };
+              });
+              metrics.push({viewport:name,lang,...m});
+              if(m.overflowX) failures.push(`${name}-${lang}: horizontal overflow`);
+              if(m.floatingHeight<44) failures.push(`${name}-${lang}: floating title too small`);
+              if(m.floatingOpacity<.95) failures.push(`${name}-${lang}: floating title too faint`);
+              if(m.lineHeight<1.5) failures.push(`${name}-${lang}: top rule too weak`);
+              if(m.cardHeights.length!==2) failures.push(`${name}-${lang}: expected two cards`);
+              if(name==='1440' && Math.max(...m.cardPaddingTop)>47) failures.push(`${name}-${lang}: cards still carry excessive top padding`);
+              if(m.titleWidths.some(v=>v<180)) failures.push(`${name}-${lang}: title measure collapsed`);
+              await page.locator('.about-values-section').screenshot({path:`about-values-qa/${name}-${lang}.png`});
+              if(name==='1440'){
+                await page.locator('.about-value-card').first().hover(); await page.waitForTimeout(300);
+                const tr=await page.locator('.about-value-card').first().evaluate(el=>getComputedStyle(el).transform);
+                if(tr==='none') failures.push(`${name}-${lang}: card hover lift missing`);
+              }
+            }
+            await ctx.close();
+          }
+          fs.writeFileSync('about-values-qa/metrics.json',JSON.stringify(metrics,null,2));
+          fs.writeFileSync('about-values-qa/failures.txt',failures.join('\n'));
+          await browser.close();
+          if(failures.length){console.error(failures.join('\n'));process.exit(1)}
+          EOF
+          node about-values-qa/check.mjs
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: target-about-values-owner-polish
+          path: about-values-qa
+          retention-days: 14
