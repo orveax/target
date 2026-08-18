@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { computed, nextTick, onBeforeUnmount, onMounted, ref } from 'vue';
-import { usePortfolioStore } from '../stores/portfolio';
 
 type ProductCredit = {
   href?: string;
@@ -48,18 +47,21 @@ type ActiveCompanyRecord = CompanyRecord & {
   nameEn: string;
 };
 
+type Language = 'ar' | 'en';
+
 type LucideWindow = Window & {
   lucide?: { createIcons?: () => void };
 };
 
-const store = usePortfolioStore();
 const records = ref<CompanyRecord[]>([]);
-const isAr = computed(() => store.language === 'ar');
+const language = ref<Language>('ar');
+const companyIndex = ref(0);
+const isAr = computed(() => language.value === 'ar');
 const companies = computed<ActiveCompanyRecord[]>(() => records.value.filter(
   (company): company is ActiveCompanyRecord =>
     company.status === 'active' && Boolean(company.nameAr && company.nameEn),
 ));
-const company = computed(() => companies.value[store.companyIndex] ?? companies.value[0] ?? null);
+const company = computed(() => companies.value[companyIndex.value] ?? companies.value[0] ?? null);
 const atlas = '/assets/products/illustrative-product-atlas.webp';
 let observer: MutationObserver | undefined;
 
@@ -117,7 +119,7 @@ async function refreshIcons() {
 }
 
 async function selectCompany(index: number) {
-  store.selectCompany(index);
+  companyIndex.value = index;
   await refreshIcons();
 }
 
@@ -127,17 +129,18 @@ async function loadCompanies() {
     if (!response.ok) throw new Error(`Company records request failed with ${response.status}`);
     const payload = await response.json() as { companies?: CompanyRecord[] };
     records.value = Array.isArray(payload.companies) ? payload.companies : [];
-    if (store.companyIndex >= companies.value.length) store.selectCompany(0);
+    if (companyIndex.value >= companies.value.length) companyIndex.value = 0;
     await refreshIcons();
   } catch (error) {
     console.error('Unable to load TARGET company records', error);
     records.value = [];
+    companyIndex.value = 0;
   }
 }
 
 onMounted(() => {
   const syncLanguage = async () => {
-    store.setLanguage(document.documentElement.lang === 'en' ? 'en' : 'ar');
+    language.value = document.documentElement.lang === 'en' ? 'en' : 'ar';
     await refreshIcons();
   };
 
@@ -159,9 +162,9 @@ onBeforeUnmount(() => observer?.disconnect());
         :key="c.id"
         type="button"
         class="company-tile"
-        :class="{ active: store.companyIndex === ci }"
+        :class="{ active: companyIndex === ci }"
         role="tab"
-        :aria-selected="store.companyIndex === ci"
+        :aria-selected="companyIndex === ci"
         aria-controls="company-detail"
         @click="selectCompany(ci)"
       >
