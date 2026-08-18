@@ -50,7 +50,7 @@ jobs:
           grep -Fq 'data-compact-label' "$JS" || grep -Fq 'compactLabel' "$JS"
           grep -Fq 'target-numbered-card' "$CSS"
           grep -Fq 'target-card-number-bg' "$CSS"
-          grep -Fq 'hc-steps li.target-numbered-card' "$CSS"
+          grep -Fq '.hc-steps .hc-step-number' "$CSS"
           grep -Fq 'design-system-finishing-v1.css?v=20260819-01' "$LAYOUT"
           grep -Fq 'design-system-finishing-v1.js?v=20260819-01' "$LAYOUT"
           grep -Fq 'navigation-close-control-final-v1.css?v=20260819-01' "$LAYOUT"
@@ -104,9 +104,6 @@ jobs:
                     compact:el.dataset.compactLabel||'',
                     after:getComputedStyle(el,'::after').content
                   }));
-                  const numbered=[...document.querySelectorAll('.target-numbered-card .target-card-number-bg')].map(el=>{
-                    const s=getComputedStyle(el); return {text:(el.textContent||'').trim(),position:s.position,font:parseFloat(s.fontSize)||0};
-                  });
                   const selector=[
                     'article [class*="number"]','article [class*="index"]','article [class*="-num"]',
                     'li [class*="number"]','li [class*="index"]','li [class*="-num"]',
@@ -117,7 +114,16 @@ jobs:
                     if(el.closest('.target-section-nav,.faq-topic-band,.privacy-toc,.terms-toc')) return false;
                     return !!el.closest('article,[class*="card"],li');
                   });
-                  const unconverted=eligible.filter(el=>!el.classList.contains('target-card-number-bg')).map(el=>(el.textContent||'').trim());
+                  const numbered=eligible.map(el=>{
+                    const s=getComputedStyle(el);
+                    return {
+                      text:(el.textContent||'').trim(),
+                      position:s.position,
+                      font:parseFloat(s.fontSize)||0,
+                      bgClass:el.classList.contains('target-card-number-bg')
+                    };
+                  });
+                  const unconverted=numbered.filter(item=>item.position!=='absolute'||item.font<40).map(item=>item.text);
                   return {
                     labels,
                     numbered,
@@ -135,11 +141,7 @@ jobs:
                   if(item.compact!=='true') failures.push(`${path} ${width}: compact registry not applied to '${item.text}'`);
                   if(!['none','normal','""'].includes(item.after)) failures.push(`${path} ${width}: legacy pseudo label remains on '${item.text}' => ${item.after}`);
                 }
-                if(metrics.unconverted.length) failures.push(`${path} ${width}: numeric card markers not converted: ${metrics.unconverted.join(', ')}`);
-                for(const item of metrics.numbered){
-                  if(item.position!=='absolute') failures.push(`${path} ${width}: number '${item.text}' is not background-positioned`);
-                  if(item.font<40) failures.push(`${path} ${width}: number '${item.text}' is not visually oversized (${item.font}px)`);
-                }
+                if(metrics.unconverted.length) failures.push(`${path} ${width}: numeric card markers are not background visuals: ${metrics.unconverted.join(', ')}`);
 
                 await page.locator('[data-lang-toggle]').first().click();
                 await page.waitForTimeout(250);
