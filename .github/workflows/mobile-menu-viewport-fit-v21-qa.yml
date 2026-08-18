@@ -137,8 +137,8 @@ jobs:
 
                 await trigger.click();
                 const nav = page.locator('#mobileNav');
-                await nav.waitFor({state:'visible'});
-                await page.waitForTimeout(220);
+                await page.waitForFunction(() => document.querySelector('#mobileNav')?.classList.contains('show'), null, {timeout:2500});
+                await page.waitForTimeout(60);
 
                 const m = await page.evaluate(() => {
                   const button = document.querySelector('.th2-mobile-close');
@@ -174,14 +174,18 @@ jobs:
                   if (m.button.x < m.head.x-1 || m.button.y < m.head.y-1 || m.button.x+m.button.w > m.head.right+1 || m.button.y+m.button.h > m.head.bottom+1) failures.push(`${name}-${lang}: close button escapes header bounds`);
                 }
                 if (m.overflowX) failures.push(`${name}-${lang}: horizontal document overflow`);
-                if (!m.open) failures.push(`${name}-${lang}: offcanvas did not open`);
+                if (!m.open) failures.push(`${name}-${lang}: offcanvas did not reach open state`);
                 if (!m.aria) failures.push(`${name}-${lang}: close button missing accessible label`);
 
                 await page.screenshot({path:`responsive-navigation-final/${name}-${lang}.png`,fullPage:false});
 
                 await page.locator('.th2-mobile-close').click();
-                await page.waitForTimeout(180);
-                if (await nav.isVisible()) failures.push(`${name}-${lang}: close button did not close offcanvas`);
+                await page.waitForFunction(() => {
+                  const el=document.querySelector('#mobileNav');
+                  return el && !el.classList.contains('show') && !el.classList.contains('showing') && !el.classList.contains('hiding');
+                }, null, {timeout:2500});
+                const stillOpen=await nav.evaluate((el)=>el.classList.contains('show')||el.classList.contains('showing')||el.classList.contains('hiding'));
+                if (stillOpen) failures.push(`${name}-${lang}: close button did not reach closed state`);
               } catch (e) {
                 failures.push(`${name}-${lang}: ${e.message}`);
               } finally {
