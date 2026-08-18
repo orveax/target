@@ -35,7 +35,7 @@ jobs:
         run: |
           set -euo pipefail
           test -f public/assets/faq-canonical.css
-          grep -Fq 'faq-canonical.css?v=20260818-01' src/layouts/BaseLayout.astro
+          grep -Fq 'faq-canonical.css?v=20260818-02' src/layouts/BaseLayout.astro
           ! grep -Fq 'faq-v1.css' src/layouts/BaseLayout.astro
           ! grep -Fq 'faq-polish-v2.css' src/layouts/BaseLayout.astro
           ! grep -Fq 'hero-faq-premium-v1.css' src/layouts/BaseLayout.astro
