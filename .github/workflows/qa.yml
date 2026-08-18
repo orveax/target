@@ -87,7 +87,7 @@ jobs:
           grep -q 'info@targetft.com' dist/privacy.html
           grep -q 'سياسة الخصوصية' dist/privacy.html
           grep -q 'ملفات الارتباط والتحليلات والتحديثات' dist/privacy.html
-          grep -q 'privacy-canonical.css?v=20260818-01' dist/privacy.html
+          grep -q 'privacy-canonical.css?v=20260818-02' dist/privacy.html
           ! grep -q 'privacy-v1.css' dist/privacy.html
           ! grep -q 'privacy-polish-v2.css' dist/privacy.html
           ! grep -q 'hero-privacy-premium-v1.css' dist/privacy.html
