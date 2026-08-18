@@ -1,11 +1,42 @@
 ---
-const ways = [
+type WorkWay = [
+  icon: string,
+  arTitle: string,
+  enTitle: string,
+  arBody: string,
+  enBody: string,
+  arPoints: string[],
+  enPoints: string[],
+];
+
+type WorkStep = [
+  icon: string,
+  arTitle: string,
+  enTitle: string,
+  arBody: string,
+  enBody: string,
+];
+
+type WorkAudience = [
+  icon: string,
+  arTitle: string,
+  enTitle: string,
+  arBody: string,
+  enBody: string,
+  arFocus: string[],
+  enFocus: string[],
+];
+
+type StartInfoItem = [icon: string, ar: string, en: string];
+
+const ways: WorkWay[] = [
   ['ship','الاستيراد والتجارة','Import & Trading','نعمل على منتجات غذائية مختارة من المصنعين والموردين، ونراجع إمكانية التعامل معها ضمن نشاط تارقت في التجارة والاستيراد إلى قطر.','We work with selected food products from manufacturers and suppliers and review whether they fit TARGET\'s trading and import activity in Qatar.',['منتجات غذائية مختارة.','مراجعة كل منتج حسب فئته وفرصته.','مناقشة المنتج لا تعني التزامًا تلقائيًا بالاستيراد.'],['Selected food products.','Case-by-case review.','No automatic import commitment.']],
   ['handshake','العمل مع المصنعين والموردين','Manufacturers & Suppliers','نناقش المنتج والفرصة مباشرة مع المصنع أو العلامة أو المورد، ونحدد طريقة العمل المناسبة إذا كانت الفرصة ملائمة للطرفين.','We discuss the product and opportunity directly with the manufacturer, brand or supplier and define an appropriate commercial arrangement where the opportunity fits both sides.',['تواصل مباشر حول المنتج.','مصنعون، موردون وعلامات غذائية.','طريقة العمل تُحدد قبل التنفيذ.'],['Direct product discussion.','Manufacturers, suppliers and brands.','Arrangement agreed before execution.']],
   ['route','قنوات البيع والتوزيع','Sales & Distribution Channels','عندما تكون الفرصة مناسبة، نعمل على تحديد قنوات البيع والتوزيع الأنسب للمنتج داخل قطر بحسب طبيعة الفئة والفرصة المتاحة.','Where the opportunity is suitable, we work on identifying appropriate sales and distribution channels in Qatar based on the product category and opportunity.',['قنوات البيع تختلف حسب المنتج.','التوزيع يُبنى على طبيعة الفئة والفرصة.','لا نذكر أعداد منافذ أو تغطية غير موثقة.'],['Channel choice depends on the product.','Distribution depends on category and opportunity.','No unverified coverage claims.']],
   ['refresh-cw','متابعة فرصة المنتج في قطر','Product Opportunity in Qatar','بعد بدء التعامل، نراجع إمكانية استمرار المنتج وتوسيع وصوله عندما تكون النتائج والفرصة والسوق مناسبة لذلك، دون وعود مسبقة بالنمو أو التوسع.','After the relationship starts, we review whether the product can continue and reach further in Qatar where the opportunity and market support it, without advance growth or expansion promises.',['متابعة الفرصة بعد البداية.','التوسع عند وجود أساس تجاري مناسب.','لا وعود بنتائج أو نمو مضمون.'],['Opportunity reviewed after launch.','Expansion only where commercially supported.','No guaranteed growth.']]
 ];
-const steps = [
+
+const steps: WorkStep[] = [
   ['file-text','شاركنا تفاصيل المنتج','Share the Product','أرسل لنا معلومات واضحة عن الشركة أو العلامة والمنتج والفئة والفرصة التي تريد مناقشتها في قطر.','Send clear information about your company or brand, product, category and the opportunity you want to discuss in Qatar.'],
   ['search-check','نراجع الملاءمة','Review the Fit','نراجع المنتج والفئة ومدى ارتباط الفرصة بتوجه تارقت والسوق القطري قبل الدخول في تفاصيل تجارية أوسع.','We review the product, category and how the opportunity relates to TARGET and the Qatar market before broader commercial details.'],
   ['handshake','نتفق على طريقة العمل','Agree How to Work','إذا كانت الفرصة مناسبة، نناقش طريقة العمل ونطاقها والشروط التجارية الأساسية قبل أي تنفيذ.','If the opportunity is suitable, we discuss the arrangement, its scope and core commercial terms before any execution.'],
@@ -13,16 +44,23 @@ const steps = [
   ['store','نعمل على البيع والتوزيع','Work on Sales & Distribution','نحدد القنوات المناسبة للمنتج ونتعامل مع فرصة البيع والتوزيع وفق الفئة والواقع التجاري في قطر.','We identify suitable channels and work on the sales and distribution opportunity according to the category and commercial reality in Qatar.'],
   ['package-check','نراجع الاستمرار','Review Continuity','بعد البداية، نراجع إمكانية استمرار المنتج أو توسيع وصوله عندما تكون الفرصة والنتائج مناسبة.','After starting, we review whether the product can continue or reach further where the opportunity and results are suitable.']
 ];
-const audiences = [
+
+const audiences: WorkAudience[] = [
   ['factory','المصنعون الغذائيون','Food Manufacturers','مصانع لديها منتجات قائمة وتبحث عن فرصة مناسبة لدخول السوق القطري.','Manufacturers with established products looking for a suitable Qatar market opportunity.',['الشاي والمشروبات العشبية','العصائر والمشروبات التقليدية','الألبان والمجمدات والأغذية المجهزة'],['Tea & Herbal Infusions','Juices & Traditional Beverages','Dairy, Frozen & Prepared Foods']],
   ['badge-check','العلامات الغذائية','Food Brands','علامات غذائية تريد مناقشة طرح منتجاتها أو توسيع وجودها التجاري في قطر.','Food brands looking to discuss market entry or a broader commercial presence in Qatar.',['العسل والدبس والحلويات التقليدية','الأغذية المعبأة','منتجات غذائية استهلاكية مختارة'],['Honey, Molasses & Traditional Sweets','Packaged Foods','Selected Food FMCG']],
   ['boxes','الموردون','Suppliers','موردون لديهم منتجات أو فئات مناسبة ويريدون مناقشة فرصة توريد أو تعامل تجاري.','Suppliers with relevant products or categories looking to discuss a supply or trading opportunity.',['الشاي والأعشاب','العصائر والمشروبات','الأغذية المعبأة والمنتجات المختارة'],['Tea & Herbs','Juices & Beverages','Packaged & Selected Foods']],
   ['globe-2','فرق التصدير والمبيعات الدولية','Export & International Sales Teams','فرق تصدير ومبيعات تبحث عن طرف محلي لمناقشة منتج وفرصة داخل قطر.','Export and international sales teams looking for a local party to discuss a product and Qatar opportunity.',['الألبان والأغذية المجمدة والمجهزة','العسل والحلويات التقليدية','منتجات غذائية استهلاكية مختارة'],['Dairy, Frozen & Prepared Foods','Honey & Traditional Sweets','Selected Food FMCG']]
 ];
-const startInfo = [['building-2','الشركة أو العلامة','Company / Brand'],['package-open','المنتج والفئة','Product / Category'],['map-pinned','السوق أو الفرصة المقترحة','Proposed Market Opportunity'],['files','المواد أو المعلومات المتاحة عن المنتج','Available Product Information / Materials']];
+
+const startInfo: StartInfoItem[] = [
+  ['building-2','الشركة أو العلامة','Company / Brand'],
+  ['package-open','المنتج والفئة','Product / Category'],
+  ['map-pinned','السوق أو الفرصة المقترحة','Proposed Market Opportunity'],
+  ['files','المواد أو المعلومات المتاحة عن المنتج','Available Product Information / Materials'],
+];
 ---
 <div class="work-canonical">
-  <section class="work-hero"><div class="container work-hero__grid"><div><span class="work-eyebrow"><i data-lucide="route"></i><span data-ar="كيف نعمل مع المصنعين والموردين" data-en="How We Work with Manufacturers & Suppliers">كيف نعمل مع المصنعين والموردين</span></span><h1 data-ar="نأخذ المنتج في خطوات واضحة من الفرصة إلى السوق القطري." data-en="A clear route from product opportunity to the Qatar market.">نأخذ المنتج في خطوات واضحة من الفرصة إلى السوق القطري.</h1><p data-ar="نراجع المنتج والفرصة، نتفق على طريقة العمل المناسبة، ثم نتحرك عبر الاستيراد والتجارة وقنوات البيع والتوزيع داخل قطر — بحسب ملاءمة المنتج وطبيعة الفرصة." data-en="We review the product and opportunity, agree the appropriate commercial arrangement, then move through import, trading and suitable sales and distribution channels in Qatar — according to product fit and the opportunity.">نراجع المنتج والفرصة، نتفق على طريقة العمل المناسبة، ثم نتحرك عبر الاستيراد والتجارة وقنوات البيع والتوزيع داخل قطر — بحسب ملاءمة المنتج وطبيعة الفرصة.</p><div class="work-hero__actions"><a class="btn-premium btn-light-premium" href="suppliers.html"><i data-lucide="send"></i><span data-ar="ناقش منتجك معنا" data-en="Discuss Your Product">ناقش منتجك معنا</span></a><a class="work-quiet-link" href="food-portfolio.html"><span data-ar="استعرض المنتجات والشركات" data-en="Explore Products & Companies">استعرض المنتجات والشركات</span><i data-lucide="arrow-left"></i></a></div></div><div class="work-hero__route" aria-hidden="true"><span><i data-lucide="package"></i></span><i data-lucide="arrow-left"></i><strong>TARGET</strong><i data-lucide="arrow-left"></i><span><i data-lucide="map-pinned"></i></span></div></div></section>
+  <section class="work-hero"><div class="container work-hero__grid"><div><span class="work-eyebrow"><i data-lucide="route"></i><span data-ar="كيف نعمل مع المصنعين والموردين" data-en="How We Work with Manufacturers & Suppliers">كيف نعمل مع المصنعين والموردين</span></span><h1 data-ar="نأخذ المنتج في خطوات واضحة من الفرصة إلى السوق القطري." data-en="A clear route from product opportunity to the Qatar market.">نأخذ المنتج في خطوات واضحة من الفرصة إلى السوق القطري.</h1><p data-ar="نراجع المنتج والفرصة، نتفق على طريقة العمل المناسبة، ثم نتحرك عبر الاستيراد والتجارة وقنوات البيع والتوزيع داخل قطر — بحسب ملاءمة المنتج وطبيعة الفرصة." data-en="We review the product and opportunity, agree the appropriate commercial arrangement, then move through import, trading and suitable sales and distribution channels in Qatar — according to product fit and the opportunity.">نراجع المنتج والفرصة، نتفق على طريقة العمل المناسبة، ثم نتحرك عبر الاستيراد والتجارة وقنوات البيع والتوزيع داخل قطر — بحسب ملاءمة المنتج وطبيعة الفرصة.</p><div class="work-hero__actions"><a class="btn-premium btn-light-premium" href="suppliers.html"><i data-lucide="send"></i><span data-ar="ناقش منتجك معنا" data-en="Discuss Your Product">ناقش منتجك معنا</span></a><a class="work-quiet-link" href="products-companies.html"><span data-ar="استعرض المنتجات والشركات" data-en="Explore Products & Companies">استعرض المنتجات والشركات</span><i data-lucide="arrow-left"></i></a></div></div><div class="work-hero__route" aria-hidden="true"><span><i data-lucide="package"></i></span><i data-lucide="arrow-left"></i><strong>TARGET</strong><i data-lucide="arrow-left"></i><span><i data-lucide="map-pinned"></i></span></div></div></section>
 
   <section class="work-section"><div class="container"><div class="work-head"><span class="work-kicker" data-ar="طريقة عملنا" data-en="How We Work">طريقة عملنا</span><h2 data-ar="أربع نقاط واضحة في التعامل مع المنتج والفرصة" data-en="Four clear parts of working with a product opportunity">أربع نقاط واضحة في التعامل مع المنتج والفرصة</h2><p data-ar="لا نتعامل مع كل المنتجات بالطريقة نفسها. نبدأ بفهم المنتج والفئة والفرصة في قطر، ثم نحدد ما إذا كان هناك مجال عملي للانتقال إلى الخطوة التالية." data-en="We do not handle every product in the same way. We start by understanding the product, category and opportunity in Qatar, then determine whether there is a practical basis to move forward.">لا نتعامل مع كل المنتجات بالطريقة نفسها. نبدأ بفهم المنتج والفئة والفرصة في قطر، ثم نحدد ما إذا كان هناك مجال عملي للانتقال إلى الخطوة التالية.</p></div><div class="work-ways">{ways.map(([icon,arTitle,enTitle,arBody,enBody,arPoints,enPoints], index)=><article class="work-way"><span class="work-number">0{index+1}</span><span class="work-icon"><i data-lucide={icon}></i></span><h3 data-ar={arTitle} data-en={enTitle}>{arTitle}</h3><p data-ar={arBody} data-en={enBody}>{arBody}</p><ul>{arPoints.map((point,i)=><li><i data-lucide="check"></i><span data-ar={point} data-en={enPoints[i]}>{point}</span></li>)}</ul></article>)}</div></div></section>
 
