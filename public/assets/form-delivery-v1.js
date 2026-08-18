@@ -76,6 +76,7 @@
     if (!success) return;
     const copy = success.querySelector('.icon-inline > span:last-child, span[data-ar][data-en]');
     if (!copy) return;
+
     const ar = 'تم تجهيز رسالتك في تطبيق البريد. أكمل الإرسال من نافذة البريد التي ستفتح الآن. إذا لم يفتح تطبيق البريد، استخدم قناة البريد المباشرة الظاهرة في الصفحة.';
     const en = 'Your message has been prepared in your email app. Complete the send from the email window that opens now. If no email app opens, use the direct email channel shown on this page.';
     copy.dataset.ar = ar;
@@ -88,6 +89,7 @@
     const submit = form.querySelector('button[type="submit"]');
     const holder = submit?.closest('.ct-field-wide,.fs-field-wide') || submit?.parentElement;
     if (!holder) return;
+
     const note = doc.createElement('div');
     note.className = 'form-delivery-note';
     note.setAttribute('data-form-delivery-note', '');
@@ -97,22 +99,12 @@
     holder.insertAdjacentElement('beforebegin', note);
   }
 
-  function normalizeFooterCredit() {
-    const bottom = doc.querySelector('.site-footer .footer-bottom');
-    const credit = bottom?.querySelector('span:last-child');
-    if (!credit) return;
-    credit.dataset.ar = 'جميع الحقوق محفوظة © TARGET 2026';
-    credit.dataset.en = 'TARGET 2026 © All rights reserved';
-    credit.textContent = isAr() ? credit.dataset.ar : credit.dataset.en;
-  }
-
   function initialize() {
     doc.querySelectorAll('form[data-target-form]').forEach((form) => {
       form.dataset.deliveryMode = 'email-client';
       setDeliveryStatus(form);
       addDeliveryNote(form);
     });
-    window.setTimeout(normalizeFooterCredit, 0);
   }
 
   doc.addEventListener('submit', (event) => {
@@ -123,8 +115,10 @@
     event.stopPropagation();
     event.stopImmediatePropagation();
 
-    const fields = [...form.querySelectorAll('input,select,textarea')].filter((field) => !['hidden', 'submit', 'button'].includes(field.type));
+    const fields = [...form.querySelectorAll('input,select,textarea')]
+      .filter((field) => !['hidden', 'submit', 'button'].includes(field.type));
     let firstInvalid = null;
+
     fields.forEach((field) => {
       const valid = field.type === 'checkbox' ? (!field.required || field.checked) : field.checkValidity();
       field.setAttribute('aria-invalid', valid ? 'false' : 'true');
