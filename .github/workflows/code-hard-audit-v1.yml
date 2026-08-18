@@ -125,7 +125,7 @@ jobs:
         run: |
           cat > knip.audit.json <<'EOF'
           {
-            "entry": ["src/pages/**/*.astro", "src/pages/_app.ts"],
+            "entry": ["src/pages/**/*.astro"],
             "project": ["src/**/*.{astro,vue,ts}"]
           }
           EOF
