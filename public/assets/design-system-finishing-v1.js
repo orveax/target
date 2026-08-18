@@ -120,6 +120,30 @@
     return /(?:dark|forest|focus|featured|primary|cta|after)/.test(classText);
   }
 
+  function upgradeNumberMarker(marker, explicitCard = null) {
+    if (!marker) return;
+    const value = (marker.textContent || '').trim();
+    if (!/^0?\d{1,2}$/.test(value)) return;
+    if (marker.closest('.target-section-nav,.faq-topic-band,.privacy-toc,.terms-toc')) return;
+
+    const card = explicitCard || marker.closest('article,[class*="card"],li');
+    if (!card || card === marker) return;
+
+    if (!card.classList.contains('target-numbered-card')) card.classList.add('target-numbered-card');
+    if (!marker.classList.contains('target-card-number-bg')) marker.classList.add('target-card-number-bg');
+    if (surfaceIsDark(card) && !card.classList.contains('target-numbered-card--dark')) card.classList.add('target-numbered-card--dark');
+    if (card.dataset.numberedCardSystem !== 'background') card.dataset.numberedCardSystem = 'background';
+  }
+
+  /* Known adapter for the legacy Home step component.
+   * The component predates the shared numbered-card contract, so bind its marker/card pair explicitly.
+   */
+  function syncKnownNumberedCards() {
+    doc.querySelectorAll('.home-canonical .hc-steps li').forEach((card) => {
+      upgradeNumberMarker(card.querySelector('.hc-step-number'), card);
+    });
+  }
+
   function scanNumberedCards(scope = doc) {
     const markerSelector = [
       'article [class*="number"]',
@@ -133,24 +157,13 @@
       '[class*="card"] [class*="-num"]'
     ].join(',');
 
-    scope.querySelectorAll(markerSelector).forEach((marker) => {
-      const value = (marker.textContent || '').trim();
-      if (!/^0?\d{1,2}$/.test(value)) return;
-      if (marker.closest('.target-section-nav,.faq-topic-band,.privacy-toc,.terms-toc')) return;
-
-      const card = marker.closest('article,[class*="card"],li');
-      if (!card || card === marker) return;
-
-      if (!card.classList.contains('target-numbered-card')) card.classList.add('target-numbered-card');
-      if (!marker.classList.contains('target-card-number-bg')) marker.classList.add('target-card-number-bg');
-      if (surfaceIsDark(card) && !card.classList.contains('target-numbered-card--dark')) card.classList.add('target-numbered-card--dark');
-      if (card.dataset.numberedCardSystem !== 'background') card.dataset.numberedCardSystem = 'background';
-    });
+    scope.querySelectorAll(markerSelector).forEach((marker) => upgradeNumberMarker(marker));
   }
 
   function sync() {
     syncGenericSectionNav();
     syncFaqOwnedNavigator();
+    syncKnownNumberedCards();
     scanNumberedCards();
   }
 
