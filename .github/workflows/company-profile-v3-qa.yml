@@ -1,0 +1,161 @@
+name: TARGET Company Profile V3 QA
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'public/assets/company-profile-canonical.css'
+      - 'src/data/companyProfile.ts'
+      - 'src/components/SiteHeader.astro'
+      - 'src/layouts/BaseLayout.astro'
+      - 'src/pages/company-profile.astro'
+      - '.github/workflows/company-profile-v3-qa.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  statuses: write
+
+jobs:
+  company-profile-v3:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Publish pending status
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          RUN_URL="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          jq -n --arg state pending --arg context 'TARGET Company Profile V3 QA' --arg description 'Pattern and download hierarchy QA is running' --arg target_url "$RUN_URL" '{state:$state,context:$context,description:$description,target_url:$target_url}' >/tmp/status.json
+          curl -fsSL -X POST -H "Authorization: Bearer ${GH_TOKEN}" -H "Accept: application/vnd.github+json" "https://api.github.com/repos/${GITHUB_REPOSITORY}/statuses/${GITHUB_SHA}" -d @/tmp/status.json >/dev/null
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Verify V3 source contract
+        run: |
+          set -euo pipefail
+          test -f public/assets/company-profile-canonical.css
+          test -f src/data/companyProfile.ts
+          grep -Fq 'Company Profile Canonical V3' public/assets/company-profile-canonical.css
+          grep -Fq '.cp-hero-pattern' public/assets/company-profile-canonical.css
+          grep -Fq 'repeating-linear-gradient' public/assets/company-profile-canonical.css
+          grep -Fq "downloadUrl: 'https://drive.google.com/uc?export=download&id=1sLGRCC5re16gRsXZVpXm5oSzxA5TRjqm'" src/data/companyProfile.ts
+          grep -Fq 'data-profile-download-state="active"' src/pages/company-profile.astro
+          grep -Fq 'data-profile-download' src/pages/company-profile.astro
+          grep -Fq 'data-profile-view' src/pages/company-profile.astro
+          grep -Fq 'data-profile-header-download' src/components/SiteHeader.astro
+          grep -Fq 'data-profile-mega-download' src/components/SiteHeader.astro
+          grep -Fq 'data-profile-mobile-download' src/components/SiteHeader.astro
+          grep -Fq 'company-profile-canonical.css?v=20260818-03' src/layouts/BaseLayout.astro
+          ! grep -Fq 'PDF PENDING' src/pages/company-profile.astro
+          ! grep -Fq 'withheld-access-control' src/pages/company-profile.astro
+
+      - name: Build Astro site
+        run: |
+          npm install
+          npm run build
+
+      - name: Install Playwright and locate hosted Chrome
+        run: |
+          npm install --no-save playwright@1.55.0
+          CHROME_PATH="$(command -v google-chrome || command -v google-chrome-stable || true)"
+          test -n "$CHROME_PATH"
+          echo "CHROME_PATH=$CHROME_PATH" >> "$GITHUB_ENV"
+
+      - name: Start static server
+        run: |
+          npx --yes http-server dist -p 4173 -c-1 >/tmp/cp-v3-http.log 2>&1 &
+          for i in {1..30}; do
+            curl -fsS http://127.0.0.1:4173/company-profile.html >/dev/null && exit 0
+            sleep 1
+          done
+          cat /tmp/cp-v3-http.log
+          exit 1
+
+      - name: Validate visual hierarchy
+        env:
+          CHROME_PATH: ${{ env.CHROME_PATH }}
+        run: |
+          mkdir -p company-profile-v3
+          cat > company-profile-v3/qa.mjs <<'EOF'
+          import { chromium } from 'playwright';
+          import fs from 'node:fs';
+          const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_PATH});
+          const failures=[]; const metrics=[];
+          for(const [label,width,height] of [['1440',1440,1000],['768',768,1024],['390',390,844]]){
+            const context=await browser.newContext({viewport:{width,height}});
+            const page=await context.newPage();
+            await page.goto('http://127.0.0.1:4173/company-profile.html',{waitUntil:'networkidle'});
+            await page.evaluate(async()=>{if(document.fonts) await document.fonts.ready});
+            for(const lang of ['ar','en']){
+              if(await page.locator('html').getAttribute('lang')!==lang){await page.locator('[data-lang-toggle]').first().click();await page.waitForTimeout(220)}
+              const m=await page.evaluate(()=>{
+                const hero=document.querySelector('.cp-hero');
+                const pattern=document.querySelector('.cp-hero-pattern');
+                const copy=document.querySelector('.cp-hero-copy').getBoundingClientRect();
+                const media=document.querySelector('.cp-profile-preview-hero').getBoundingClientRect();
+                const imgs=[...document.querySelectorAll('.cp-profile-preview img')];
+                const downloads=[...document.querySelectorAll('.page-company-profile [data-profile-download]')];
+                const views=[...document.querySelectorAll('.page-company-profile [data-profile-view]')];
+                return {
+                  overflowX:document.documentElement.scrollWidth>document.documentElement.clientWidth,
+                  state:hero.dataset.profileDownloadState,
+                  pattern:getComputedStyle(pattern).backgroundImage,
+                  patternOpacity:Number(getComputedStyle(pattern).opacity),
+                  heroActions:document.querySelectorAll('.cp-hero-actions .cp-btn').length,
+                  resourceActions:document.querySelectorAll('.cp-resource-actions .cp-btn').length,
+                  downloads:downloads.length,
+                  views:views.length,
+                  downloadHrefOk:downloads.every(a=>(a.getAttribute('href')||'').includes('drive.google.com/uc?export=download&id=1sLGRCC5re16gRsXZVpXm5oSzxA5TRjqm')),
+                  headerDownload:!!document.querySelector('[data-profile-header-download]'),
+                  megaDownload:!!document.querySelector('[data-profile-mega-download]'),
+                  mobileDownload:!!document.querySelector('[data-profile-mobile-download]'),
+                  previewLoaded:imgs.length===2&&imgs.every(img=>img.complete&&img.naturalWidth>100),
+                  copyTop:copy.top,mediaTop:media.top,ratio:copy.width/media.width,
+                  h1:document.querySelectorAll('.page-company-profile h1').length
+                };
+              });
+              metrics.push({label,lang,...m});
+              if(m.overflowX) failures.push(`${label}-${lang}: overflow`);
+              if(m.state!=='active') failures.push(`${label}-${lang}: download state not active`);
+              if(!m.pattern||m.pattern==='none'||m.patternOpacity<=0) failures.push(`${label}-${lang}: pattern missing`);
+              if(m.heroActions!==3) failures.push(`${label}-${lang}: hero hierarchy incomplete`);
+              if(m.resourceActions!==2) failures.push(`${label}-${lang}: resource hierarchy incomplete`);
+              if(m.downloads!==2||m.views!==2||!m.downloadHrefOk) failures.push(`${label}-${lang}: profile download/view controls invalid`);
+              if(!m.headerDownload||!m.megaDownload||!m.mobileDownload) failures.push(`${label}-${lang}: sitewide download entry missing`);
+              if(!m.previewLoaded) failures.push(`${label}-${lang}: profile preview not loaded`);
+              if(m.h1!==1) failures.push(`${label}-${lang}: expected one H1`);
+              if(label==='1440'&&(m.ratio<1.05||m.ratio>1.50)) failures.push(`${label}-${lang}: hero ratio ${m.ratio.toFixed(2)}`);
+              if(label!=='1440'&&!(m.copyTop<m.mediaTop)) failures.push(`${label}-${lang}: mobile/tablet order invalid`);
+              await page.screenshot({path:`company-profile-v3/${label}-${lang}.png`,fullPage:true});
+            }
+            await context.close();
+          }
+          fs.writeFileSync('company-profile-v3/metrics.json',JSON.stringify(metrics,null,2));
+          fs.writeFileSync('company-profile-v3/failures.txt',failures.join('\n'));
+          await browser.close();
+          if(failures.length){console.error(failures.join('\n'));process.exit(1)}
+          EOF
+          node company-profile-v3/qa.mjs
+
+      - name: Upload V3 artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: target-company-profile-v3
+          path: company-profile-v3
+          retention-days: 14
+
+      - name: Publish final status
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          JOB_STATUS: ${{ job.status }}
+        run: |
+          RUN_URL="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          if [[ "$JOB_STATUS" == "success" ]]; then STATE=success; DESC='Company Profile V3 QA passed'; else STATE=failure; DESC='Company Profile V3 QA failed'; fi
+          jq -n --arg state "$STATE" --arg context 'TARGET Company Profile V3 QA' --arg description "$DESC" --arg target_url "$RUN_URL" '{state:$state,context:$context,description:$description,target_url:$target_url}' >/tmp/status.json
+          curl -fsSL -X POST -H "Authorization: Bearer ${GH_TOKEN}" -H "Accept: application/vnd.github+json" "https://api.github.com/repos/${GITHUB_REPOSITORY}/statuses/${GITHUB_SHA}" -d @/tmp/status.json >/dev/null
