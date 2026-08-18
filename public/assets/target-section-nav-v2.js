@@ -92,17 +92,14 @@
     return /^(sticky|fixed)$/.test(position) ? Math.ceil(header.getBoundingClientRect().height) : 0;
   }
 
-  /* RTL-safe: use physical center delta rather than an absolute scrollLeft target. */
   function centerActiveButton(nav) {
     const track = nav.querySelector('.target-section-nav-track');
     const active = track?.querySelector('button[aria-current="true"]');
     if (!track || !active) return;
-
     const trackRect = track.getBoundingClientRect();
     const activeRect = active.getBoundingClientRect();
     const delta = (activeRect.left + activeRect.width / 2) - (trackRect.left + trackRect.width / 2);
     if (Math.abs(delta) < 3) return;
-
     const behavior = reducedMotion() ? 'auto' : 'smooth';
     if (typeof track.scrollBy === 'function') track.scrollBy({ left: delta, behavior });
     else active.scrollIntoView({ behavior, block: 'nearest', inline: 'center' });
@@ -124,7 +121,6 @@
       window.requestAnimationFrame(() => centerActiveButton(nav));
       return;
     }
-
     entries.forEach(({ button }) => button.setAttribute('aria-current', button === activeEntry.button ? 'true' : 'false'));
     window.requestAnimationFrame(() => centerActiveButton(nav));
   }
@@ -134,13 +130,11 @@
     const stickyDepth = headerStickyOffset(header) + Math.ceil(nav.getBoundingClientRect().height) + 24;
     const probe = window.scrollY + stickyDepth;
     let active = entries[0];
-
     for (const entry of entries) {
       const sectionTop = window.scrollY + entry.section.getBoundingClientRect().top;
       if (sectionTop <= probe) active = entry;
       else break;
     }
-
     const last = entries[entries.length - 1];
     if (window.innerHeight + window.scrollY >= doc.documentElement.scrollHeight - 8) active = last;
     setActiveEntry(nav, entries, active);
@@ -149,7 +143,6 @@
   function installScrollSpy(nav, header, track) {
     const entries = trackedEntries(track);
     if (!entries.length) return;
-
     let ticking = false;
     const queueUpdate = () => {
       if (ticking) return;
@@ -159,27 +152,21 @@
         updateScrollSpy(nav, header, entries);
       });
     };
-
     window.addEventListener('scroll', queueUpdate, { passive: true });
     window.addEventListener('resize', queueUpdate, { passive: true });
     window.addEventListener('orientationchange', queueUpdate, { passive: true });
     window.addEventListener('load', queueUpdate, { once: true });
-
-    /* Keep V2 synchronized when the legacy observer or any other module changes aria-current. */
     const activeObserver = new MutationObserver((mutations) => {
       if (mutations.some((mutation) => mutation.attributeName === 'aria-current')) {
         window.requestAnimationFrame(() => centerActiveButton(nav));
       }
     });
     entries.forEach(({ button }) => activeObserver.observe(button, { attributes: true, attributeFilter: ['aria-current'] }));
-
-    /* Re-center after AR/EN direction changes. */
     new MutationObserver(() => {
       track.dir = root.dir || (root.lang === 'en' ? 'ltr' : 'rtl');
       queueUpdate();
       window.requestAnimationFrame(() => centerActiveButton(nav));
     }).observe(root, { attributes: true, attributeFilter: ['dir', 'lang'] });
-
     queueUpdate();
   }
 
@@ -187,28 +174,24 @@
     if (!nav || nav.dataset.sectionNavV2 === '1') return;
     nav.dataset.sectionNavV2 = '1';
     nav.classList.add('target-section-nav--under-header');
-
     const header = doc.querySelector('.site-header');
     const track = doc.createElement('div');
     track.className = 'target-section-nav-track';
     track.setAttribute('role', 'presentation');
     track.dir = root.dir || (root.lang === 'en' ? 'ltr' : 'rtl');
-
     [...nav.children].forEach((child) => track.appendChild(child));
     nav.appendChild(track);
     if (header) header.insertAdjacentElement('afterend', nav);
-
     const syncOffset = () => nav.style.setProperty('--target-section-nav-top', `${headerStickyOffset(header)}px`);
     syncOffset();
     window.addEventListener('resize', syncOffset, { passive: true });
     window.addEventListener('orientationchange', syncOffset, { passive: true });
-
     installScrollSpy(nav, header, track);
     window.requestAnimationFrame(() => centerActiveButton(nav));
   }
 
-  function suppressFAQSectionNavigation() {
-    const ownsPageNavigation = doc.body?.classList.contains('page-faq') || doc.body?.classList.contains('page-privacy');
+  function suppressPageOwnedSectionNavigation() {
+    const ownsPageNavigation = doc.body?.classList.contains('page-faq') || doc.body?.classList.contains('page-privacy') || doc.body?.classList.contains('page-terms');
     if (!ownsPageNavigation) return false;
     const remove = () => doc.querySelectorAll('.target-section-nav').forEach((nav) => nav.remove());
     remove();
@@ -217,11 +200,10 @@
   }
 
   function init() {
-    if (suppressFAQSectionNavigation()) return;
+    if (suppressPageOwnedSectionNavigation()) return;
     injectStyles();
     const existing = doc.querySelector('.target-section-nav');
     if (existing) return upgrade(existing);
-
     const observer = new MutationObserver(() => {
       const nav = doc.querySelector('.target-section-nav');
       if (!nav) return;
