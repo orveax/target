@@ -1,16 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-
-const profileAsset = {
-  driveId: '1sLGRCC5re16gRsXZVpXm5oSzxA5TRjqm',
-  previewUrl: 'https://drive.google.com/thumbnail?id=1sLGRCC5re16gRsXZVpXm5oSzxA5TRjqm&sz=w1600',
-  title: 'Rev2_Company Profile_08-17-26',
-  type: 'PDF / PDF-X-4',
-  pages: '10',
-  size: '20.66 MB',
-  version: 'Rev2 · 17 Aug 2026',
-  downloadState: 'withheld-access-control'
-};
+import { companyProfileAsset as profileAsset } from '../data/companyProfile';
 
 const snapshot = [
   ['building-2','قطر','Qatar-Based'],
@@ -33,15 +23,31 @@ const documentMeta = [
   ['calendar-check-2','الإصدار','Version',profileAsset.version],
 ];
 ---
-<BaseLayout active="profile" bodyClass="page-company-profile premium-v8-page" title="الملف التعريفي | TARGET For Food Trading" description="تعرف على تارقت ونشاطها في تجارة واستيراد الأغذية داخل قطر، واستكشف الملف التعريفي والمسارات الرئيسية للموقع.">
-  <section class="cp-hero" data-profile-download-state={profileAsset.downloadState} data-profile-build="20260818-03">
+<BaseLayout active="profile" bodyClass="page-company-profile premium-v8-page" title="الملف التعريفي | TARGET For Food Trading" description="تعرف على تارقت ونشاطها في تجارة واستيراد الأغذية داخل قطر، واستعرض أو حمّل الملف التعريفي الرسمي للشركة.">
+  <section class="cp-hero" data-profile-download-state="active" data-profile-build="20260818-04">
+    <span class="cp-hero-pattern" aria-hidden="true"></span>
     <div class="container cp-hero-grid">
       <div class="cp-hero-copy">
         <span class="cp-eyebrow"><i data-lucide="book-open-text"></i><span data-ar="الملف التعريفي" data-en="Company Profile">الملف التعريفي</span></span>
         <h1 data-ar="تعرف على تارقت ونشاطها التجاري في الأغذية داخل قطر." data-en="An overview of TARGET and its food-trading activity in Qatar.">تعرف على تارقت ونشاطها التجاري في الأغذية داخل قطر.</h1>
         <p data-ar="يقدم الملف التعريفي نظرة مركزة على تارقت، نشاطها في تجارة واستيراد الأغذية، الفئات والمنتجات محل الاهتمام، وطريقة تعاملها مع المصنعين والموردين والسوق القطري." data-en="The Company Profile provides a focused overview of TARGET, its food trading and import activity, the categories and products in focus, and how it works with manufacturers, suppliers and the Qatar market.">يقدم الملف التعريفي نظرة مركزة على تارقت، نشاطها في تجارة واستيراد الأغذية، الفئات والمنتجات محل الاهتمام، وطريقة تعاملها مع المصنعين والموردين والسوق القطري.</p>
-        <div class="cp-actions">
-          <a class="cp-btn cp-btn-secondary" href="about.html"><i data-lucide="building-2"></i><span data-ar="عن تارقت" data-en="About TARGET">عن تارقت</span></a>
+
+        <div class="cp-actions cp-hero-actions">
+          <a class="cp-btn cp-btn-primary cp-btn-download" href={profileAsset.downloadUrl} target="_blank" rel="noopener noreferrer" data-profile-download>
+            <i data-lucide="download"></i><span data-ar="تحميل الملف التعريفي" data-en="Download Company Profile">تحميل الملف التعريفي</span>
+          </a>
+          <a class="cp-btn cp-btn-secondary" href={profileAsset.viewUrl} target="_blank" rel="noopener noreferrer" data-profile-view>
+            <i data-lucide="external-link"></i><span data-ar="عرض الملف" data-en="View Profile">عرض الملف</span>
+          </a>
+          <a class="cp-btn cp-btn-tertiary" href="about.html">
+            <span data-ar="عن تارقت" data-en="About TARGET">عن تارقت</span><i data-lucide="arrow-up-left"></i>
+          </a>
+        </div>
+
+        <div class="cp-hero-meta" aria-label="بيانات سريعة عن الملف" data-ar-aria="بيانات سريعة عن الملف" data-en-aria="Company Profile quick facts">
+          <span><i data-lucide="file-text"></i>PDF</span>
+          <span><i data-lucide="files"></i><b data-ar="10 صفحات" data-en="10 pages">10 صفحات</b></span>
+          <span><i data-lucide="hard-drive"></i>{profileAsset.size}</span>
         </div>
       </div>
 
@@ -96,11 +102,21 @@ const documentMeta = [
           <div class="cp-preview-shell"><img src={profileAsset.previewUrl} alt="معاينة غلاف الملف التعريفي الرسمي" data-ar-alt="معاينة غلاف الملف التعريفي الرسمي" data-en-alt="Official Company Profile cover preview" width="1600" height="900" loading="lazy" decoding="async" referrerpolicy="no-referrer" /></div>
         </figure>
         <div class="cp-resource-copy">
-          <span class="cp-resource-status"><i data-lucide="badge-check"></i><span data-ar="تم التحقق من النسخة النهائية" data-en="Final file verified">تم التحقق من النسخة النهائية</span></span>
-          <span class="cp-kicker" data-ar="نسخة PDF" data-en="PDF Company Profile">نسخة PDF</span>
-          <h2 data-ar="حمّل النسخة الرسمية من الملف التعريفي." data-en="Download the official Company Profile.">حمّل النسخة الرسمية من الملف التعريفي.</h2>
-          <p data-ar="تتضمن النسخة الرسمية المحتوى المعتمد للملف التعريفي بصيغة مناسبة للمشاركة مع المصنعين والموردين والجهات التجارية." data-en="The official PDF contains the approved Company Profile content in a format suitable for sharing with manufacturers, suppliers and commercial stakeholders.">تتضمن النسخة الرسمية المحتوى المعتمد للملف التعريفي بصيغة مناسبة للمشاركة مع المصنعين والموردين والجهات التجارية.</p>
-          <div class="cp-resource-proof"><span class="cp-proof-icon"><i data-lucide="shield-check"></i></span><div><strong data-ar="المعاينة والبيانات أدناه مأخوذة من الملف النهائي الموثق." data-en="The preview and metadata below come from the verified final file.">المعاينة والبيانات أدناه مأخوذة من الملف النهائي الموثق.</strong><p data-ar="يُفعّل إجراء التنزيل فقط من نسخة نشر عامة مضبوطة الصلاحيات، لذلك لا يظهر رابط تنزيل غير موثوق داخل الصفحة." data-en="The download action is enabled only from a controlled public copy, so no untrusted download link is exposed on this page.">يُفعّل إجراء التنزيل فقط من نسخة نشر عامة مضبوطة الصلاحيات، لذلك لا يظهر رابط تنزيل غير موثوق داخل الصفحة.</p></div></div>
+          <span class="cp-resource-status"><i data-lucide="badge-check"></i><span data-ar="النسخة النهائية متاحة" data-en="Final profile available">النسخة النهائية متاحة</span></span>
+          <span class="cp-kicker" data-ar="الملف الرسمي" data-en="Official Company Profile">الملف الرسمي</span>
+          <h2 data-ar="اعرض الملف التعريفي أو حمّله مباشرة." data-en="View or download the official Company Profile.">اعرض الملف التعريفي أو حمّله مباشرة.</h2>
+          <p data-ar="نسخة PDF الرسمية جاهزة للمشاركة مع المصنعين والموردين والجهات التجارية، وتتضمن المحتوى التعريفي المعتمد لتارقت." data-en="The official PDF is ready to share with manufacturers, suppliers and commercial stakeholders and contains TARGET's approved corporate profile content.">نسخة PDF الرسمية جاهزة للمشاركة مع المصنعين والموردين والجهات التجارية، وتتضمن المحتوى التعريفي المعتمد لتارقت.</p>
+
+          <div class="cp-resource-actions">
+            <a class="cp-btn cp-btn-primary cp-btn-download" href={profileAsset.downloadUrl} target="_blank" rel="noopener noreferrer" data-profile-download>
+              <i data-lucide="download"></i><span data-ar="تحميل PDF" data-en="Download PDF">تحميل PDF</span>
+            </a>
+            <a class="cp-btn cp-btn-secondary" href={profileAsset.viewUrl} target="_blank" rel="noopener noreferrer" data-profile-view>
+              <i data-lucide="eye"></i><span data-ar="عرض الملف" data-en="View Profile">عرض الملف</span>
+            </a>
+          </div>
+
+          <div class="cp-resource-proof"><span class="cp-proof-icon"><i data-lucide="shield-check"></i></span><div><strong data-ar="المعاينة والبيانات مرتبطة بالنسخة النهائية الموثقة." data-en="The preview and metadata are tied to the verified final file.">المعاينة والبيانات مرتبطة بالنسخة النهائية الموثقة.</strong><p data-ar="يمكنك عرض الملف في نافذة مستقلة أو استخدام مسار التنزيل المباشر من زر التحميل." data-en="You can open the profile in a separate tab or use the direct download route from the download button.">يمكنك عرض الملف في نافذة مستقلة أو استخدام مسار التنزيل المباشر من زر التحميل.</p></div></div>
         </div>
       </div>
     </div>
@@ -111,7 +127,7 @@ const documentMeta = [
       <div class="cp-document-info-copy">
         <span class="cp-kicker" data-ar="بيانات المستند" data-en="Document Information">بيانات المستند</span>
         <h2 id="cp-document-info-title" data-ar="بيانات موثقة من النسخة النهائية." data-en="Verified information from the final file.">بيانات موثقة من النسخة النهائية.</h2>
-        <p data-ar="نعرض فقط البيانات التي تم التحقق منها مباشرة من ملف PDF النهائي، بدون إضافة حقول افتراضية أو معلومات قانونية لا تخص هذا المورد." data-en="Only metadata verified directly from the final PDF is shown here, without placeholder fields or unrelated legal information.">نعرض فقط البيانات التي تم التحقق منها مباشرة من ملف PDF النهائي، بدون إضافة حقول افتراضية أو معلومات قانونية لا تخص هذا المورد.</p>
+        <p data-ar="نعرض فقط البيانات التي تم التحقق منها مباشرة من ملف PDF النهائي، بدون إضافة حقول افتراضية أو معلومات غير مرتبطة بالمستند." data-en="Only metadata verified directly from the final PDF is shown here, without placeholder fields or unrelated information.">نعرض فقط البيانات التي تم التحقق منها مباشرة من ملف PDF النهائي، بدون إضافة حقول افتراضية أو معلومات غير مرتبطة بالمستند.</p>
       </div>
       <div class="cp-meta-grid">
         {documentMeta.map(([icon,ar,en,value]) => (
