@@ -2,6 +2,7 @@
  * Final pre-freeze behavior contract:
  * 1) under-header section navigation uses short authored section labels (kickers), never long H2 copy;
  * 2) numbered cards automatically use the shared oversized background-number treatment.
+ * Runtime is idempotent: it only mutates DOM when the target value actually changes.
  */
 (() => {
   'use strict';
@@ -59,14 +60,15 @@
       const full = currentLanguageText(heading) || `Section ${index + 1}`;
       const compact = compactWords(currentLanguageText(semantic) || full, semantic ? 4 : 3);
 
-      label.textContent = compact;
-      label.dataset.compactLabel = 'true';
-      button.dataset.targetSectionId = section.id || '';
-      button.dataset.compactNav = 'true';
-      button.setAttribute('aria-label', full);
-      button.title = full;
+      if (label.textContent !== compact) label.textContent = compact;
+      if (label.dataset.compactLabel !== 'true') label.dataset.compactLabel = 'true';
+      const sectionId = section.id || '';
+      if (button.dataset.targetSectionId !== sectionId) button.dataset.targetSectionId = sectionId;
+      if (button.dataset.compactNav !== 'true') button.dataset.compactNav = 'true';
+      if (button.getAttribute('aria-label') !== full) button.setAttribute('aria-label', full);
+      if (button.title !== full) button.title = full;
     });
-    nav.dataset.designSystemCompact = 'true';
+    if (nav.dataset.designSystemCompact !== 'true') nav.dataset.designSystemCompact = 'true';
   }
 
   function syncFaqOwnedNavigator() {
@@ -87,11 +89,12 @@
       const key = node.dataset.ar || node.dataset.en || '';
       const pair = replacements.get(key);
       if (!pair) return;
-      node.dataset.ar = pair[0];
-      node.dataset.en = pair[1];
-      node.textContent = root.lang === 'en' ? pair[1] : pair[0];
+      if (node.dataset.ar !== pair[0]) node.dataset.ar = pair[0];
+      if (node.dataset.en !== pair[1]) node.dataset.en = pair[1];
+      const visible = root.lang === 'en' ? pair[1] : pair[0];
+      if (node.textContent !== visible) node.textContent = visible;
     });
-    band.dataset.designSystemCompact = 'true';
+    if (band.dataset.designSystemCompact !== 'true') band.dataset.designSystemCompact = 'true';
   }
 
   function parseRgb(value) {
@@ -122,24 +125,26 @@
       'article [class*="number"]',
       'article [class*="index"]',
       'article [class*="-num"]',
+      'li [class*="number"]',
+      'li [class*="index"]',
+      'li [class*="-num"]',
       '[class*="card"] [class*="number"]',
       '[class*="card"] [class*="index"]',
       '[class*="card"] [class*="-num"]'
     ].join(',');
 
     scope.querySelectorAll(markerSelector).forEach((marker) => {
-      if (marker.classList.contains('target-card-number-bg')) return;
       const value = (marker.textContent || '').trim();
       if (!/^0?\d{1,2}$/.test(value)) return;
       if (marker.closest('.target-section-nav,.faq-topic-band,.privacy-toc,.terms-toc')) return;
 
-      const card = marker.closest('article,[class*="card"]');
+      const card = marker.closest('article,[class*="card"],li');
       if (!card || card === marker) return;
 
-      card.classList.add('target-numbered-card');
-      marker.classList.add('target-card-number-bg');
-      if (surfaceIsDark(card)) card.classList.add('target-numbered-card--dark');
-      card.dataset.numberedCardSystem = 'background';
+      if (!card.classList.contains('target-numbered-card')) card.classList.add('target-numbered-card');
+      if (!marker.classList.contains('target-card-number-bg')) marker.classList.add('target-card-number-bg');
+      if (surfaceIsDark(card) && !card.classList.contains('target-numbered-card--dark')) card.classList.add('target-numbered-card--dark');
+      if (card.dataset.numberedCardSystem !== 'background') card.dataset.numberedCardSystem = 'background';
     });
   }
 
