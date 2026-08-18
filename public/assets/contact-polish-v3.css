@@ -6,14 +6,12 @@
   object-fit:cover;
   object-position:center 50%;
   filter:saturate(.92) contrast(1.025);
+  transition:transform .35s ease,filter .35s ease;
 }
 .page-contact .ct-hero-media{
   overflow:hidden;
   border-radius:24px;
   background:#e9e2d8;
-}
-.page-contact .ct-hero-media>img{
-  transition:transform .35s ease,filter .35s ease;
 }
 @media (hover:hover) and (pointer:fine){
   .page-contact .ct-hero-media:hover>img{
