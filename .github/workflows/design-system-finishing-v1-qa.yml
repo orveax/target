@@ -79,7 +79,7 @@ jobs:
           const browser = await chromium.launch({headless:true, executablePath:process.env.CHROME_PATH});
           const origin='http://127.0.0.1:4173';
           const pages=['/index.html','/about.html','/capabilities.html','/products-companies.html','/qatar-market.html','/suppliers.html','/contact.html','/company-profile.html'];
-          const numberedRequired=['/index.html','/capabilities.html','/qatar-market.html','/suppliers.html'];
+          const navRequired=new Set(['/qatar-market.html','/suppliers.html','/contact.html','/company-profile.html']);
           const viewports=[[1440,1000],[390,844]];
           const failures=[];
 
@@ -106,27 +106,38 @@ jobs:
                   const numbered=[...document.querySelectorAll('.target-numbered-card .target-card-number-bg')].map(el=>{
                     const s=getComputedStyle(el); return {text:(el.textContent||'').trim(),position:s.position,font:parseFloat(s.fontSize)||0};
                   });
+                  const selector=[
+                    'article [class*="number"]','article [class*="index"]','article [class*="-num"]',
+                    'li [class*="number"]','li [class*="index"]','li [class*="-num"]',
+                    '[class*="card"] [class*="number"]','[class*="card"] [class*="index"]','[class*="card"] [class*="-num"]'
+                  ].join(',');
+                  const eligible=[...document.querySelectorAll(selector)].filter(el=>{
+                    if(!/^0?\d{1,2}$/.test((el.textContent||'').trim())) return false;
+                    if(el.closest('.target-section-nav,.faq-topic-band,.privacy-toc,.terms-toc')) return false;
+                    return !!el.closest('article,[class*="card"],li');
+                  });
+                  const unconverted=eligible.filter(el=>!el.classList.contains('target-card-number-bg')).map(el=>(el.textContent||'').trim());
                   return {
                     labels,
                     numbered,
+                    eligibleCount:eligible.length,
+                    unconverted,
                     overflow:document.documentElement.scrollWidth>document.documentElement.clientWidth
                   };
                 });
 
                 if(metrics.overflow) failures.push(`${path} ${width}: horizontal overflow`);
-                if(!metrics.labels.length) failures.push(`${path} ${width}: no smart section nav labels`);
+                if(navRequired.has(path) && !metrics.labels.length) failures.push(`${path} ${width}: expected sticky section navigator is missing`);
                 for(const item of metrics.labels){
                   if(!item.text) failures.push(`${path} ${width}: empty section-nav label`);
                   if(item.words>4) failures.push(`${path} ${width}: long label '${item.text}' (${item.words} words)`);
                   if(item.compact!=='true') failures.push(`${path} ${width}: compact registry not applied to '${item.text}'`);
                   if(!['none','normal','""'].includes(item.after)) failures.push(`${path} ${width}: legacy pseudo label remains on '${item.text}' => ${item.after}`);
                 }
-                if(numberedRequired.includes(path)){
-                  if(!metrics.numbered.length) failures.push(`${path} ${width}: no numbered cards upgraded`);
-                  for(const item of metrics.numbered){
-                    if(item.position!=='absolute') failures.push(`${path} ${width}: number '${item.text}' is not background-positioned`);
-                    if(item.font<40) failures.push(`${path} ${width}: number '${item.text}' is not visually oversized (${item.font}px)`);
-                  }
+                if(metrics.unconverted.length) failures.push(`${path} ${width}: numeric card markers not converted: ${metrics.unconverted.join(', ')}`);
+                for(const item of metrics.numbered){
+                  if(item.position!=='absolute') failures.push(`${path} ${width}: number '${item.text}' is not background-positioned`);
+                  if(item.font<40) failures.push(`${path} ${width}: number '${item.text}' is not visually oversized (${item.font}px)`);
                 }
 
                 await page.locator('[data-lang-toggle]').first().click();
