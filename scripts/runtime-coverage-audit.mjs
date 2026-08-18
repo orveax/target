@@ -26,6 +26,7 @@ const viewports = [
 
 const cssTotals = new Map();
 const jsTotals = new Map();
+const selectorStats = new Map();
 const loadedFirstParty = new Set();
 const failures = [];
 
@@ -61,6 +62,71 @@ const recordCoverage = (store, entries) => {
   }
 };
 
+function recordSelectors(entries) {
+  for (const entry of entries) {
+    const href = normalizeUrl(entry.href);
+    const fileStats = selectorStats.get(href) || new Map();
+    const current = fileStats.get(entry.selector) || { seen: 0, matched: 0 };
+    current.seen += 1;
+    if (entry.matched) current.matched += 1;
+    fileStats.set(entry.selector, current);
+    selectorStats.set(href, fileStats);
+  }
+}
+
+async function collectSelectors(page) {
+  const entries = await page.evaluate((auditOrigin) => {
+    const results = [];
+    const dynamicPseudo = /:(?:hover|active|focus|focus-visible|focus-within|visited|link|target)\b/gi;
+    const pseudoElement = /::[a-z-]+(?:\([^)]*\))?|:(?:before|after)\b/gi;
+
+    const cleanSelector = (selector) => selector
+      .replace(pseudoElement, '')
+      .replace(dynamicPseudo, '')
+      .trim();
+
+    const walkRules = (rules, href) => {
+      for (const rule of rules) {
+        if (rule.type === CSSRule.STYLE_RULE && rule.selectorText) {
+          const selector = rule.selectorText.trim();
+          const query = cleanSelector(selector);
+          if (!query) continue;
+          let matched = false;
+          try {
+            matched = Boolean(document.querySelector(query));
+          } catch {
+            // Keep malformed/unsupported selectors visible in the report as unmatched.
+          }
+          results.push({ href, selector, matched });
+          continue;
+        }
+        if (!rule.cssRules) continue;
+        if (rule.type === CSSRule.MEDIA_RULE && !matchMedia(rule.conditionText).matches) continue;
+        if (rule.type === CSSRule.SUPPORTS_RULE && !CSS.supports(rule.conditionText)) continue;
+        walkRules(rule.cssRules, href);
+      }
+    };
+
+    for (const sheet of document.styleSheets) {
+      if (!sheet.href) continue;
+      let url;
+      try {
+        url = new URL(sheet.href);
+      } catch {
+        continue;
+      }
+      if (url.origin !== auditOrigin || !url.pathname.startsWith('/assets/')) continue;
+      try {
+        walkRules(sheet.cssRules, sheet.href);
+      } catch {
+        // A stylesheet that cannot expose rules will still be covered by byte coverage.
+      }
+    }
+    return results;
+  }, origin);
+  recordSelectors(entries);
+}
+
 const browser = await chromium.launch({ headless: true, executablePath: chromePath });
 
 try {
@@ -89,17 +155,20 @@ try {
       try {
         await page.goto(`${origin}${pagePath}`, { waitUntil: 'domcontentloaded', timeout: 30000 });
         await page.waitForTimeout(700);
+        await collectSelectors(page);
 
         const toggle = page.locator('[data-lang-toggle]').first();
         if (await toggle.count()) {
           await toggle.click();
           await page.waitForTimeout(180);
+          await collectSelectors(page);
         }
 
         await page.evaluate(() => {
           window.scrollTo(0, document.documentElement.scrollHeight);
         });
         await page.waitForTimeout(180);
+        await collectSelectors(page);
       } catch (error) {
         failures.push(`${pagePath} ${viewport.name}: ${error.message}`);
       }
@@ -131,6 +200,15 @@ function printReport(title, store) {
 
 printReport('First-party CSS runtime coverage', cssTotals);
 printReport('First-party JS runtime coverage', jsTotals);
+
+console.log('\n=== CSS selector reachability ===');
+for (const [href, selectors] of [...selectorStats.entries()].sort(([a], [b]) => a.localeCompare(b))) {
+  const all = [...selectors.entries()];
+  const unmatched = all.filter(([, stats]) => stats.matched === 0).map(([selector]) => selector);
+  console.log(`${href}: ${all.length - unmatched.length}/${all.length} selectors reached; ${unmatched.length} never matched`);
+  unmatched.slice(0, 80).forEach((selector) => console.log(`  - ${selector}`));
+  if (unmatched.length > 80) console.log(`  ... ${unmatched.length - 80} more`);
+}
 
 const covered = new Set([...cssTotals.keys(), ...jsTotals.keys()]);
 const loadedWithoutCoverage = [...loadedFirstParty].filter((url) => !covered.has(url)).sort();
