@@ -1,37 +1,165 @@
-name: TARGET Terms & Conditions Polish V2 QA
+name: TARGET Terms & Conditions Premium V2 QA
 
 on:
   push:
     branches: [main]
     paths:
-      - 'public/assets/terms-polish-v2.css'
+      - 'public/assets/terms-canonical.css'
+      - 'public/assets/target-section-nav-v2.js'
       - 'src/layouts/BaseLayout.astro'
       - 'src/pages/terms.astro'
       - '.github/workflows/terms-polish-v2-qa.yml'
   workflow_dispatch:
 
+permissions:
+  contents: read
+  statuses: write
+
 jobs:
-  terms-polish-v2:
+  terms-premium-v2:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Verify Terms legal-reading contract
+      - name: Publish QA pending status
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          test -f public/assets/terms-polish-v2.css
-          grep -q 'terms-polish-v2.css?v=20260817-02' src/layouts/BaseLayout.astro
-          grep -q 'Commercial boundary is the center of gravity' public/assets/terms-polish-v2.css
-          grep -q '.terms-section:target' public/assets/terms-polish-v2.css
-          grep -q 'overflow-x:auto' public/assets/terms-polish-v2.css
-          grep -q 'scroll-snap-type:x proximity' public/assets/terms-polish-v2.css
-          grep -q 'Explicit single-column reset' public/assets/terms-polish-v2.css
-          grep -q 'grid-template-columns:minmax(0,1fr)' public/assets/terms-polish-v2.css
-          grep -q '.page-terms .terms-layout > \*' public/assets/terms-polish-v2.css
-          grep -q 'min-width:0' public/assets/terms-polish-v2.css
-          grep -q 'prefers-reduced-motion:reduce' public/assets/terms-polish-v2.css
-          grep -q 'terms-boundary' src/pages/terms.astro
-          grep -q 'info@targetft.com' src/pages/terms.astro
-          grep -q 'لا عرض أو قبول أو التزام تلقائي' src/pages/terms.astro
-      - name: Build Astro site
+          RUN_URL="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          jq -n --arg state pending --arg context 'TARGET Terms & Conditions Premium V2 QA' --arg description 'Terms Premium V2 QA is running' --arg target_url "$RUN_URL" '{state:$state,context:$context,description:$description,target_url:$target_url}' >/tmp/status.json
+          curl -fsSL -X POST -H "Authorization: Bearer ${GH_TOKEN}" -H "Accept: application/vnd.github+json" "https://api.github.com/repos/${GITHUB_REPOSITORY}/statuses/${GITHUB_SHA}" -d @/tmp/status.json >/dev/null
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify canonical Terms contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f public/assets/terms-canonical.css
+          grep -Fq 'terms-canonical.css?v=20260818-01' src/layouts/BaseLayout.astro
+          ! grep -Fq 'terms-v1.css' src/layouts/BaseLayout.astro
+          ! grep -Fq 'terms-polish-v2.css' src/layouts/BaseLayout.astro
+          ! grep -Fq 'hero-terms-premium-v1.css' src/layouts/BaseLayout.astro
+          grep -Fq 'grid-template-columns:minmax(0,55fr) minmax(340px,45fr)' public/assets/terms-canonical.css
+          grep -Fq 'flex-wrap:nowrap!important' public/assets/terms-canonical.css
+          grep -Fq "classList.contains('page-terms')" public/assets/target-section-nav-v2.js
+          grep -Fq 'id="use"' src/pages/terms.astro
+          grep -Fq 'id="commitment"' src/pages/terms.astro
+          grep -Fq 'id="law"' src/pages/terms.astro
+          grep -Fq 'terms-boundary' src/pages/terms.astro
+          grep -Fq 'privacy.html' src/pages/terms.astro
+          grep -Fq 'contact.html' src/pages/terms.astro
+          grep -Fq 'info@targetft.com' src/pages/terms.astro
+          ! grep -Fq 'Legal Review Required' src/pages/terms.astro
+          ! grep -Fq 'Set at publication' src/pages/terms.astro
+          ! grep -Fq 'noindex,nofollow' src/pages/terms.astro
+      - name: Install and build
         run: |
           npm install
           npm run build
+      - name: Prepare hosted Chrome
+        shell: bash
+        run: |
+          npm install --no-save playwright@1.55.0
+          CHROME_PATH="$(command -v google-chrome || command -v google-chrome-stable || true)"
+          test -n "$CHROME_PATH"
+          echo "CHROME_PATH=$CHROME_PATH" >> "$GITHUB_ENV"
+      - name: Start static server
+        run: |
+          npx --yes http-server dist -p 4173 -c-1 >/tmp/terms-http.log 2>&1 &
+          for i in {1..30}; do curl -fsS http://127.0.0.1:4173/terms.html >/dev/null && exit 0; sleep 1; done
+          cat /tmp/terms-http.log; exit 1
+      - name: Capture and validate AR/EN Terms reading contract
+        env:
+          CHROME_PATH: ${{ env.CHROME_PATH }}
+        run: |
+          mkdir -p terms-premium-v2
+          cat > terms-premium-v2/capture.mjs <<'EOF'
+          import { chromium } from 'playwright';
+          import fs from 'node:fs';
+          const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_PATH});
+          const origin='http://127.0.0.1:4173/terms.html';
+          const viewports=[
+            ['1440',{viewport:{width:1440,height:1000}}],
+            ['768',{viewport:{width:768,height:1024}}],
+            ['390',{viewport:{width:390,height:844},isMobile:true,hasTouch:true}]
+          ];
+          const failures=[]; const metrics=[];
+          for(const [name,opts] of viewports){
+            const ctx=await browser.newContext(opts);
+            const page=await ctx.newPage();
+            try{
+              await page.goto(origin,{waitUntil:'networkidle'});
+              await page.evaluate(async()=>{if(document.fonts) await document.fonts.ready;});
+              await page.waitForTimeout(250);
+              for(const lang of ['ar','en']){
+                if(await page.locator('html').getAttribute('lang')!==lang){await page.locator('[data-lang-toggle]').first().click();await page.waitForTimeout(220);}
+                const m=await page.evaluate(()=>{
+                  const copy=document.querySelector('.terms-hero-copy').getBoundingClientRect();
+                  const visual=document.querySelector('.terms-visual').getBoundingClientRect();
+                  const toc=document.querySelector('.terms-toc');
+                  const tocNav=toc.querySelector('nav');
+                  const boundary=document.querySelector('.terms-boundary');
+                  return {
+                    lang:document.documentElement.lang,
+                    overflowX:document.documentElement.scrollWidth>document.documentElement.clientWidth,
+                    h1:document.querySelectorAll('.page-terms h1').length,
+                    sections:document.querySelectorAll('.terms-section').length,
+                    tocLinks:tocNav.querySelectorAll('a').length,
+                    heroActions:document.querySelectorAll('.terms-hero-utility a').length,
+                    relatedActions:document.querySelectorAll('.terms-related-actions a').length,
+                    boundary:!!boundary,
+                    globalNav:document.querySelectorAll('.target-section-nav').length,
+                    copyTop:copy.top,visualTop:visual.top,copyWidth:copy.width,visualWidth:visual.width,
+                    tocPosition:getComputedStyle(toc).position,
+                    tocDisplay:getComputedStyle(tocNav).display,
+                    tocWrap:getComputedStyle(tocNav).flexWrap,
+                    tocOverflow:getComputedStyle(tocNav).overflowX
+                  };
+                });
+                metrics.push({viewport:name,...m});
+                if(m.overflowX) failures.push(`${name}-${lang}: horizontal overflow`);
+                if(m.h1!==1||m.sections!==10||m.tocLinks!==10) failures.push(`${name}-${lang}: canonical Terms counts mismatch`);
+                if(m.heroActions!==2||m.relatedActions!==2||!m.boundary) failures.push(`${name}-${lang}: legal utilities/boundary mismatch`);
+                if(m.globalNav!==0) failures.push(`${name}-${lang}: duplicate global section navigation present`);
+                if(name==='1440'){
+                  const ratio=m.copyWidth/m.visualWidth;
+                  if(ratio<1.05||ratio>1.50) failures.push(`${name}-${lang}: hero ratio ${ratio.toFixed(2)} outside 55/45 tolerance`);
+                  if(m.tocPosition!=='sticky') failures.push(`${name}-${lang}: desktop legal TOC is not sticky`);
+                } else if(!(m.copyTop<m.visualTop)) failures.push(`${name}-${lang}: text must precede legal visual`);
+                if(name==='390'&&(m.tocDisplay!=='flex'||m.tocWrap!=='nowrap'||m.tocOverflow!=='auto')) failures.push(`${name}-${lang}: mobile Terms TOC is not a compact horizontal strip`);
+                await page.screenshot({path:`terms-premium-v2/${name}-${lang}-first-fold.png`,fullPage:false});
+              }
+
+              await page.goto(origin+'#commitment',{waitUntil:'networkidle'});
+              await page.waitForTimeout(250);
+              const deep=await page.locator('#commitment').evaluate(el=>({top:el.getBoundingClientRect().top,bg:getComputedStyle(el).backgroundImage,numBg:getComputedStyle(el.querySelector('.terms-section-num')).backgroundColor}));
+              if(deep.top<70) failures.push(`${name}: deep-linked Terms section is hidden under header`);
+              if(!deep.bg||deep.bg==='none') failures.push(`${name}: target Terms reading state is not rendered`);
+              await page.screenshot({path:`terms-premium-v2/${name}-commitment.png`,fullPage:true});
+            }catch(e){failures.push(`${name}: ${e.message}`)}finally{await ctx.close()}
+          }
+          fs.writeFileSync('terms-premium-v2/metrics.json',JSON.stringify(metrics,null,2));
+          fs.writeFileSync('terms-premium-v2/failures.txt',failures.join('\n'));
+          await browser.close();
+          if(failures.length){console.error(failures.join('\n'));process.exit(1)}
+          EOF
+          node terms-premium-v2/capture.mjs
+      - name: Upload Terms visual artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: target-terms-premium-v2
+          path: terms-premium-v2
+          retention-days: 14
+      - name: Publish final QA status
+        if: always()
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          JOB_STATUS: ${{ job.status }}
+        run: |
+          RUN_URL="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          if [[ "$JOB_STATUS" == success ]]; then STATE=success; DESC='Terms Premium V2 QA passed'; else STATE=failure; DESC='Terms Premium V2 QA failed'; fi
+          jq -n --arg state "$STATE" --arg context 'TARGET Terms & Conditions Premium V2 QA' --arg description "$DESC" --arg target_url "$RUN_URL" '{state:$state,context:$context,description:$description,target_url:$target_url}' >/tmp/status.json
+          curl -fsSL -X POST -H "Authorization: Bearer ${GH_TOKEN}" -H "Accept: application/vnd.github+json" "https://api.github.com/repos/${GITHUB_REPOSITORY}/statuses/${GITHUB_SHA}" -d @/tmp/status.json >/dev/null
