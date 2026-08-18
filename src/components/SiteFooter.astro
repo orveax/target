@@ -1,66 +1,91 @@
-<footer class="target-footer-v6" aria-labelledby="tf6-brand-title">
-  <div class="container tf6-shell">
-    <div class="tf6-main">
-      <section class="tf6-brand" aria-labelledby="tf6-brand-title">
-        <a class="tf6-logo-link" href="index.html" aria-label="TARGET home">
-          <img class="tf6-logo" src="/assets/brand/target-logo-primary-official-cream-transparent.svg" alt="TARGET — تارقت لتجارة الأغذية" />
+---
+const { variant = 'default' } = Astro.props;
+const compact = variant === 'compact';
+---
+<footer class:list={['target-footer-v6', { 'target-footer-v6--compact': compact }]} aria-labelledby={compact ? undefined : 'tf6-brand-title'} aria-label={compact ? 'TARGET recovery footer' : undefined}>
+  {compact ? (
+    <div class="container tf6-shell tf6-shell--compact">
+      <div class="tf6-compact-main">
+        <a class="tf6-compact-logo-link" href="index.html" aria-label="TARGET home">
+          <img class="tf6-compact-logo" src="/assets/brand/target-logo-primary-official-cream-transparent.svg" alt="TARGET — تارقت لتجارة الأغذية" />
         </a>
-        <h2 id="tf6-brand-title" class="visually-hidden">TARGET</h2>
-        <p class="tf6-brand-copy" data-ar="تارقت شركة قطرية تعمل في تجارة واستيراد الأغذية، وتناقش فرص المنتجات مع المصنعين والعلامات والموردين للسوق القطري." data-en="TARGET is a Qatar-based food trading and import company working with manufacturers, brands and suppliers on product opportunities for Qatar.">تارقت شركة قطرية تعمل في تجارة واستيراد الأغذية، وتناقش فرص المنتجات مع المصنعين والعلامات والموردين للسوق القطري.</p>
-        <div class="tf6-meta" aria-label="TARGET company facts">
-          <span><i data-lucide="map-pin"></i><b data-ar="دولة قطر" data-en="State of Qatar">دولة قطر</b></span>
-          <span><i data-lucide="ship"></i><b data-ar="تجارة واستيراد الأغذية" data-en="Food Trading & Import">تجارة واستيراد الأغذية</b></span>
-        </div>
-        <a class="tf6-cta" href="suppliers.html">
-          <span data-ar="ناقش منتجك معنا" data-en="Discuss Your Product">ناقش منتجك معنا</span>
-          <i data-lucide="arrow-up-left"></i>
-        </a>
-        <div class="tf6-social" aria-label="TARGET social media">
-          <a href="https://www.facebook.com/targetft" target="_blank" rel="noopener noreferrer" aria-label="TARGET on Facebook"><i class="bi bi-facebook"></i></a>
-          <a href="https://www.instagram.com/targetft/" target="_blank" rel="noopener noreferrer" aria-label="TARGET on Instagram"><i class="bi bi-instagram"></i></a>
-          <a href="https://www.tiktok.com/@targetft" target="_blank" rel="noopener noreferrer" aria-label="TARGET on TikTok"><i class="bi bi-tiktok"></i></a>
-          <a href="https://wa.me/97477910919" target="_blank" rel="noopener noreferrer" aria-label="TARGET on WhatsApp"><i class="bi bi-whatsapp"></i></a>
-        </div>
-      </section>
-
-      <nav class="tf6-navigation" aria-labelledby="tf6-navigation-title">
-        <div class="tf6-navigation-head">
-          <span data-ar="استكشف تارقت" data-en="Explore TARGET">استكشف تارقت</span>
-          <h3 id="tf6-navigation-title" data-ar="المسارات الرئيسية" data-en="Main Routes">المسارات الرئيسية</h3>
-        </div>
-        <div class="tf6-navigation-list">
-          <a href="about.html" data-nav-file="about.html"><small>01</small><strong data-ar="عن تارقت" data-en="About TARGET">عن تارقت</strong><i data-lucide="arrow-up-left"></i></a>
-          <a href="capabilities.html" data-nav-file="capabilities.html"><small>02</small><strong data-ar="كيف نعمل" data-en="How We Work">كيف نعمل</strong><i data-lucide="arrow-up-left"></i></a>
-          <a href="products-companies.html" data-nav-file="products-companies.html"><small>03</small><strong data-ar="المنتجات والشركات" data-en="Products & Companies">المنتجات والشركات</strong><i data-lucide="arrow-up-left"></i></a>
-          <a href="qatar-market.html" data-nav-file="qatar-market.html"><small>04</small><strong data-ar="السوق القطري" data-en="Qatar Market">السوق القطري</strong><i data-lucide="arrow-up-left"></i></a>
-          <a href="suppliers.html" data-nav-file="suppliers.html"><small>05</small><strong data-ar="للمصنعين والموردين" data-en="For Suppliers">للمصنعين والموردين</strong><i data-lucide="arrow-up-left"></i></a>
-          <a href="contact.html" data-nav-file="contact.html"><small>06</small><strong data-ar="الاتصال بنا" data-en="Contact Us">الاتصال بنا</strong><i data-lucide="arrow-up-left"></i></a>
-        </div>
-      </nav>
-    </div>
-
-    <section class="tf6-contact-band" aria-label="TARGET contact channels">
-      <a href="mailto:info@targetft.com"><span data-ar="استفسارات عامة" data-en="General Enquiries">استفسارات عامة</span><strong>info@targetft.com</strong></a>
-      <a href="mailto:sales@targetft.com"><span data-ar="المبيعات والتجاري" data-en="Sales & Commercial">المبيعات والتجاري</span><strong>sales@targetft.com</strong></a>
-      <a href="mailto:procurement@targetft.com"><span data-ar="المشتريات" data-en="Procurement">المشتريات</span><strong>procurement@targetft.com</strong></a>
-      <a href="mailto:partners@targetft.com"><span data-ar="المصنعون والموردون" data-en="Manufacturers & Suppliers">المصنعون والموردون</span><strong>partners@targetft.com</strong></a>
-    </section>
-
-    <div class="tf6-bottom">
-      <div class="tf6-copyright">
+        <nav class="tf6-compact-nav" aria-label="Recovery footer links">
+          <a href="index.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
+          <a href="contact.html" data-ar="اتصل بنا" data-en="Contact">اتصل بنا</a>
+          <a href="faq.html" data-ar="الأسئلة الشائعة" data-en="FAQ">الأسئلة الشائعة</a>
+          <a href="privacy.html" data-ar="الخصوصية" data-en="Privacy">الخصوصية</a>
+          <a href="terms.html" data-ar="الشروط" data-en="Terms">الشروط</a>
+        </nav>
+      </div>
+      <div class="tf6-compact-bottom">
         <span>© 2026 TARGET</span>
         <span data-ar="جميع الحقوق محفوظة" data-en="All rights reserved">جميع الحقوق محفوظة</span>
       </div>
-      <nav class="tf6-utility" aria-label="Footer utility links">
-        <a href="company-profile.html" data-ar="الملف التعريفي" data-en="Company Profile">الملف التعريفي</a>
-        <a href="faq.html" data-ar="الأسئلة الشائعة" data-en="FAQ">الأسئلة الشائعة</a>
-        <a href="privacy.html" data-ar="الخصوصية" data-en="Privacy">الخصوصية</a>
-        <a href="terms.html" data-ar="الشروط" data-en="Terms">الشروط</a>
-      </nav>
-      <div class="tf6-orveax">
-        <span data-ar="التجربة الرقمية والتنفيذ بواسطة" data-en="Digital experience & implementation by">التجربة الرقمية والتنفيذ بواسطة</span>
-        <a href="https://orveax.com" target="_blank" rel="noopener noreferrer">ORVEAX <i data-lucide="external-link"></i></a>
+    </div>
+  ) : (
+    <div class="container tf6-shell">
+      <div class="tf6-main">
+        <section class="tf6-brand" aria-labelledby="tf6-brand-title">
+          <a class="tf6-logo-link" href="index.html" aria-label="TARGET home">
+            <img class="tf6-logo" src="/assets/brand/target-logo-primary-official-cream-transparent.svg" alt="TARGET — تارقت لتجارة الأغذية" />
+          </a>
+          <h2 id="tf6-brand-title" class="visually-hidden">TARGET</h2>
+          <p class="tf6-brand-copy" data-ar="تارقت شركة قطرية تعمل في تجارة واستيراد الأغذية، وتناقش فرص المنتجات مع المصنعين والعلامات والموردين للسوق القطري." data-en="TARGET is a Qatar-based food trading and import company working with manufacturers, brands and suppliers on product opportunities for Qatar.">تارقت شركة قطرية تعمل في تجارة واستيراد الأغذية، وتناقش فرص المنتجات مع المصنعين والعلامات والموردين للسوق القطري.</p>
+          <div class="tf6-meta" aria-label="TARGET company facts">
+            <span><i data-lucide="map-pin"></i><b data-ar="دولة قطر" data-en="State of Qatar">دولة قطر</b></span>
+            <span><i data-lucide="ship"></i><b data-ar="تجارة واستيراد الأغذية" data-en="Food Trading & Import">تجارة واستيراد الأغذية</b></span>
+          </div>
+          <a class="tf6-cta" href="suppliers.html">
+            <span data-ar="ناقش منتجك معنا" data-en="Discuss Your Product">ناقش منتجك معنا</span>
+            <i data-lucide="arrow-up-left"></i>
+          </a>
+          <div class="tf6-social" aria-label="TARGET social media">
+            <a href="https://www.facebook.com/targetft" target="_blank" rel="noopener noreferrer" aria-label="TARGET on Facebook"><i class="bi bi-facebook"></i></a>
+            <a href="https://www.instagram.com/targetft/" target="_blank" rel="noopener noreferrer" aria-label="TARGET on Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="https://www.tiktok.com/@targetft" target="_blank" rel="noopener noreferrer" aria-label="TARGET on TikTok"><i class="bi bi-tiktok"></i></a>
+            <a href="https://wa.me/97477910919" target="_blank" rel="noopener noreferrer" aria-label="TARGET on WhatsApp"><i class="bi bi-whatsapp"></i></a>
+          </div>
+        </section>
+
+        <nav class="tf6-navigation" aria-labelledby="tf6-navigation-title">
+          <div class="tf6-navigation-head">
+            <span data-ar="استكشف تارقت" data-en="Explore TARGET">استكشف تارقت</span>
+            <h3 id="tf6-navigation-title" data-ar="المسارات الرئيسية" data-en="Main Routes">المسارات الرئيسية</h3>
+          </div>
+          <div class="tf6-navigation-list">
+            <a href="about.html" data-nav-file="about.html"><small>01</small><strong data-ar="عن تارقت" data-en="About TARGET">عن تارقت</strong><i data-lucide="arrow-up-left"></i></a>
+            <a href="capabilities.html" data-nav-file="capabilities.html"><small>02</small><strong data-ar="كيف نعمل" data-en="How We Work">كيف نعمل</strong><i data-lucide="arrow-up-left"></i></a>
+            <a href="products-companies.html" data-nav-file="products-companies.html"><small>03</small><strong data-ar="المنتجات والشركات" data-en="Products & Companies">المنتجات والشركات</strong><i data-lucide="arrow-up-left"></i></a>
+            <a href="qatar-market.html" data-nav-file="qatar-market.html"><small>04</small><strong data-ar="السوق القطري" data-en="Qatar Market">السوق القطري</strong><i data-lucide="arrow-up-left"></i></a>
+            <a href="suppliers.html" data-nav-file="suppliers.html"><small>05</small><strong data-ar="للمصنعين والموردين" data-en="For Suppliers">للمصنعين والموردين</strong><i data-lucide="arrow-up-left"></i></a>
+            <a href="contact.html" data-nav-file="contact.html"><small>06</small><strong data-ar="الاتصال بنا" data-en="Contact Us">الاتصال بنا</strong><i data-lucide="arrow-up-left"></i></a>
+          </div>
+        </nav>
+      </div>
+
+      <section class="tf6-contact-band" aria-label="TARGET contact channels">
+        <a href="mailto:info@targetft.com"><span data-ar="استفسارات عامة" data-en="General Enquiries">استفسارات عامة</span><strong>info@targetft.com</strong></a>
+        <a href="mailto:sales@targetft.com"><span data-ar="المبيعات والتجاري" data-en="Sales & Commercial">المبيعات والتجاري</span><strong>sales@targetft.com</strong></a>
+        <a href="mailto:procurement@targetft.com"><span data-ar="المشتريات" data-en="Procurement">المشتريات</span><strong>procurement@targetft.com</strong></a>
+        <a href="mailto:partners@targetft.com"><span data-ar="المصنعون والموردون" data-en="Manufacturers & Suppliers">المصنعون والموردون</span><strong>partners@targetft.com</strong></a>
+      </section>
+
+      <div class="tf6-bottom">
+        <div class="tf6-copyright">
+          <span>© 2026 TARGET</span>
+          <span data-ar="جميع الحقوق محفوظة" data-en="All rights reserved">جميع الحقوق محفوظة</span>
+        </div>
+        <nav class="tf6-utility" aria-label="Footer utility links">
+          <a href="company-profile.html" data-ar="الملف التعريفي" data-en="Company Profile">الملف التعريفي</a>
+          <a href="faq.html" data-ar="الأسئلة الشائعة" data-en="FAQ">الأسئلة الشائعة</a>
+          <a href="privacy.html" data-ar="الخصوصية" data-en="Privacy">الخصوصية</a>
+          <a href="terms.html" data-ar="الشروط" data-en="Terms">الشروط</a>
+        </nav>
+        <div class="tf6-orveax">
+          <span data-ar="التجربة الرقمية والتنفيذ بواسطة" data-en="Digital experience & implementation by">التجربة الرقمية والتنفيذ بواسطة</span>
+          <a href="https://orveax.com" target="_blank" rel="noopener noreferrer">ORVEAX <i data-lucide="external-link"></i></a>
+        </div>
       </div>
     </div>
-  </div>
+  )}
 </footer>
