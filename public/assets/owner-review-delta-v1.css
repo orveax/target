@@ -1,4 +1,4 @@
-/* TARGET — Owner Review Delta V1 | 2026-08-18 · build 05
+/* TARGET — Owner Review Delta V1 | 2026-08-18 · build 06
  * Temporary controlled review layer.
  * Merge approved deltas into canonical page layers before Final Site Freeze.
  */
@@ -118,13 +118,18 @@ html[lang='en'] .page-about .about-value-card h3{letter-spacing:-.024em}
 @media (max-width:1023.98px){
   .page-about .about-hero{
     background:
-      radial-gradient(circle at 86% 11%,rgba(192,149,82,.15) 0,rgba(192,149,82,.06) 16%,transparent 31%),
+      radial-gradient(circle at 86% 11%,rgba(192,149,82,.15) 0,rgba(192,149,82,.06) 16%,transparent 30%),
       radial-gradient(circle,rgba(12,73,49,.085) 0 1px,transparent 1.35px) 0 0/30px 30px,
       linear-gradient(rgba(12,73,49,.028) 1px,transparent 1px) 0 0/58px 58px,
       linear-gradient(90deg,rgba(12,73,49,.028) 1px,transparent 1px) 0 0/58px 58px,
       linear-gradient(145deg,#fffaf5 0%,#f8f1e8 60%,#fffdf9 100%);
   }
-  .page-about .about-hero__media{width:min(82%,560px);background-position:center 50%}
+  .page-about .about-hero__grid{
+    grid-template-columns:1fr;
+    gap:36px;
+  }
+  .page-about .about-hero__copy{max-width:760px}
+  .page-about .about-hero__media{justify-self:end;width:min(82%,560px);background-position:center 50%}
 }
 
 @media (max-width:767.98px){
@@ -152,7 +157,13 @@ html[lang='en'] .page-about .about-value-card h3{letter-spacing:-.024em}
       linear-gradient(90deg,rgba(12,73,49,.022) 1px,transparent 1px) 0 0/46px 46px,
       linear-gradient(155deg,#fffaf5 0%,#f7efe5 100%);
   }
+  .page-about .about-hero__grid{
+    grid-template-columns:1fr;
+    gap:30px;
+  }
+  .page-about .about-hero__copy{max-width:none}
   .page-about .about-hero__media{
+    justify-self:stretch;
     width:calc(100% - 8px);
     margin-inline-start:8px;
     aspect-ratio:4/3;
