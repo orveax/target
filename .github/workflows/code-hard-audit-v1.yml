@@ -1,0 +1,109 @@
+name: TARGET Code Hard Audit V1
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  statuses: write
+
+jobs:
+  code-hard-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Publish pending status
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          RUN_URL="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          jq -n --arg state pending --arg context 'TARGET Code Hard Audit V1' --arg description 'Code hard audit is running' --arg target_url "$RUN_URL" '{state:$state,context:$context,description:$description,target_url:$target_url}' >/tmp/status.json
+          curl -fsSL -X POST -H "Authorization: Bearer ${GH_TOKEN}" -H "Accept: application/vnd.github+json" "https://api.github.com/repos/${GITHUB_REPOSITORY}/statuses/${GITHUB_SHA}" -d @/tmp/status.json >/dev/null
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install project dependencies
+        run: npm install
+
+      - name: Build compiler gate
+        run: npm run build
+
+      - name: Install static-analysis tools
+        run: npm install --no-save @astrojs/check typescript stylelint stylelint-config-recommended eslint @eslint/js typescript-eslint eslint-plugin-vue vue-eslint-parser eslint-plugin-astro globals knip
+
+      - name: Astro and TypeScript check
+        run: npx astro check
+
+      - name: JavaScript syntax check
+        shell: bash
+        run: |
+          set -euo pipefail
+          while IFS= read -r file; do
+            node --check "$file"
+          done < <(find public/assets scripts -type f \( -name '*.js' -o -name '*.mjs' -o -name '*.cjs' \) | sort)
+
+      - name: CSS syntax and possible-error check
+        shell: bash
+        run: |
+          cat > /tmp/stylelint-target.json <<'EOF'
+          {"extends":["stylelint-config-recommended"]}
+          EOF
+          npx stylelint 'public/assets/**/*.css' --config /tmp/stylelint-target.json
+
+      - name: ESLint source check
+        shell: bash
+        run: |
+          cat > eslint.audit.config.mjs <<'EOF'
+          import js from '@eslint/js';
+          import globals from 'globals';
+          import tseslint from 'typescript-eslint';
+          import vue from 'eslint-plugin-vue';
+          import astro from 'eslint-plugin-astro';
+
+          export default [
+            { ignores: ['dist/**', 'node_modules/**', 'src/legacy/**'] },
+            js.configs.recommended,
+            ...tseslint.configs.recommended,
+            ...vue.configs['flat/recommended'],
+            ...astro.configs['flat/recommended'],
+            {
+              files: ['public/assets/**/*.js', 'scripts/**/*.mjs'],
+              languageOptions: { globals: { ...globals.browser, ...globals.node } },
+            },
+            {
+              files: ['src/**/*.ts', 'src/**/*.vue', 'src/**/*.astro'],
+              rules: {
+                '@typescript-eslint/no-explicit-any': 'off',
+                'vue/multi-word-component-names': 'off'
+              }
+            }
+          ];
+          EOF
+          npx eslint src public/assets scripts --config eslint.audit.config.mjs
+
+      - name: Unused dependency and source-file check
+        run: npx knip --no-progress
+
+      - name: Repository structure and reference scan
+        run: node scripts/code-hard-audit.mjs
+
+      - name: Production dependency audit
+        run: npm audit --omit=dev --audit-level=high
+
+      - name: Publish final status
+        if: always()
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          JOB_STATUS: ${{ job.status }}
+        run: |
+          RUN_URL="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          if [[ "$JOB_STATUS" == success ]]; then STATE=success; DESC='Code hard audit passed'; else STATE=failure; DESC='Code hard audit found blocking issues'; fi
+          jq -n --arg state "$STATE" --arg context 'TARGET Code Hard Audit V1' --arg description "$DESC" --arg target_url "$RUN_URL" '{state:$state,context:$context,description:$description,target_url:$target_url}' >/tmp/status.json
+          curl -fsSL -X POST -H "Authorization: Bearer ${GH_TOKEN}" -H "Accept: application/vnd.github+json" "https://api.github.com/repos/${GITHUB_REPOSITORY}/statuses/${GITHUB_SHA}" -d @/tmp/status.json >/dev/null
