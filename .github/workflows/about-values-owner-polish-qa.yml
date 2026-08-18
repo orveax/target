@@ -24,7 +24,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           RUN_URL="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
-          jq -n --arg state pending --arg context 'TARGET About Vision Mission QA' --arg description 'Vision & Mission owner polish QA is running' --arg target_url "$RUN_URL" '{state:$state,context:$context,description:$description,target_url:$target_url}' >/tmp/status.json
+          jq -n --arg state pending --arg context 'TARGET About Vision Mission QA' --arg description 'Vision & Mission charcoal-card QA is running' --arg target_url "$RUN_URL" '{state:$state,context:$context,description:$description,target_url:$target_url}' >/tmp/status.json
           curl -fsSL -X POST -H "Authorization: Bearer ${GH_TOKEN}" -H "Accept: application/vnd.github+json" "https://api.github.com/repos/${GITHUB_REPOSITORY}/statuses/${GITHUB_SHA}" -d @/tmp/status.json >/dev/null
       - uses: actions/setup-node@v4
         with:
@@ -34,10 +34,13 @@ jobs:
         run: |
           set -euo pipefail
           test -f public/assets/about-values-owner-polish-v1.css
-          grep -Fq 'about-values-owner-polish-v1.css?v=20260818-01' src/layouts/BaseLayout.astro
-          grep -Fq 'min-height:50px!important' public/assets/about-values-owner-polish-v1.css
-          grep -Fq 'max-width:23ch!important' public/assets/about-values-owner-polish-v1.css
-          grep -Fq 'height:2px' public/assets/about-values-owner-polish-v1.css
+          grep -Fq 'about-values-owner-polish-v1.css?v=20260818-02' src/layouts/BaseLayout.astro
+          grep -Fq 'About Vision & Mission Owner Polish V2' public/assets/about-values-owner-polish-v1.css
+          grep -Fq 'content:none!important' public/assets/about-values-owner-polish-v1.css
+          grep -Fq 'background:#262626!important' public/assets/about-values-owner-polish-v1.css
+          grep -Fq 'position:absolute!important' public/assets/about-values-owner-polish-v1.css
+          grep -Fq 'background:#F4EDE4!important' public/assets/about-values-owner-polish-v1.css
+          grep -Fq 'opacity:.075!important' public/assets/about-values-owner-polish-v1.css
       - name: Install and build
         run: |
           npm install
@@ -54,7 +57,7 @@ jobs:
           npx --yes http-server dist -p 4173 -c-1 >/tmp/about-values-http.log 2>&1 &
           for i in {1..30}; do curl -fsS http://127.0.0.1:4173/about.html >/dev/null && exit 0; sleep 1; done
           cat /tmp/about-values-http.log; exit 1
-      - name: Browser QA
+      - name: Browser and interaction QA
         env:
           CHROME_PATH: ${{ env.CHROME_PATH }}
         run: |
@@ -64,7 +67,8 @@ jobs:
           import fs from 'node:fs';
           const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_PATH});
           const failures=[]; const metrics=[];
-          for(const [name,width,height] of [['1440',1440,1000],['768',768,1024],['390',390,844]]){
+          const sizes=[['1440',1440,1000],['768',768,1024],['390',390,844]];
+          for(const [name,width,height] of sizes){
             const ctx=await browser.newContext({viewport:{width,height},isMobile:width===390,hasTouch:width===390});
             const page=await ctx.newPage();
             await page.goto('http://127.0.0.1:4173/about.html',{waitUntil:'networkidle'});
@@ -74,32 +78,74 @@ jobs:
               const m=await page.evaluate(()=>{
                 const values=document.querySelector('.about-values');
                 const cards=[...document.querySelectorAll('.about-value-card')];
-                const floating=getComputedStyle(values,'::before');
-                const line=getComputedStyle(values,'::after');
+                const before=getComputedStyle(values,'::before');
+                const after=getComputedStyle(values,'::after');
+                const vs=getComputedStyle(values);
                 return {
                   overflowX:document.documentElement.scrollWidth>document.documentElement.clientWidth,
-                  floatingHeight:parseFloat(floating.height),
-                  floatingFont:parseFloat(floating.fontSize),
-                  floatingOpacity:Number(floating.opacity),
-                  lineHeight:parseFloat(line.height),
-                  cardHeights:cards.map(c=>c.getBoundingClientRect().height),
-                  cardPaddingTop:cards.map(c=>parseFloat(getComputedStyle(c).paddingTop)),
-                  titleWidths:cards.map(c=>c.querySelector('h3').getBoundingClientRect().width)
+                  columns:vs.gridTemplateColumns,
+                  sharedBefore:before.content,
+                  sharedAfter:after.content,
+                  cards:cards.map(c=>{
+                    const cs=getComputedStyle(c);
+                    const label=c.querySelector('.about-card-label');
+                    const ls=getComputedStyle(label);
+                    const icon=c.querySelector('.about-icon--large');
+                    const is=getComputedStyle(icon);
+                    const h3s=getComputedStyle(c.querySelector('h3'));
+                    const ps=getComputedStyle(c.querySelector('p'));
+                    return {
+                      bg:cs.backgroundColor,
+                      color:cs.color,
+                      height:c.getBoundingClientRect().height,
+                      borderTop:cs.borderTopColor,
+                      labelText:label.textContent.trim(),
+                      labelPosition:ls.position,
+                      labelTop:ls.top,
+                      labelHeight:label.getBoundingClientRect().height,
+                      labelBg:ls.backgroundColor,
+                      iconPosition:is.position,
+                      iconOpacity:Number(is.opacity),
+                      iconWidth:icon.getBoundingClientRect().width,
+                      titleColor:h3s.color,
+                      bodyColor:ps.color
+                    };
+                  })
                 };
               });
               metrics.push({viewport:name,lang,...m});
               if(m.overflowX) failures.push(`${name}-${lang}: horizontal overflow`);
-              if(m.floatingHeight<44) failures.push(`${name}-${lang}: floating title too small`);
-              if(m.floatingOpacity<.95) failures.push(`${name}-${lang}: floating title too faint`);
-              if(m.lineHeight<1.5) failures.push(`${name}-${lang}: top rule too weak`);
-              if(m.cardHeights.length!==2) failures.push(`${name}-${lang}: expected two cards`);
-              if(name==='1440' && Math.max(...m.cardPaddingTop)>47) failures.push(`${name}-${lang}: cards still carry excessive top padding`);
-              if(m.titleWidths.some(v=>v<180)) failures.push(`${name}-${lang}: title measure collapsed`);
-              await page.locator('.about-values-section').screenshot({path:`about-values-qa/${name}-${lang}.png`});
+              if(!['none','normal',''].includes((m.sharedBefore||'').replaceAll('"',''))) failures.push(`${name}-${lang}: rejected shared floating title is still rendered`);
+              if(!['none','normal',''].includes((m.sharedAfter||'').replaceAll('"',''))) failures.push(`${name}-${lang}: rejected shared top rule is still rendered`);
+              if(m.cards.length!==2) failures.push(`${name}-${lang}: expected two cards`);
+              for(const [i,c] of m.cards.entries()){
+                if(c.bg!=='rgb(38, 38, 38)') failures.push(`${name}-${lang}: card ${i+1} is not charcoal by default`);
+                if(c.labelPosition!=='absolute'||c.labelHeight<40) failures.push(`${name}-${lang}: card ${i+1} upper-border label is not prominent`);
+                if(c.iconPosition!=='absolute'||c.iconWidth<100||c.iconOpacity>.12) failures.push(`${name}-${lang}: card ${i+1} icon is not a restrained watermark`);
+                if(!c.labelText) failures.push(`${name}-${lang}: card ${i+1} label missing`);
+              }
+              if(name==='390' && m.columns.split(' ').length>1) failures.push(`${name}-${lang}: mobile cards are not single-column`);
+              await page.locator('.about-values-section').screenshot({path:`about-values-qa/${name}-${lang}-default.png`});
               if(name==='1440'){
-                await page.locator('.about-value-card').first().hover(); await page.waitForTimeout(300);
-                const tr=await page.locator('.about-value-card').first().evaluate(el=>getComputedStyle(el).transform);
-                if(tr==='none') failures.push(`${name}-${lang}: card hover lift missing`);
+                const card=page.locator('.about-value-card').first();
+                await card.hover(); await page.waitForTimeout(340);
+                const h=await card.evaluate(c=>{
+                  const cs=getComputedStyle(c);
+                  const label=c.querySelector('.about-card-label');
+                  const icon=c.querySelector('.about-icon--large');
+                  return {
+                    bg:cs.backgroundColor,
+                    transform:cs.transform,
+                    labelBg:getComputedStyle(label).backgroundColor,
+                    titleColor:getComputedStyle(c.querySelector('h3')).color,
+                    iconColor:getComputedStyle(icon).color
+                  };
+                });
+                if(h.bg!=='rgb(244, 237, 228)') failures.push(`${name}-${lang}: hover does not flip card to Off-White`);
+                if(h.labelBg!=='rgb(244, 237, 228)') failures.push(`${name}-${lang}: hover label does not flip with card`);
+                if(h.transform==='none') failures.push(`${name}-${lang}: hover lift missing`);
+                if(h.titleColor!=='rgb(38, 38, 38)') failures.push(`${name}-${lang}: hover title is not charcoal`);
+                await page.locator('.about-values-section').screenshot({path:`about-values-qa/${name}-${lang}-hover.png`});
               }
             }
             await ctx.close();
@@ -114,7 +160,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: target-about-values-owner-polish
+          name: target-about-values-charcoal-cards
           path: about-values-qa
           retention-days: 14
       - name: Publish final status
@@ -125,6 +171,6 @@ jobs:
           JOB_STATUS: ${{ job.status }}
         run: |
           RUN_URL="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
-          if [[ "$JOB_STATUS" == success ]]; then STATE=success; DESC='Vision & Mission owner polish QA passed'; else STATE=failure; DESC='Vision & Mission owner polish QA failed'; fi
+          if [[ "$JOB_STATUS" == success ]]; then STATE=success; DESC='Vision & Mission charcoal-card QA passed'; else STATE=failure; DESC='Vision & Mission charcoal-card QA failed'; fi
           jq -n --arg state "$STATE" --arg context 'TARGET About Vision Mission QA' --arg description "$DESC" --arg target_url "$RUN_URL" '{state:$state,context:$context,description:$description,target_url:$target_url}' >/tmp/status.json
           curl -fsSL -X POST -H "Authorization: Bearer ${GH_TOKEN}" -H "Accept: application/vnd.github+json" "https://api.github.com/repos/${GITHUB_REPOSITORY}/statuses/${GITHUB_SHA}" -d @/tmp/status.json >/dev/null
