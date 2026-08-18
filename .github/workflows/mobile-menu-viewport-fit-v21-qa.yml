@@ -35,10 +35,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: npm
 
-      - name: Install dependencies and build
+      - name: Install locked dependencies and build
         run: |
-          npm install
+          npm ci
           npm run build
 
       - name: Verify final navigation ownership contract
@@ -67,7 +68,6 @@ jobs:
       - name: Prepare hosted Chrome
         shell: bash
         run: |
-          npm install --no-save playwright@1.55.0
           CHROME_PATH="$(command -v google-chrome || command -v google-chrome-stable || true)"
           test -n "$CHROME_PATH"
           echo "CHROME_PATH=$CHROME_PATH" >> "$GITHUB_ENV"
@@ -177,8 +177,6 @@ jobs:
                 if (!m.open) failures.push(`${name}-${lang}: offcanvas did not reach open state`);
                 if (!m.aria) failures.push(`${name}-${lang}: close button missing accessible label`);
 
-                await page.screenshot({path:`responsive-navigation-final/${name}-${lang}.png`,fullPage:false});
-
                 await page.locator('.th2-mobile-close').click();
                 await page.waitForFunction(() => {
                   const el=document.querySelector('#mobileNav');
@@ -201,16 +199,9 @@ jobs:
             console.error(failures.join('\n'));
             process.exit(1);
           }
+          console.log(`TARGET RESPONSIVE NAVIGATION: PASS (${metrics.length} state samples)`);
           EOF
           node responsive-navigation-final/validate.mjs
-
-      - name: Upload responsive navigation evidence
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: target-responsive-navigation-final
-          path: responsive-navigation-final
-          retention-days: 14
 
       - name: Publish final QA status
         if: always()
