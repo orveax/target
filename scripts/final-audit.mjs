@@ -6,11 +6,11 @@ const fail = (message) => { throw new Error(message); };
 const assert = (condition, message) => { if (!condition) fail(message); };
 const read = (file) => fs.readFileSync(path.join(dist, file), 'utf8');
 
-const publicPages = [
+const canonicalPublicPages = [
   'index.html',
   'about.html',
   'capabilities.html',
-  'food-portfolio.html',
+  'products-companies.html',
   'qatar-market.html',
   'suppliers.html',
   'contact.html',
@@ -19,8 +19,9 @@ const publicPages = [
   'privacy.html',
   'terms.html',
 ];
+const legacyAliasPages = ['food-portfolio.html'];
 const utilityPages = ['404.html'];
-const trackedPages = [...publicPages, ...utilityPages];
+const trackedPages = [...canonicalPublicPages, ...legacyAliasPages, ...utilityPages];
 
 assert(fs.existsSync(dist), 'dist/ is missing. Run the Astro build first.');
 
@@ -91,6 +92,8 @@ for (const file of trackedPages) {
   assert(/<main\b[^>]*id=["']main["']/i.test(html), `${file} is missing the main landmark.`);
   assert(html.includes('form-delivery-v1.js?v=20260817-01'), `${file} is missing the final form-delivery guard.`);
   assert(html.includes('final-site-freeze-v1.css?v=20260817-01'), `${file} is missing the final site-freeze CSS guard.`);
+  assert(html.includes('design-system-finishing-v1.css?v=20260819-01'), `${file} is missing the final design-system finishing layer.`);
+  assert(html.includes('navigation-close-control-final-v1.css?v=20260819-01'), `${file} is missing the final responsive navigation control guard.`);
   assert(!html.includes('RFX'), `${file} still exposes the stray RFX footer label.`);
   assert(!/href=["']#["']/i.test(html), `${file} contains an empty # link.`);
 
@@ -106,10 +109,15 @@ for (const file of trackedPages) {
 
 const notFound = read('404.html');
 assert(/<meta\s+name=["']robots["']\s+content=["']noindex,follow["']/i.test(notFound), '404.html must be noindex,follow.');
-for (const file of publicPages) {
+
+for (const file of canonicalPublicPages) {
   const html = read(file);
   assert(!/content=["']noindex/i.test(html), `${file} must remain indexable.`);
 }
+
+const legacyPortfolio = read('food-portfolio.html');
+assert(/<meta\s+name=["']robots["']\s+content=["']noindex,follow["']/i.test(legacyPortfolio), 'food-portfolio.html must be noindex,follow as a legacy alias.');
+assert(/<link\s+rel=["']canonical["']\s+href=["']https:\/\/targetft\.com\/products-companies\.html["']/i.test(legacyPortfolio), 'food-portfolio.html must canonicalize to products-companies.html.');
 
 for (const file of ['contact.html', 'suppliers.html']) {
   const html = read(file);
@@ -140,7 +148,9 @@ const robots = read('robots.txt');
 assert(robots.includes('Sitemap: https://targetft.com/sitemap.xml'), 'robots.txt sitemap declaration is missing.');
 const sitemap = read('sitemap.xml');
 const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
-assert(sitemapUrls.length === 11, `Sitemap must contain 11 public URLs; found ${sitemapUrls.length}.`);
+assert(sitemapUrls.length === 11, `Sitemap must contain 11 canonical public URLs; found ${sitemapUrls.length}.`);
+assert(sitemap.includes('https://targetft.com/products-companies.html'), 'Sitemap must contain the canonical Products & Companies route.');
+assert(!sitemap.includes('food-portfolio.html'), 'Legacy food-portfolio alias must not appear in sitemap.xml.');
 assert(!sitemap.includes('404'), '404 must not appear in sitemap.xml.');
 assert(!sitemap.includes('product-profile'), 'Untracked product-profile must not appear in sitemap.xml.');
 
@@ -150,10 +160,15 @@ for (const required of ['X-Content-Type-Options: nosniff', 'Referrer-Policy: str
 }
 
 const companyProfile = read('company-profile.html');
-assert(!/href=["'][^"']*company-profile[^"']*\.pdf/i.test(companyProfile), 'Company Profile page must not expose a final PDF download until the approved asset exists.');
+assert(companyProfile.includes('data-profile-download-state="active"'), 'Company Profile final download state must be active.');
+assert(companyProfile.includes('data-profile-download'), 'Company Profile page must expose the approved PDF download action.');
+assert(companyProfile.includes('1sLGRCC5re16gRsXZVpXm5oSzxA5TRjqm'), 'Company Profile page must reference the verified final Google Drive asset.');
+assert(companyProfile.includes('10 صفحات') || companyProfile.includes('10 pages'), 'Company Profile page must expose the verified 10-page document metadata.');
 
 console.log('TARGET FINAL AUDIT: PASS');
-console.log(`Tracked routes: ${trackedPages.length} (${publicPages.length} public + ${utilityPages.length} utility)`);
+console.log(`Tracked routes: ${trackedPages.length} (${canonicalPublicPages.length} canonical + ${legacyAliasPages.length} legacy alias + ${utilityPages.length} utility)`);
+console.log('Canonical portfolio route: products-companies.html');
 console.log('Forms: transparent email-client delivery fallback active');
+console.log('Company Profile: verified final PDF active');
 console.log('Placeholder brochures: public download disabled');
-console.log('SEO utilities: robots.txt + 11-URL sitemap present');
+console.log('SEO utilities: robots.txt + 11 canonical sitemap URLs present');
