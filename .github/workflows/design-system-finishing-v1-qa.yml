@@ -63,7 +63,8 @@ jobs:
         env:
           CHROME_PATH: ${{ env.CHROME_PATH }}
         run: |
-          cat > /tmp/validate-design-system.mjs <<'EOF'
+          mkdir -p design-system-finishing-qa
+          cat > design-system-finishing-qa/validate.mjs <<'EOF'
           import { chromium } from 'playwright';
 
           const browser = await chromium.launch({headless:true, executablePath:process.env.CHROME_PATH});
@@ -139,7 +140,7 @@ jobs:
           if(failures.length){ console.error(failures.join('\n')); process.exit(1); }
           console.log('TARGET DESIGN SYSTEM FINISHING: PASS');
           EOF
-          node /tmp/validate-design-system.mjs
+          node design-system-finishing-qa/validate.mjs
 
       - name: Publish commit status
         if: always()
