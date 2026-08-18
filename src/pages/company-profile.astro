@@ -1,6 +1,17 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
+const profileAsset = {
+  driveId: '1sLGRCC5re16gRsXZVpXm5oSzxA5TRjqm',
+  previewUrl: 'https://drive.google.com/thumbnail?id=1sLGRCC5re16gRsXZVpXm5oSzxA5TRjqm&sz=w1600',
+  title: 'Rev2_Company Profile_08-17-26',
+  type: 'PDF / PDF-X-4',
+  pages: '10',
+  size: '20.66 MB',
+  version: 'Rev2 · 17 Aug 2026',
+  downloadState: 'withheld-access-control'
+};
+
 const snapshot = [
   ['building-2','قطر','Qatar-Based'],
   ['ship','تجارة واستيراد أغذية','Food Trading & Import'],
@@ -11,38 +22,35 @@ const snapshot = [
 const explore = [
   ['building-2','عن تارقت','About TARGET','دور الشركة، الرؤية والرسالة، ووضوح التعامل التجاري.','Company role, vision and mission, and commercial clarity.','about.html'],
   ['route','كيف نعمل','How We Work','مسار مراجعة المنتج والخطوات التجارية من الفرصة إلى السوق.','Product review and the commercial route from opportunity to market.','capabilities.html'],
-  ['package','المنتجات والشركات','Products & Companies','الفئات الحالية والشركات والمنتجات الموجودة ضمن نطاق الاهتمام.','Current categories, companies and products within the active focus.','food-portfolio.html'],
+  ['package','المنتجات والشركات','Products & Companies','الفئات الحالية والشركات والمنتجات الموجودة ضمن نطاق الاهتمام.','Current categories, companies and products within the active focus.','products-companies.html'],
   ['map-pinned','السوق القطري','Qatar Market','كيف ننظر إلى ملاءمة المنتج والقنوات والسياق التجاري داخل قطر.','How product fit, channels and commercial context are considered in Qatar.','qatar-market.html'],
+];
+
+const documentMeta = [
+  ['file-text','نوع الملف','File Type',profileAsset.type],
+  ['files','عدد الصفحات','Page Count',profileAsset.pages],
+  ['hard-drive','حجم الملف','File Size',profileAsset.size],
+  ['calendar-check-2','الإصدار','Version',profileAsset.version],
 ];
 ---
 <BaseLayout active="profile" bodyClass="page-company-profile premium-v8-page" title="الملف التعريفي | TARGET For Food Trading" description="تعرف على تارقت ونشاطها في تجارة واستيراد الأغذية داخل قطر، واستكشف الملف التعريفي والمسارات الرئيسية للموقع.">
-  <section class="cp-hero">
+  <section class="cp-hero" data-profile-download-state={profileAsset.downloadState}>
     <div class="container cp-hero-grid">
       <div class="cp-hero-copy">
         <span class="cp-eyebrow"><i data-lucide="book-open-text"></i><span data-ar="الملف التعريفي" data-en="Company Profile">الملف التعريفي</span></span>
         <h1 data-ar="تعرف على تارقت ونشاطها التجاري في الأغذية داخل قطر." data-en="An overview of TARGET and its food-trading activity in Qatar.">تعرف على تارقت ونشاطها التجاري في الأغذية داخل قطر.</h1>
         <p data-ar="يقدم الملف التعريفي نظرة مركزة على تارقت، نشاطها في تجارة واستيراد الأغذية، الفئات والمنتجات محل الاهتمام، وطريقة تعاملها مع المصنعين والموردين والسوق القطري." data-en="The Company Profile provides a focused overview of TARGET, its food trading and import activity, the categories and products in focus, and how it works with manufacturers, suppliers and the Qatar market.">يقدم الملف التعريفي نظرة مركزة على تارقت، نشاطها في تجارة واستيراد الأغذية، الفئات والمنتجات محل الاهتمام، وطريقة تعاملها مع المصنعين والموردين والسوق القطري.</p>
         <div class="cp-actions">
-          <span class="cp-availability"><i data-lucide="file-clock"></i><span data-ar="نسخة PDF النهائية قيد الإضافة" data-en="Final PDF asset pending">نسخة PDF النهائية قيد الإضافة</span></span>
           <a class="cp-btn cp-btn-secondary" href="about.html"><i data-lucide="building-2"></i><span data-ar="عن تارقت" data-en="About TARGET">عن تارقت</span></a>
         </div>
       </div>
 
-      <div class="cp-document-stage" aria-label="حالة مورد الملف التعريفي">
-        <div class="cp-document-stack" aria-hidden="true">
-          <span class="cp-paper cp-paper-back"></span>
-          <span class="cp-paper cp-paper-mid"></span>
-          <article class="cp-document cp-document-pending">
-            <img class="cp-document-logo" src="/assets/brand/target-logo-horizontal-forest.svg" alt="" width="420" height="130" />
-            <span class="cp-document-stamp">PDF<br/>PENDING</span>
-            <div class="cp-document-main">
-              <span class="cp-document-label">TARGET FOR FOOD TRADING</span>
-              <strong data-ar="الملف التعريفي" data-en="Company Profile">الملف التعريفي</strong>
-              <small data-ar="سيتم استبدال هذه الحالة بالمعاينة الرسمية بعد اعتماد الملف." data-en="This state will be replaced by the approved document preview once the final file is available.">سيتم استبدال هذه الحالة بالمعاينة الرسمية بعد اعتماد الملف.</small>
-            </div>
-          </article>
+      <figure class="cp-profile-preview cp-profile-preview-hero">
+        <div class="cp-preview-shell">
+          <img src={profileAsset.previewUrl} alt="غلاف الملف التعريفي الرسمي لشركة تارقت" data-ar-alt="غلاف الملف التعريفي الرسمي لشركة تارقت" data-en-alt="Official TARGET Company Profile cover" width="1600" height="900" loading="eager" decoding="async" referrerpolicy="no-referrer" />
         </div>
-      </div>
+        <figcaption><i data-lucide="badge-check"></i><span data-ar="معاينة من الملف النهائي الموثق" data-en="Preview from the verified final file">معاينة من الملف النهائي الموثق</span></figcaption>
+      </figure>
     </div>
   </section>
 
@@ -55,10 +63,7 @@ const explore = [
       </div>
       <div class="cp-facts">
         {snapshot.map(([icon,ar,en]) => (
-          <article class="cp-fact">
-            <span class="cp-icon"><i data-lucide={icon}></i></span>
-            <strong data-ar={ar} data-en={en}>{ar}</strong>
-          </article>
+          <article class="cp-fact"><span class="cp-icon"><i data-lucide={icon}></i></span><strong data-ar={ar} data-en={en}>{ar}</strong></article>
         ))}
       </div>
     </div>
@@ -76,10 +81,7 @@ const explore = [
           <a class="cp-route" href={href}>
             <span class="cp-route-number">0{index + 1}</span>
             <span class="cp-icon"><i data-lucide={icon}></i></span>
-            <div class="cp-route-copy">
-              <h3 data-ar={ar} data-en={en}>{ar}</h3>
-              <p data-ar={arBody} data-en={enBody}>{arBody}</p>
-            </div>
+            <div class="cp-route-copy"><h3 data-ar={ar} data-en={en}>{ar}</h3><p data-ar={arBody} data-en={enBody}>{arBody}</p></div>
             <span class="cp-route-arrow"><i data-lucide="arrow-up-left"></i></span>
           </a>
         ))}
@@ -87,42 +89,34 @@ const explore = [
     </div>
   </section>
 
-  <section class="cp-section cp-resource" id="profile-resource">
+  <section class="cp-section cp-resource" id="profile-resource" data-profile-title={profileAsset.title}>
     <div class="container">
       <div class="cp-resource-panel">
-        <div class="cp-resource-preview">
-          <div class="cp-document-stack cp-document-stack-resource" aria-hidden="true">
-            <span class="cp-paper cp-paper-back"></span>
-            <span class="cp-paper cp-paper-mid"></span>
-            <article class="cp-document cp-document-pending">
-              <img class="cp-document-logo" src="/assets/brand/target-logo-horizontal-forest.svg" alt="" width="420" height="130" />
-              <span class="cp-document-stamp">PDF<br/>PENDING</span>
-              <div class="cp-document-main">
-                <span class="cp-document-label">TARGET FOR FOOD TRADING</span>
-                <strong data-ar="الملف التعريفي" data-en="Company Profile">الملف التعريفي</strong>
-                <small data-ar="معاينة المورد ستظهر هنا بعد اعتماد النسخة النهائية." data-en="The approved document preview will appear here when the final asset is ready.">معاينة المورد ستظهر هنا بعد اعتماد النسخة النهائية.</small>
-              </div>
-            </article>
-          </div>
-        </div>
+        <figure class="cp-resource-preview cp-profile-preview">
+          <div class="cp-preview-shell"><img src={profileAsset.previewUrl} alt="معاينة غلاف الملف التعريفي الرسمي" data-ar-alt="معاينة غلاف الملف التعريفي الرسمي" data-en-alt="Official Company Profile cover preview" width="1600" height="900" loading="lazy" decoding="async" referrerpolicy="no-referrer" /></div>
+        </figure>
         <div class="cp-resource-copy">
-          <span class="cp-resource-status"><i data-lucide="file-clock"></i><span data-ar="حالة المورد: النسخة النهائية غير مضافة بعد" data-en="Resource status: final PDF not added yet">حالة المورد: النسخة النهائية غير مضافة بعد</span></span>
+          <span class="cp-resource-status"><i data-lucide="badge-check"></i><span data-ar="تم التحقق من النسخة النهائية" data-en="Final file verified">تم التحقق من النسخة النهائية</span></span>
+          <span class="cp-kicker" data-ar="نسخة PDF" data-en="PDF Company Profile">نسخة PDF</span>
           <h2 data-ar="حمّل النسخة الرسمية من الملف التعريفي." data-en="Download the official Company Profile.">حمّل النسخة الرسمية من الملف التعريفي.</h2>
           <p data-ar="تتضمن النسخة الرسمية المحتوى المعتمد للملف التعريفي بصيغة مناسبة للمشاركة مع المصنعين والموردين والجهات التجارية." data-en="The official PDF contains the approved Company Profile content in a format suitable for sharing with manufacturers, suppliers and commercial stakeholders.">تتضمن النسخة الرسمية المحتوى المعتمد للملف التعريفي بصيغة مناسبة للمشاركة مع المصنعين والموردين والجهات التجارية.</p>
-
-          <div class="cp-pending-box">
-            <span class="cp-pending-icon"><i data-lucide="shield-check"></i></span>
-            <div>
-              <strong data-ar="لن يظهر رابط تحميل قبل اعتماد الملف." data-en="No download link will be shown before the file is approved.">لن يظهر رابط تحميل قبل اعتماد الملف.</strong>
-              <p data-ar="عند إضافة النسخة النهائية المعتمدة إلى مسار الإنتاج، سيظهر رابط التحميل والمعاينة الرسمية هنا دون الحاجة إلى إعادة تصميم الصفحة." data-en="Once the approved final PDF is added to the production path, the official preview and download action will appear here without redesigning the page.">عند إضافة النسخة النهائية المعتمدة إلى مسار الإنتاج، سيظهر رابط التحميل والمعاينة الرسمية هنا دون الحاجة إلى إعادة تصميم الصفحة.</p>
-            </div>
-          </div>
-
-          <div class="cp-resource-actions">
-            <a class="cp-btn cp-btn-secondary" href="about.html"><span data-ar="استكشف عن تارقت" data-en="Explore About TARGET">استكشف عن تارقت</span><i data-lucide="arrow-up-left"></i></a>
-          </div>
-          <small class="cp-resource-note" data-ar="بيانات الإصدار وعدد الصفحات وحجم الملف لا تُعرض إلا بعد التحقق من النسخة النهائية نفسها." data-en="Version, page count and file-size metadata are shown only after verification of the final PDF asset itself.">بيانات الإصدار وعدد الصفحات وحجم الملف لا تُعرض إلا بعد التحقق من النسخة النهائية نفسها.</small>
+          <div class="cp-resource-proof"><span class="cp-proof-icon"><i data-lucide="shield-check"></i></span><div><strong data-ar="المعاينة والبيانات أدناه مأخوذة من الملف النهائي الموثق." data-en="The preview and metadata below come from the verified final file.">المعاينة والبيانات أدناه مأخوذة من الملف النهائي الموثق.</strong><p data-ar="يُفعّل إجراء التنزيل فقط من نسخة نشر عامة مضبوطة الصلاحيات، لذلك لا يظهر رابط تنزيل غير موثوق داخل الصفحة." data-en="The download action is enabled only from a controlled public copy, so no untrusted download link is exposed on this page.">يُفعّل إجراء التنزيل فقط من نسخة نشر عامة مضبوطة الصلاحيات، لذلك لا يظهر رابط تنزيل غير موثوق داخل الصفحة.</p></div></div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cp-section cp-document-info" aria-labelledby="cp-document-info-title">
+    <div class="container cp-document-info-grid">
+      <div class="cp-document-info-copy">
+        <span class="cp-kicker" data-ar="بيانات المستند" data-en="Document Information">بيانات المستند</span>
+        <h2 id="cp-document-info-title" data-ar="بيانات موثقة من النسخة النهائية." data-en="Verified information from the final file.">بيانات موثقة من النسخة النهائية.</h2>
+        <p data-ar="نعرض فقط البيانات التي تم التحقق منها مباشرة من ملف PDF النهائي، بدون إضافة حقول افتراضية أو معلومات قانونية لا تخص هذا المورد." data-en="Only metadata verified directly from the final PDF is shown here, without placeholder fields or unrelated legal information.">نعرض فقط البيانات التي تم التحقق منها مباشرة من ملف PDF النهائي، بدون إضافة حقول افتراضية أو معلومات قانونية لا تخص هذا المورد.</p>
+      </div>
+      <div class="cp-meta-grid">
+        {documentMeta.map(([icon,ar,en,value]) => (
+          <article class="cp-meta-item"><span class="cp-icon"><i data-lucide={icon}></i></span><div><small data-ar={ar} data-en={en}>{ar}</small><strong dir="ltr">{value}</strong></div></article>
+        ))}
       </div>
     </div>
   </section>
@@ -130,10 +124,7 @@ const explore = [
   <section class="cp-next">
     <div class="container">
       <div class="cp-next-panel">
-        <div>
-          <span class="cp-kicker" data-ar="الخطوة التالية" data-en="Next Step">الخطوة التالية</span>
-          <h2 data-ar="لديك منتج غذائي تريد مناقشة فرصته في قطر؟" data-en="Have a food product you want to discuss for Qatar?">لديك منتج غذائي تريد مناقشة فرصته في قطر؟</h2>
-        </div>
+        <div><span class="cp-kicker" data-ar="الخطوة التالية" data-en="Next Step">الخطوة التالية</span><h2 data-ar="لديك منتج غذائي تريد مناقشة فرصته في قطر؟" data-en="Have a food product you want to discuss for Qatar?">لديك منتج غذائي تريد مناقشة فرصته في قطر؟</h2></div>
         <div class="cp-next-actions">
           <a class="cp-btn cp-next-primary" href="suppliers.html"><i data-lucide="send"></i><span data-ar="ناقش منتجك معنا" data-en="Discuss Your Product">ناقش منتجك معنا</span></a>
           <a class="cp-btn cp-next-secondary" href="contact.html"><span data-ar="الاتصال بنا" data-en="Contact Us">الاتصال بنا</span><i data-lucide="arrow-up-left"></i></a>
