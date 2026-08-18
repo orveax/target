@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'public/assets/faq-canonical.css'
+      - 'public/assets/target-section-nav-v2.js'
       - 'src/layouts/BaseLayout.astro'
       - 'src/pages/faq.astro'
       - '.github/workflows/faq-premium-v2-final-qa.yml'
@@ -35,12 +36,15 @@ jobs:
         run: |
           set -euo pipefail
           test -f public/assets/faq-canonical.css
+          test -f public/assets/target-section-nav-v2.js
           grep -Fq 'faq-canonical.css?v=20260818-02' src/layouts/BaseLayout.astro
           ! grep -Fq 'faq-v1.css' src/layouts/BaseLayout.astro
           ! grep -Fq 'faq-polish-v2.css' src/layouts/BaseLayout.astro
           ! grep -Fq 'hero-faq-premium-v1.css' src/layouts/BaseLayout.astro
           grep -Fq 'grid-template-columns:minmax(0,55fr) minmax(340px,45fr)' public/assets/faq-canonical.css
           grep -Fq 'scroll-margin-top:112px' public/assets/faq-canonical.css
+          grep -Fq 'suppressFAQSectionNavigation' public/assets/target-section-nav-v2.js
+          grep -Fq "classList.contains('page-faq')" public/assets/target-section-nav-v2.js
           grep -Fq 'faq-q01' src/pages/faq.astro
           grep -Fq 'faq-q15' src/pages/faq.astro
           grep -Fq 'aria-controls' src/pages/faq.astro
@@ -85,6 +89,7 @@ jobs:
             try{
               await page.goto(origin,{waitUntil:'networkidle'});
               await page.evaluate(async()=>{if(document.fonts) await document.fonts.ready;});
+              await page.waitForTimeout(250);
               for(const lang of ['ar','en']){
                 if(await page.locator('html').getAttribute('lang')!==lang){await page.locator('[data-lang-toggle]').first().click();await page.waitForTimeout(220);}
                 const m=await page.evaluate(()=>{
@@ -102,6 +107,7 @@ jobs:
                     ariaClosed:items.every(x=>x.querySelector('summary')?.getAttribute('aria-expanded')==='false'),
                     topics:topics.length,
                     support:document.querySelectorAll('.faq-support-actions .faq-btn').length,
+                    globalSectionNav:document.querySelectorAll('.target-section-nav').length,
                     pattern:getComputedStyle(document.querySelector('.faq-hero'),'::before').backgroundImage,
                     copyTop:copy.top,visualTop:visual.top,copyWidth:copy.width,visualWidth:visual.width
                   };
@@ -110,6 +116,7 @@ jobs:
                 if(m.overflowX) failures.push(`${name}-${lang}: horizontal overflow`);
                 if(m.h1!==1||m.groups!==4||m.items!==15||m.topics!==4||m.support!==2) failures.push(`${name}-${lang}: canonical counts mismatch`);
                 if(m.open!==0||!m.ariaClosed) failures.push(`${name}-${lang}: FAQ default closed/ARIA contract failed`);
+                if(m.globalSectionNav!==0) failures.push(`${name}-${lang}: duplicate global section navigation is present`);
                 if(!m.pattern||m.pattern==='none') failures.push(`${name}-${lang}: hero pattern missing`);
                 if(name==='1440'){
                   const ratio=m.copyWidth/m.visualWidth;
@@ -165,5 +172,3 @@ jobs:
           if [[ "$JOB_STATUS" == success ]]; then STATE=success; DESC='FAQ final QA passed'; else STATE=failure; DESC='FAQ final QA failed'; fi
           jq -n --arg state "$STATE" --arg context 'TARGET FAQ Premium V2 Final QA' --arg description "$DESC" --arg target_url "$RUN_URL" '{state:$state,context:$context,description:$description,target_url:$target_url}' >/tmp/status.json
           curl -fsSL -X POST -H "Authorization: Bearer ${GH_TOKEN}" -H "Accept: application/vnd.github+json" "https://api.github.com/repos/${GITHUB_REPOSITORY}/statuses/${GITHUB_SHA}" -d @/tmp/status.json >/dev/null
-
-# trigger: canonical Page 09 final gate
