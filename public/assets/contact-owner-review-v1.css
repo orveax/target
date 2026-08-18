@@ -1,0 +1,106 @@
+/* TARGET — Contact Owner Review V1 — 2026-08-18
+ * Pass 1: Hero only. Preserve canonical 55/45 structure and approved copy.
+ */
+
+/* Cleaner routing-oriented hero background: subtle nodes + directional grid, no oversized decoration. */
+.page-contact .ct-hero{
+  background:#F4EDE4!important;
+}
+.page-contact .ct-hero::before{
+  content:""!important;
+  position:absolute!important;
+  z-index:0!important;
+  inset:0!important;
+  width:auto!important;
+  height:auto!important;
+  background:
+    radial-gradient(circle at 13% 27%,rgba(192,149,82,.20) 0 2px,transparent 2.6px),
+    radial-gradient(circle at 34% 66%,rgba(12,73,49,.12) 0 2px,transparent 2.6px),
+    radial-gradient(circle at 76% 24%,rgba(192,149,82,.16) 0 2px,transparent 2.6px),
+    linear-gradient(rgba(12,73,49,.032) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(12,73,49,.032) 1px,transparent 1px)!important;
+  background-size:210px 210px,260px 260px,300px 300px,52px 52px,52px 52px!important;
+  opacity:1!important;
+  color:transparent!important;
+  font-size:0!important;
+  letter-spacing:0!important;
+  pointer-events:none!important;
+  -webkit-mask-image:linear-gradient(90deg,rgba(0,0,0,.68),rgba(0,0,0,.25) 62%,transparent 100%);
+  mask-image:linear-gradient(90deg,rgba(0,0,0,.68),rgba(0,0,0,.25) 62%,transparent 100%);
+}
+html[dir="rtl"] .page-contact .ct-hero::before{
+  -webkit-mask-image:linear-gradient(270deg,rgba(0,0,0,.68),rgba(0,0,0,.25) 62%,transparent 100%);
+  mask-image:linear-gradient(270deg,rgba(0,0,0,.68),rgba(0,0,0,.25) 62%,transparent 100%);
+}
+.page-contact .ct-hero::after{
+  content:""!important;
+  position:absolute!important;
+  z-index:0!important;
+  inset-inline-start:clamp(24px,4vw,68px)!important;
+  inset-block-start:72px!important;
+  width:clamp(100px,11vw,168px)!important;
+  height:1px!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  background:linear-gradient(90deg,#0C4931 0 70%,#C09552 70% 100%)!important;
+  opacity:.42!important;
+  pointer-events:none!important;
+}
+html[dir="rtl"] .page-contact .ct-hero::after{
+  background:linear-gradient(270deg,#0C4931 0 70%,#C09552 70% 100%)!important;
+}
+
+/* Preserve approved geometry, tighten visual hierarchy slightly. */
+.page-contact .ct-hero-grid{
+  gap:clamp(40px,5vw,66px)!important;
+  min-height:clamp(570px,62vh,660px)!important;
+}
+.page-contact .ct-hero-copy{max-width:710px!important}
+.page-contact .ct-hero h1{
+  max-width:14.5ch!important;
+  text-wrap:balance!important;
+}
+.page-contact .ct-hero-copy>p{max-width:650px!important}
+.page-contact .ct-actions{gap:12px!important}
+
+/* Hero media reads as one commercial-contact object; caption is a concise routing strip. */
+.page-contact .ct-hero-media{
+  border-color:rgba(12,73,49,.13)!important;
+  box-shadow:0 22px 50px rgba(38,38,38,.105)!important;
+}
+.page-contact .ct-hero-media>img{
+  object-position:center 48%!important;
+  filter:saturate(.90) contrast(1.035)!important;
+}
+.page-contact .ct-hero-media figcaption{
+  background:rgba(255,255,255,.97)!important;
+}
+.page-contact .ct-hero-media figcaption span{
+  min-height:54px!important;
+  padding:8px 10px!important;
+}
+.page-contact .ct-hero-media figcaption b{
+  font-size:.68rem!important;
+  line-height:1.28!important;
+}
+
+@media (min-width:768px) and (max-width:1023.98px){
+  .page-contact .ct-hero-grid{gap:28px!important}
+  .page-contact .ct-hero-media{max-width:700px!important}
+}
+
+@media (max-width:767.98px){
+  .page-contact .ct-hero::after{display:none!important}
+  .page-contact .ct-hero::before{
+    background-size:170px 170px,210px 210px,240px 240px,42px 42px,42px 42px!important;
+    opacity:.82!important;
+  }
+  .page-contact .ct-hero-grid{gap:24px!important}
+  .page-contact .ct-hero h1{max-width:14ch!important}
+  .page-contact .ct-hero-media figcaption span{min-height:44px!important}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .page-contact .ct-hero *{transition:none!important;transform:none!important}
+}
