@@ -1,6 +1,6 @@
-/* TARGET — Company Profile Canonical V2 | 2026-08-18
- * Page 08 authority: document/resource destination.
- * Real verified final-file preview, no fabricated cover, no unsafe download CTA.
+/* TARGET — Company Profile Canonical V3 | 2026-08-18
+ * Page 08 authority: official document/resource destination.
+ * Verified final-file preview + active View/Download hierarchy + subtle document-grid hero pattern.
  */
 .page-company-profile{background:#F4EDE4}
 .page-company-profile .cp-section{padding-block:88px}
@@ -11,30 +11,44 @@
 .page-company-profile .cp-section-head p{max-width:730px;margin:0;color:rgba(38,38,38,.69)!important;line-height:1.78}
 .page-company-profile .cp-icon{display:grid;place-items:center;width:48px;height:48px;flex:0 0 auto;border:1px solid rgba(12,73,49,.12);border-radius:14px;background:#fff;color:#0C4931}
 .page-company-profile .cp-icon svg{width:24px;height:24px;stroke-width:1.8}
-.page-company-profile .cp-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding-inline:24px;border-radius:12px;font-weight:800;text-decoration:none;transition:transform .18s ease,border-color .18s ease,background-color .18s ease}
-.page-company-profile .cp-btn-secondary{border:1px solid rgba(12,73,49,.20);background:#fff;color:#0C4931}
-.page-company-profile .cp-btn-secondary:hover,.page-company-profile .cp-btn-secondary:focus-visible{border-color:#0C4931;background:#fff;color:#073D2A;transform:translateY(-1px)}
+.page-company-profile .cp-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding-inline:22px;border-radius:12px;font-weight:800;text-decoration:none!important;transition:transform .18s ease,border-color .18s ease,background-color .18s ease,box-shadow .18s ease}
+.page-company-profile .cp-btn svg{width:18px;height:18px;stroke-width:1.9}
+.page-company-profile .cp-btn-primary{border:1px solid #0C4931;background:#0C4931;color:#F4EDE4!important;box-shadow:0 8px 20px rgba(12,73,49,.12)}
+.page-company-profile .cp-btn-primary:hover,.page-company-profile .cp-btn-primary:focus-visible{background:#073D2A;color:#fff!important;transform:translateY(-1px);box-shadow:0 12px 26px rgba(12,73,49,.16)}
+.page-company-profile .cp-btn-secondary{border:1px solid rgba(12,73,49,.20);background:#fff;color:#0C4931!important}
+.page-company-profile .cp-btn-secondary:hover,.page-company-profile .cp-btn-secondary:focus-visible{border-color:#0C4931;background:#fff;color:#073D2A!important;transform:translateY(-1px)}
+.page-company-profile .cp-btn-tertiary{min-height:52px;padding-inline:10px;border:1px solid transparent;background:transparent;color:#0C4931!important}
+.page-company-profile .cp-btn-tertiary:hover,.page-company-profile .cp-btn-tertiary:focus-visible{color:#073D2A!important;transform:translateY(-1px)}
+html[dir="ltr"] .page-company-profile .cp-btn-tertiary svg{transform:scaleX(-1)}
 
-/* HERO — locked Warm Cream 55/45 grammar. */
+/* HERO — Warm Cream 55/45 with a restrained document / trade-grid pattern. */
 .page-company-profile .cp-hero{position:relative;isolation:isolate;overflow:hidden;padding:0!important;background:#F4EDE4!important;color:#262626!important;border-bottom:1px solid rgba(12,73,49,.09)}
-.page-company-profile .cp-hero::before{content:"COMPANY PROFILE · VERIFIED RESOURCE";position:absolute;z-index:0;inset-inline-start:clamp(24px,4vw,66px);inset-block-start:27px;color:rgba(12,73,49,.15);font:800 .6rem/1 "Manrope",sans-serif;letter-spacing:.16em;white-space:nowrap}
-.page-company-profile .cp-hero::after{content:"";position:absolute;z-index:0;width:440px;height:440px;border:1px solid rgba(192,149,82,.16);border-radius:50%;inset:auto -190px -230px auto;pointer-events:none}
+.page-company-profile .cp-hero-pattern{position:absolute;z-index:0;inset:0;pointer-events:none;opacity:.82;background-image:linear-gradient(rgba(12,73,49,.040) 1px,transparent 1px),linear-gradient(90deg,rgba(12,73,49,.040) 1px,transparent 1px),repeating-linear-gradient(135deg,transparent 0 24px,rgba(192,149,82,.035) 25px,transparent 26px),radial-gradient(circle at 84% 24%,transparent 0 74px,rgba(192,149,82,.13) 75px,rgba(192,149,82,.13) 76px,transparent 77px),radial-gradient(circle at 84% 24%,transparent 0 136px,rgba(12,73,49,.075) 137px,rgba(12,73,49,.075) 138px,transparent 139px);background-size:42px 42px,42px 42px,auto,auto,auto;mask-image:linear-gradient(90deg,rgba(0,0,0,.36),rgba(0,0,0,.78) 48%,#000 100%)}
+html[dir="ltr"] .page-company-profile .cp-hero-pattern{transform:scaleX(-1)}
+.page-company-profile .cp-hero::before{content:"COMPANY PROFILE · OFFICIAL RESOURCE";position:absolute;z-index:1;inset-inline-start:clamp(24px,4vw,66px);inset-block-start:27px;color:rgba(12,73,49,.20);font:800 .6rem/1 "Manrope",sans-serif;letter-spacing:.16em;white-space:nowrap}
+.page-company-profile .cp-hero::after{content:"";position:absolute;z-index:1;width:440px;height:440px;border:1px solid rgba(192,149,82,.18);border-radius:50%;inset:auto -190px -230px auto;pointer-events:none}
 html[dir="ltr"] .page-company-profile .cp-hero::after{inset:auto auto -230px -190px}
-.page-company-profile .cp-hero-grid{position:relative;z-index:1;display:grid!important;grid-template-columns:minmax(0,55fr) minmax(340px,45fr)!important;gap:clamp(38px,5vw,64px);align-items:center;min-height:clamp(590px,64vh,680px);padding-block:clamp(76px,6.8vw,96px)}
-.page-company-profile .cp-hero-copy{max-width:700px}
-.page-company-profile .cp-eyebrow{display:inline-flex;align-items:center;gap:9px;width:max-content;min-height:36px;padding:7px 11px;border:1px solid rgba(12,73,49,.13);border-radius:999px;background:#fff;color:#0C4931;font-size:.82rem;font-weight:800}
+.page-company-profile .cp-hero-grid{position:relative;z-index:2;display:grid!important;grid-template-columns:minmax(0,55fr) minmax(340px,45fr)!important;gap:clamp(38px,5vw,64px);align-items:center;min-height:clamp(610px,66vh,700px);padding-block:clamp(78px,6.8vw,100px)}
+.page-company-profile .cp-hero-copy{max-width:710px}
+.page-company-profile .cp-eyebrow{display:inline-flex;align-items:center;gap:9px;width:max-content;min-height:36px;padding:7px 11px;border:1px solid rgba(12,73,49,.14);border-radius:999px;background:rgba(255,255,255,.88);color:#0C4931;font-size:.82rem;font-weight:800;backdrop-filter:blur(8px)}
 .page-company-profile .cp-eyebrow svg{width:17px;height:17px;color:#C09552;stroke-width:1.8}
 .page-company-profile .cp-hero h1{max-width:14ch;margin:18px 0 19px;color:#262626!important;font-family:"Tajawal",system-ui,sans-serif!important;font-size:clamp(2.55rem,4vw,3.8rem)!important;font-weight:800!important;line-height:1.1!important;letter-spacing:0!important;text-wrap:balance}
 html[lang="en"] .page-company-profile .cp-hero h1{max-width:16ch;font-family:"Manrope",system-ui,sans-serif!important;line-height:1.05!important;letter-spacing:-.025em!important}
-.page-company-profile .cp-hero-copy>p{max-width:650px;margin:0;color:rgba(38,38,38,.72)!important;font-size:clamp(1.01rem,1.15vw,1.12rem);line-height:1.78}
+.page-company-profile .cp-hero-copy>p{max-width:650px;margin:0;color:rgba(38,38,38,.73)!important;font-size:clamp(1.01rem,1.15vw,1.12rem);line-height:1.78}
 html[lang="en"] .page-company-profile .cp-hero-copy>p{line-height:1.64}
-.page-company-profile .cp-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:25px}
+.page-company-profile .cp-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:25px;align-items:center}
+.page-company-profile .cp-hero-actions .cp-btn-download{min-width:210px}
+.page-company-profile .cp-hero-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;color:#526059}
+.page-company-profile .cp-hero-meta>span{display:inline-flex;align-items:center;gap:6px;min-height:31px;padding:6px 9px;border:1px solid rgba(12,73,49,.10);border-radius:999px;background:rgba(255,255,255,.70);font-family:"Manrope","Tajawal",sans-serif;font-size:.72rem;font-weight:750;backdrop-filter:blur(7px)}
+.page-company-profile .cp-hero-meta svg{width:14px;height:14px;color:#C09552}
+.page-company-profile .cp-hero-meta b{font-weight:750}
 .page-company-profile .cp-profile-preview{margin:0}
 .page-company-profile .cp-profile-preview-hero{position:relative}
-.page-company-profile .cp-profile-preview-hero::before{content:"VERIFIED FINAL FILE";position:absolute;z-index:3;inset-inline-start:14px;inset-block-start:14px;display:inline-flex;align-items:center;min-height:28px;padding:6px 9px;border:1px solid rgba(255,255,255,.34);border-radius:999px;background:rgba(38,38,38,.62);color:#F4EDE4;font:700 .56rem/1 "Manrope",sans-serif;letter-spacing:.1em;backdrop-filter:blur(7px)}
-.page-company-profile .cp-preview-shell{position:relative;overflow:hidden;width:100%;aspect-ratio:16/9;border:1px solid rgba(12,73,49,.12);border-radius:22px;background:#E8E0D4;box-shadow:0 20px 48px rgba(38,38,38,.10)}
+.page-company-profile .cp-profile-preview-hero::before{content:"VERIFIED FINAL FILE";position:absolute;z-index:3;inset-inline-start:14px;inset-block-start:14px;display:inline-flex;align-items:center;min-height:28px;padding:6px 9px;border:1px solid rgba(255,255,255,.34);border-radius:999px;background:rgba(38,38,38,.66);color:#F4EDE4;font:700 .56rem/1 "Manrope",sans-serif;letter-spacing:.1em;backdrop-filter:blur(7px)}
+.page-company-profile .cp-preview-shell{position:relative;overflow:hidden;width:100%;aspect-ratio:16/9;border:1px solid rgba(12,73,49,.13);border-radius:22px;background:#E8E0D4;box-shadow:0 24px 56px rgba(38,38,38,.13)}
+.page-company-profile .cp-preview-shell::after{content:"";position:absolute;inset:0;border:1px solid rgba(255,255,255,.34);border-radius:inherit;pointer-events:none}
 .page-company-profile .cp-preview-shell img{display:block;width:100%;height:100%;object-fit:cover;object-position:center;background:#E8E0D4}
-.page-company-profile .cp-profile-preview-hero figcaption{display:flex;align-items:center;gap:8px;width:max-content;max-width:100%;margin-top:12px;padding:8px 11px;border-radius:999px;background:rgba(12,73,49,.07);color:#0C4931;font-size:.78rem;font-weight:800}
+.page-company-profile .cp-profile-preview-hero figcaption{display:flex;align-items:center;gap:8px;width:max-content;max-width:100%;margin-top:12px;padding:8px 11px;border-radius:999px;background:rgba(12,73,49,.075);color:#0C4931;font-size:.78rem;font-weight:800}
 .page-company-profile .cp-profile-preview-hero figcaption svg{width:16px;height:16px;color:#C09552}
 
 /* SNAPSHOT */
@@ -48,7 +62,7 @@ html[lang="en"] .page-company-profile .cp-hero-copy>p{line-height:1.64}
 .page-company-profile .cp-fact .cp-icon svg{width:22px;height:22px}
 .page-company-profile .cp-fact strong{color:#262626!important;font-size:.95rem;line-height:1.45}
 
-/* EXPLORE — true resource navigation. */
+/* EXPLORE */
 .page-company-profile .cp-explore{background:linear-gradient(180deg,#F4EDE4,#F8F3EC)}
 .page-company-profile .cp-route-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 .page-company-profile .cp-route{position:relative;display:grid;grid-template-columns:52px minmax(0,1fr) 38px;column-gap:16px;align-items:center;min-height:180px;padding:24px;border:1px solid rgba(12,73,49,.11);border-radius:18px;background:#fff;color:inherit;text-decoration:none;overflow:hidden;box-shadow:none;transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}
@@ -63,7 +77,7 @@ html[lang="en"] .page-company-profile .cp-hero-copy>p{line-height:1.64}
 .page-company-profile .cp-route-arrow{grid-column:3;display:grid;place-items:center;width:36px;height:36px;border:1px solid rgba(12,73,49,.11);border-radius:10px;background:#fff;color:#0C4931}
 .page-company-profile .cp-route-arrow svg{width:17px;height:17px}
 
-/* PDF RESOURCE — center of gravity after Hero. */
+/* OFFICIAL PROFILE RESOURCE */
 .page-company-profile .cp-resource{padding-block:96px;background:#fff}
 .page-company-profile .cp-resource-panel{display:grid;grid-template-columns:minmax(0,7fr) minmax(340px,5fr);gap:0;overflow:hidden;border:1px solid rgba(12,73,49,.12);border-radius:24px;background:#fff;box-shadow:0 18px 48px rgba(38,38,38,.07)}
 .page-company-profile .cp-resource-preview{display:grid;place-items:center;min-height:510px;padding:42px;background:radial-gradient(circle at 30% 24%,rgba(255,255,255,.88),transparent 32%),linear-gradient(145deg,#EADFCE,#F7F1E8)}
@@ -72,15 +86,17 @@ html[lang="en"] .page-company-profile .cp-hero-copy>p{line-height:1.64}
 .page-company-profile .cp-resource-status{display:inline-flex;align-items:center;gap:8px;width:max-content;max-width:100%;min-height:34px;padding:7px 10px;border-radius:999px;background:rgba(12,73,49,.075);color:#0C4931;font-size:.78rem;font-weight:800}
 .page-company-profile .cp-resource-status svg{width:17px;height:17px;color:#C09552}
 .page-company-profile .cp-resource-copy>.cp-kicker{margin-top:22px}
-.page-company-profile .cp-resource-copy h2{max-width:14ch;margin:12px 0 15px;color:#262626!important;font-size:clamp(2rem,3vw,2.8rem)!important;font-weight:750!important;line-height:1.15!important;text-wrap:balance}
+.page-company-profile .cp-resource-copy h2{max-width:15ch;margin:12px 0 15px;color:#262626!important;font-size:clamp(2rem,3vw,2.8rem)!important;font-weight:750!important;line-height:1.15!important;text-wrap:balance}
 .page-company-profile .cp-resource-copy>p{margin:0;color:rgba(38,38,38,.68)!important;line-height:1.8}
-.page-company-profile .cp-resource-proof{display:grid;grid-template-columns:48px minmax(0,1fr);gap:14px;margin-top:24px;padding:18px;border:1px solid rgba(12,73,49,.12);border-radius:16px;background:rgba(244,237,228,.55)}
+.page-company-profile .cp-resource-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:25px}
+.page-company-profile .cp-resource-actions .cp-btn-download{min-width:160px}
+.page-company-profile .cp-resource-proof{display:grid;grid-template-columns:48px minmax(0,1fr);gap:14px;margin-top:20px;padding:18px;border:1px solid rgba(12,73,49,.12);border-radius:16px;background:rgba(244,237,228,.55)}
 .page-company-profile .cp-proof-icon{display:grid;place-items:center;width:48px;height:48px;border-radius:13px;background:#fff;color:#0C4931;box-shadow:0 6px 16px rgba(38,38,38,.04)}
 .page-company-profile .cp-proof-icon svg{width:24px;height:24px}
 .page-company-profile .cp-resource-proof strong{display:block;color:#262626!important;font-size:.96rem;line-height:1.5}
 .page-company-profile .cp-resource-proof p{margin:5px 0 0;color:rgba(38,38,38,.64)!important;font-size:.86rem;line-height:1.7}
 
-/* DOCUMENT INFORMATION — verified metadata only. */
+/* DOCUMENT INFORMATION */
 .page-company-profile .cp-document-info{background:#F7F2EA}
 .page-company-profile .cp-document-info-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:48px;align-items:center}
 .page-company-profile .cp-document-info-copy h2{max-width:15ch;margin:10px 0 15px;color:#262626!important;font-size:clamp(1.9rem,3vw,2.7rem)!important;font-weight:750!important;line-height:1.18!important}
@@ -99,10 +115,10 @@ html[dir="ltr"] .page-company-profile .cp-next-panel::after{inset:auto auto -120
 .page-company-profile .cp-next .cp-kicker{color:#C09552!important}
 .page-company-profile .cp-next h2{max-width:17ch;margin:10px 0 0;color:#F4EDE4!important;font-size:clamp(2rem,3vw,2.75rem)!important;font-weight:750!important;line-height:1.16!important}
 .page-company-profile .cp-next-actions{position:relative;z-index:2;display:flex;flex-wrap:wrap;gap:10px}
-.page-company-profile .cp-next-primary{border:1px solid #C09552;background:#C09552;color:#262626}
-.page-company-profile .cp-next-primary:hover,.page-company-profile .cp-next-primary:focus-visible{background:#D0AE76;color:#262626;transform:translateY(-1px)}
-.page-company-profile .cp-next-secondary{border:1px solid rgba(244,237,228,.70);background:#fff;color:#262626}
-.page-company-profile .cp-next-secondary:hover,.page-company-profile .cp-next-secondary:focus-visible{background:#F4EDE4;color:#262626;transform:translateY(-1px)}
+.page-company-profile .cp-next-primary{border:1px solid #C09552;background:#C09552;color:#262626!important}
+.page-company-profile .cp-next-primary:hover,.page-company-profile .cp-next-primary:focus-visible{background:#D0AE76;color:#262626!important;transform:translateY(-1px)}
+.page-company-profile .cp-next-secondary{border:1px solid rgba(244,237,228,.70);background:#fff;color:#262626!important}
+.page-company-profile .cp-next-secondary:hover,.page-company-profile .cp-next-secondary:focus-visible{background:#F4EDE4;color:#262626!important;transform:translateY(-1px)}
 
 @media(max-width:1199.98px){
   .page-company-profile .cp-section{padding-block:78px}
@@ -121,11 +137,14 @@ html[dir="ltr"] .page-company-profile .cp-next-panel::after{inset:auto auto -120
 @media(max-width:767.98px){
   .page-company-profile .cp-section{padding-block:60px}
   .page-company-profile .cp-hero::before{display:none}
+  .page-company-profile .cp-hero-pattern{opacity:.58;background-size:36px 36px,36px 36px,auto,auto,auto;mask-image:linear-gradient(180deg,rgba(0,0,0,.62),#000 55%,rgba(0,0,0,.48))}
   .page-company-profile .cp-hero-grid{gap:26px;padding-block:50px 58px}
   .page-company-profile .cp-hero h1{font-size:clamp(2.3rem,10vw,3rem)!important}
   .page-company-profile .cp-hero-copy>p{font-size:.98rem;line-height:1.7}
-  .page-company-profile .cp-actions{display:grid;grid-template-columns:1fr;margin-top:22px}
-  .page-company-profile .cp-actions .cp-btn{width:100%}
+  .page-company-profile .cp-actions,.page-company-profile .cp-resource-actions{display:grid;grid-template-columns:1fr;margin-top:22px}
+  .page-company-profile .cp-actions .cp-btn,.page-company-profile .cp-resource-actions .cp-btn{width:100%}
+  .page-company-profile .cp-btn-tertiary{border:1px solid rgba(12,73,49,.13);background:rgba(255,255,255,.58)}
+  .page-company-profile .cp-hero-meta{margin-top:12px}
   .page-company-profile .cp-route-grid{grid-template-columns:1fr}
   .page-company-profile .cp-route{min-height:150px}
   .page-company-profile .cp-resource{padding-block:64px}
@@ -143,10 +162,11 @@ html[dir="ltr"] .page-company-profile .cp-next-panel::after{inset:auto auto -120
   .page-company-profile .cp-route-number{font-size:2.15rem;inset-inline-end:14px;inset-block-start:11px}
   .page-company-profile .cp-resource-proof{grid-template-columns:42px minmax(0,1fr);padding:15px}
   .page-company-profile .cp-proof-icon{width:42px;height:42px}
+  .page-company-profile .cp-hero-meta>span{font-size:.68rem}
   .page-company-profile .cp-next{padding-block:52px}
   .page-company-profile .cp-next-panel{padding:30px 24px}
 }
-html.handheld-desktop-mode .page-company-profile .cp-hero-grid{grid-template-columns:minmax(0,55fr) minmax(0,45fr)!important;gap:28px;min-height:500px;padding-block:48px 56px}
+html.handheld-desktop-mode .page-company-profile .cp-hero-grid{grid-template-columns:minmax(0,55fr) minmax(0,45fr)!important;gap:28px;min-height:520px;padding-block:48px 56px}
 html.handheld-desktop-mode .page-company-profile .cp-hero h1{font-size:2.7rem!important}
 html.handheld-desktop-mode .page-company-profile .cp-hero-copy>p{font-size:.92rem;line-height:1.58}
 @media(prefers-reduced-motion:reduce){
