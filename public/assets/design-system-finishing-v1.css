@@ -63,7 +63,7 @@ body .target-section-nav.target-section-nav--under-header button{
 }
 
 /* B — Numbered Card System
- * JavaScript only adds these classes when a real numeric marker exists inside a card.
+ * JavaScript adds the shared classes for generic numbered cards.
  */
 .target-numbered-card{
   position:relative!important;
@@ -104,19 +104,51 @@ body .target-section-nav.target-section-nav--under-header button{
   color:rgba(244,237,228,.085)!important;
 }
 
-/* Home step cards previously reserved a dedicated number column.
- * Once the number becomes background art, the content owns the full row.
+/* Home steps predate the shared runtime card contract.
+ * Lock their existing numeric markers directly into the same background-number visual system.
  */
-.page-home .home-canonical .hc-steps li.target-numbered-card{
+.page-home .home-canonical .hc-steps li{
+  position:relative!important;
+  isolation:isolate!important;
+  overflow:hidden!important;
   grid-template-columns:minmax(0,1fr)!important;
 }
-.page-home .home-canonical .hc-steps li.target-numbered-card>div{
+.page-home .home-canonical .hc-steps li>div{
+  position:relative!important;
+  z-index:1!important;
   grid-column:1/-1!important;
   width:100%!important;
 }
+.page-home .home-canonical .hc-steps .hc-step-number{
+  position:absolute!important;
+  z-index:0!important;
+  inset-inline-end:12px!important;
+  inset-block-start:10px!important;
+  width:auto!important;
+  min-width:0!important;
+  height:auto!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  color:rgba(12,73,49,.065)!important;
+  font-family:var(--target-font-en,"Manrope",sans-serif)!important;
+  font-size:clamp(3.15rem,4.7vw,4.9rem)!important;
+  font-weight:800!important;
+  line-height:.84!important;
+  letter-spacing:-.065em!important;
+  text-align:end!important;
+  opacity:1!important;
+  pointer-events:none!important;
+  user-select:none!important;
+  transform:none!important;
+}
 
 @media(max-width:767.98px){
-  .target-numbered-card .target-card-number-bg{
+  .target-numbered-card .target-card-number-bg,
+  .page-home .home-canonical .hc-steps .hc-step-number{
     inset-inline-end:9px!important;
     inset-block-start:9px!important;
     font-size:3.35rem!important;
@@ -124,5 +156,6 @@ body .target-section-nav.target-section-nav--under-header button{
 }
 
 @media(prefers-reduced-motion:reduce){
-  .target-numbered-card .target-card-number-bg{transition:none!important}
+  .target-numbered-card .target-card-number-bg,
+  .page-home .home-canonical .hc-steps .hc-step-number{transition:none!important}
 }
