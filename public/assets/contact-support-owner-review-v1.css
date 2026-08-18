@@ -1,0 +1,181 @@
+/* TARGET — Contact Support Owner Review V1 — 2026-08-18
+ * Scope: closing CTA only. Primary route = supplier/product discussion; secondary route = FAQ.
+ */
+
+.page-contact .ct-support{
+  padding-block:72px!important;
+  background:var(--target-cream,#F4EDE4)!important;
+}
+.page-contact .ct-support-panel{
+  display:grid!important;
+  grid-template-columns:minmax(0,1.18fr) minmax(0,.82fr)!important;
+  gap:14px!important;
+  overflow:visible!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+.page-contact .ct-support-panel article{
+  position:relative!important;
+  isolation:isolate!important;
+  overflow:hidden!important;
+  min-width:0!important;
+  min-height:300px!important;
+  padding:38px 40px!important;
+  border-radius:22px!important;
+}
+
+/* Primary closing route — product / supplier conversation. */
+.page-contact .ct-support-panel article:first-child{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+  justify-content:center!important;
+  border:1px solid rgba(192,149,82,.34)!important;
+  background:linear-gradient(145deg,#0C4931 0%,#093C2A 72%,#082F23 100%)!important;
+  box-shadow:0 18px 42px rgba(12,73,49,.12)!important;
+}
+.page-contact .ct-support-panel article:first-child::before{
+  content:""!important;
+  position:absolute!important;
+  z-index:0!important;
+  inset-inline-end:-72px!important;
+  inset-block-start:-92px!important;
+  width:260px!important;
+  height:260px!important;
+  border:1px solid rgba(192,149,82,.20)!important;
+  border-radius:50%!important;
+  box-shadow:0 0 0 42px rgba(192,149,82,.025),0 0 0 84px rgba(244,237,228,.018)!important;
+  pointer-events:none!important;
+}
+.page-contact .ct-support-panel article:first-child>*{
+  position:relative!important;
+  z-index:1!important;
+}
+.page-contact .ct-support-panel article:first-child .ct-kicker{
+  color:var(--target-sand,#C09552)!important;
+}
+.page-contact .ct-support-panel article:first-child h2{
+  max-width:18ch!important;
+  margin:12px 0 24px!important;
+  color:#fff!important;
+  font-size:clamp(1.85rem,2.9vw,2.65rem)!important;
+  line-height:1.16!important;
+  text-wrap:balance!important;
+}
+.page-contact .ct-support-primary{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:8px!important;
+  min-width:220px!important;
+  min-height:54px!important;
+  padding-inline:26px!important;
+  border:1px solid var(--target-sand,#C09552)!important;
+  border-radius:12px!important;
+  background:var(--target-sand,#C09552)!important;
+  color:var(--target-charcoal,#262626)!important;
+  box-shadow:0 10px 24px rgba(0,0,0,.10)!important;
+  font-weight:800!important;
+  text-decoration:none!important;
+}
+.page-contact .ct-support-primary:hover,
+.page-contact .ct-support-primary:focus-visible{
+  background:#D1AE73!important;
+  border-color:#D1AE73!important;
+  color:var(--target-charcoal,#262626)!important;
+  transform:translateY(-1px)!important;
+}
+
+/* Secondary route — FAQ stays useful but visually subordinate. */
+.page-contact .ct-support-panel article+article{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+  justify-content:center!important;
+  min-height:300px!important;
+  padding:38px 34px!important;
+  border:1px solid rgba(12,73,49,.11)!important;
+  border-radius:22px!important;
+  background:#fff!important;
+  box-shadow:0 12px 30px rgba(38,38,38,.045)!important;
+}
+.page-contact .ct-support-panel article+article .ct-kicker{
+  color:var(--target-forest,#0C4931)!important;
+}
+.page-contact .ct-support-panel article+article h2{
+  max-width:19ch!important;
+  margin:12px 0 24px!important;
+  color:var(--target-charcoal,#262626)!important;
+  font-size:clamp(1.55rem,2.25vw,2.05rem)!important;
+  line-height:1.23!important;
+  text-wrap:balance!important;
+}
+.page-contact .ct-support-secondary{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:8px!important;
+  min-width:180px!important;
+  min-height:52px!important;
+  padding-inline:22px!important;
+  border:1px solid rgba(12,73,49,.18)!important;
+  border-radius:12px!important;
+  background:var(--target-cream,#F4EDE4)!important;
+  color:var(--target-forest,#0C4931)!important;
+  font-weight:800!important;
+  text-decoration:none!important;
+}
+.page-contact .ct-support-secondary:hover,
+.page-contact .ct-support-secondary:focus-visible{
+  border-color:var(--target-forest,#0C4931)!important;
+  background:#fff!important;
+  color:#073D2A!important;
+}
+
+@media (min-width:768px) and (max-width:1023.98px){
+  .page-contact .ct-support{padding-block:64px!important}
+  .page-contact .ct-support-panel{
+    grid-template-columns:1fr!important;
+    gap:14px!important;
+  }
+  .page-contact .ct-support-panel article,
+  .page-contact .ct-support-panel article+article{
+    min-height:0!important;
+    padding:32px!important;
+  }
+  .page-contact .ct-support-panel article:first-child h2,
+  .page-contact .ct-support-panel article+article h2{max-width:24ch!important}
+}
+
+@media (max-width:767.98px){
+  .page-contact .ct-support{padding-block:52px!important}
+  .page-contact .ct-support-panel{
+    grid-template-columns:1fr!important;
+    gap:12px!important;
+  }
+  .page-contact .ct-support-panel article,
+  .page-contact .ct-support-panel article+article{
+    min-height:0!important;
+    padding:28px 22px!important;
+    border-radius:18px!important;
+  }
+  .page-contact .ct-support-panel article:first-child h2,
+  .page-contact .ct-support-panel article+article h2{
+    max-width:none!important;
+    margin-bottom:20px!important;
+  }
+  .page-contact .ct-support-primary,
+  .page-contact .ct-support-secondary{
+    width:100%!important;
+    min-width:0!important;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .page-contact .ct-support-primary,
+  .page-contact .ct-support-secondary{
+    transition:none!important;
+    transform:none!important;
+  }
+}
