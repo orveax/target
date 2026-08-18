@@ -1,11 +1,6 @@
-/* TARGET — Owner Review Delta V1 | 2026-08-18 · build 08
- * Temporary controlled review layer.
- * Merge approved deltas into canonical page layers before Final Site Freeze.
- */
+/* TARGET — Owner Review Delta V1 | consolidated approved deltas only. */
 
-/* HOME — How We Work: replace the rejected inspection image with the
-   approved manufacturing / packaging operation source already tracked
-   in the site media manifest (Pexels source 11679687). */
+/* HOME — approved manufacturing / packaging operation source. */
 .page-home .home-canonical .hc-work-grid::before{
   background:
     linear-gradient(90deg,rgba(12,73,49,.025),rgba(12,73,49,.13)),
@@ -13,9 +8,7 @@
   filter:saturate(.96) contrast(1.015);
 }
 
-/* HOME — How to Start: make number, icon and title read as one header row.
-   The copy remains below the icon/title group and the existing connector
-   line / card treatment is preserved. */
+/* HOME — How to Start final internal hierarchy. */
 .page-home .home-canonical .hc-steps li{
   display:grid;
   grid-template-columns:42px minmax(0,1fr);
@@ -29,26 +22,12 @@
   align-items:center;
   min-width:0;
 }
-.page-home .home-canonical .hc-step-number{
-  align-self:start;
-  margin:0;
-}
-.page-home .home-canonical .hc-step-icon{
-  margin-top:0;
-}
-.page-home .home-canonical .hc-steps h3{
-  min-width:0;
-  margin:0!important;
-  align-self:center;
-}
-.page-home .home-canonical .hc-steps p{
-  grid-column:1/-1;
-  margin-top:12px!important;
-}
+.page-home .home-canonical .hc-step-number{align-self:start;margin:0}
+.page-home .home-canonical .hc-step-icon{margin-top:0}
+.page-home .home-canonical .hc-steps h3{min-width:0;margin:0!important;align-self:center}
+.page-home .home-canonical .hc-steps p{grid-column:1/-1;margin-top:12px!important}
 
-/* ABOUT TARGET — Hero V2 owner review.
-   Remove the hard split and use one continuous warm institutional field.
-   Pattern is intentionally visible but remains behind the editorial hierarchy. */
+/* ABOUT TARGET — final owner-approved hero state. */
 .page-about .about-hero{
   background:
     radial-gradient(circle at 84% 17%,rgba(192,149,82,.20) 0,rgba(192,149,82,.08) 15%,transparent 29%),
@@ -62,24 +41,26 @@
   gap:clamp(46px,5.2vw,74px);
 }
 .page-about .about-hero__copy{max-width:760px}
+.page-about .about-hero h1{
+  max-width:16.5ch;
+  font-size:clamp(2.55rem,4.15vw,3.95rem)!important;
+  line-height:1.11!important;
+}
+html[lang='en'] .page-about .about-hero h1{max-width:19ch;line-height:1.06!important}
 .page-about .about-hero__media{
   width:min(100%,460px);
   aspect-ratio:4/5;
   border-radius:30px 30px 86px 30px;
   background:
-    linear-gradient(180deg,rgba(7,59,41,.00),rgba(7,59,41,.17)),
-    url('https://images.pexels.com/photos/10907746/pexels-photo-10907746.jpeg?auto=compress&dpr=1&h=1100&w=900') center 50%/cover no-repeat;
+    linear-gradient(180deg,rgba(7,59,41,.00),rgba(7,59,41,.15)),
+    url('https://images.pexels.com/photos/4481260/pexels-photo-4481260.jpeg?auto=compress&cs=tinysrgb&w=1200') center 48%/cover no-repeat;
   box-shadow:0 30px 66px rgba(38,38,38,.15);
-  filter:saturate(.94) contrast(1.025);
+  filter:saturate(.92) contrast(1.02);
 }
 html[dir='ltr'] .page-about .about-hero__media{border-radius:30px 30px 30px 86px}
-.page-about .about-hero__media::before{
-  background:rgba(244,237,228,.72);
-  border-color:rgba(12,73,49,.16);
-}
+.page-about .about-hero__media::before{display:none!important}
 
-/* ABOUT TARGET — Vision / Mission title hierarchy.
-   Keep the clean cards; make the actual statement the dominant reading cue. */
+/* ABOUT TARGET — Vision / Mission hierarchy. */
 .page-about .about-value-card .about-card-label{
   display:inline-flex;
   width:max-content;
@@ -115,9 +96,6 @@ html[lang='en'] .page-about .about-value-card h3{letter-spacing:-.024em}
 }
 .page-about .about-value-card:nth-child(2) h3::after{background:var(--ab-forest)}
 
-/* ABOUT TARGET — Vision & Mission floating identity.
-   The old small section kicker remains available semantically but is visually
-   replaced by a stronger title sitting directly on the top card line. */
 .page-about .about-values-section .about-section-head .about-kicker{
   position:absolute!important;
   width:1px!important;
@@ -125,14 +103,11 @@ html[lang='en'] .page-about .about-value-card h3{letter-spacing:-.024em}
   padding:0!important;
   margin:-1px!important;
   overflow:hidden!important;
-  clip:rect(0 0 0 0)!important;
+  clip-path:inset(50%)!important;
   white-space:nowrap!important;
   border:0!important;
 }
-.page-about .about-values{
-  position:relative;
-  isolation:isolate;
-}
+.page-about .about-values{position:relative;isolation:isolate}
 .page-about .about-values::after{
   content:"";
   position:absolute;
@@ -174,9 +149,7 @@ html[lang='en'] .page-about .about-values::before{
   font-size:.76rem;
   letter-spacing:.095em;
 }
-.page-about .about-value-card{
-  z-index:1;
-}
+.page-about .about-value-card{z-index:1}
 
 @media (hover:hover) and (pointer:fine){
   .page-about .about-values:hover::before{
@@ -184,9 +157,7 @@ html[lang='en'] .page-about .about-values::before{
     transform:translate(-50%,-50%) translateY(-3px);
     box-shadow:0 16px 34px rgba(38,38,38,.18);
   }
-  .page-about .about-value-card{
-    transition:transform .28s ease,box-shadow .28s ease,border-color .28s ease;
-  }
+  .page-about .about-value-card{transition:transform .28s ease,box-shadow .28s ease,border-color .28s ease}
   .page-about .about-value-card h3,
   .page-about .about-value-card p{
     opacity:.93;
@@ -199,10 +170,7 @@ html[lang='en'] .page-about .about-values::before{
     box-shadow:0 22px 46px rgba(38,38,38,.10);
   }
   .page-about .about-value-card:hover h3,
-  .page-about .about-value-card:hover p{
-    opacity:1;
-    transform:translateY(0);
-  }
+  .page-about .about-value-card:hover p{opacity:1;transform:translateY(0)}
 }
 
 @media (max-width:1023.98px){
@@ -214,30 +182,18 @@ html[lang='en'] .page-about .about-values::before{
       linear-gradient(90deg,rgba(12,73,49,.028) 1px,transparent 1px) 0 0/58px 58px,
       linear-gradient(145deg,#fffaf5 0%,#f8f1e8 60%,#fffdf9 100%);
   }
-  .page-about .about-hero__grid{
-    grid-template-columns:1fr;
-    gap:36px;
-  }
+  .page-about .about-hero__grid{grid-template-columns:1fr;gap:36px}
   .page-about .about-hero__copy{max-width:760px}
-  .page-about .about-hero__media{justify-self:end;width:min(82%,560px);background-position:center 50%}
+  .page-about .about-hero h1{max-width:16ch;font-size:clamp(2.4rem,6.1vw,3.35rem)!important;line-height:1.10!important}
+  html[lang='en'] .page-about .about-hero h1{max-width:19ch;line-height:1.05!important}
+  .page-about .about-hero__media{justify-self:end;width:min(82%,560px);background-position:center 48%}
 }
 
 @media (max-width:767.98px){
-  .page-home .home-canonical .hc-steps li{
-    grid-template-columns:40px minmax(0,1fr);
-    column-gap:16px;
-  }
-  .page-home .home-canonical .hc-steps li>div{
-    grid-template-columns:42px minmax(0,1fr);
-    column-gap:11px;
-  }
-  .page-home .home-canonical .hc-step-icon{
-    width:42px;
-    height:42px;
-  }
-  .page-home .home-canonical .hc-steps p{
-    margin-top:9px!important;
-  }
+  .page-home .home-canonical .hc-steps li{grid-template-columns:40px minmax(0,1fr);column-gap:16px}
+  .page-home .home-canonical .hc-steps li>div{grid-template-columns:42px minmax(0,1fr);column-gap:11px}
+  .page-home .home-canonical .hc-step-icon{width:42px;height:42px}
+  .page-home .home-canonical .hc-steps p{margin-top:9px!important}
 
   .page-about .about-hero{
     background:
@@ -247,24 +203,20 @@ html[lang='en'] .page-about .about-values::before{
       linear-gradient(90deg,rgba(12,73,49,.022) 1px,transparent 1px) 0 0/46px 46px,
       linear-gradient(155deg,#fffaf5 0%,#f7efe5 100%);
   }
-  .page-about .about-hero__grid{
-    grid-template-columns:1fr;
-    gap:30px;
-  }
+  .page-about .about-hero__grid{grid-template-columns:1fr;gap:30px}
   .page-about .about-hero__copy{max-width:none}
+  .page-about .about-hero h1{max-width:15ch;font-size:clamp(2.05rem,9vw,2.72rem)!important;line-height:1.12!important}
+  html[lang='en'] .page-about .about-hero h1{max-width:18ch;line-height:1.07!important}
   .page-about .about-hero__media{
     justify-self:stretch;
     width:calc(100% - 8px);
     margin-inline-start:8px;
     aspect-ratio:4/3;
     border-radius:21px 21px 52px 21px;
-    background-position:center 50%;
+    background-position:52% center;
   }
   html[dir='ltr'] .page-about .about-hero__media{margin-inline-start:0;margin-inline-end:8px;border-radius:21px 21px 21px 52px}
-  .page-about .about-value-card h3{
-    font-size:clamp(1.45rem,7.2vw,1.8rem)!important;
-    line-height:1.27!important;
-  }
+  .page-about .about-value-card h3{font-size:clamp(1.45rem,7.2vw,1.8rem)!important;line-height:1.27!important}
   .page-about .about-values::before{
     min-height:38px;
     padding:8px 14px;
@@ -273,13 +225,10 @@ html[lang='en'] .page-about .about-values::before{
     transform:translate(-50%,-50%);
     box-shadow:0 9px 20px rgba(38,38,38,.11);
   }
-  html[lang='en'] .page-about .about-values::before{
-    font-size:.68rem;
-    letter-spacing:.075em;
-  }
+  html[lang='en'] .page-about .about-values::before{font-size:.68rem;letter-spacing:.075em}
 }
 
-/* Browser Desktop Site on a physical phone: keep About visually unified too. */
+/* Browser desktop-site mode on a physical phone. */
 html.handheld-desktop-mode .page-about .about-hero{
   background:
     radial-gradient(circle at 84% 16%,rgba(192,149,82,.17),transparent 28%),
@@ -288,52 +237,6 @@ html.handheld-desktop-mode .page-about .about-hero{
     linear-gradient(90deg,rgba(12,73,49,.028) 1px,transparent 1px) 0 0/54px 54px,
     linear-gradient(145deg,#fffaf5 0%,#f7efe6 100%)!important;
 }
-html.handheld-desktop-mode .page-about .about-hero__media{
-  background:
-    linear-gradient(180deg,rgba(7,59,41,.00),rgba(7,59,41,.17)),
-    url('https://images.pexels.com/photos/10907746/pexels-photo-10907746.jpeg?auto=compress&dpr=1&h=900&w=720') center 50%/cover no-repeat!important;
-}
-
-/* ABOUT TARGET — Hero V3 owner polish.
-   Make the visual read as food-trade operations rather than retail merchandising,
-   reduce headline dominance, and remove the decorative media plate behind the image. */
-.page-about .about-hero h1{
-  max-width:16.5ch;
-  font-size:clamp(2.55rem,4.15vw,3.95rem)!important;
-  line-height:1.11!important;
-}
-html[lang='en'] .page-about .about-hero h1{
-  max-width:19ch;
-  line-height:1.06!important;
-}
-.page-about .about-hero__media{
-  background:
-    linear-gradient(180deg,rgba(7,59,41,.00),rgba(7,59,41,.15)),
-    url('https://images.pexels.com/photos/4481260/pexels-photo-4481260.jpeg?auto=compress&cs=tinysrgb&w=1200') center 48%/cover no-repeat;
-  filter:saturate(.92) contrast(1.02);
-}
-.page-about .about-hero__media::before{display:none!important}
-
-@media (max-width:1023.98px){
-  .page-about .about-hero h1{
-    max-width:16ch;
-    font-size:clamp(2.4rem,6.1vw,3.35rem)!important;
-    line-height:1.10!important;
-  }
-  html[lang='en'] .page-about .about-hero h1{max-width:19ch;line-height:1.05!important}
-  .page-about .about-hero__media{background-position:center 48%}
-}
-
-@media (max-width:767.98px){
-  .page-about .about-hero h1{
-    max-width:15ch;
-    font-size:clamp(2.05rem,9vw,2.72rem)!important;
-    line-height:1.12!important;
-  }
-  html[lang='en'] .page-about .about-hero h1{max-width:18ch;line-height:1.07!important}
-  .page-about .about-hero__media{background-position:52% center}
-}
-
 html.handheld-desktop-mode .page-about .about-hero__media{
   background:
     linear-gradient(180deg,rgba(7,59,41,.00),rgba(7,59,41,.15)),
