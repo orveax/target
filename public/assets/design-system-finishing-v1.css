@@ -104,22 +104,30 @@ body .target-section-nav.target-section-nav--under-header button{
   color:rgba(244,237,228,.085)!important;
 }
 
-/* Home steps predate the shared runtime card contract.
- * Lock their existing numeric markers directly into the same background-number visual system.
+/* Home has two pre-system number markers: feature-card numbers and start-step numbers.
+ * Both are locked directly into the same background-number treatment.
  */
+.page-home .home-canonical .hc-feature-card,
 .page-home .home-canonical .hc-steps li{
   position:relative!important;
   isolation:isolate!important;
   overflow:hidden!important;
-  grid-template-columns:minmax(0,1fr)!important;
 }
+.page-home .home-canonical .hc-feature-card>*:not(.hc-card-number),
 .page-home .home-canonical .hc-steps li>div{
   position:relative!important;
   z-index:1!important;
+}
+.page-home .home-canonical .hc-steps li{
+  grid-template-columns:minmax(0,1fr)!important;
+}
+.page-home .home-canonical .hc-steps li>div{
   grid-column:1/-1!important;
   width:100%!important;
 }
-.page-home .home-canonical .hc-steps .hc-step-number{
+.page-home .home-canonical .hc-feature-card>.hc-card-number,
+.page-home .home-canonical .hc-steps>.target-numbered-card>.hc-step-number,
+.page-home .home-canonical .hc-steps>li>.hc-step-number{
   position:absolute!important;
   z-index:0!important;
   inset-inline-end:12px!important;
@@ -148,7 +156,8 @@ body .target-section-nav.target-section-nav--under-header button{
 
 @media(max-width:767.98px){
   .target-numbered-card .target-card-number-bg,
-  .page-home .home-canonical .hc-steps .hc-step-number{
+  .page-home .home-canonical .hc-feature-card>.hc-card-number,
+  .page-home .home-canonical .hc-steps>li>.hc-step-number{
     inset-inline-end:9px!important;
     inset-block-start:9px!important;
     font-size:3.35rem!important;
@@ -157,5 +166,6 @@ body .target-section-nav.target-section-nav--under-header button{
 
 @media(prefers-reduced-motion:reduce){
   .target-numbered-card .target-card-number-bg,
-  .page-home .home-canonical .hc-steps .hc-step-number{transition:none!important}
+  .page-home .home-canonical .hc-feature-card>.hc-card-number,
+  .page-home .home-canonical .hc-steps>li>.hc-step-number{transition:none!important}
 }
