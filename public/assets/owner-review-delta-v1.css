@@ -1,4 +1,4 @@
-/* TARGET — Owner Review Delta V1 | 2026-08-18 · build 03
+/* TARGET — Owner Review Delta V1 | 2026-08-18 · build 04
  * Temporary controlled review layer.
  * Merge approved deltas into canonical page layers before Final Site Freeze.
  */
@@ -46,17 +46,85 @@
   margin-top:12px!important;
 }
 
-/* ABOUT TARGET — Hero pattern.
-   Institutional, tone-on-tone and deliberately quieter than the Home hero.
-   The existing editorial cream split remains intact underneath the pattern. */
+/* ABOUT TARGET — Hero V2 owner review.
+   Remove the hard split and use one continuous warm institutional field.
+   Pattern is intentionally visible but remains behind the editorial hierarchy. */
 .page-about .about-hero{
   background:
-    radial-gradient(circle at 82% 18%,rgba(192,149,82,.11),transparent 23%),
-    radial-gradient(circle,rgba(12,73,49,.075) 0 1px,transparent 1.35px) 0 0/30px 30px,
-    repeating-linear-gradient(135deg,transparent 0 42px,rgba(12,73,49,.024) 42px 43px),
-    linear-gradient(90deg,rgba(244,237,228,.80) 0 31%,transparent 31% 100%),
-    linear-gradient(180deg,#fff 0%,#FFFCF8 100%);
-  background-attachment:scroll;
+    radial-gradient(circle at 84% 17%,rgba(192,149,82,.20) 0,rgba(192,149,82,.08) 15%,transparent 29%),
+    radial-gradient(circle,rgba(12,73,49,.105) 0 1.05px,transparent 1.4px) 0 0/30px 30px,
+    linear-gradient(rgba(12,73,49,.036) 1px,transparent 1px) 0 0/64px 64px,
+    linear-gradient(90deg,rgba(12,73,49,.036) 1px,transparent 1px) 0 0/64px 64px,
+    linear-gradient(135deg,#fffaf4 0%,#f6efe5 52%,#fffdf9 100%);
+}
+.page-about .about-hero__grid{
+  grid-template-columns:minmax(0,1.22fr) minmax(340px,.78fr);
+  gap:clamp(46px,5.2vw,74px);
+}
+.page-about .about-hero__copy{max-width:760px}
+.page-about .about-hero__media{
+  width:min(100%,460px);
+  aspect-ratio:4/5;
+  border-radius:30px 30px 86px 30px;
+  background:
+    linear-gradient(180deg,rgba(7,59,41,.00),rgba(7,59,41,.17)),
+    url('https://images.pexels.com/photos/10907746/pexels-photo-10907746.jpeg?auto=compress&dpr=1&h=1100&w=900') center 50%/cover no-repeat;
+  box-shadow:0 30px 66px rgba(38,38,38,.15);
+  filter:saturate(.94) contrast(1.025);
+}
+html[dir='ltr'] .page-about .about-hero__media{border-radius:30px 30px 30px 86px}
+.page-about .about-hero__media::before{
+  background:rgba(244,237,228,.72);
+  border-color:rgba(12,73,49,.16);
+}
+
+/* ABOUT TARGET — Vision / Mission title hierarchy.
+   Keep the clean cards; make the actual statement the dominant reading cue. */
+.page-about .about-value-card .about-card-label{
+  display:inline-flex;
+  width:max-content;
+  min-height:30px;
+  align-items:center;
+  padding:5px 9px;
+  border:1px solid rgba(12,73,49,.11);
+  border-radius:999px;
+  background:rgba(244,237,228,.58);
+  color:var(--ab-forest);
+  font-size:.78rem;
+  font-weight:800;
+}
+.page-about .about-value-card h3{
+  position:relative;
+  max-width:28ch;
+  margin:16px 0 15px!important;
+  color:var(--ab-charcoal)!important;
+  font-size:clamp(1.55rem,2.05vw,2rem)!important;
+  font-weight:800!important;
+  line-height:1.24!important;
+  letter-spacing:-.008em;
+}
+html[lang='en'] .page-about .about-value-card h3{letter-spacing:-.024em}
+.page-about .about-value-card h3::after{
+  content:"";
+  display:block;
+  width:38px;
+  height:2px;
+  margin-top:14px;
+  border-radius:999px;
+  background:var(--ab-sand);
+}
+.page-about .about-value-card:nth-child(2) h3::after{background:var(--ab-forest)}
+
+@media (max-width:1023.98px){
+  .page-about .about-hero{
+    background:
+      radial-gradient(circle at 86% 11%,rgba(192,149,82,.15) 0,rgba(192,149,82,.06) 16%,transparent 31%),
+      radial-gradient(circle,rgba(12,73,49,.085) 0 1px,transparent 1.35px) 0 0/30px 30px,
+      linear-gradient(rgba(12,73,49,.028) 1px,transparent 1px) 0 0/58px 58px,
+      linear-gradient(90deg,rgba(12,73,49,.028) 1px,transparent 1px) 0 0/58px 58px,
+      linear-gradient(145deg,#fffaf5 0%,#f8f1e8 60%,#fffdf9 100%);
+  }
+  .page-about .about-hero__media{width:min(82%,560px);background-position:center 50%}
 }
 
 @media (max-width:767.98px){
@@ -76,13 +144,39 @@
     margin-top:9px!important;
   }
 
-  /* About: reduce pattern density/contrast on narrow screens so the title
-     remains the dominant visual signal. */
   .page-about .about-hero{
     background:
-      radial-gradient(circle at 82% 14%,rgba(192,149,82,.075),transparent 24%),
-      radial-gradient(circle,rgba(12,73,49,.05) 0 .9px,transparent 1.2px) 0 0/26px 26px,
-      repeating-linear-gradient(135deg,transparent 0 38px,rgba(12,73,49,.016) 38px 39px),
-      linear-gradient(180deg,#fff 0%,#FFFCF8 100%);
+      radial-gradient(circle at 88% 9%,rgba(192,149,82,.12),transparent 28%),
+      radial-gradient(circle,rgba(12,73,49,.075) 0 .95px,transparent 1.25px) 0 0/26px 26px,
+      linear-gradient(rgba(12,73,49,.022) 1px,transparent 1px) 0 0/46px 46px,
+      linear-gradient(90deg,rgba(12,73,49,.022) 1px,transparent 1px) 0 0/46px 46px,
+      linear-gradient(155deg,#fffaf5 0%,#f7efe5 100%);
   }
+  .page-about .about-hero__media{
+    width:calc(100% - 8px);
+    margin-inline-start:8px;
+    aspect-ratio:4/3;
+    border-radius:21px 21px 52px 21px;
+    background-position:center 50%;
+  }
+  html[dir='ltr'] .page-about .about-hero__media{margin-inline-start:0;margin-inline-end:8px;border-radius:21px 21px 21px 52px}
+  .page-about .about-value-card h3{
+    font-size:clamp(1.45rem,7.2vw,1.8rem)!important;
+    line-height:1.27!important;
+  }
+}
+
+/* Browser Desktop Site on a physical phone: keep About visually unified too. */
+html.handheld-desktop-mode .page-about .about-hero{
+  background:
+    radial-gradient(circle at 84% 16%,rgba(192,149,82,.17),transparent 28%),
+    radial-gradient(circle,rgba(12,73,49,.09) 0 1px,transparent 1.35px) 0 0/28px 28px,
+    linear-gradient(rgba(12,73,49,.028) 1px,transparent 1px) 0 0/54px 54px,
+    linear-gradient(90deg,rgba(12,73,49,.028) 1px,transparent 1px) 0 0/54px 54px,
+    linear-gradient(145deg,#fffaf5 0%,#f7efe6 100%)!important;
+}
+html.handheld-desktop-mode .page-about .about-hero__media{
+  background:
+    linear-gradient(180deg,rgba(7,59,41,.00),rgba(7,59,41,.17)),
+    url('https://images.pexels.com/photos/10907746/pexels-photo-10907746.jpeg?auto=compress&dpr=1&h=900&w=720') center 50%/cover no-repeat!important;
 }
