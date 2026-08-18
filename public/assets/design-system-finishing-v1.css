@@ -1,0 +1,117 @@
+/* TARGET — Design System Finishing V1 | 2026-08-19
+ * Final pre-freeze system rules:
+ * A) compact under-header section navigation labels
+ * B) one background-number treatment for numbered cards
+ * Loaded after owner-review layers so these rules become the shared visual contract.
+ */
+
+/* A — Compact Section Navigation
+ * Visible labels are supplied by design-system-finishing-v1.js from each section's authored kicker.
+ * Full section headings remain in aria-labels for accessibility.
+ */
+body .target-section-nav.target-section-nav--under-header .target-section-nav-label{
+  display:block!important;
+  max-width:152px!important;
+  overflow:hidden!important;
+  text-overflow:clip!important;
+  white-space:nowrap!important;
+  font-size:.78rem!important;
+  line-height:1.2!important;
+}
+body .target-section-nav.target-section-nav--under-header .target-section-nav-label::before,
+body .target-section-nav.target-section-nav--under-header .target-section-nav-label::after{
+  content:none!important;
+  display:none!important;
+}
+body .target-section-nav.target-section-nav--under-header button{
+  min-width:0!important;
+  max-width:190px!important;
+  padding-inline:13px!important;
+}
+
+/* Keep the FAQ-owned topic navigator in the same compact visual rhythm without replacing its page-specific identity. */
+.page-faq .faq-topic-band{
+  min-height:0!important;
+}
+.page-faq .faq-topic-band a,
+.page-faq .faq-topic-band button{
+  white-space:nowrap!important;
+}
+.page-faq .faq-topic-band [data-ar][data-en]{
+  line-height:1.2!important;
+}
+
+@media(max-width:1199.98px){
+  body .target-section-nav.target-section-nav--under-header .target-section-nav-label{
+    max-width:132px!important;
+    font-size:.75rem!important;
+  }
+  body .target-section-nav.target-section-nav--under-header button{
+    max-width:166px!important;
+    padding-inline:12px!important;
+  }
+}
+@media(max-width:767.98px){
+  body .target-section-nav.target-section-nav--under-header .target-section-nav-label{
+    max-width:122px!important;
+    font-size:.73rem!important;
+  }
+  body .target-section-nav.target-section-nav--under-header button{
+    max-width:154px!important;
+    padding-inline:11px!important;
+  }
+}
+
+/* B — Numbered Card System
+ * JavaScript only adds these classes when a real numeric marker exists inside a card.
+ */
+.target-numbered-card{
+  position:relative!important;
+  isolation:isolate!important;
+  overflow:hidden!important;
+}
+.target-numbered-card > *:not(.target-card-number-bg){
+  position:relative;
+  z-index:1;
+}
+.target-numbered-card .target-card-number-bg{
+  position:absolute!important;
+  z-index:0!important;
+  inset-inline-end:12px!important;
+  inset-block-start:10px!important;
+  width:auto!important;
+  min-width:0!important;
+  height:auto!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  color:rgba(12,73,49,.065)!important;
+  font-family:var(--target-font-en,"Manrope",sans-serif)!important;
+  font-size:clamp(3.15rem,4.7vw,4.9rem)!important;
+  font-weight:800!important;
+  line-height:.84!important;
+  letter-spacing:-.065em!important;
+  text-align:end!important;
+  opacity:1!important;
+  pointer-events:none!important;
+  user-select:none!important;
+  transform:none!important;
+}
+.target-numbered-card.target-numbered-card--dark .target-card-number-bg{
+  color:rgba(244,237,228,.085)!important;
+}
+
+@media(max-width:767.98px){
+  .target-numbered-card .target-card-number-bg{
+    inset-inline-end:9px!important;
+    inset-block-start:9px!important;
+    font-size:3.35rem!important;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .target-numbered-card .target-card-number-bg{transition:none!important}
+}
