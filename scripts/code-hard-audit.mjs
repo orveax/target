@@ -1,4 +1,4 @@
-// TARGET Code Hard Audit V1 — repository reference scanner.
+// TARGET Code Hard Audit V1 — consolidated repository reference scanner.
 import fs from 'node:fs';
 import path from 'node:path';
 
