@@ -165,3 +165,5 @@ jobs:
           if [[ "$JOB_STATUS" == success ]]; then STATE=success; DESC='FAQ final QA passed'; else STATE=failure; DESC='FAQ final QA failed'; fi
           jq -n --arg state "$STATE" --arg context 'TARGET FAQ Premium V2 Final QA' --arg description "$DESC" --arg target_url "$RUN_URL" '{state:$state,context:$context,description:$description,target_url:$target_url}' >/tmp/status.json
           curl -fsSL -X POST -H "Authorization: Bearer ${GH_TOKEN}" -H "Accept: application/vnd.github+json" "https://api.github.com/repos/${GITHUB_REPOSITORY}/statuses/${GITHUB_SHA}" -d @/tmp/status.json >/dev/null
+
+# trigger: canonical Page 09 final gate
