@@ -2,7 +2,7 @@
 
 Status: COMPLETED / FINAL FROZEN
 Project: TARGET For Food Trading
-Domain: targetft.com
+Official production domain: targetft.com — APPROVED
 Frozen production code commit: 2c13b87628d023143f2cfeeb590392859e2739f4
 Release baseline: v1.0.0
 
@@ -91,7 +91,8 @@ Update verified contact details in the source-of-truth data/content layer. Do no
 
 ## Production release checklist
 
-- custom production domain connected
+- official production domain approved: `targetft.com`
+- connect `targetft.com` to the production deployment
 - HTTPS valid
 - www/non-www redirect policy confirmed
 - canonical URLs resolve to targetft.com
@@ -104,4 +105,4 @@ Update verified contact details in the source-of-truth data/content layer. Do no
 
 ## Closure
 
-TARGET Corporate Website v1.0.0 is considered complete at the frozen production code commit above. Any work beyond the defined maintenance rules is a Change Request / V2.
+TARGET Corporate Website v1.0.0 is considered complete at the frozen production code commit above. The official production domain is `targetft.com`. Domain approval is closed; production DNS/deployment activation and live validation remain release operations, not website-development work. Any work beyond the defined maintenance rules is a Change Request / V2.
