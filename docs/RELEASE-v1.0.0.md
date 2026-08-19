@@ -3,10 +3,11 @@
 Release status: FINAL FROZEN
 Frozen production code commit: `2c13b87628d023143f2cfeeb590392859e2739f4`
 Release date: 2026-08-19
+Official production domain: `targetft.com` — APPROVED
 
 ## Release summary
 
-TARGET v1.0.0 is the completed bilingual corporate website for TARGET For Food Trading. The release closes the initial website implementation and establishes the code, responsive behavior, design system, content routes and technical QA baseline for production use.
+TARGET v1.0.0 is the completed bilingual corporate website for TARGET For Food Trading. The release closes the initial website implementation and establishes the code, responsive behavior, design system, content routes and technical QA baseline for production use. The official production domain is `targetft.com`; domain approval is complete, while DNS/deployment activation and live production validation are handled as release operations.
 
 ## Included
 
@@ -48,6 +49,12 @@ The v1.0.0 frozen code passed:
 - Moved production DOM content from runtime injection into Astro source
 - Reduced CI to permanent release/code gates
 - Locked dependencies with package-lock.json and npm ci
+
+## Production domain
+
+- Official domain: `targetft.com`
+- Approval status: APPROVED
+- Remaining release operation: connect the approved domain to the production deployment, then validate HTTPS, redirect policy, canonical URLs, sitemap, robots and live behavior.
 
 ## Post-release policy
 
