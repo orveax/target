@@ -25,8 +25,8 @@
 .page-food-portfolio .portfolio-principles article .portfolio-principle-index,
 .page-food-portfolio .portfolio-principles article:hover .portfolio-principle-index,
 .page-food-portfolio .portfolio-principles article:focus-within .portfolio-principle-index{
-  color:#C09552!important;
-  -webkit-text-fill-color:#C09552!important;
+  color:rgba(192,149,82,.12)!important;
+  -webkit-text-fill-color:rgba(192,149,82,.12)!important;
   opacity:1!important;
 }
 .page-food-portfolio .portfolio-principles article .portfolio-icon,
