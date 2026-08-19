@@ -1,6 +1,6 @@
-/* TARGET — Contact Support Owner Review V2 — 2026-08-18
+/* TARGET — Contact Support Owner Review V3 — 2026-08-19
  * Scope: closing CTA only. Primary route = supplier/product discussion; secondary route = FAQ.
- * Goal: stronger internal hierarchy, balanced card rhythm, stable CTA alignment.
+ * Goal: concise headings, supporting copy, balanced card rhythm, stable CTA alignment.
  */
 
 .page-contact .ct-support{
@@ -22,7 +22,7 @@
   isolation:isolate!important;
   overflow:hidden!important;
   display:grid!important;
-  grid-template-rows:auto 1fr auto!important;
+  grid-template-rows:auto auto 1fr auto!important;
   align-content:start!important;
   min-width:0!important;
   min-height:320px!important;
@@ -52,10 +52,17 @@
   margin:0!important;
   text-wrap:balance!important;
 }
+.page-contact .ct-support-panel .ct-support-copy{
+  align-self:start!important;
+  max-width:48ch!important;
+  margin:13px 0 0!important;
+  font-size:.95rem!important;
+  line-height:1.72!important;
+}
 .page-contact .ct-support-panel a{
   align-self:end!important;
   justify-self:start!important;
-  margin-top:28px!important;
+  margin-top:24px!important;
 }
 
 /* Primary closing route — product / supplier conversation. */
@@ -105,11 +112,14 @@ html[dir="rtl"] .page-contact .ct-support-panel article:first-child::after{
   background:var(--target-sand,#C09552)!important;
 }
 .page-contact .ct-support-panel article:first-child h2{
-  max-width:17ch!important;
+  max-width:19ch!important;
   padding-inline-end:24px!important;
   color:#fff!important;
-  font-size:clamp(1.9rem,2.85vw,2.58rem)!important;
-  line-height:1.17!important;
+  font-size:clamp(1.72rem,2.55vw,2.32rem)!important;
+  line-height:1.18!important;
+}
+.page-contact .ct-support-panel article:first-child .ct-support-copy{
+  color:rgba(244,237,228,.74)!important;
 }
 .page-contact .ct-support-primary{
   display:inline-flex!important;
@@ -167,11 +177,14 @@ html[dir="rtl"] .page-contact .ct-support-panel article:first-child::after{
   background:var(--target-forest,#0C4931)!important;
 }
 .page-contact .ct-support-panel article+article h2{
-  max-width:18ch!important;
+  max-width:20ch!important;
   padding-inline-end:12px!important;
   color:var(--target-charcoal,#262626)!important;
-  font-size:clamp(1.55rem,2.18vw,2rem)!important;
+  font-size:clamp(1.45rem,2vw,1.82rem)!important;
   line-height:1.24!important;
+}
+.page-contact .ct-support-panel article+article .ct-support-copy{
+  color:rgba(38,38,38,.66)!important;
 }
 .page-contact .ct-support-secondary{
   display:inline-flex!important;
@@ -233,6 +246,10 @@ html[dir="rtl"] .page-contact .ct-support-panel article:first-child::after{
     max-width:none!important;
     padding-inline-end:0!important;
     font-size:clamp(1.55rem,7.2vw,2rem)!important;
+  }
+  .page-contact .ct-support-panel .ct-support-copy{
+    max-width:none!important;
+    margin-top:11px!important;
   }
   .page-contact .ct-support-panel a{
     width:100%!important;
